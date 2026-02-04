@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ubo-swift-grpc}",
+            "name": "Debug ubo-test",
+            "target": "ubo-test",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug ubo-test"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:ubo-swift-grpc}",
+            "name": "Release ubo-test",
+            "target": "ubo-test",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release ubo-test"
+        }
+    ]
+}
