@@ -40,8 +40,9 @@ public actor UboConnection {
 
         do {
             // Create the transport
+            // Use DNS resolution which handles both IPv4 and IPv6 (important for .local mDNS names)
             let transport = try HTTP2ClientTransport.Posix(
-                target: .ipv4(host: host, port: port),
+                target: .dns(host: host, port: port),
                 transportSecurity: .plaintext
             )
 
@@ -57,10 +58,106 @@ public actor UboConnection {
                 try await client.runConnections()
             }
 
+            // Verify the connection is actually ready by attempting a lightweight probe
+            // Try up to 10 times with 500ms intervals (5 seconds total)
+            var connectionVerified = false
+            var lastError: Error?
+
+            for _ in 1...10 {
+                // Give the transport time to establish
+                try await Task.sleep(nanoseconds: 500_000_000) // 500ms
+
+                // Try a simple dispatch to verify connectivity
+                let verifyResult = await verifyConnection()
+                switch verifyResult {
+                case .success:
+                    connectionVerified = true
+                case .notReady(let error):
+                    lastError = error
+                    // Continue waiting
+                case .failed(let error):
+                    // This is a real connection error (like "connection refused"), not just "not ready"
+                    throw UboError.connectionFailed(error)
+                }
+
+                if connectionVerified {
+                    break
+                }
+            }
+
+            if !connectionVerified {
+                state = .disconnected
+                throw UboError.connectionFailed(lastError ?? NSError(domain: "UboConnection", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to verify connection after 5 seconds"]))
+            }
+
             state = .connected
+        } catch let error as UboError {
+            state = .disconnected
+            throw error
         } catch {
             state = .disconnected
             throw UboError.connectionFailed(error)
+        }
+    }
+
+    /// Result of connection verification
+    private enum ConnectionVerifyResult {
+        case success
+        case notReady(Error)
+        case failed(Error)
+    }
+
+    /// Verify the connection is ready by attempting a lightweight RPC
+    private func verifyConnection() async -> ConnectionVerifyResult {
+        guard let client = storeClient else {
+            return .failed(UboError.notConnected)
+        }
+
+        // Try to get the current store state with empty selectors as a connectivity test
+        var testRequest = Store_V1_SubscribeStoreRequest()
+        testRequest.selectors = []
+
+        do {
+            // Use a task with timeout
+            try await withThrowingTaskGroup(of: Void.self) { group in
+                let clientToUse = client
+                let request = testRequest
+
+                group.addTask {
+                    try await clientToUse.subscribeStore(request) { response in
+                        // We just need to verify we can connect, immediately return
+                        switch response.accepted {
+                        case .success(_):
+                            return  // Connection works!
+                        case .failure(let error):
+                            throw error
+                        }
+                    }
+                }
+
+                group.addTask {
+                    try await Task.sleep(nanoseconds: 2_000_000_000) // 2 second timeout
+                    throw UboError.connectionFailed(NSError(domain: "UboConnection", code: -1, userInfo: [NSLocalizedDescriptionKey: "Connection test timeout"]))
+                }
+
+                // Wait for first to complete
+                try await group.next()
+                group.cancelAll()
+            }
+
+            return .success
+        } catch {
+            let errorStr = String(describing: error).lowercased()
+            let isNotReady = errorStr.contains("channel") ||
+                             errorStr.contains("unavailable") ||
+                             errorStr.contains("not ready") ||
+                             errorStr.contains("transport")
+
+            if isNotReady {
+                return .notReady(error)
+            } else {
+                return .failed(error)
+            }
         }
     }
 
@@ -102,6 +199,224 @@ public actor UboConnection {
         } catch {
             throw UboError.dispatchFailed(error)
         }
+    }
+
+    // MARK: - Store Subscription
+
+    /// Subscribe to store state changes for view data and status bar
+    /// - Parameter selectors: List of state selectors (e.g., ["state.main.current_view", "state.main.status_bar"])
+    /// - Returns: An async stream of (ViewData, StatusBarData?) tuples
+    public func subscribeToStoreChanges(selectors: [String] = ["state.main.current_view", "state.main.status_bar"]) -> AsyncThrowingStream<(ViewData, StatusBarData?), Error> {
+        AsyncThrowingStream { continuation in
+            Task {
+                guard let client = self.storeClient else {
+                    continuation.finish(throwing: UboError.notConnected)
+                    return
+                }
+
+                // Create subscription request
+                var request = Store_V1_SubscribeStoreRequest()
+                request.selectors = selectors
+
+                do {
+                    try await client.subscribeStore(request) { response in
+                        switch response.accepted {
+                        case .success(let contents):
+                            for try await message in contents.bodyParts {
+                                if case .message(let subscribeResponse) = message {
+                                    // Unpack the results from google.protobuf.Any
+                                    let results = subscribeResponse.results
+
+                                    // First result should be ViewData, second should be StatusBarData
+                                    var viewData: ViewData?
+                                    var statusBarData: StatusBarData?
+
+                                    if results.count > 0 {
+                                        viewData = self.unpackViewData(from: results[0])
+                                    }
+                                    if results.count > 1 {
+                                        statusBarData = self.unpackStatusBarData(from: results[1])
+                                    }
+
+                                    if let view = viewData {
+                                        continuation.yield((view, statusBarData))
+                                    }
+                                }
+                            }
+                        case .failure(let error):
+                            throw error
+                        }
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                }
+            }
+        }
+    }
+
+    // MARK: - Proto Unpacking
+
+    /// Unpack a google.protobuf.Any message to ViewData
+    private nonisolated func unpackViewData(from any: SwiftProtobuf.Google_Protobuf_Any) -> ViewData? {
+        let typeURL = any.typeURL
+
+        // Check the type URL to determine which ViewData type to unpack
+        if typeURL.hasSuffix("HomeViewData") {
+            if let proto = try? Ubo_V1_HomeViewData(serializedBytes: any.value) {
+                return .home(convertHomeViewData(proto))
+            }
+        } else if typeURL.hasSuffix("MenuViewData") {
+            if let proto = try? Ubo_V1_MenuViewData(serializedBytes: any.value) {
+                return .menu(convertMenuViewData(proto))
+            }
+        } else if typeURL.hasSuffix("NotificationViewData") {
+            if let proto = try? Ubo_V1_NotificationViewData(serializedBytes: any.value) {
+                return .notification(convertNotificationViewData(proto))
+            }
+        } else if typeURL.hasSuffix("ApplicationViewData") {
+            if let proto = try? Ubo_V1_ApplicationViewData(serializedBytes: any.value) {
+                return .application(convertApplicationViewData(proto))
+            }
+        }
+
+        return nil
+    }
+
+    /// Unpack a google.protobuf.Any message to StatusBarData
+    private nonisolated func unpackStatusBarData(from any: SwiftProtobuf.Google_Protobuf_Any) -> StatusBarData? {
+        let typeURL = any.typeURL
+
+        if typeURL.hasSuffix("StatusBarData") {
+            if let proto = try? Ubo_V1_StatusBarData(serializedBytes: any.value) {
+                return convertStatusBarData(proto)
+            }
+        }
+
+        return nil
+    }
+
+    // MARK: - Proto Conversion (to Swift models)
+
+    private nonisolated func convertMenuItemData(_ proto: Ubo_V1_MenuItemData) -> MenuItemData {
+        MenuItemData(
+            key: proto.key,
+            label: proto.label,
+            icon: proto.icon,
+            color: proto.hasColor ? proto.color : "#ffffff",
+            backgroundColor: proto.hasBackgroundColor ? proto.backgroundColor : nil,
+            isShort: proto.hasIsShort ? proto.isShort : false,
+            actionId: proto.hasActionID ? proto.actionID : nil
+        )
+    }
+
+    private nonisolated func convertHomeViewData(_ proto: Ubo_V1_HomeViewData) -> HomeViewData {
+        var menuItems: [MenuItemData] = []
+        if proto.hasMenuItems {
+            menuItems = proto.menuItems.items.map { convertMenuItemData($0) }
+        }
+
+        return HomeViewData(
+            type: proto.hasType ? proto.type : "home",
+            showStatusBar: proto.hasShowStatusBar ? proto.showStatusBar : true,
+            menuItems: menuItems,
+            cpuPercent: proto.hasCpuPercent ? proto.cpuPercent : 0,
+            ramPercent: proto.hasRamPercent ? proto.ramPercent : 0,
+            volumeLevel: proto.hasVolumeLevel ? proto.volumeLevel : 0
+        )
+    }
+
+    private nonisolated func convertMenuViewData(_ proto: Ubo_V1_MenuViewData) -> MenuViewData {
+        var items: [MenuItemData?] = []
+        if proto.hasItems {
+            items = proto.items.items.map { itemWrapper in
+                if itemWrapper.hasItems {
+                    return convertMenuItemData(itemWrapper.items)
+                }
+                return nil
+            }
+        }
+
+        return MenuViewData(
+            type: proto.hasType ? proto.type : "menu",
+            showStatusBar: proto.hasShowStatusBar ? proto.showStatusBar : true,
+            title: proto.hasTitle ? proto.title : "",
+            heading: proto.hasHeading ? proto.heading : nil,
+            subHeading: proto.hasSubHeading ? proto.subHeading : nil,
+            items: items,
+            pageIndex: proto.hasPageIndex ? Int(proto.pageIndex) : 0,
+            totalPages: proto.hasTotalPages ? Int(proto.totalPages) : 1
+        )
+    }
+
+    private nonisolated func convertNotificationViewData(_ proto: Ubo_V1_NotificationViewData) -> NotificationViewData {
+        var items: [MenuItemData?] = []
+        if proto.hasItems {
+            items = proto.items.items.map { itemWrapper in
+                if itemWrapper.hasItems {
+                    return convertMenuItemData(itemWrapper.items)
+                }
+                return nil
+            }
+        }
+
+        return NotificationViewData(
+            type: proto.hasType ? proto.type : "notification",
+            showStatusBar: proto.hasShowStatusBar ? proto.showStatusBar : false,
+            notificationId: proto.hasNotificationID ? proto.notificationID : "",
+            title: proto.hasTitle ? proto.title : "",
+            content: proto.hasContent ? proto.content : "",
+            icon: proto.hasIcon ? proto.icon : "",
+            color: proto.hasColor ? proto.color : "#ffffff",
+            items: items,
+            extraInformation: proto.hasExtraInformation ? proto.extraInformation : ""
+        )
+    }
+
+    private nonisolated func convertApplicationViewData(_ proto: Ubo_V1_ApplicationViewData) -> ApplicationViewData {
+        var extraData: [String: String] = [:]
+        if proto.hasExtraData {
+            extraData = proto.extraData.items
+        }
+
+        return ApplicationViewData(
+            type: proto.hasType ? proto.type : "application",
+            showStatusBar: proto.hasShowStatusBar ? proto.showStatusBar : false,
+            applicationId: proto.hasApplicationID ? proto.applicationID : "",
+            extraData: extraData
+        )
+    }
+
+    private nonisolated func convertStatusBarData(_ proto: Ubo_V1_StatusBarData) -> StatusBarData {
+        var progressNotifications: [ProgressNotificationData] = []
+        if proto.hasProgressNotifications {
+            progressNotifications = proto.progressNotifications.items.map { item in
+                ProgressNotificationData(
+                    id: item.id,
+                    progress: item.hasProgress ? item.progress : nil,
+                    color: item.color
+                )
+            }
+        }
+
+        var icons: [StatusIconData] = []
+        if proto.hasIcons {
+            icons = proto.icons.items.map { item in
+                StatusIconData(symbol: item.symbol, color: item.color)
+            }
+        }
+
+        return StatusBarData(
+            title: proto.hasTitle ? proto.title : "",
+            isRecording: proto.hasIsRecording ? proto.isRecording : false,
+            isReplaying: proto.hasIsReplaying ? proto.isReplaying : false,
+            isRecordingAudio: proto.hasIsRecordingAudio ? proto.isRecordingAudio : false,
+            progressNotifications: progressNotifications,
+            clock: proto.hasClock ? proto.clock : "",
+            temperature: proto.hasTemperature ? proto.temperature : nil,
+            lightLevel: proto.hasLightLevel ? proto.lightLevel : nil,
+            icons: icons
+        )
     }
 
     // MARK: - Event Subscription
@@ -241,6 +556,38 @@ public actor UboConnection {
         case .notificationClearAll:
             protoAction.notificationsClearAllAction = Ubo_V1_NotificationsClearAllAction()
 
+        // MARK: Menu Navigation Actions
+        case .menuGoBack:
+            protoAction.menuGoBackAction = Ubo_V1_MenuGoBackAction()
+
+        case .menuGoHome:
+            protoAction.menuGoHomeAction = Ubo_V1_MenuGoHomeAction()
+
+        case .menuChooseByIndex(let index):
+            var chooseByIndex = Ubo_V1_MenuChooseByIndexAction()
+            chooseByIndex.index = Int64(index)
+            protoAction.menuChooseByIndexAction = chooseByIndex
+
+        case .menuChooseByLabel(let label):
+            var chooseByLabel = Ubo_V1_MenuChooseByLabelAction()
+            chooseByLabel.label = label
+            protoAction.menuChooseByLabelAction = chooseByLabel
+
+        case .menuChooseByIcon(let icon):
+            var chooseByIcon = Ubo_V1_MenuChooseByIconAction()
+            chooseByIcon.icon = icon
+            protoAction.menuChooseByIconAction = chooseByIcon
+
+        case .menuScrollUp:
+            var scroll = Ubo_V1_MenuScrollAction()
+            scroll.direction = .up
+            protoAction.menuScrollAction = scroll
+
+        case .menuScrollDown:
+            var scroll = Ubo_V1_MenuScrollAction()
+            scroll.direction = .down
+            protoAction.menuScrollAction = scroll
+
         // Handle other action cases with minimal implementation
         default:
             // Unsupported actions will send an empty action
@@ -276,10 +623,9 @@ public actor UboConnection {
         if let chime = notification.chime {
             proto.chime = Ubo_V1_Chime(rawValue: Int(chime.protoValue)) ?? .uboAppDotStoreDotServicesDotNotificationsUnspecified
         }
-        proto.dismissable = notification.dismissable
-        if let progress = notification.progress {
-            proto.progress = progress
-        }
+        proto.showDismissAction = notification.dismissable
+        proto.importance = Ubo_V1_Importance(rawValue: Int(notification.importance.protoValue)) ?? .uboAppDotStoreDotServicesDotNotificationsUnspecified
+        proto.displayType = Ubo_V1_NotificationDisplayType(rawValue: Int(notification.displayType.protoValue)) ?? .uboAppDotStoreDotServicesDotNotificationsUnspecified
         return proto
     }
 }

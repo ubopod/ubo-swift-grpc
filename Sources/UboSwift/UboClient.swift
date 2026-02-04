@@ -27,6 +27,12 @@ public final class UboClient: ObservableObject {
     /// Current display render data (from DisplayRenderEvent)
     @Published public private(set) var currentDisplay: DisplayRenderData?
 
+    /// Current view data (from SubscribeStore)
+    @Published public private(set) var currentView: ViewData?
+
+    /// Current status bar data (from SubscribeStore)
+    @Published public private(set) var statusBar: StatusBarData?
+
     /// Whether the device is recording audio
     @Published public private(set) var isRecording: Bool = false
 
@@ -34,6 +40,7 @@ public final class UboClient: ObservableObject {
 
     private let connection: UboConnection
     private var displaySubscriptionTask: Task<Void, Never>?
+    private var viewSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -71,9 +78,13 @@ public final class UboClient: ObservableObject {
     public func disconnect() async {
         displaySubscriptionTask?.cancel()
         displaySubscriptionTask = nil
+        viewSubscriptionTask?.cancel()
+        viewSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
+        currentView = nil
+        statusBar = nil
     }
 
     /// Whether currently connected to a device
@@ -112,6 +123,36 @@ public final class UboClient: ObservableObject {
     /// Request a display redraw from the device
     public func requestDisplayRedraw() async throws {
         try await dispatch(.displayRedraw)
+    }
+
+    // MARK: - View Subscription
+
+    /// Start subscribing to view state changes (view data and status bar)
+    /// This provides structured view data instead of raw display pixels.
+    public func startViewSubscription() {
+        viewSubscriptionTask?.cancel()
+        viewSubscriptionTask = Task {
+            do {
+                for try await (view, status) in await connection.subscribeToStoreChanges() {
+                    await MainActor.run {
+                        self.currentView = view
+                        self.statusBar = status
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to view state changes
+    public func stopViewSubscription() {
+        viewSubscriptionTask?.cancel()
+        viewSubscriptionTask = nil
     }
 
     // MARK: - Button/Key Actions
@@ -431,5 +472,20 @@ extension UboClient {
     /// Select menu item by label
     public func selectMenuItem(label: String) async throws {
         try await dispatch(.menuChooseByLabel(label))
+    }
+
+    /// Select menu item by icon
+    public func selectMenuItem(icon: String) async throws {
+        try await dispatch(.menuChooseByIcon(icon))
+    }
+
+    /// Scroll the menu up
+    public func scrollMenuUp() async throws {
+        try await dispatch(.menuScrollUp)
+    }
+
+    /// Scroll the menu down
+    public func scrollMenuDown() async throws {
+        try await dispatch(.menuScrollDown)
     }
 }

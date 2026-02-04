@@ -56,11 +56,24 @@ public enum Store_V1_StoreService: Sendable {
                 method: "SubscribeEvent"
             )
         }
+        /// Namespace for "SubscribeStore" metadata.
+        public enum SubscribeStore: Sendable {
+            /// Request type for "SubscribeStore".
+            public typealias Input = Store_V1_SubscribeStoreRequest
+            /// Response type for "SubscribeStore".
+            public typealias Output = Store_V1_SubscribeStoreResponse
+            /// Descriptor for "SubscribeStore".
+            public static let descriptor = GRPCCore.MethodDescriptor(
+                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
+                method: "SubscribeStore"
+            )
+        }
         /// Descriptors for all methods in the "store.v1.StoreService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             DispatchAction.descriptor,
             DispatchEvent.descriptor,
-            SubscribeEvent.descriptor
+            SubscribeEvent.descriptor,
+            SubscribeStore.descriptor
         ]
     }
 }
@@ -127,6 +140,20 @@ extension Store_V1_StoreService {
             request: GRPCCore.StreamingServerRequest<Store_V1_SubscribeEventRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeEventResponse>
+
+        /// Handle the "SubscribeStore" method.
+        ///
+        /// - Parameters:
+        ///   - request: A streaming request of `Store_V1_SubscribeStoreRequest` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Store_V1_SubscribeStoreResponse` messages.
+        func subscribeStore(
+            request: GRPCCore.StreamingServerRequest<Store_V1_SubscribeStoreRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeStoreResponse>
     }
 
     /// Service protocol for the "store.v1.StoreService" service.
@@ -178,6 +205,20 @@ extension Store_V1_StoreService {
             request: GRPCCore.ServerRequest<Store_V1_SubscribeEventRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeEventResponse>
+
+        /// Handle the "SubscribeStore" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Store_V1_SubscribeStoreRequest` message.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        /// - Returns: A streaming response of `Store_V1_SubscribeStoreResponse` messages.
+        func subscribeStore(
+            request: GRPCCore.ServerRequest<Store_V1_SubscribeStoreRequest>,
+            context: GRPCCore.ServerContext
+        ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeStoreResponse>
     }
 
     /// Simple service protocol for the "store.v1.StoreService" service.
@@ -228,6 +269,21 @@ extension Store_V1_StoreService {
             response: GRPCCore.RPCWriter<Store_V1_SubscribeEventResponse>,
             context: GRPCCore.ServerContext
         ) async throws
+
+        /// Handle the "SubscribeStore" method.
+        ///
+        /// - Parameters:
+        ///   - request: A `Store_V1_SubscribeStoreRequest` message.
+        ///   - response: A response stream of `Store_V1_SubscribeStoreResponse` messages.
+        ///   - context: Context providing information about the RPC.
+        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
+        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
+        ///     to an internal error.
+        func subscribeStore(
+            request: Store_V1_SubscribeStoreRequest,
+            response: GRPCCore.RPCWriter<Store_V1_SubscribeStoreResponse>,
+            context: GRPCCore.ServerContext
+        ) async throws
     }
 }
 
@@ -268,6 +324,17 @@ extension Store_V1_StoreService.StreamingServiceProtocol {
                 )
             }
         )
+        router.registerHandler(
+            forMethod: Store_V1_StoreService.Method.SubscribeStore.descriptor,
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_SubscribeStoreRequest>(),
+            serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_SubscribeStoreResponse>(),
+            handler: { request, context in
+                try await self.subscribeStore(
+                    request: request,
+                    context: context
+                )
+            }
+        )
     }
 }
 
@@ -301,6 +368,17 @@ extension Store_V1_StoreService.ServiceProtocol {
         context: GRPCCore.ServerContext
     ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeEventResponse> {
         let response = try await self.subscribeEvent(
+            request: GRPCCore.ServerRequest(stream: request),
+            context: context
+        )
+        return response
+    }
+
+    public func subscribeStore(
+        request: GRPCCore.StreamingServerRequest<Store_V1_SubscribeStoreRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeStoreResponse> {
+        let response = try await self.subscribeStore(
             request: GRPCCore.ServerRequest(stream: request),
             context: context
         )
@@ -345,6 +423,23 @@ extension Store_V1_StoreService.SimpleServiceProtocol {
             metadata: [:],
             producer: { writer in
                 try await self.subscribeEvent(
+                    request: request.message,
+                    response: writer,
+                    context: context
+                )
+                return [:]
+            }
+        )
+    }
+
+    public func subscribeStore(
+        request: GRPCCore.ServerRequest<Store_V1_SubscribeStoreRequest>,
+        context: GRPCCore.ServerContext
+    ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_SubscribeStoreResponse> {
+        return GRPCCore.StreamingServerResponse<Store_V1_SubscribeStoreResponse>(
+            metadata: [:],
+            producer: { writer in
+                try await self.subscribeStore(
                     request: request.message,
                     response: writer,
                     context: context
@@ -419,6 +514,25 @@ extension Store_V1_StoreService {
             deserializer: some GRPCCore.MessageDeserializer<Store_V1_SubscribeEventResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<Store_V1_SubscribeEventResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable
+
+        /// Call the "SubscribeStore" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Store_V1_SubscribeStoreRequest` message.
+        ///   - serializer: A serializer for `Store_V1_SubscribeStoreRequest` messages.
+        ///   - deserializer: A deserializer for `Store_V1_SubscribeStoreResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        func subscribeStore<Result>(
+            request: GRPCCore.ClientRequest<Store_V1_SubscribeStoreRequest>,
+            serializer: some GRPCCore.MessageSerializer<Store_V1_SubscribeStoreRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Store_V1_SubscribeStoreResponse>,
+            options: GRPCCore.CallOptions,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<Store_V1_SubscribeStoreResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
     }
 
@@ -525,6 +639,34 @@ extension Store_V1_StoreService {
                 onResponse: handleResponse
             )
         }
+
+        /// Call the "SubscribeStore" method.
+        ///
+        /// - Parameters:
+        ///   - request: A request containing a single `Store_V1_SubscribeStoreRequest` message.
+        ///   - serializer: A serializer for `Store_V1_SubscribeStoreRequest` messages.
+        ///   - deserializer: A deserializer for `Store_V1_SubscribeStoreResponse` messages.
+        ///   - options: Options to apply to this RPC.
+        ///   - handleResponse: A closure which handles the response, the result of which is
+        ///       returned to the caller. Returning from the closure will cancel the RPC if it
+        ///       hasn't already finished.
+        /// - Returns: The result of `handleResponse`.
+        public func subscribeStore<Result>(
+            request: GRPCCore.ClientRequest<Store_V1_SubscribeStoreRequest>,
+            serializer: some GRPCCore.MessageSerializer<Store_V1_SubscribeStoreRequest>,
+            deserializer: some GRPCCore.MessageDeserializer<Store_V1_SubscribeStoreResponse>,
+            options: GRPCCore.CallOptions = .defaults,
+            onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<Store_V1_SubscribeStoreResponse>) async throws -> Result
+        ) async throws -> Result where Result: Sendable {
+            try await self.client.serverStreaming(
+                request: request,
+                descriptor: Store_V1_StoreService.Method.SubscribeStore.descriptor,
+                serializer: serializer,
+                deserializer: deserializer,
+                options: options,
+                onResponse: handleResponse
+            )
+        }
     }
 }
 
@@ -599,6 +741,29 @@ extension Store_V1_StoreService.ClientProtocol {
             request: request,
             serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_SubscribeEventRequest>(),
             deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_SubscribeEventResponse>(),
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SubscribeStore" method.
+    ///
+    /// - Parameters:
+    ///   - request: A request containing a single `Store_V1_SubscribeStoreRequest` message.
+    ///   - options: Options to apply to this RPC.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func subscribeStore<Result>(
+        request: GRPCCore.ClientRequest<Store_V1_SubscribeStoreRequest>,
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<Store_V1_SubscribeStoreResponse>) async throws -> Result
+    ) async throws -> Result where Result: Sendable {
+        try await self.subscribeStore(
+            request: request,
+            serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_SubscribeStoreRequest>(),
+            deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_SubscribeStoreResponse>(),
             options: options,
             onResponse: handleResponse
         )
@@ -687,6 +852,33 @@ extension Store_V1_StoreService.ClientProtocol {
             metadata: metadata
         )
         return try await self.subscribeEvent(
+            request: request,
+            options: options,
+            onResponse: handleResponse
+        )
+    }
+
+    /// Call the "SubscribeStore" method.
+    ///
+    /// - Parameters:
+    ///   - message: request message to send.
+    ///   - metadata: Additional metadata to send, defaults to empty.
+    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
+    ///   - handleResponse: A closure which handles the response, the result of which is
+    ///       returned to the caller. Returning from the closure will cancel the RPC if it
+    ///       hasn't already finished.
+    /// - Returns: The result of `handleResponse`.
+    public func subscribeStore<Result>(
+        _ message: Store_V1_SubscribeStoreRequest,
+        metadata: GRPCCore.Metadata = [:],
+        options: GRPCCore.CallOptions = .defaults,
+        onResponse handleResponse: @Sendable @escaping (GRPCCore.StreamingClientResponse<Store_V1_SubscribeStoreResponse>) async throws -> Result
+    ) async throws -> Result where Result: Sendable {
+        let request = GRPCCore.ClientRequest<Store_V1_SubscribeStoreRequest>(
+            message: message,
+            metadata: metadata
+        )
+        return try await self.subscribeStore(
             request: request,
             options: options,
             onResponse: handleResponse
