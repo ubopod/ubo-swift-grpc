@@ -4,6 +4,25 @@ import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 import SwiftProtobuf
 
+/// Actor to safely hold and merge system stats across async updates
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+private actor StatsHolder {
+    private var stats = SystemStats()
+
+    func update(
+        cpuPercent: Float?,
+        ramPercent: Float?,
+        clock: String?,
+        temperature: Float?
+    ) -> SystemStats {
+        if let cpu = cpuPercent { stats.cpuPercent = cpu }
+        if let ram = ramPercent { stats.ramPercent = ram }
+        if let clk = clock { stats.clock = clk }
+        if let temp = temperature { stats.temperature = temp }
+        return stats
+    }
+}
+
 /// Manages gRPC connection to an Ubo device
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public actor UboConnection {
@@ -255,6 +274,71 @@ public actor UboConnection {
         }
     }
 
+    /// Subscribe to system stats (CPU, RAM, clock, temperature) - updates continuously regardless of current view
+    /// - Returns: An async stream of SystemStats
+    public func subscribeToSystemStats() -> AsyncThrowingStream<SystemStats, Error> {
+        AsyncThrowingStream { continuation in
+            Task {
+                guard let client = self.storeClient else {
+                    continuation.finish(throwing: UboError.notConnected)
+                    return
+                }
+
+                // Create subscription request for system state and sensors
+                var request = Store_V1_SubscribeStoreRequest()
+                request.selectors = ["state.system", "state.sensors"]
+
+                // Use actor-isolated state holder to safely track stats across updates
+                let statsHolder = StatsHolder()
+
+                do {
+                    try await client.subscribeStore(request) { response in
+                        switch response.accepted {
+                        case .success(let contents):
+                            for try await message in contents.bodyParts {
+                                if case .message(let subscribeResponse) = message {
+                                    let results = subscribeResponse.results
+
+                                    var cpuPercent: Float?
+                                    var ramPercent: Float?
+                                    var clock: String?
+                                    var temperature: Float?
+
+                                    for result in results {
+                                        // Try to parse as SystemState
+                                        if let stats = self.unpackSystemStats(from: result) {
+                                            cpuPercent = stats.cpuPercent
+                                            ramPercent = stats.ramPercent
+                                            clock = stats.clock
+                                        }
+                                        // Try to parse as SensorsState for temperature
+                                        if let temp = self.unpackTemperature(from: result) {
+                                            temperature = temp
+                                        }
+                                    }
+
+                                    // Update and get merged stats
+                                    let mergedStats = await statsHolder.update(
+                                        cpuPercent: cpuPercent,
+                                        ramPercent: ramPercent,
+                                        clock: clock,
+                                        temperature: temperature
+                                    )
+                                    continuation.yield(mergedStats)
+                                }
+                            }
+                        case .failure(let error):
+                            throw error
+                        }
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                }
+            }
+        }
+    }
+
     // MARK: - Proto Unpacking
 
     /// Unpack a google.protobuf.Any message to ViewData
@@ -290,6 +374,38 @@ public actor UboConnection {
         if typeURL.hasSuffix("StatusBarData") {
             if let proto = try? Ubo_V1_StatusBarData(serializedBytes: any.value) {
                 return convertStatusBarData(proto)
+            }
+        }
+
+        return nil
+    }
+
+    /// Unpack a google.protobuf.Any message to SystemStats
+    private nonisolated func unpackSystemStats(from any: SwiftProtobuf.Google_Protobuf_Any) -> SystemStats? {
+        let typeURL = any.typeURL
+
+        if typeURL.hasSuffix("SystemState") {
+            if let proto = try? Ubo_V1_SystemState(serializedBytes: any.value) {
+                return SystemStats(
+                    cpuPercent: proto.hasCpuPercent ? proto.cpuPercent : 0,
+                    ramPercent: proto.hasRamPercent ? proto.ramPercent : 0,
+                    clock: proto.hasClock ? proto.clock : ""
+                )
+            }
+        }
+
+        return nil
+    }
+
+    /// Unpack temperature from SensorsState
+    private nonisolated func unpackTemperature(from any: SwiftProtobuf.Google_Protobuf_Any) -> Float? {
+        let typeURL = any.typeURL
+
+        if typeURL.hasSuffix("SensorsState") {
+            if let proto = try? Ubo_V1_SensorsState(serializedBytes: any.value) {
+                if proto.hasTemperature && proto.temperature.hasValue {
+                    return proto.temperature.value
+                }
             }
         }
 
@@ -587,6 +703,63 @@ public actor UboConnection {
             var scroll = Ubo_V1_MenuScrollAction()
             scroll.direction = .down
             protoAction.menuScrollAction = scroll
+
+        case .displayBlank:
+            protoAction.displayBlankAction = Ubo_V1_DisplayBlankAction()
+
+        case .displayUnblank:
+            protoAction.displayUnblankAction = Ubo_V1_DisplayUnblankAction()
+
+        case .displayRedraw:
+            protoAction.displayRedrawAction = Ubo_V1_DisplayRedrawAction()
+
+        case .assistantStartListening:
+            protoAction.assistantStartListeningAction = Ubo_V1_AssistantStartListeningAction()
+
+        case .assistantStopListening:
+            protoAction.assistantStopListeningAction = Ubo_V1_AssistantStopListeningAction()
+
+        case .assistantToggleListening:
+            protoAction.assistantToggleListeningAction = Ubo_V1_AssistantToggleListeningAction()
+
+        case .rgbRingPulse(let color, let repetitions, let wait):
+            var pulse = Ubo_V1_RgbRingPulseAction()
+            pulse.color = buildProtoColor(color)
+            pulse.repetitions = Int64(repetitions)
+            pulse.wait = Int64(wait * 1000)  // Convert seconds to milliseconds
+            protoAction.rgbRingPulseAction = pulse
+
+        case .rgbRingBlink(let color, let repetitions, let wait):
+            var blink = Ubo_V1_RgbRingBlinkAction()
+            blink.color = buildProtoColor(color)
+            blink.repetitions = Int64(repetitions)
+            blink.wait = Int64(wait * 1000)  // Convert seconds to milliseconds
+            protoAction.rgbRingBlinkAction = blink
+
+        case .rgbRingSpinningWheel(let color, let rounds, let length, let wait):
+            var spinningWheel = Ubo_V1_RgbRingSpinningWheelAction()
+            spinningWheel.color = buildProtoColor(color)
+            spinningWheel.repetitions = Int64(rounds)
+            spinningWheel.length = Int64(length)
+            spinningWheel.wait = Int64(wait * 1000)  // Convert seconds to milliseconds
+            protoAction.rgbRingSpinningWheelAction = spinningWheel
+
+        case .rgbRingProgressWheel(let color, let percentage):
+            var progressWheel = Ubo_V1_RgbRingProgressWheelAction()
+            progressWheel.color = buildProtoColor(color)
+            progressWheel.percentage = Float(percentage)
+            protoAction.rgbRingProgressWheelAction = progressWheel
+
+        case .rgbRingSetEnabled(let enabled):
+            var setEnabled = Ubo_V1_RgbRingSetEnabledAction()
+            setEnabled.enabled = enabled
+            protoAction.rgbRingSetEnabledAction = setEnabled
+
+        case .powerOff:
+            protoAction.powerOffAction = Ubo_V1_PowerOffAction()
+
+        case .reboot:
+            protoAction.rebootAction = Ubo_V1_RebootAction()
 
         // Handle other action cases with minimal implementation
         default:
