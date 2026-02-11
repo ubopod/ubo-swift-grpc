@@ -36,11 +36,15 @@ public final class UboClient: ObservableObject {
     /// Whether the device is recording audio
     @Published public private(set) var isRecording: Bool = false
 
+    /// Current system stats (CPU, RAM, clock) - updated continuously
+    @Published public private(set) var systemStats: SystemStats?
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
     private var displaySubscriptionTask: Task<Void, Never>?
     private var viewSubscriptionTask: Task<Void, Never>?
+    private var statsSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -80,11 +84,14 @@ public final class UboClient: ObservableObject {
         displaySubscriptionTask = nil
         viewSubscriptionTask?.cancel()
         viewSubscriptionTask = nil
+        statsSubscriptionTask?.cancel()
+        statsSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
         currentView = nil
         statusBar = nil
+        systemStats = nil
     }
 
     /// Whether currently connected to a device
@@ -155,6 +162,35 @@ public final class UboClient: ObservableObject {
         viewSubscriptionTask = nil
     }
 
+    // MARK: - System Stats Subscription
+
+    /// Start subscribing to system stats (CPU, RAM, clock)
+    /// This provides continuous updates even when the device is not on the home screen.
+    public func startStatsSubscription() {
+        statsSubscriptionTask?.cancel()
+        statsSubscriptionTask = Task {
+            do {
+                for try await stats in await connection.subscribeToSystemStats() {
+                    await MainActor.run {
+                        self.systemStats = stats
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to system stats
+    public func stopStatsSubscription() {
+        statsSubscriptionTask?.cancel()
+        statsSubscriptionTask = nil
+    }
+
     // MARK: - Button/Key Actions
 
     /// Press a button on the device
@@ -175,24 +211,24 @@ public final class UboClient: ObservableObject {
         try await dispatch(.keypadKeyRelease(key: key))
     }
 
-    /// Press the back button
+    /// Navigate back in the menu
     public func goBack() async throws {
-        try await pressKey(.back)
+        try await dispatch(.menuGoBack)
     }
 
-    /// Press the home button
+    /// Navigate to home screen
     public func goHome() async throws {
-        try await pressKey(.home)
+        try await dispatch(.menuGoHome)
     }
 
-    /// Press the up button
+    /// Scroll up in the current menu
     public func scrollUp() async throws {
-        try await pressKey(.up)
+        try await dispatch(.menuScrollUp)
     }
 
-    /// Press the down button
+    /// Scroll down in the current menu
     public func scrollDown() async throws {
-        try await pressKey(.down)
+        try await dispatch(.menuScrollDown)
     }
 
     /// Press L1 button
