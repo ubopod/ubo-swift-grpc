@@ -220,6 +220,24 @@ public actor UboConnection {
         }
     }
 
+    // MARK: - Event Dispatch
+
+    /// Dispatch an event to the device
+    public func dispatchEvent(_ event: Ubo_V1_Event) async throws {
+        guard let client = storeClient else {
+            throw UboError.notConnected
+        }
+
+        var request = Store_V1_DispatchEventRequest()
+        request.event = event
+
+        do {
+            _ = try await client.dispatchEvent(request)
+        } catch {
+            throw UboError.dispatchFailed(error)
+        }
+    }
+
     // MARK: - Store Subscription
 
     /// Subscribe to store state changes for view data and status bar
@@ -579,6 +597,85 @@ public actor UboConnection {
                         case .failure(let error):
                             throw error
                         }
+                    }
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                }
+            }
+        }
+    }
+
+    // MARK: - Camera Event Subscription
+
+    /// Camera event types received from the device
+    public enum CameraEventType: Sendable {
+        case startViewfinder(pattern: String?)
+        case stopViewfinder
+    }
+
+    /// Subscribe to camera viewfinder events (start/stop)
+    public func subscribeToCameraEvents() -> AsyncThrowingStream<CameraEventType, Error> {
+        AsyncThrowingStream { continuation in
+            Task {
+                guard let client = self.storeClient else {
+                    continuation.finish(throwing: UboError.notConnected)
+                    return
+                }
+
+                do {
+                    try await withThrowingTaskGroup(of: Void.self) { group in
+                        // Subscribe to CameraStartViewfinderEvent
+                        group.addTask {
+                            var requestBuilder = Store_V1_SubscribeEventRequest()
+                            var eventBuilder = Ubo_V1_Event()
+                            eventBuilder.cameraStartViewfinderEvent = Ubo_V1_CameraStartViewfinderEvent()
+                            requestBuilder.event = eventBuilder
+                            let request = requestBuilder
+
+                            try await client.subscribeEvent(request) { response in
+                                switch response.accepted {
+                                case .success(let contents):
+                                    for try await message in contents.bodyParts {
+                                        if case .message(let subscribeResponse) = message {
+                                            if case .cameraStartViewfinderEvent(let startEvent) = subscribeResponse.event.event {
+                                                let pattern: String? = startEvent.hasPattern ? startEvent.pattern : nil
+                                                continuation.yield(.startViewfinder(pattern: pattern))
+                                            }
+                                        }
+                                    }
+                                case .failure(let error):
+                                    throw error
+                                }
+                            }
+                        }
+
+                        // Subscribe to CameraStopViewfinderEvent
+                        group.addTask {
+                            var requestBuilder = Store_V1_SubscribeEventRequest()
+                            var eventBuilder = Ubo_V1_Event()
+                            eventBuilder.cameraStopViewfinderEvent = Ubo_V1_CameraStopViewfinderEvent()
+                            requestBuilder.event = eventBuilder
+                            let request = requestBuilder
+
+                            try await client.subscribeEvent(request) { response in
+                                switch response.accepted {
+                                case .success(let contents):
+                                    for try await message in contents.bodyParts {
+                                        if case .message(let subscribeResponse) = message {
+                                            if case .cameraStopViewfinderEvent(_) = subscribeResponse.event.event {
+                                                continuation.yield(.stopViewfinder)
+                                            }
+                                        }
+                                    }
+                                case .failure(let error):
+                                    throw error
+                                }
+                            }
+                        }
+
+                        // Wait for all tasks (they run until cancelled)
+                        try await group.waitForAll()
                     }
                     continuation.finish()
                 } catch {

@@ -35,6 +35,12 @@ public enum UboEvent: Sendable {
     /// Reboot initiated
     case reboot
 
+    /// Camera viewfinder started (device wants frames)
+    case cameraStartViewfinder(pattern: String?)
+
+    /// Camera viewfinder stopped (device no longer needs frames)
+    case cameraStopViewfinder
+
     /// Generic/unknown event
     case unknown(type: String)
 }
@@ -64,6 +70,10 @@ extension UboEvent: CustomStringConvertible {
             return "PowerOff"
         case .reboot:
             return "Reboot"
+        case .cameraStartViewfinder(let pattern):
+            return "CameraStartViewfinder(pattern=\(pattern ?? "nil"))"
+        case .cameraStopViewfinder:
+            return "CameraStopViewfinder"
         case .unknown(let type):
             return "Unknown(\(type))"
         }
