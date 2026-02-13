@@ -39,12 +39,19 @@ public final class UboClient: ObservableObject {
     /// Current system stats (CPU, RAM, clock) - updated continuously
     @Published public private(set) var systemStats: SystemStats?
 
+    /// Whether the device camera viewfinder is active
+    @Published public private(set) var isCameraViewfinderActive: Bool = false
+
+    /// Current camera pattern (e.g. QR code pattern to scan for)
+    @Published public private(set) var cameraPattern: String?
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
     private var displaySubscriptionTask: Task<Void, Never>?
     private var viewSubscriptionTask: Task<Void, Never>?
     private var statsSubscriptionTask: Task<Void, Never>?
+    private var cameraSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -86,12 +93,16 @@ public final class UboClient: ObservableObject {
         viewSubscriptionTask = nil
         statsSubscriptionTask?.cancel()
         statsSubscriptionTask = nil
+        cameraSubscriptionTask?.cancel()
+        cameraSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
         currentView = nil
         statusBar = nil
         systemStats = nil
+        isCameraViewfinderActive = false
+        cameraPattern = nil
     }
 
     /// Whether currently connected to a device
@@ -189,6 +200,75 @@ public final class UboClient: ObservableObject {
     public func stopStatsSubscription() {
         statsSubscriptionTask?.cancel()
         statsSubscriptionTask = nil
+    }
+
+    // MARK: - Camera Subscription
+
+    /// Start subscribing to camera viewfinder events
+    public func startCameraSubscription() {
+        cameraSubscriptionTask?.cancel()
+        cameraSubscriptionTask = Task {
+            do {
+                for try await event in await connection.subscribeToCameraEvents() {
+                    await MainActor.run {
+                        switch event {
+                        case .startViewfinder(let pattern):
+                            self.cameraPattern = pattern
+                            self.isCameraViewfinderActive = true
+                        case .stopViewfinder:
+                            self.isCameraViewfinderActive = false
+                            self.cameraPattern = nil
+                        }
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to camera viewfinder events
+    public func stopCameraSubscription() {
+        cameraSubscriptionTask?.cancel()
+        cameraSubscriptionTask = nil
+        isCameraViewfinderActive = false
+        cameraPattern = nil
+    }
+
+    /// Send a camera frame to the device as a CameraReportImageEvent
+    /// - Parameters:
+    ///   - data: RGB pixel data (3 bytes per pixel)
+    ///   - width: Frame width in pixels
+    ///   - height: Frame height in pixels
+    ///   - timestamp: Frame timestamp
+    public func sendCameraFrame(data: Data, width: Int, height: Int, timestamp: Float) async throws {
+        guard isConnected else {
+            throw UboError.notConnected
+        }
+
+        var reportEvent = Ubo_V1_CameraReportImageEvent()
+        reportEvent.data = data
+        reportEvent.width = Int64(width)
+        reportEvent.height = Int64(height)
+        reportEvent.timestamp = timestamp
+
+        var event = Ubo_V1_Event()
+        event.cameraReportImageEvent = reportEvent
+
+        do {
+            try await connection.dispatchEvent(event)
+        } catch let error as UboError {
+            lastError = error
+            throw error
+        } catch {
+            let uboError = UboError.dispatchFailed(error)
+            lastError = uboError
+            throw uboError
+        }
     }
 
     // MARK: - Button/Key Actions
