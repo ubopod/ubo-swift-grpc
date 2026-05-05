@@ -26,11 +26,11 @@ public struct Store_V1_DispatchActionRequest: Sendable {
   // methods supported on all messages.
 
   public var action: Ubo_V1_Action {
-    get {return _action ?? Ubo_V1_Action()}
+    get {_action ?? Ubo_V1_Action()}
     set {_action = newValue}
   }
   /// Returns true if `action` has been explicitly set.
-  public var hasAction: Bool {return self._action != nil}
+  public var hasAction: Bool {self._action != nil}
   /// Clears the value of `action`. Subsequent reads from it will return its default value.
   public mutating func clearAction() {self._action = nil}
 
@@ -47,11 +47,11 @@ public struct Store_V1_DispatchEventRequest: Sendable {
   // methods supported on all messages.
 
   public var event: Ubo_V1_Event {
-    get {return _event ?? Ubo_V1_Event()}
+    get {_event ?? Ubo_V1_Event()}
     set {_event = newValue}
   }
   /// Returns true if `event` has been explicitly set.
-  public var hasEvent: Bool {return self._event != nil}
+  public var hasEvent: Bool {self._event != nil}
   /// Clears the value of `event`. Subsequent reads from it will return its default value.
   public mutating func clearEvent() {self._event = nil}
 
@@ -87,20 +87,11 @@ public struct Store_V1_SubscribeEventRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var event: Ubo_V1_Event {
-    get {return _event ?? Ubo_V1_Event()}
-    set {_event = newValue}
-  }
-  /// Returns true if `event` has been explicitly set.
-  public var hasEvent: Bool {return self._event != nil}
-  /// Clears the value of `event`. Subsequent reads from it will return its default value.
-  public mutating func clearEvent() {self._event = nil}
+  public var events: [Ubo_V1_Event] = []
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
-
-  fileprivate var _event: Ubo_V1_Event? = nil
 }
 
 public struct Store_V1_SubscribeEventResponse: Sendable {
@@ -109,11 +100,11 @@ public struct Store_V1_SubscribeEventResponse: Sendable {
   // methods supported on all messages.
 
   public var event: Ubo_V1_Event {
-    get {return _event ?? Ubo_V1_Event()}
+    get {_event ?? Ubo_V1_Event()}
     set {_event = newValue}
   }
   /// Returns true if `event` has been explicitly set.
-  public var hasEvent: Bool {return self._event != nil}
+  public var hasEvent: Bool {self._event != nil}
   /// Clears the value of `event`. Subsequent reads from it will return its default value.
   public mutating func clearEvent() {self._event = nil}
 
@@ -260,7 +251,7 @@ extension Store_V1_DispatchEventResponse: SwiftProtobuf.Message, SwiftProtobuf._
 
 extension Store_V1_SubscribeEventRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SubscribeEventRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}event\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}events\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -268,25 +259,21 @@ extension Store_V1_SubscribeEventRequest: SwiftProtobuf.Message, SwiftProtobuf._
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._event) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.events) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._event {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
+    if !self.events.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Store_V1_SubscribeEventRequest, rhs: Store_V1_SubscribeEventRequest) -> Bool {
-    if lhs._event != rhs._event {return false}
+    if lhs.events != rhs.events {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

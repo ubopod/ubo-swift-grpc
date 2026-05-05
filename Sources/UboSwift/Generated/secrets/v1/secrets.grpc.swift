@@ -29,7 +29,8 @@ public enum Secrets_V1_SecretsService: Sendable {
             /// Descriptor for "QuerySecret".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "secrets.v1.SecretsService"),
-                method: "QuerySecret"
+                method: "QuerySecret",
+                type: .unary
             )
         }
         /// Descriptors for all methods in the "secrets.v1.SecretsService" service.

@@ -4,7 +4,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROTO_DIR="$SCRIPT_DIR/../proto"
+PROTO_DIR="$SCRIPT_DIR/proto"
 OUTPUT_DIR="$SCRIPT_DIR/Sources/UboSwift/Generated"
 
 # Check if proto directory exists

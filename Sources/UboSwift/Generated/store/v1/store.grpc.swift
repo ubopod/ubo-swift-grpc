@@ -29,7 +29,8 @@ public enum Store_V1_StoreService: Sendable {
             /// Descriptor for "DispatchAction".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
-                method: "DispatchAction"
+                method: "DispatchAction",
+                type: .unary
             )
         }
         /// Namespace for "DispatchEvent" metadata.
@@ -41,7 +42,8 @@ public enum Store_V1_StoreService: Sendable {
             /// Descriptor for "DispatchEvent".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
-                method: "DispatchEvent"
+                method: "DispatchEvent",
+                type: .unary
             )
         }
         /// Namespace for "SubscribeEvent" metadata.
@@ -53,7 +55,8 @@ public enum Store_V1_StoreService: Sendable {
             /// Descriptor for "SubscribeEvent".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
-                method: "SubscribeEvent"
+                method: "SubscribeEvent",
+                type: .serverStreaming
             )
         }
         /// Namespace for "SubscribeStore" metadata.
@@ -65,7 +68,8 @@ public enum Store_V1_StoreService: Sendable {
             /// Descriptor for "SubscribeStore".
             public static let descriptor = GRPCCore.MethodDescriptor(
                 service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
-                method: "SubscribeStore"
+                method: "SubscribeStore",
+                type: .serverStreaming
             )
         }
         /// Descriptors for all methods in the "store.v1.StoreService" service.
