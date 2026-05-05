@@ -510,7 +510,7 @@ public actor UboConnection {
     private nonisolated func convertApplicationViewData(_ proto: Ubo_V1_ApplicationViewData) -> ApplicationViewData {
         var extraData: [String: String] = [:]
         if proto.hasExtraData {
-            extraData = proto.extraData.items
+            extraData = proto.extraData.items.mapValues(convertApplicationExtraDataValue)
         }
 
         return ApplicationViewData(
@@ -519,6 +519,36 @@ public actor UboConnection {
             applicationId: proto.hasApplicationID ? proto.applicationID : "",
             extraData: extraData
         )
+    }
+
+    private nonisolated func convertApplicationExtraDataValue(
+        _ value: Ubo_V1_ApplicationViewData.ExtraDataValue
+    ) -> String {
+        switch value.extraDataValue {
+        case .basicType(let basicType):
+            return convertBasicType(basicType)
+        case .list(let list):
+            return list.items.map(convertBasicType).joined(separator: ",")
+        case nil:
+            return ""
+        }
+    }
+
+    private nonisolated func convertBasicType(_ value: Ubo_V1_BasicType) -> String {
+        switch value.basicType {
+        case .bool(let bool):
+            return String(bool)
+        case .bytes(let data):
+            return data.base64EncodedString()
+        case .float(let float):
+            return String(float)
+        case .int64(let int64):
+            return String(int64)
+        case .string(let string):
+            return string
+        case nil:
+            return ""
+        }
     }
 
     private nonisolated func convertStatusBarData(_ proto: Ubo_V1_StatusBarData) -> StatusBarData {
@@ -568,7 +598,7 @@ public actor UboConnection {
                 var requestBuilder = Store_V1_SubscribeEventRequest()
                 var eventBuilder = Ubo_V1_Event()
                 eventBuilder.displayRenderEvent = Ubo_V1_DisplayRenderEvent()
-                requestBuilder.event = eventBuilder
+                requestBuilder.events = [eventBuilder]
                 let request = requestBuilder
 
                 do {
@@ -630,7 +660,7 @@ public actor UboConnection {
                             var requestBuilder = Store_V1_SubscribeEventRequest()
                             var eventBuilder = Ubo_V1_Event()
                             eventBuilder.cameraStartViewfinderEvent = Ubo_V1_CameraStartViewfinderEvent()
-                            requestBuilder.event = eventBuilder
+                            requestBuilder.events = [eventBuilder]
                             let request = requestBuilder
 
                             try await client.subscribeEvent(request) { response in
@@ -655,7 +685,7 @@ public actor UboConnection {
                             var requestBuilder = Store_V1_SubscribeEventRequest()
                             var eventBuilder = Ubo_V1_Event()
                             eventBuilder.cameraStopViewfinderEvent = Ubo_V1_CameraStopViewfinderEvent()
-                            requestBuilder.event = eventBuilder
+                            requestBuilder.events = [eventBuilder]
                             let request = requestBuilder
 
                             try await client.subscribeEvent(request) { response in

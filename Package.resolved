@@ -1,13 +1,13 @@
 {
-  "originHash" : "4172ed04212c0d862ff69e2a22de925baaaba17c55c33260ae5ada5f2d349300",
+  "originHash" : "5b35b9119017ba7e76abd836152e1ba455f872f8310ab431b54884468d23e878",
   "pins" : [
     {
-      "identity" : "grpc-swift",
+      "identity" : "grpc-swift-2",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/grpc/grpc-swift.git",
+      "location" : "https://github.com/grpc/grpc-swift-2.git",
       "state" : {
-        "revision" : "adc18c3e1c55027d0ce43893897ac448e3f27ebe",
-        "version" : "2.2.3"
+        "revision" : "d19a94824cc6fa182211e8197ce391ff712b69f1",
+        "version" : "2.4.0"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/grpc/grpc-swift-nio-transport.git",
       "state" : {
-        "revision" : "ca2303eb7f3df556beafbba33a143ffa30d5b786",
-        "version" : "1.2.3"
+        "revision" : "f62a09000685b5b86ee383b63e042f286b1a5422",
+        "version" : "2.7.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/grpc/grpc-swift-protobuf.git",
       "state" : {
-        "revision" : "53e89e3a5d417307f70a721c7b83e564fefb1e1c",
-        "version" : "1.3.1"
+        "revision" : "8723cf856dc23d9c2fad4d874e7b9ed3254acf03",
+        "version" : "2.3.0"
       }
     },
     {
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "233f61bc2cfbb22d0edeb2594da27a20d2ce514e",
-        "version" : "2.93.0"
+        "revision" : "f71c8d2a5e74a2c6d11a0fbe324774b5d6084237",
+        "version" : "2.99.0"
       }
     },
     {
@@ -141,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio-http2.git",
       "state" : {
-        "revision" : "c2ba4cfbb83f307c66f5a6df6bb43e3c88dfbf80",
-        "version" : "1.39.0"
+        "revision" : "81cc18264f92cd307ff98430f89372711d4f6fe9",
+        "version" : "1.43.0"
       }
     },
     {
