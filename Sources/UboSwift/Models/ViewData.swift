@@ -142,12 +142,161 @@ public struct ApplicationViewData: Sendable {
     }
 }
 
+/// Sub-kinds of `RenderViewData` that the core dispatches to clients.
+///
+/// Mirrors the `kind` strings used by `ubo_app.store.core.types.view_data.RenderViewData`
+/// (e.g. `'qr_code'`, `'frame_stream'`). New kinds added on the Python side without
+/// a Swift counterpart fall through to `.unknown` so clients can degrade gracefully.
+public enum RenderKind: Sendable, Equatable {
+    case qrCode
+    case qrCodeCarousel
+    case textViewer
+    case imageViewer
+    case frameStream
+    case status
+    case unknown(String)
+
+    public init(rawValue: String) {
+        switch rawValue {
+        case "qr_code": self = .qrCode
+        case "qr_code_carousel": self = .qrCodeCarousel
+        case "text_viewer": self = .textViewer
+        case "image_viewer": self = .imageViewer
+        case "frame_stream": self = .frameStream
+        case "status": self = .status
+        default: self = .unknown(rawValue)
+        }
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .qrCode: return "qr_code"
+        case .qrCodeCarousel: return "qr_code_carousel"
+        case .textViewer: return "text_viewer"
+        case .imageViewer: return "image_viewer"
+        case .frameStream: return "frame_stream"
+        case .status: return "status"
+        case .unknown(let value): return value
+        }
+    }
+}
+
+/// A `props` value attached to a `RenderViewData` payload. Either a primitive
+/// (string/int64/float/bool/bytes) or a list of primitives — mirrors the
+/// `BasicType | tuple[BasicType, ...] | list[BasicType]` union from Python.
+public enum RenderPropValue: Sendable, Equatable {
+    case string(String)
+    case int(Int64)
+    case float(Float)
+    case bool(Bool)
+    case bytes(Data)
+    case list([RenderPropValue])
+}
+
+/// Data for rendering a generic widget such as a QR code, image/text viewer,
+/// status page, or live frame stream. The sub-kind is carried in `kind` and
+/// the renderer-specific arguments live in `props`.
+public struct RenderViewData: Sendable {
+    public var type: String = "render"
+    public var showStatusBar: Bool = false
+    public var kind: RenderKind
+    public var title: String = ""
+    public var props: [String: RenderPropValue] = [:]
+    public var items: [MenuItemData] = []
+    public var streamId: String = ""
+
+    public init(
+        type: String = "render",
+        showStatusBar: Bool = false,
+        kind: RenderKind,
+        title: String = "",
+        props: [String: RenderPropValue] = [:],
+        items: [MenuItemData] = [],
+        streamId: String = ""
+    ) {
+        self.type = type
+        self.showStatusBar = showStatusBar
+        self.kind = kind
+        self.title = title
+        self.props = props
+        self.items = items
+        self.streamId = streamId
+    }
+}
+
+/// Data for rendering an instruction/waiting view (e.g. "Press the button on
+/// your device", "Scan this QR code"). Optionally shows a spinner and a
+/// timeout countdown.
+public struct InstructionViewData: Sendable {
+    public var type: String = "instruction"
+    public var showStatusBar: Bool = false
+    public var title: String = ""
+    public var instruction: String = ""
+    public var icon: String = ""
+    public var spinner: Bool = false
+    public var timeoutSeconds: Int = 0
+    public var progressText: String = ""
+    public var footerText: String = ""
+
+    public init(
+        type: String = "instruction",
+        showStatusBar: Bool = false,
+        title: String = "",
+        instruction: String = "",
+        icon: String = "",
+        spinner: Bool = false,
+        timeoutSeconds: Int = 0,
+        progressText: String = "",
+        footerText: String = ""
+    ) {
+        self.type = type
+        self.showStatusBar = showStatusBar
+        self.title = title
+        self.instruction = instruction
+        self.icon = icon
+        self.spinner = spinner
+        self.timeoutSeconds = timeoutSeconds
+        self.progressText = progressText
+        self.footerText = footerText
+    }
+}
+
+/// Data for rendering a confirmation/prompt view (e.g. Yes/Cancel,
+/// Connect/Delete). Items carry the action button labels and `action_id`s.
+public struct PromptViewData: Sendable {
+    public var type: String = "prompt"
+    public var showStatusBar: Bool = false
+    public var title: String = ""
+    public var prompt: String = ""
+    public var icon: String = ""
+    public var items: [MenuItemData] = []
+
+    public init(
+        type: String = "prompt",
+        showStatusBar: Bool = false,
+        title: String = "",
+        prompt: String = "",
+        icon: String = "",
+        items: [MenuItemData] = []
+    ) {
+        self.type = type
+        self.showStatusBar = showStatusBar
+        self.title = title
+        self.prompt = prompt
+        self.icon = icon
+        self.items = items
+    }
+}
+
 /// Union type for all view data types
 public enum ViewData: Sendable {
     case home(HomeViewData)
     case menu(MenuViewData)
     case notification(NotificationViewData)
     case application(ApplicationViewData)
+    case instruction(InstructionViewData)
+    case prompt(PromptViewData)
+    case render(RenderViewData)
 
     /// Returns true if this is a home view
     public var isHome: Bool {
@@ -173,6 +322,24 @@ public enum ViewData: Sendable {
         return false
     }
 
+    /// Returns true if this is an instruction view
+    public var isInstruction: Bool {
+        if case .instruction = self { return true }
+        return false
+    }
+
+    /// Returns true if this is a prompt view
+    public var isPrompt: Bool {
+        if case .prompt = self { return true }
+        return false
+    }
+
+    /// Returns true if this is a render view
+    public var isRender: Bool {
+        if case .render = self { return true }
+        return false
+    }
+
     /// Returns the view type string
     public var type: String {
         switch self {
@@ -180,6 +347,9 @@ public enum ViewData: Sendable {
         case .menu: return "menu"
         case .notification: return "notification"
         case .application: return "application"
+        case .instruction: return "instruction"
+        case .prompt: return "prompt"
+        case .render: return "render"
         }
     }
 
@@ -190,6 +360,9 @@ public enum ViewData: Sendable {
         case .menu(let data): return data.showStatusBar
         case .notification(let data): return data.showStatusBar
         case .application(let data): return data.showStatusBar
+        case .instruction(let data): return data.showStatusBar
+        case .prompt(let data): return data.showStatusBar
+        case .render(let data): return data.showStatusBar
         }
     }
 }
@@ -205,6 +378,12 @@ extension ViewData: CustomStringConvertible {
             return "NotificationView(title: \"\(data.title)\")"
         case .application(let data):
             return "ApplicationView(id: \"\(data.applicationId)\")"
+        case .instruction(let data):
+            return "InstructionView(title: \"\(data.title)\", spinner: \(data.spinner))"
+        case .prompt(let data):
+            return "PromptView(title: \"\(data.title)\", items: \(data.items.count))"
+        case .render(let data):
+            return "RenderView(kind: \(data.kind.rawValue), title: \"\(data.title)\")"
         }
     }
 }

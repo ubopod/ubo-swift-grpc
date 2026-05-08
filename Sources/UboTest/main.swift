@@ -286,6 +286,21 @@ func runInteractiveMenu(client: UboClient) async {
                     case .application(let data):
                         print("  Type: Application")
                         print("  App ID: \(data.applicationId)")
+                    case .instruction(let data):
+                        print("  Type: Instruction")
+                        print("  Title: \(data.title)")
+                        print("  Instruction: \(data.instruction)")
+                        print("  Spinner: \(data.spinner)")
+                    case .prompt(let data):
+                        print("  Type: Prompt")
+                        print("  Title: \(data.title)")
+                        print("  Prompt: \(data.prompt)")
+                        print("  Items: \(data.items.count)")
+                    case .render(let data):
+                        print("  Type: Render")
+                        print("  Kind: \(data.kind.rawValue)")
+                        print("  Title: \(data.title)")
+                        print("  Stream: \(data.streamId)")
                     }
                     if let status = client.statusBar {
                         print("Status Bar:")

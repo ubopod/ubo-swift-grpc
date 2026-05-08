@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import GRPCNIOTransportHTTP2
 
 /// Main client for interacting with Ubo devices via gRPC.
 ///
@@ -45,6 +46,9 @@ public final class UboClient: ObservableObject {
     /// Current camera pattern (e.g. QR code pattern to scan for)
     @Published public private(set) var cameraPattern: String?
 
+    /// Currently pending input demands (drives native InputFormView).
+    @Published public private(set) var activeInputs: [WebUIInputDescription] = []
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
@@ -52,6 +56,7 @@ public final class UboClient: ObservableObject {
     private var viewSubscriptionTask: Task<Void, Never>?
     private var statsSubscriptionTask: Task<Void, Never>?
     private var cameraSubscriptionTask: Task<Void, Never>?
+    private var inputsSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -65,13 +70,19 @@ public final class UboClient: ObservableObject {
     /// - Parameters:
     ///   - host: Device hostname or IP address
     ///   - port: gRPC port (default: 50051)
+    ///   - security: Transport security to use (default: `.plaintext`).
     ///   - subscribeToDisplay: Whether to automatically subscribe to display events
-    public func connect(host: String, port: Int = 50051, subscribeToDisplay: Bool = true) async throws {
+    public func connect(
+        host: String,
+        port: Int = 50051,
+        security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext,
+        subscribeToDisplay: Bool = true
+    ) async throws {
         connectionState = .connecting
         lastError = nil
 
         do {
-            try await connection.connect(host: host, port: port)
+            try await connection.connect(host: host, port: port, security: security)
             connectionState = .connected
 
             if subscribeToDisplay {
@@ -95,6 +106,8 @@ public final class UboClient: ObservableObject {
         statsSubscriptionTask = nil
         cameraSubscriptionTask?.cancel()
         cameraSubscriptionTask = nil
+        inputsSubscriptionTask?.cancel()
+        inputsSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
@@ -103,6 +116,7 @@ public final class UboClient: ObservableObject {
         systemStats = nil
         isCameraViewfinderActive = false
         cameraPattern = nil
+        activeInputs = []
     }
 
     /// Whether currently connected to a device
@@ -200,6 +214,37 @@ public final class UboClient: ObservableObject {
     public func stopStatsSubscription() {
         statsSubscriptionTask?.cancel()
         statsSubscriptionTask = nil
+    }
+
+    // MARK: - Active Inputs Subscription
+
+    /// Start subscribing to `state.web_ui.active_inputs`. Updates
+    /// `activeInputs` so the UI can render an `InputFormView` for any
+    /// pending demand and dispatch `provideInput` / `cancelInput` against
+    /// each item's `id`.
+    public func startInputsSubscription() {
+        inputsSubscriptionTask?.cancel()
+        inputsSubscriptionTask = Task {
+            do {
+                for try await inputs in await connection.subscribeToActiveInputs() {
+                    await MainActor.run {
+                        self.activeInputs = inputs
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to active input demands.
+    public func stopInputsSubscription() {
+        inputsSubscriptionTask?.cancel()
+        inputsSubscriptionTask = nil
     }
 
     // MARK: - Camera Subscription
@@ -538,6 +583,69 @@ public final class UboClient: ObservableObject {
     /// Toggle assistant listening
     public func toggleAssistantListening() async throws {
         try await dispatch(.assistantToggleListening)
+    }
+
+    // MARK: - Input Actions
+
+    /// Provide the user's response to an active `InputDescription` request.
+    /// This is what a connected client (iPhone/Watch/Mac) dispatches after a
+    /// native input form is filled in, instead of redirecting to the Web UI.
+    public func provideInput(id: String, value: String) async throws {
+        try await dispatch(.inputProvide(id: id, value: value))
+    }
+
+    /// Cancel an active `InputDescription` request.
+    public func cancelInput(id: String) async throws {
+        try await dispatch(.inputCancel(id: id))
+    }
+
+    // MARK: - Audio Capture (mic → device)
+
+    /// Report a captured microphone sample to the device. Mirrors the Web
+    /// UI's `reportAudioSample` flow used to feed the assistant pipeline.
+    public func reportAudioSample(
+        timestamp: Float,
+        data: Data,
+        channels: Int = 1,
+        rate: Int = 16000,
+        width: Int = 2
+    ) async throws {
+        let sample = AudioSampleData(data: data, channels: channels, rate: rate, width: width)
+        try await dispatch(.audioReportSample(timestamp: timestamp, sample: sample))
+    }
+
+    // MARK: - Stack Navigation
+
+    /// Push a registered menu onto the navigation stack by its menu key.
+    public func pushMenu(menuKey: String) async throws {
+        try await dispatch(.stackPushMenu(menuKey: menuKey))
+    }
+
+    /// Pop one or more items off the navigation stack.
+    public func popStack(count: Int = 1) async throws {
+        try await dispatch(.stackPop(count: count))
+    }
+
+    /// Pop the navigation stack back to the root (home).
+    public func popToRoot() async throws {
+        try await dispatch(.stackPopToRoot)
+    }
+
+    // MARK: - Frame Stream Subscription
+
+    /// Subscribe to `frame_stream` render frames coming from the device.
+    /// If `streamId` is provided, only frames for that stream are yielded.
+    public func frameStream(streamId: String = "") async -> AsyncThrowingStream<UboConnection.FrameStreamFrame, Error> {
+        await connection.subscribeToFrameStream(streamId: streamId)
+    }
+
+    // MARK: - Audio Playback Subscription
+
+    /// Subscribe to PCM samples emitted by the device for the client to
+    /// play through its speaker. Yields one `AudioSampleData` per
+    /// `AudioPlayAudioSampleEvent`.
+    public func playbackAudio() async -> AsyncThrowingStream<AudioSampleData, Error> {
+        await connection.subscribeToPlaybackAudio()
     }
 
     // MARK: - Raw Action Dispatch

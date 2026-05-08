@@ -36,8 +36,11 @@ public enum UboAction: Sendable {
     /// Play a chime sound
     case audioPlayChime(Chime)
 
-    /// Play audio sample data
-    case audioPlaySample(Data)
+    /// Report a captured microphone sample to the device. Mirrors
+    /// `AudioReportSampleAction` on the Python side. Used to stream PCM
+    /// audio from a connected client (iPhone/Watch/Mac) to the device's
+    /// assistant pipeline.
+    case audioReportSample(timestamp: Float, sample: AudioSampleData)
 
     /// Start recording audio
     case audioStartRecording
@@ -142,14 +145,27 @@ public enum UboAction: Sendable {
     /// Choose menu item by icon
     case menuChooseByIcon(String)
 
-    /// Push a new menu onto the stack
-    case navigatePushMenu(title: String)
+    /// Push a registered menu onto the navigation stack by its menu key.
+    case stackPushMenu(menuKey: String)
 
-    /// Pop menu from stack
-    case navigatePop(count: Int = 1)
+    /// Pop one or more items off the navigation stack.
+    case stackPop(count: Int = 1)
 
-    /// Clear navigation stack
-    case navigateClear
+    /// Pop the navigation stack back to the root (home).
+    case stackPopToRoot
+
+    // MARK: - Input Actions
+
+    /// Provide the user's response to an active `InputDescription` request.
+    /// `value` is the primary scalar response (e.g. text typed into the
+    /// field). For multi-field forms the richer `InputResult` payload should
+    /// be supplied by `audioReportSampleWithResult`/dedicated helpers when
+    /// they're added; the common case (single-field text/password) is
+    /// handled here.
+    case inputProvide(id: String, value: String)
+
+    /// Cancel an active `InputDescription` request without providing a value.
+    case inputCancel(id: String)
 
     // MARK: - Assistant Actions
 
@@ -176,7 +192,7 @@ extension UboAction: CustomStringConvertible {
         case .audioSetMute(let muted, let device): return "SetMute(\(muted), \(device))"
         case .audioToggleMute(let device): return "ToggleMute(\(device))"
         case .audioPlayChime(let chime): return "PlayChime(\(chime))"
-        case .audioPlaySample: return "PlaySample"
+        case .audioReportSample(let t, let s): return "ReportSample(t=\(t), bytes=\(s.data.count))"
         case .audioStartRecording: return "StartRecording"
         case .audioStopRecording: return "StopRecording"
         case .audioPlayRecording: return "PlayRecording"
@@ -208,9 +224,11 @@ extension UboAction: CustomStringConvertible {
         case .menuChooseByIndex(let i): return "MenuChooseByIndex(\(i))"
         case .menuChooseByLabel(let l): return "MenuChooseByLabel(\(l))"
         case .menuChooseByIcon(let i): return "MenuChooseByIcon(\(i))"
-        case .navigatePushMenu(let title): return "NavigatePushMenu(\(title))"
-        case .navigatePop(let count): return "NavigatePop(\(count))"
-        case .navigateClear: return "NavigateClear"
+        case .stackPushMenu(let key): return "StackPushMenu(\(key))"
+        case .stackPop(let count): return "StackPop(\(count))"
+        case .stackPopToRoot: return "StackPopToRoot"
+        case .inputProvide(let id, _): return "InputProvide(\(id))"
+        case .inputCancel(let id): return "InputCancel(\(id))"
         case .assistantStartListening: return "AssistantStartListening"
         case .assistantStopListening: return "AssistantStopListening"
         case .assistantToggleListening: return "AssistantToggleListening"

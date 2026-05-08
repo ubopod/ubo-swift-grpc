@@ -29,6 +29,22 @@ public enum Chime: String, CaseIterable, Sendable, Codable {
     }
 }
 
+/// A raw audio sample captured by a connected client (or originating on
+/// the device). Mirrors the `AudioSample` proto message.
+public struct AudioSampleData: Sendable, Equatable {
+    public var data: Data
+    public var channels: Int
+    public var rate: Int
+    public var width: Int
+
+    public init(data: Data, channels: Int = 1, rate: Int = 16000, width: Int = 2) {
+        self.data = data
+        self.channels = channels
+        self.rate = rate
+        self.width = width
+    }
+}
+
 /// Audio device type (input/output)
 public enum AudioDevice: String, CaseIterable, Sendable, Codable {
     case input
