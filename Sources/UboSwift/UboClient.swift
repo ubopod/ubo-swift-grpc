@@ -223,19 +223,15 @@ public final class UboClient: ObservableObject {
     /// pending demand and dispatch `provideInput` / `cancelInput` against
     /// each item's `id`.
     public func startInputsSubscription() {
-        print("[UboInputs] startInputsSubscription called")
         inputsSubscriptionTask?.cancel()
         inputsSubscriptionTask = Task {
             do {
                 for try await inputs in await connection.subscribeToActiveInputs() {
-                    print("[UboInputs] activeInputs updated: \(inputs.count) item(s)")
                     await MainActor.run {
                         self.activeInputs = inputs
                     }
                 }
-                print("[UboInputs] inputs stream ended")
             } catch {
-                print("[UboInputs] inputs stream errored: \(error)")
                 await MainActor.run {
                     if self.connectionState == .connected {
                         self.lastError = .subscriptionFailed(error)

@@ -912,33 +912,19 @@ public actor UboConnection {
         var request = Store_V1_SubscribeStoreRequest()
         request.selectors = ["state.web_ui"]
 
-        print("[UboInputs] subscribing to state.web_ui")
-        do {
-            try await client.subscribeStore(request) { response in
-                switch response.accepted {
-                case .success(let contents):
-                    print("[UboInputs] subscribeStore accepted")
-                    for try await message in contents.bodyParts {
-                        if case .message(let subscribeResponse) = message {
-                            await self.markConnected()
-                            let typeURLs = subscribeResponse.results.map { $0.typeURL }
-                            let inputs = self.unpackActiveInputs(from: subscribeResponse.results)
-                            print(
-                                "[UboInputs] got message: typeURLs=\(typeURLs) -> "
-                                + "\(inputs.count) inputs (\(inputs.map { $0.id }))"
-                            )
-                            continuation.yield(inputs)
-                        }
+        try await client.subscribeStore(request) { response in
+            switch response.accepted {
+            case .success(let contents):
+                for try await message in contents.bodyParts {
+                    if case .message(let subscribeResponse) = message {
+                        await self.markConnected()
+                        let inputs = self.unpackActiveInputs(from: subscribeResponse.results)
+                        continuation.yield(inputs)
                     }
-                    print("[UboInputs] stream ended without error")
-                case .failure(let error):
-                    print("[UboInputs] subscribeStore failed: \(error)")
-                    throw error
                 }
+            case .failure(let error):
+                throw error
             }
-        } catch {
-            print("[UboInputs] subscribeStore threw: \(error)")
-            throw error
         }
     }
 
@@ -947,11 +933,17 @@ public actor UboConnection {
     ) -> [WebUIInputDescription] {
         var output: [WebUIInputDescription] = []
         for any in results {
-            if any.typeURL.hasSuffix("WebUIState") {
+            // Python betterproto renames `WebUIState`/`WebUIInputDescription`
+            // to `WebUiState`/`WebUiInputDescription` (lowercase `i`) for
+            // the type URL, while swift-protobuf keeps the original casing
+            // for the type itself. Compare case-insensitively so the suffix
+            // check survives that quirk.
+            let suffix = any.typeURL.lowercased()
+            if suffix.hasSuffix("webuistate") {
                 if let proto = try? Ubo_V1_WebUIState(serializedBytes: any.value) {
                     output.append(contentsOf: proto.activeInputs.map(convertWebUIInputDescription))
                 }
-            } else if any.typeURL.hasSuffix("WebUIInputDescription") {
+            } else if suffix.hasSuffix("webuiinputdescription") {
                 if let proto = try? Ubo_V1_WebUIInputDescription(serializedBytes: any.value) {
                     output.append(convertWebUIInputDescription(proto))
                 }
