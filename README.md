@@ -156,15 +156,30 @@ struct ContentView: View {
 
 ## Proto Generation
 
-To regenerate Swift proto files from the proto definitions:
+`generate-protos.sh` reads its inputs from `../ubo_app/rpc/proto/` (the
+sibling Python repo) by default. The `ubo/v1/ubo.proto` file there is itself
+auto-generated, so regenerate it first:
 
 ```bash
 # Install required tools
 brew install protobuf swift-protobuf grpc-swift
 
-# Generate Swift files
+# From the ubo-apple-apps root, regenerate proto sources
+uv run poe proto:generate
+
+# Then regenerate Swift bindings
+cd ubo-swift-grpc
 ./generate-protos.sh
+
+# Or do both at once from the repo root
+uv run poe proto:swift
+
+# To verify the committed Generated/ tree is in sync
+uv run poe proto:swift:check
 ```
+
+Pass `--proto-dir <path>` to `generate-protos.sh` to override the source
+directory.
 
 ## License
 
