@@ -905,8 +905,12 @@ public actor UboConnection {
             throw UboError.notConnected
         }
 
+        // The Python gRPC server rejects selectors that return Sequences
+        // (`store_service.py::_pack_to_any`), so we subscribe to the parent
+        // `state.web_ui` slice and unpack the `active_inputs` field on the
+        // Swift side. See `unpackActiveInputs(from:)`.
         var request = Store_V1_SubscribeStoreRequest()
-        request.selectors = ["state.web_ui.active_inputs"]
+        request.selectors = ["state.web_ui"]
 
         try await client.subscribeStore(request) { response in
             switch response.accepted {
