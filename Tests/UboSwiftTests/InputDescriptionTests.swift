@@ -82,6 +82,34 @@ final class InputDescriptionTests: XCTestCase {
         XCTAssertFalse(password.required)
     }
 
+    func testServerCasingQuirkRoundTrip() throws {
+        // Python betterproto rewrites `WebUIState` -> `WebUiState` (and
+        // similarly for `WebUIInputDescription`) in the type URL. Verify
+        // unpackActiveInputs still recognises both casings.
+        let connection = UboConnection()
+
+        var description = Ubo_V1_WebUIInputDescription()
+        description.id = "casing-1"
+        description.title = "T"
+
+        var state = Ubo_V1_WebUIState()
+        state.activeInputs = [description]
+
+        let bytes = try state.serializedData()
+
+        for typeURL in [
+            "type.googleapis.com/ubo_bindings.ubo.v1.WebUiState",   // betterproto casing
+            "type.googleapis.com/ubo.v1.WebUIState",                // canonical casing
+        ] {
+            var any = Google_Protobuf_Any()
+            any.typeURL = typeURL
+            any.value = bytes
+            let inputs = connection.unpackActiveInputs(from: [any])
+            XCTAssertEqual(inputs.count, 1, "type URL \(typeURL)")
+            XCTAssertEqual(inputs.first?.id, "casing-1", "type URL \(typeURL)")
+        }
+    }
+
     func testEmptyActiveInputsArrayDecodes() throws {
         let connection = UboConnection()
         let state = Ubo_V1_WebUIState()
