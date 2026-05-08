@@ -823,14 +823,15 @@ public actor UboConnection {
 
     // MARK: - Audio Playback Subscription
 
-    /// Subscribe to PCM samples emitted by the device's audio service for
-    /// playback through the connected client's speaker. Each yielded item is
-    /// the contents of an `AudioPlayAudioSampleEvent`.
-    public func subscribeToPlaybackAudio() -> AsyncThrowingStream<AudioSampleData, Error> {
+    /// Subscribe to the device's playback event stream — one-shot samples,
+    /// indexed sequence chunks (TTS / file playback), and stop signals — so
+    /// the connected client can route audio to its own speaker. Mirrors the
+    /// three events the Web UI handles in `audio.ts`.
+    public func subscribeToPlaybackEvents() -> AsyncThrowingStream<PlaybackEvent, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 await self.runWithRetry {
-                    try await self.streamPlaybackAudio(continuation: continuation)
+                    try await self.streamPlaybackEvents(continuation: continuation)
                 } onFinalError: { error in
                     continuation.finish(throwing: UboError.subscriptionFailed(error))
                 } onCancelled: {
@@ -841,17 +842,25 @@ public actor UboConnection {
         }
     }
 
-    private func streamPlaybackAudio(
-        continuation: AsyncThrowingStream<AudioSampleData, Error>.Continuation
+    private func streamPlaybackEvents(
+        continuation: AsyncThrowingStream<PlaybackEvent, Error>.Continuation
     ) async throws {
         guard let client = self.storeClient else {
             throw UboError.notConnected
         }
 
         var requestBuilder = Store_V1_SubscribeEventRequest()
-        var eventBuilder = Ubo_V1_Event()
-        eventBuilder.audioPlayAudioSampleEvent = Ubo_V1_AudioPlayAudioSampleEvent()
-        requestBuilder.events = [eventBuilder]
+
+        var sampleEvent = Ubo_V1_Event()
+        sampleEvent.audioPlayAudioSampleEvent = Ubo_V1_AudioPlayAudioSampleEvent()
+
+        var sequenceEvent = Ubo_V1_Event()
+        sequenceEvent.audioPlayAudioSequenceEvent = Ubo_V1_AudioPlayAudioSequenceEvent()
+
+        var stopEvent = Ubo_V1_Event()
+        stopEvent.audioStopPlaybackEvent = Ubo_V1_AudioStopPlaybackEvent()
+
+        requestBuilder.events = [sampleEvent, sequenceEvent, stopEvent]
         let request = requestBuilder
 
         try await client.subscribeEvent(request) { response in
@@ -860,14 +869,37 @@ public actor UboConnection {
                 for try await message in contents.bodyParts {
                     if case .message(let subscribeResponse) = message {
                         await self.markConnected()
-                        if case .audioPlayAudioSampleEvent(let event) = subscribeResponse.event.event {
+                        switch subscribeResponse.event.event {
+                        case .audioPlayAudioSampleEvent(let event):
                             let sample = event.sample
-                            continuation.yield(AudioSampleData(
-                                data: sample.data,
-                                channels: Int(sample.channels),
-                                rate: Int(sample.rate),
-                                width: Int(sample.width)
+                            continuation.yield(.sample(
+                                sample: AudioSampleData(
+                                    data: sample.data,
+                                    channels: Int(sample.channels),
+                                    rate: Int(sample.rate),
+                                    width: Int(sample.width)
+                                ),
+                                volume: event.volume
                             ))
+                        case .audioPlayAudioSequenceEvent(let event):
+                            let payload: AudioSampleData? = event.hasSample
+                                ? AudioSampleData(
+                                    data: event.sample.data,
+                                    channels: Int(event.sample.channels),
+                                    rate: Int(event.sample.rate),
+                                    width: Int(event.sample.width)
+                                )
+                                : nil
+                            continuation.yield(.sequence(
+                                id: event.id,
+                                index: Int(event.index),
+                                sample: payload,
+                                volume: event.volume
+                            ))
+                        case .audioStopPlaybackEvent:
+                            continuation.yield(.stop)
+                        default:
+                            break
                         }
                     }
                 }

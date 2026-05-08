@@ -645,11 +645,12 @@ public final class UboClient: ObservableObject {
 
     // MARK: - Audio Playback Subscription
 
-    /// Subscribe to PCM samples emitted by the device for the client to
-    /// play through its speaker. Yields one `AudioSampleData` per
-    /// `AudioPlayAudioSampleEvent`.
-    public func playbackAudio() async -> AsyncThrowingStream<AudioSampleData, Error> {
-        await connection.subscribeToPlaybackAudio()
+    /// Subscribe to the device's full playback event stream — one-shot
+    /// samples (chimes, alerts), indexed sequence chunks (TTS / file
+    /// playback), and stop signals. The connected client routes each
+    /// `PlaybackEvent` through its own audio output.
+    public func playbackEvents() async -> AsyncThrowingStream<PlaybackEvent, Error> {
+        await connection.subscribeToPlaybackEvents()
     }
 
     // MARK: - Raw Action Dispatch

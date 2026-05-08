@@ -45,6 +45,19 @@ public struct AudioSampleData: Sendable, Equatable {
     }
 }
 
+/// One playback event from the device's `000-audio` service. Mirrors the
+/// three event variants the Web UI subscribes to in `audio.ts`.
+public enum PlaybackEvent: Sendable {
+    /// One-shot PCM sample (chimes, alerts, short clips).
+    case sample(sample: AudioSampleData, volume: Float)
+    /// One chunk of an indexed audio sequence (TTS, file playback). The
+    /// device may emit a final chunk with `sample == nil` to mark the
+    /// end of a stream — listeners should treat that as a no-op.
+    case sequence(id: String, index: Int, sample: AudioSampleData?, volume: Float)
+    /// Device asked all clients to halt playback (e.g. "stop" UI button).
+    case stop
+}
+
 /// Audio device type (input/output)
 public enum AudioDevice: String, CaseIterable, Sendable, Codable {
     case input
