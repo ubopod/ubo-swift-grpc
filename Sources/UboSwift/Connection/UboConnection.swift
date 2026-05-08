@@ -912,17 +912,28 @@ public actor UboConnection {
         var request = Store_V1_SubscribeStoreRequest()
         request.selectors = ["state.web_ui"]
 
+        UboLog.input.debug("subscribing to state.web_ui")
         try await client.subscribeStore(request) { response in
             switch response.accepted {
             case .success(let contents):
+                UboLog.input.debug("subscribeStore accepted")
                 for try await message in contents.bodyParts {
                     if case .message(let subscribeResponse) = message {
                         await self.markConnected()
                         let inputs = self.unpackActiveInputs(from: subscribeResponse.results)
+                        if UboLog.level <= .debug {
+                            let typeURLs = subscribeResponse.results.map(\.typeURL)
+                            UboLog.input.debug(
+                                "got message: typeURLs=\(typeURLs) -> "
+                                + "\(inputs.count) input(s) (\(inputs.map(\.id)))"
+                            )
+                        }
                         continuation.yield(inputs)
                     }
                 }
+                UboLog.input.debug("stream ended")
             case .failure(let error):
+                UboLog.input.error("subscribeStore failed: \(String(describing: error))")
                 throw error
             }
         }
