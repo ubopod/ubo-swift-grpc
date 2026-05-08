@@ -21,10 +21,27 @@ public struct SystemStats: Sendable, Equatable {
     /// Temperature in Celsius
     public var temperature: Float?
 
-    public init(cpuPercent: Float = 0, ramPercent: Float = 0, clock: String = "", temperature: Float? = nil) {
+    /// Device playback volume (0-1). `nil` until the first AudioState message
+    /// arrives from `state.audio`.
+    public var playbackVolume: Float?
+
+    /// Device playback mute state. `nil` until the first AudioState message
+    /// arrives from `state.audio`.
+    public var isPlaybackMute: Bool?
+
+    public init(
+        cpuPercent: Float = 0,
+        ramPercent: Float = 0,
+        clock: String = "",
+        temperature: Float? = nil,
+        playbackVolume: Float? = nil,
+        isPlaybackMute: Bool? = nil
+    ) {
         self.cpuPercent = cpuPercent
         self.ramPercent = ramPercent
         self.clock = clock
         self.temperature = temperature
+        self.playbackVolume = playbackVolume
+        self.isPlaybackMute = isPlaybackMute
     }
 }

@@ -13,12 +13,16 @@ private actor StatsHolder {
         cpuPercent: Float?,
         ramPercent: Float?,
         clock: String?,
-        temperature: Float?
+        temperature: Float?,
+        playbackVolume: Float?,
+        isPlaybackMute: Bool?
     ) -> SystemStats {
         if let cpu = cpuPercent { stats.cpuPercent = cpu }
         if let ram = ramPercent { stats.ramPercent = ram }
         if let clk = clock { stats.clock = clk }
         if let temp = temperature { stats.temperature = temp }
+        if let vol = playbackVolume { stats.playbackVolume = vol }
+        if let mute = isPlaybackMute { stats.isPlaybackMute = mute }
         return stats
     }
 }
@@ -401,7 +405,11 @@ public actor UboConnection {
         }
 
         var request = Store_V1_SubscribeStoreRequest()
-        request.selectors = ["state.system", "state.sensors"]
+        // `state.audio` brings the device's playback volume + mute state in
+        // sync with the app, matching what the Web UI subscribes to in
+        // `state-manager.ts`. Bundled into the same subscription so we don't
+        // open a third long-lived stream just for two scalars.
+        request.selectors = ["state.system", "state.sensors", "state.audio"]
 
         try await client.subscribeStore(request) { response in
             switch response.accepted {
@@ -415,6 +423,8 @@ public actor UboConnection {
                         var ramPercent: Float?
                         var clock: String?
                         var temperature: Float?
+                        var playbackVolume: Float?
+                        var isPlaybackMute: Bool?
 
                         for result in results {
                             if let stats = self.unpackSystemStats(from: result) {
@@ -425,13 +435,19 @@ public actor UboConnection {
                             if let temp = self.unpackTemperature(from: result) {
                                 temperature = temp
                             }
+                            if let audio = self.unpackAudioState(from: result) {
+                                playbackVolume = audio.volume
+                                isPlaybackMute = audio.isMute
+                            }
                         }
 
                         let mergedStats = await statsHolder.update(
                             cpuPercent: cpuPercent,
                             ramPercent: ramPercent,
                             clock: clock,
-                            temperature: temperature
+                            temperature: temperature,
+                            playbackVolume: playbackVolume,
+                            isPlaybackMute: isPlaybackMute
                         )
                         continuation.yield(mergedStats)
                     }
@@ -525,6 +541,22 @@ public actor UboConnection {
         }
 
         return nil
+    }
+
+    /// Unpack playback volume + mute state from AudioState. Returns `nil` for
+    /// any field the device hasn't set explicitly so the holder doesn't
+    /// clobber a real value with a default zero.
+    private nonisolated func unpackAudioState(
+        from any: SwiftProtobuf.Google_Protobuf_Any
+    ) -> (volume: Float?, isMute: Bool?)? {
+        guard any.typeURL.hasSuffix("AudioState"),
+              let proto = try? Ubo_V1_AudioState(serializedBytes: any.value) else {
+            return nil
+        }
+        return (
+            volume: proto.hasPlaybackVolume ? proto.playbackVolume : nil,
+            isMute: proto.hasIsPlaybackMute ? proto.isPlaybackMute : nil
+        )
     }
 
     // MARK: - Proto Conversion (to Swift models)
