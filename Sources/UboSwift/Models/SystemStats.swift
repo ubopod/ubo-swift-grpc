@@ -29,13 +29,18 @@ public struct SystemStats: Sendable, Equatable {
     /// arrives from `state.audio`.
     public var isPlaybackMute: Bool?
 
+    /// Device microphone (capture) mute state. `nil` until the first
+    /// AudioState message arrives from `state.audio`.
+    public var isCaptureMute: Bool?
+
     public init(
         cpuPercent: Float = 0,
         ramPercent: Float = 0,
         clock: String = "",
         temperature: Float? = nil,
         playbackVolume: Float? = nil,
-        isPlaybackMute: Bool? = nil
+        isPlaybackMute: Bool? = nil,
+        isCaptureMute: Bool? = nil
     ) {
         self.cpuPercent = cpuPercent
         self.ramPercent = ramPercent
@@ -43,5 +48,6 @@ public struct SystemStats: Sendable, Equatable {
         self.temperature = temperature
         self.playbackVolume = playbackVolume
         self.isPlaybackMute = isPlaybackMute
+        self.isCaptureMute = isCaptureMute
     }
 }
