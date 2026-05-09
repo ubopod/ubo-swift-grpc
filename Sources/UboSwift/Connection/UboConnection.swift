@@ -15,7 +15,8 @@ private actor StatsHolder {
         clock: String?,
         temperature: Float?,
         playbackVolume: Float?,
-        isPlaybackMute: Bool?
+        isPlaybackMute: Bool?,
+        isCaptureMute: Bool?
     ) -> SystemStats {
         if let cpu = cpuPercent { stats.cpuPercent = cpu }
         if let ram = ramPercent { stats.ramPercent = ram }
@@ -23,6 +24,7 @@ private actor StatsHolder {
         if let temp = temperature { stats.temperature = temp }
         if let vol = playbackVolume { stats.playbackVolume = vol }
         if let mute = isPlaybackMute { stats.isPlaybackMute = mute }
+        if let micMute = isCaptureMute { stats.isCaptureMute = micMute }
         return stats
     }
 }
@@ -425,6 +427,7 @@ public actor UboConnection {
                         var temperature: Float?
                         var playbackVolume: Float?
                         var isPlaybackMute: Bool?
+                        var isCaptureMute: Bool?
 
                         for result in results {
                             if let stats = self.unpackSystemStats(from: result) {
@@ -438,6 +441,7 @@ public actor UboConnection {
                             if let audio = self.unpackAudioState(from: result) {
                                 playbackVolume = audio.volume
                                 isPlaybackMute = audio.isMute
+                                isCaptureMute = audio.isCaptureMute
                             }
                         }
 
@@ -447,7 +451,8 @@ public actor UboConnection {
                             clock: clock,
                             temperature: temperature,
                             playbackVolume: playbackVolume,
-                            isPlaybackMute: isPlaybackMute
+                            isPlaybackMute: isPlaybackMute,
+                            isCaptureMute: isCaptureMute
                         )
                         continuation.yield(mergedStats)
                     }
@@ -543,19 +548,20 @@ public actor UboConnection {
         return nil
     }
 
-    /// Unpack playback volume + mute state from AudioState. Returns `nil` for
+    /// Unpack playback + capture mute state from AudioState. Returns `nil` for
     /// any field the device hasn't set explicitly so the holder doesn't
     /// clobber a real value with a default zero.
     private nonisolated func unpackAudioState(
         from any: SwiftProtobuf.Google_Protobuf_Any
-    ) -> (volume: Float?, isMute: Bool?)? {
+    ) -> (volume: Float?, isMute: Bool?, isCaptureMute: Bool?)? {
         guard any.typeURL.hasSuffix("AudioState"),
               let proto = try? Ubo_V1_AudioState(serializedBytes: any.value) else {
             return nil
         }
         return (
             volume: proto.hasPlaybackVolume ? proto.playbackVolume : nil,
-            isMute: proto.hasIsPlaybackMute ? proto.isPlaybackMute : nil
+            isMute: proto.hasIsPlaybackMute ? proto.isPlaybackMute : nil,
+            isCaptureMute: proto.hasIsCaptureMute ? proto.isCaptureMute : nil
         )
     }
 
