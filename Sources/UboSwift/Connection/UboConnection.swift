@@ -1133,8 +1133,15 @@ public actor UboConnection {
 
     /// Camera event types received from the device
     public enum CameraEventType: Sendable {
-        case startViewfinder(pattern: String?)
+        /// Pi has decided this source should start capturing. `sourceId` is
+        /// the registered id of the chosen source — clients should ignore
+        /// the event unless it matches their own (or the field is empty,
+        /// which means "any source", for backwards compat with old devices).
+        case startViewfinder(pattern: String?, sourceId: String)
         case stopViewfinder
+        /// Pi tapped "Detect Cameras". Subscribed clients should respond
+        /// with `cameraRegisterRemote` to be listed in the picker.
+        case detectAdvertise
     }
 
     /// Subscribe to camera viewfinder events (start/stop)
@@ -1177,7 +1184,7 @@ public actor UboConnection {
                                 await self.markConnected()
                                 if case .cameraStartViewfinderEvent(let startEvent) = subscribeResponse.event.event {
                                     let pattern: String? = startEvent.hasPattern ? startEvent.pattern : nil
-                                    continuation.yield(.startViewfinder(pattern: pattern))
+                                    continuation.yield(.startViewfinder(pattern: pattern, sourceId: startEvent.sourceID))
                                 }
                             }
                         }
@@ -1203,6 +1210,32 @@ public actor UboConnection {
                                 await self.markConnected()
                                 if case .cameraStopViewfinderEvent(_) = subscribeResponse.event.event {
                                     continuation.yield(.stopViewfinder)
+                                }
+                            }
+                        }
+                    case .failure(let error):
+                        throw error
+                    }
+                }
+            }
+
+            // CameraDetectAdvertiseEvent — Pi tapped "Detect Cameras";
+            // each yield prompts subscribers to (re-)register themselves.
+            group.addTask {
+                var requestBuilder = Store_V1_SubscribeEventRequest()
+                var eventBuilder = Ubo_V1_Event()
+                eventBuilder.cameraDetectAdvertiseEvent = Ubo_V1_CameraDetectAdvertiseEvent()
+                requestBuilder.events = [eventBuilder]
+                let request = requestBuilder
+
+                try await client.subscribeEvent(request) { response in
+                    switch response.accepted {
+                    case .success(let contents):
+                        for try await message in contents.bodyParts {
+                            if case .message(let subscribeResponse) = message {
+                                await self.markConnected()
+                                if case .cameraDetectAdvertiseEvent(_) = subscribeResponse.event.event {
+                                    continuation.yield(.detectAdvertise)
                                 }
                             }
                         }
@@ -1423,6 +1456,12 @@ public actor UboConnection {
 
         case .reboot:
             protoAction.rebootAction = Ubo_V1_RebootAction()
+
+        case .cameraRegisterRemote(let sourceId, let label):
+            var register = Ubo_V1_CameraRegisterRemoteAction()
+            register.sourceID = sourceId
+            register.label = label
+            protoAction.cameraRegisterRemoteAction = register
 
         // Handle other action cases with minimal implementation
         default:

@@ -46,6 +46,18 @@ public final class UboClient: ObservableObject {
     /// Current camera pattern (e.g. QR code pattern to scan for)
     @Published public private(set) var cameraPattern: String?
 
+    /// This client's stable id for the camera-source registration protocol.
+    /// Set by the host app (typically derived from a per-install UUID); the
+    /// camera subscription uses it to filter `startViewfinder` events so
+    /// only the selected source flips `isCameraViewfinderActive`. Empty
+    /// disables the filter.
+    public var cameraSourceId: String = ""
+
+    /// Fires when the device dispatches a `CameraDetectAdvertiseEvent`
+    /// (user tapped "Detect Cameras"). Subscribers should respond with
+    /// `registerAsCameraSource(...)` to be listed in the picker.
+    public let cameraDetectAdvertiseSubject = PassthroughSubject<Void, Never>()
+
     /// Currently pending input demands (drives native InputFormView).
     @Published public private(set) var activeInputs: [WebUIInputDescription] = []
 
@@ -261,12 +273,19 @@ public final class UboClient: ObservableObject {
                 for try await event in await connection.subscribeToCameraEvents() {
                     await MainActor.run {
                         switch event {
-                        case .startViewfinder(let pattern):
-                            self.cameraPattern = pattern
-                            self.isCameraViewfinderActive = true
+                        case .startViewfinder(let pattern, let sourceId):
+                            // Honour the Pi's selection: empty source id (legacy
+                            // devices) keeps old "any source" behaviour;
+                            // otherwise only react when this client owns it.
+                            if sourceId.isEmpty || sourceId == self.cameraSourceId {
+                                self.cameraPattern = pattern
+                                self.isCameraViewfinderActive = true
+                            }
                         case .stopViewfinder:
                             self.isCameraViewfinderActive = false
                             self.cameraPattern = nil
+                        case .detectAdvertise:
+                            self.cameraDetectAdvertiseSubject.send(())
                         }
                     }
                 }
@@ -288,12 +307,16 @@ public final class UboClient: ObservableObject {
         cameraPattern = nil
     }
 
-    /// Send a camera frame to the device as a CameraReportImageEvent
+    /// Send a camera frame to the device as a CameraReportImageEvent.
     /// - Parameters:
     ///   - data: RGB pixel data (3 bytes per pixel)
     ///   - width: Frame width in pixels
     ///   - height: Frame height in pixels
     ///   - timestamp: Frame timestamp
+    ///
+    /// Tags the outbound event with `cameraSourceId` so the Pi can route
+    /// the frame to the right pipeline (and drop it if some other source
+    /// is currently selected).
     public func sendCameraFrame(data: Data, width: Int, height: Int, timestamp: Float) async throws {
         guard isConnected else {
             throw UboError.notConnected
@@ -304,6 +327,7 @@ public final class UboClient: ObservableObject {
         reportEvent.width = Int64(width)
         reportEvent.height = Int64(height)
         reportEvent.timestamp = timestamp
+        reportEvent.sourceID = cameraSourceId
 
         var event = Ubo_V1_Event()
         event.cameraReportImageEvent = reportEvent
@@ -318,6 +342,16 @@ public final class UboClient: ObservableObject {
             lastError = uboError
             throw uboError
         }
+    }
+
+    /// Register this client as a remote camera source on the device. The
+    /// device's camera picker will list it alongside its local USB /
+    /// picamera devices; selecting it makes the device dispatch
+    /// `CameraStartViewfinderEvent` here, at which point the host app
+    /// should begin pumping frames via `sendCameraFrame(...)`.
+    public func registerAsCameraSource(id: String, label: String) async throws {
+        cameraSourceId = id
+        try await dispatch(.cameraRegisterRemote(sourceId: id, label: label))
     }
 
     // MARK: - Button/Key Actions
