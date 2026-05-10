@@ -177,6 +177,13 @@ public enum UboAction: Sendable {
 
     /// Toggle assistant listening
     case assistantToggleListening
+
+    // MARK: - Camera Actions
+
+    /// Register this client as a remote camera source. Dispatched in
+    /// response to a `CameraDetectAdvertiseEvent` so the device's camera
+    /// picker lists this client alongside local USB / picamera devices.
+    case cameraRegisterRemote(sourceId: String, label: String)
 }
 
 extension UboAction: CustomStringConvertible {
@@ -232,6 +239,7 @@ extension UboAction: CustomStringConvertible {
         case .assistantStartListening: return "AssistantStartListening"
         case .assistantStopListening: return "AssistantStopListening"
         case .assistantToggleListening: return "AssistantToggleListening"
+        case .cameraRegisterRemote(let id, let label): return "CameraRegisterRemote(\(id), \(label))"
         }
     }
 }
