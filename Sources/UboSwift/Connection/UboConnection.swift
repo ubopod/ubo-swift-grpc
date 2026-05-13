@@ -294,24 +294,6 @@ public actor UboConnection {
         }
     }
 
-    // MARK: - Event Dispatch
-
-    /// Dispatch an event to the device
-    public func dispatchEvent(_ event: Ubo_V1_Event) async throws {
-        guard let client = storeClient else {
-            throw UboError.notConnected
-        }
-
-        var request = Store_V1_DispatchEventRequest()
-        request.event = event
-
-        do {
-            _ = try await client.dispatchEvent(request)
-        } catch {
-            throw UboError.dispatchFailed(error)
-        }
-    }
-
     // MARK: - Store Subscription
 
     /// Subscribe to store state changes for view data and status bar
@@ -1462,6 +1444,15 @@ public actor UboConnection {
             register.sourceID = sourceId
             register.label = label
             protoAction.cameraRegisterRemoteAction = register
+
+        case .cameraReportImage(let timestamp, let data, let width, let height, let sourceId):
+            var reportImage = Ubo_V1_CameraReportImageAction()
+            reportImage.timestamp = timestamp
+            reportImage.data = data
+            reportImage.width = Int64(width)
+            reportImage.height = Int64(height)
+            reportImage.sourceID = sourceId
+            protoAction.cameraReportImageAction = reportImage
 
         // Handle other action cases with minimal implementation
         default:

@@ -307,41 +307,30 @@ public final class UboClient: ObservableObject {
         cameraPattern = nil
     }
 
-    /// Send a camera frame to the device as a CameraReportImageEvent.
+    /// Send a camera frame to the device as a `CameraReportImageAction`.
     /// - Parameters:
     ///   - data: RGB pixel data (3 bytes per pixel)
     ///   - width: Frame width in pixels
     ///   - height: Frame height in pixels
     ///   - timestamp: Frame timestamp
     ///
-    /// Tags the outbound event with `cameraSourceId` so the Pi can route
-    /// the frame to the right pipeline (and drop it if some other source
-    /// is currently selected).
+    /// The Pi-side reducer translates the action into a
+    /// `CameraReportImageEvent` consumed by the QR decoder and viewfinder
+    /// display. Tags the outbound action with `cameraSourceId` so the Pi
+    /// can route the frame to the right pipeline (and drop it if some other
+    /// source is currently selected). Remote clients can never dispatch
+    /// events directly — events are emitted only from reducers.
     public func sendCameraFrame(data: Data, width: Int, height: Int, timestamp: Float) async throws {
         guard isConnected else {
             throw UboError.notConnected
         }
-
-        var reportEvent = Ubo_V1_CameraReportImageEvent()
-        reportEvent.data = data
-        reportEvent.width = Int64(width)
-        reportEvent.height = Int64(height)
-        reportEvent.timestamp = timestamp
-        reportEvent.sourceID = cameraSourceId
-
-        var event = Ubo_V1_Event()
-        event.cameraReportImageEvent = reportEvent
-
-        do {
-            try await connection.dispatchEvent(event)
-        } catch let error as UboError {
-            lastError = error
-            throw error
-        } catch {
-            let uboError = UboError.dispatchFailed(error)
-            lastError = uboError
-            throw uboError
-        }
+        try await dispatch(.cameraReportImage(
+            timestamp: timestamp,
+            data: data,
+            width: width,
+            height: height,
+            sourceId: cameraSourceId
+        ))
     }
 
     /// Register this client as a remote camera source on the device. The

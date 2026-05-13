@@ -184,6 +184,13 @@ public enum UboAction: Sendable {
     /// response to a `CameraDetectAdvertiseEvent` so the device's camera
     /// picker lists this client alongside local USB / picamera devices.
     case cameraRegisterRemote(sourceId: String, label: String)
+
+    /// Push a single camera frame to the device. Mirrors
+    /// `CameraReportImageAction` on the Python side; the device's reducer
+    /// translates it into a `CameraReportImageEvent` consumed by the QR
+    /// decoder and viewfinder display. The `sourceId` tags the frame so the
+    /// device drops it if a different source is currently selected.
+    case cameraReportImage(timestamp: Float, data: Data, width: Int, height: Int, sourceId: String)
 }
 
 extension UboAction: CustomStringConvertible {
@@ -240,6 +247,8 @@ extension UboAction: CustomStringConvertible {
         case .assistantStopListening: return "AssistantStopListening"
         case .assistantToggleListening: return "AssistantToggleListening"
         case .cameraRegisterRemote(let id, let label): return "CameraRegisterRemote(\(id), \(label))"
+        case .cameraReportImage(let t, _, let w, let h, let sid):
+            return "CameraReportImage(t=\(t), \(w)x\(h), source=\(sid))"
         }
     }
 }

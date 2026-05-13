@@ -33,19 +33,6 @@ public enum Store_V1_StoreService: Sendable {
                 type: .unary
             )
         }
-        /// Namespace for "DispatchEvent" metadata.
-        public enum DispatchEvent: Sendable {
-            /// Request type for "DispatchEvent".
-            public typealias Input = Store_V1_DispatchEventRequest
-            /// Response type for "DispatchEvent".
-            public typealias Output = Store_V1_DispatchEventResponse
-            /// Descriptor for "DispatchEvent".
-            public static let descriptor = GRPCCore.MethodDescriptor(
-                service: GRPCCore.ServiceDescriptor(fullyQualifiedService: "store.v1.StoreService"),
-                method: "DispatchEvent",
-                type: .unary
-            )
-        }
         /// Namespace for "SubscribeEvent" metadata.
         public enum SubscribeEvent: Sendable {
             /// Request type for "SubscribeEvent".
@@ -75,7 +62,6 @@ public enum Store_V1_StoreService: Sendable {
         /// Descriptors for all methods in the "store.v1.StoreService" service.
         public static let descriptors: [GRPCCore.MethodDescriptor] = [
             DispatchAction.descriptor,
-            DispatchEvent.descriptor,
             SubscribeEvent.descriptor,
             SubscribeStore.descriptor
         ]
@@ -116,20 +102,6 @@ extension Store_V1_StoreService {
             request: GRPCCore.StreamingServerRequest<Store_V1_DispatchActionRequest>,
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_DispatchActionResponse>
-
-        /// Handle the "DispatchEvent" method.
-        ///
-        /// - Parameters:
-        ///   - request: A streaming request of `Store_V1_DispatchEventRequest` messages.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A streaming response of `Store_V1_DispatchEventResponse` messages.
-        func dispatchEvent(
-            request: GRPCCore.StreamingServerRequest<Store_V1_DispatchEventRequest>,
-            context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_DispatchEventResponse>
 
         /// Handle the "SubscribeEvent" method.
         ///
@@ -182,20 +154,6 @@ extension Store_V1_StoreService {
             context: GRPCCore.ServerContext
         ) async throws -> GRPCCore.ServerResponse<Store_V1_DispatchActionResponse>
 
-        /// Handle the "DispatchEvent" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Store_V1_DispatchEventRequest` message.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A response containing a single `Store_V1_DispatchEventResponse` message.
-        func dispatchEvent(
-            request: GRPCCore.ServerRequest<Store_V1_DispatchEventRequest>,
-            context: GRPCCore.ServerContext
-        ) async throws -> GRPCCore.ServerResponse<Store_V1_DispatchEventResponse>
-
         /// Handle the "SubscribeEvent" method.
         ///
         /// - Parameters:
@@ -245,20 +203,6 @@ extension Store_V1_StoreService {
             context: GRPCCore.ServerContext
         ) async throws -> Store_V1_DispatchActionResponse
 
-        /// Handle the "DispatchEvent" method.
-        ///
-        /// - Parameters:
-        ///   - request: A `Store_V1_DispatchEventRequest` message.
-        ///   - context: Context providing information about the RPC.
-        /// - Throws: Any error which occurred during the processing of the request. Thrown errors
-        ///     of type `RPCError` are mapped to appropriate statuses. All other errors are converted
-        ///     to an internal error.
-        /// - Returns: A `Store_V1_DispatchEventResponse` to respond with.
-        func dispatchEvent(
-            request: Store_V1_DispatchEventRequest,
-            context: GRPCCore.ServerContext
-        ) async throws -> Store_V1_DispatchEventResponse
-
         /// Handle the "SubscribeEvent" method.
         ///
         /// - Parameters:
@@ -307,17 +251,6 @@ extension Store_V1_StoreService.StreamingServiceProtocol {
             }
         )
         router.registerHandler(
-            forMethod: Store_V1_StoreService.Method.DispatchEvent.descriptor,
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_DispatchEventRequest>(),
-            serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_DispatchEventResponse>(),
-            handler: { request, context in
-                try await self.dispatchEvent(
-                    request: request,
-                    context: context
-                )
-            }
-        )
-        router.registerHandler(
             forMethod: Store_V1_StoreService.Method.SubscribeEvent.descriptor,
             deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_SubscribeEventRequest>(),
             serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_SubscribeEventResponse>(),
@@ -356,17 +289,6 @@ extension Store_V1_StoreService.ServiceProtocol {
         return GRPCCore.StreamingServerResponse(single: response)
     }
 
-    public func dispatchEvent(
-        request: GRPCCore.StreamingServerRequest<Store_V1_DispatchEventRequest>,
-        context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.StreamingServerResponse<Store_V1_DispatchEventResponse> {
-        let response = try await self.dispatchEvent(
-            request: GRPCCore.ServerRequest(stream: request),
-            context: context
-        )
-        return GRPCCore.StreamingServerResponse(single: response)
-    }
-
     public func subscribeEvent(
         request: GRPCCore.StreamingServerRequest<Store_V1_SubscribeEventRequest>,
         context: GRPCCore.ServerContext
@@ -399,19 +321,6 @@ extension Store_V1_StoreService.SimpleServiceProtocol {
     ) async throws -> GRPCCore.ServerResponse<Store_V1_DispatchActionResponse> {
         return GRPCCore.ServerResponse<Store_V1_DispatchActionResponse>(
             message: try await self.dispatchAction(
-                request: request.message,
-                context: context
-            ),
-            metadata: [:]
-        )
-    }
-
-    public func dispatchEvent(
-        request: GRPCCore.ServerRequest<Store_V1_DispatchEventRequest>,
-        context: GRPCCore.ServerContext
-    ) async throws -> GRPCCore.ServerResponse<Store_V1_DispatchEventResponse> {
-        return GRPCCore.ServerResponse<Store_V1_DispatchEventResponse>(
-            message: try await self.dispatchEvent(
                 request: request.message,
                 context: context
             ),
@@ -480,25 +389,6 @@ extension Store_V1_StoreService {
             deserializer: some GRPCCore.MessageDeserializer<Store_V1_DispatchActionResponse>,
             options: GRPCCore.CallOptions,
             onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Store_V1_DispatchActionResponse>) async throws -> Result
-        ) async throws -> Result where Result: Sendable
-
-        /// Call the "DispatchEvent" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Store_V1_DispatchEventRequest` message.
-        ///   - serializer: A serializer for `Store_V1_DispatchEventRequest` messages.
-        ///   - deserializer: A deserializer for `Store_V1_DispatchEventResponse` messages.
-        ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
-        /// - Returns: The result of `handleResponse`.
-        func dispatchEvent<Result>(
-            request: GRPCCore.ClientRequest<Store_V1_DispatchEventRequest>,
-            serializer: some GRPCCore.MessageSerializer<Store_V1_DispatchEventRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Store_V1_DispatchEventResponse>,
-            options: GRPCCore.CallOptions,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Store_V1_DispatchEventResponse>) async throws -> Result
         ) async throws -> Result where Result: Sendable
 
         /// Call the "SubscribeEvent" method.
@@ -579,36 +469,6 @@ extension Store_V1_StoreService {
             try await self.client.unary(
                 request: request,
                 descriptor: Store_V1_StoreService.Method.DispatchAction.descriptor,
-                serializer: serializer,
-                deserializer: deserializer,
-                options: options,
-                onResponse: handleResponse
-            )
-        }
-
-        /// Call the "DispatchEvent" method.
-        ///
-        /// - Parameters:
-        ///   - request: A request containing a single `Store_V1_DispatchEventRequest` message.
-        ///   - serializer: A serializer for `Store_V1_DispatchEventRequest` messages.
-        ///   - deserializer: A deserializer for `Store_V1_DispatchEventResponse` messages.
-        ///   - options: Options to apply to this RPC.
-        ///   - handleResponse: A closure which handles the response, the result of which is
-        ///       returned to the caller. Returning from the closure will cancel the RPC if it
-        ///       hasn't already finished.
-        /// - Returns: The result of `handleResponse`.
-        public func dispatchEvent<Result>(
-            request: GRPCCore.ClientRequest<Store_V1_DispatchEventRequest>,
-            serializer: some GRPCCore.MessageSerializer<Store_V1_DispatchEventRequest>,
-            deserializer: some GRPCCore.MessageDeserializer<Store_V1_DispatchEventResponse>,
-            options: GRPCCore.CallOptions = .defaults,
-            onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Store_V1_DispatchEventResponse>) async throws -> Result = { response in
-                try response.message
-            }
-        ) async throws -> Result where Result: Sendable {
-            try await self.client.unary(
-                request: request,
-                descriptor: Store_V1_StoreService.Method.DispatchEvent.descriptor,
                 serializer: serializer,
                 deserializer: deserializer,
                 options: options,
@@ -702,31 +562,6 @@ extension Store_V1_StoreService.ClientProtocol {
         )
     }
 
-    /// Call the "DispatchEvent" method.
-    ///
-    /// - Parameters:
-    ///   - request: A request containing a single `Store_V1_DispatchEventRequest` message.
-    ///   - options: Options to apply to this RPC.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
-    /// - Returns: The result of `handleResponse`.
-    public func dispatchEvent<Result>(
-        request: GRPCCore.ClientRequest<Store_V1_DispatchEventRequest>,
-        options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Store_V1_DispatchEventResponse>) async throws -> Result = { response in
-            try response.message
-        }
-    ) async throws -> Result where Result: Sendable {
-        try await self.dispatchEvent(
-            request: request,
-            serializer: GRPCProtobuf.ProtobufSerializer<Store_V1_DispatchEventRequest>(),
-            deserializer: GRPCProtobuf.ProtobufDeserializer<Store_V1_DispatchEventResponse>(),
-            options: options,
-            onResponse: handleResponse
-        )
-    }
-
     /// Call the "SubscribeEvent" method.
     ///
     /// - Parameters:
@@ -800,35 +635,6 @@ extension Store_V1_StoreService.ClientProtocol {
             metadata: metadata
         )
         return try await self.dispatchAction(
-            request: request,
-            options: options,
-            onResponse: handleResponse
-        )
-    }
-
-    /// Call the "DispatchEvent" method.
-    ///
-    /// - Parameters:
-    ///   - message: request message to send.
-    ///   - metadata: Additional metadata to send, defaults to empty.
-    ///   - options: Options to apply to this RPC, defaults to `.defaults`.
-    ///   - handleResponse: A closure which handles the response, the result of which is
-    ///       returned to the caller. Returning from the closure will cancel the RPC if it
-    ///       hasn't already finished.
-    /// - Returns: The result of `handleResponse`.
-    public func dispatchEvent<Result>(
-        _ message: Store_V1_DispatchEventRequest,
-        metadata: GRPCCore.Metadata = [:],
-        options: GRPCCore.CallOptions = .defaults,
-        onResponse handleResponse: @Sendable @escaping (GRPCCore.ClientResponse<Store_V1_DispatchEventResponse>) async throws -> Result = { response in
-            try response.message
-        }
-    ) async throws -> Result where Result: Sendable {
-        let request = GRPCCore.ClientRequest<Store_V1_DispatchEventRequest>(
-            message: message,
-            metadata: metadata
-        )
-        return try await self.dispatchEvent(
             request: request,
             options: options,
             onResponse: handleResponse
