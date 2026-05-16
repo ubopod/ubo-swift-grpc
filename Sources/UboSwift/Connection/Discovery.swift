@@ -50,11 +50,12 @@ public final class UboDiscovery: Sendable {
 
             browser.browseResultsChangedHandler = { results, _ in
                 Task {
+                    let token = await state.nextUpdateToken()
                     var snapshot: Set<DiscoveredDevice> = []
                     await withTaskGroup(of: DiscoveredDevice?.self) { group in
                         for result in results {
                             group.addTask {
-                                await Self.resolve(result: result)
+                                await Self.resolveWithTimeout(result: result, timeoutNanoseconds: 5_000_000_000)
                             }
                         }
                         for await device in group {
@@ -62,7 +63,9 @@ public final class UboDiscovery: Sendable {
                         }
                     }
                     await state.setSnapshot(snapshot)
-                    continuation.yield(snapshot)
+                    if await state.isCurrentToken(token) {
+                        continuation.yield(snapshot)
+                    }
                 }
             }
 
@@ -77,6 +80,22 @@ public final class UboDiscovery: Sendable {
             }
 
             browser.start(queue: .global(qos: .utility))
+        }
+    }
+
+    /// Resolve a single Bonjour result to a `DiscoveredDevice` with a timeout.
+    private static func resolveWithTimeout(result: NWBrowser.Result, timeoutNanoseconds: UInt64) async -> DiscoveredDevice? {
+        await withTaskGroup(of: DiscoveredDevice?.self) { group in
+            group.addTask {
+                await Self.resolve(result: result)
+            }
+            group.addTask {
+                try? await Task.sleep(nanoseconds: timeoutNanoseconds)
+                return nil
+            }
+            let first = await group.next()
+            group.cancelAll()
+            return first ?? nil
         }
     }
 
@@ -130,7 +149,18 @@ public final class UboDiscovery: Sendable {
 
 private actor BrowserState {
     private var snapshot: Set<DiscoveredDevice> = []
+    private var browseUpdateToken: Int = 0
+
     func setSnapshot(_ s: Set<DiscoveredDevice>) { snapshot = s }
+
+    func nextUpdateToken() -> Int {
+        browseUpdateToken += 1
+        return browseUpdateToken
+    }
+
+    func isCurrentToken(_ token: Int) -> Bool {
+        return token == browseUpdateToken
+    }
 }
 
 private actor ResolveLatch {

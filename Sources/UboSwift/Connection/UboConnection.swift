@@ -87,6 +87,10 @@ public actor UboConnection {
                 // Body returned without error: server closed the stream.
                 // Treat as a soft retry — back off then re-subscribe.
                 attempt += 1
+                if attempt >= policy.maxRetries {
+                    onCancelled()
+                    return
+                }
             } catch is CancellationError {
                 onCancelled()
                 return
