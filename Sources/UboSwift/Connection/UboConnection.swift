@@ -1322,7 +1322,7 @@ public actor UboConnection {
             playChime.name = chime.rawValue
             protoAction.audioPlayChimeAction = playChime
 
-        case .audioReportSample(let timestamp, let sample):
+        case .audioReportSample(let timestamp, let sample, let audioSource):
             var reportSample = Ubo_V1_AudioReportSampleAction()
             reportSample.timestamp = timestamp
             var protoSample = Ubo_V1_AudioSample()
@@ -1331,6 +1331,7 @@ public actor UboConnection {
             protoSample.rate = Int64(sample.rate)
             protoSample.width = Int64(sample.width)
             reportSample.sample = protoSample
+            reportSample.audioSource = audioSource
             protoAction.audioReportSampleAction = reportSample
 
         case .inputProvide(let id, let value):
@@ -1436,14 +1437,18 @@ public actor UboConnection {
         case .displayRedraw:
             protoAction.displayRedrawAction = Ubo_V1_DisplayRedrawAction()
 
-        case .assistantStartListening:
-            protoAction.assistantStartListeningAction = Ubo_V1_AssistantStartListeningAction()
+        case .assistantStartListening(let audioSource):
+            var startListening = Ubo_V1_AssistantStartListeningAction()
+            startListening.audioSource = audioSource
+            protoAction.assistantStartListeningAction = startListening
 
         case .assistantStopListening:
             protoAction.assistantStopListeningAction = Ubo_V1_AssistantStopListeningAction()
 
-        case .assistantToggleListening:
-            protoAction.assistantToggleListeningAction = Ubo_V1_AssistantToggleListeningAction()
+        case .assistantToggleListening(let audioSource):
+            var toggleListening = Ubo_V1_AssistantToggleListeningAction()
+            toggleListening.audioSource = audioSource
+            protoAction.assistantToggleListeningAction = toggleListening
 
         case .rgbRingPulse(let color, let repetitions, let wait):
             var pulse = Ubo_V1_RgbRingPulseAction()

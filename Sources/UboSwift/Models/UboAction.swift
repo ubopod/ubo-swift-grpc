@@ -40,7 +40,12 @@ public enum UboAction: Sendable {
     /// `AudioReportSampleAction` on the Python side. Used to stream PCM
     /// audio from a connected client (iPhone/Watch/Mac) to the device's
     /// assistant pipeline.
-    case audioReportSample(timestamp: Float, sample: AudioSampleData)
+    /// Report a captured mic sample. `audioSource` tags which mic the sample
+    /// came from (empty = on-device system mic; a remote client sets a unique
+    /// id so the core binds a listening session to that one source). It must
+    /// match the `audioSource` on the `assistantStartListening` that opened
+    /// the session, or the core drops the sample.
+    case audioReportSample(timestamp: Float, sample: AudioSampleData, audioSource: String)
 
     /// Start recording audio
     case audioStartRecording
@@ -169,14 +174,17 @@ public enum UboAction: Sendable {
 
     // MARK: - Assistant Actions
 
-    /// Start assistant listening
-    case assistantStartListening
+    /// Start assistant listening. `audioSource` selects which mic the session
+    /// consumes (empty = on-device system mic; a remote client sets a unique
+    /// id so the core listens only to that client's streamed samples and
+    /// ignores the device's built-in mic).
+    case assistantStartListening(audioSource: String)
 
     /// Stop assistant listening
     case assistantStopListening
 
-    /// Toggle assistant listening
-    case assistantToggleListening
+    /// Toggle assistant listening. See `assistantStartListening` for `audioSource`.
+    case assistantToggleListening(audioSource: String)
 
     // MARK: - Camera Actions
 
@@ -213,7 +221,7 @@ extension UboAction: CustomStringConvertible {
         case .audioSetMute(let muted, let device): return "SetMute(\(muted), \(device))"
         case .audioToggleMute(let device): return "ToggleMute(\(device))"
         case .audioPlayChime(let chime): return "PlayChime(\(chime))"
-        case .audioReportSample(let t, let s): return "ReportSample(t=\(t), bytes=\(s.data.count))"
+        case .audioReportSample(let t, let s, let src): return "ReportSample(t=\(t), bytes=\(s.data.count), src=\(src))"
         case .audioStartRecording: return "StartRecording"
         case .audioStopRecording: return "StopRecording"
         case .audioPlayRecording: return "PlayRecording"
@@ -250,9 +258,9 @@ extension UboAction: CustomStringConvertible {
         case .stackPopToRoot: return "StackPopToRoot"
         case .inputProvide(let id, _): return "InputProvide(\(id))"
         case .inputCancel(let id): return "InputCancel(\(id))"
-        case .assistantStartListening: return "AssistantStartListening"
+        case .assistantStartListening(let src): return "AssistantStartListening(\(src))"
         case .assistantStopListening: return "AssistantStopListening"
-        case .assistantToggleListening: return "AssistantToggleListening"
+        case .assistantToggleListening(let src): return "AssistantToggleListening(\(src))"
         case .cameraRegisterRemote(let id, let label): return "CameraRegisterRemote(\(id), \(label))"
         case .cameraReportImage(let t, _, let w, let h, let sid):
             return "CameraReportImage(t=\(t), \(w)x\(h), source=\(sid))"

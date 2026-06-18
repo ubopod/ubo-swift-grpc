@@ -597,9 +597,14 @@ public final class UboClient: ObservableObject {
 
     // MARK: - Assistant Actions
 
-    /// Start assistant listening
-    public func startAssistantListening() async throws {
-        try await dispatch(.assistantStartListening)
+    /// Start assistant listening.
+    ///
+    /// Pass `audioSource` when this client also streams its own microphone
+    /// (see `reportAudioSample`): the core binds the session to that id and
+    /// ignores the device's built-in mic. Leave it empty to use the on-device
+    /// system mic. The same id must be set on every `reportAudioSample`.
+    public func startAssistantListening(audioSource: String = "") async throws {
+        try await dispatch(.assistantStartListening(audioSource: audioSource))
     }
 
     /// Stop assistant listening
@@ -607,9 +612,9 @@ public final class UboClient: ObservableObject {
         try await dispatch(.assistantStopListening)
     }
 
-    /// Toggle assistant listening
-    public func toggleAssistantListening() async throws {
-        try await dispatch(.assistantToggleListening)
+    /// Toggle assistant listening. See `startAssistantListening` for `audioSource`.
+    public func toggleAssistantListening(audioSource: String = "") async throws {
+        try await dispatch(.assistantToggleListening(audioSource: audioSource))
     }
 
     /// Toggle playback of an audio chat bubble. On the device this is bound to
@@ -637,15 +642,19 @@ public final class UboClient: ObservableObject {
 
     /// Report a captured microphone sample to the device. Mirrors the Web
     /// UI's `reportAudioSample` flow used to feed the assistant pipeline.
+    /// `audioSource` must match the id passed to `startAssistantListening`
+    /// for this session, so the core accepts these samples and drops the
+    /// device's built-in mic. Empty means the on-device system mic.
     public func reportAudioSample(
         timestamp: Float,
         data: Data,
         channels: Int = 1,
         rate: Int = 16000,
-        width: Int = 2
+        width: Int = 2,
+        audioSource: String = ""
     ) async throws {
         let sample = AudioSampleData(data: data, channels: channels, rate: rate, width: width)
-        try await dispatch(.audioReportSample(timestamp: timestamp, sample: sample))
+        try await dispatch(.audioReportSample(timestamp: timestamp, sample: sample, audioSource: audioSource))
     }
 
     // MARK: - Stack Navigation
