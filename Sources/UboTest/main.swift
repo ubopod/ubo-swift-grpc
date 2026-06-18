@@ -301,6 +301,10 @@ func runInteractiveMenu(client: UboClient) async {
                         print("  Kind: \(data.kind.rawValue)")
                         print("  Title: \(data.title)")
                         print("  Stream: \(data.streamId)")
+                    case .chat(let data):
+                        print("  Type: Chat")
+                        print("  Bubbles: \(data.bubbles.count)/\(data.totalBubbles)")
+                        print("  Scroll: \(data.scrollOffset)")
                     }
                     if let status = client.statusBar {
                         print("Status Bar:")

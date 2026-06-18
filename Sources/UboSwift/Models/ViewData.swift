@@ -288,6 +288,82 @@ public struct PromptViewData: Sendable {
     }
 }
 
+/// Fully-resolved representation of one chat speech bubble.
+///
+/// Everything the renderer needs is precomputed by the core's
+/// `get_chat_view_data` — alignment, colors, the L1/L2/L3 pointer binding,
+/// and (for audio bubbles) the waveform. The client only draws what this
+/// describes; it holds no conversation logic.
+public struct ChatBubbleData: Sendable, Identifiable {
+    public var messageId: String = ""
+    public var role: String = "assistant"  // "user" | "assistant"
+    public var alignment: String = "left"  // "left" (assistant) | "right" (user)
+    public var kind: String = "text"  // "text" | "audio"
+    public var text: String = ""
+    public var color: String = "#ffffff"  // foreground (text / waveform) color
+    public var backgroundColor: String = "#2b2f38"  // bubble fill color
+    public var pointerKey: String = ""  // "" | "L1" | "L2" | "L3" — bound button
+    public var isPlaying: Bool = false  // audio bubble currently playing
+    public var waveform: [Float] = []  // normalized (0..1) bar heights
+
+    public var id: String { messageId }
+
+    public init(
+        messageId: String = "",
+        role: String = "assistant",
+        alignment: String = "left",
+        kind: String = "text",
+        text: String = "",
+        color: String = "#ffffff",
+        backgroundColor: String = "#2b2f38",
+        pointerKey: String = "",
+        isPlaying: Bool = false,
+        waveform: [Float] = []
+    ) {
+        self.messageId = messageId
+        self.role = role
+        self.alignment = alignment
+        self.kind = kind
+        self.text = text
+        self.color = color
+        self.backgroundColor = backgroundColor
+        self.pointerKey = pointerKey
+        self.isPlaying = isPlaying
+        self.waveform = waveform
+    }
+}
+
+/// Data for rendering the chat overlay view. The store computes this from the
+/// `chat` slice; `items` holds up to three `MenuItemData` entries (L1/L2/L3
+/// button bindings) so a button press routes to the bound bubble.
+public struct ChatViewData: Sendable {
+    public var type: String = "chat"
+    public var showStatusBar: Bool = false
+    public var bubbles: [ChatBubbleData] = []
+    public var items: [MenuItemData] = []  // L1/L2/L3 button bindings
+    public var scrollOffset: Int = 0  // bubbles scrolled back from the newest
+    public var totalBubbles: Int = 0
+    public var stackDepth: Int = 1
+
+    public init(
+        type: String = "chat",
+        showStatusBar: Bool = false,
+        bubbles: [ChatBubbleData] = [],
+        items: [MenuItemData] = [],
+        scrollOffset: Int = 0,
+        totalBubbles: Int = 0,
+        stackDepth: Int = 1
+    ) {
+        self.type = type
+        self.showStatusBar = showStatusBar
+        self.bubbles = bubbles
+        self.items = items
+        self.scrollOffset = scrollOffset
+        self.totalBubbles = totalBubbles
+        self.stackDepth = stackDepth
+    }
+}
+
 /// Union type for all view data types
 public enum ViewData: Sendable {
     case home(HomeViewData)
@@ -297,6 +373,7 @@ public enum ViewData: Sendable {
     case instruction(InstructionViewData)
     case prompt(PromptViewData)
     case render(RenderViewData)
+    case chat(ChatViewData)
 
     /// Returns true if this is a home view
     public var isHome: Bool {
@@ -340,6 +417,12 @@ public enum ViewData: Sendable {
         return false
     }
 
+    /// Returns true if this is a chat view
+    public var isChat: Bool {
+        if case .chat = self { return true }
+        return false
+    }
+
     /// Returns the view type string
     public var type: String {
         switch self {
@@ -350,6 +433,7 @@ public enum ViewData: Sendable {
         case .instruction: return "instruction"
         case .prompt: return "prompt"
         case .render: return "render"
+        case .chat: return "chat"
         }
     }
 
@@ -363,6 +447,7 @@ public enum ViewData: Sendable {
         case .instruction(let data): return data.showStatusBar
         case .prompt(let data): return data.showStatusBar
         case .render(let data): return data.showStatusBar
+        case .chat(let data): return data.showStatusBar
         }
     }
 }
@@ -384,6 +469,8 @@ extension ViewData: CustomStringConvertible {
             return "PromptView(title: \"\(data.title)\", items: \(data.items.count))"
         case .render(let data):
             return "RenderView(kind: \(data.kind.rawValue), title: \"\(data.title)\")"
+        case .chat(let data):
+            return "ChatView(bubbles: \(data.bubbles.count)/\(data.totalBubbles), scroll: \(data.scrollOffset))"
         }
     }
 }

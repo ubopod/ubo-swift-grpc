@@ -612,6 +612,13 @@ public final class UboClient: ObservableObject {
         try await dispatch(.assistantToggleListening)
     }
 
+    /// Toggle playback of an audio chat bubble. On the device this is bound to
+    /// the bubble's L1/L2/L3 button; touch clients call this when the bubble
+    /// is tapped. The core flips the bubble's `is_playing` flag.
+    public func toggleChatAudio(messageId: String) async throws {
+        try await dispatch(.chatToggleAudioPlayback(messageId: messageId))
+    }
+
     // MARK: - Input Actions
 
     /// Provide the user's response to an active `InputDescription` request.

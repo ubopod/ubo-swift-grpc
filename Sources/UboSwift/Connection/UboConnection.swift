@@ -484,6 +484,10 @@ public actor UboConnection {
             if let proto = try? Ubo_V1_RenderViewData(serializedBytes: any.value) {
                 return .render(convertRenderViewData(proto))
             }
+        } else if typeURL.hasSuffix("ChatViewData") {
+            if let proto = try? Ubo_V1_ChatViewData(serializedBytes: any.value) {
+                return .chat(convertChatViewData(proto))
+            }
         }
 
         return nil
@@ -740,6 +744,43 @@ public actor UboConnection {
             props: props,
             items: items,
             streamId: proto.hasStreamID ? proto.streamID : ""
+        )
+    }
+
+    private nonisolated func convertChatBubbleData(_ proto: Ubo_V1_ChatBubbleData) -> ChatBubbleData {
+        ChatBubbleData(
+            messageId: proto.hasMessageID ? proto.messageID : "",
+            role: proto.hasRole ? proto.role : "assistant",
+            alignment: proto.hasAlignment ? proto.alignment : "left",
+            kind: proto.hasKind ? proto.kind : "text",
+            text: proto.hasText ? proto.text : "",
+            color: proto.hasColor ? proto.color : "#ffffff",
+            backgroundColor: proto.hasBackgroundColor ? proto.backgroundColor : "#2b2f38",
+            pointerKey: proto.hasPointerKey ? proto.pointerKey : "",
+            isPlaying: proto.hasIsPlaying ? proto.isPlaying : false,
+            waveform: proto.hasWaveform ? proto.waveform.items : []
+        )
+    }
+
+    private nonisolated func convertChatViewData(_ proto: Ubo_V1_ChatViewData) -> ChatViewData {
+        var bubbles: [ChatBubbleData] = []
+        if proto.hasBubbles {
+            bubbles = proto.bubbles.items.map { convertChatBubbleData($0) }
+        }
+
+        var items: [MenuItemData] = []
+        if proto.hasItems {
+            items = proto.items.items.map { convertMenuItemData($0) }
+        }
+
+        return ChatViewData(
+            type: proto.hasType ? proto.type : "chat",
+            showStatusBar: proto.hasShowStatusBar ? proto.showStatusBar : false,
+            bubbles: bubbles,
+            items: items,
+            scrollOffset: proto.hasScrollOffset ? Int(proto.scrollOffset) : 0,
+            totalBubbles: proto.hasTotalBubbles ? Int(proto.totalBubbles) : 0,
+            stackDepth: proto.hasStackDepth ? Int(proto.stackDepth) : 1
         )
     }
 
@@ -1457,6 +1498,11 @@ public actor UboConnection {
             reportImage.height = Int64(height)
             reportImage.sourceID = sourceId
             protoAction.cameraReportImageAction = reportImage
+
+        case .chatToggleAudioPlayback(let messageId):
+            var toggle = Ubo_V1_ChatToggleAudioPlaybackAction()
+            toggle.messageID = messageId
+            protoAction.chatToggleAudioPlaybackAction = toggle
 
         // Handle other action cases with minimal implementation
         default:

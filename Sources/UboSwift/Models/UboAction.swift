@@ -191,6 +191,13 @@ public enum UboAction: Sendable {
     /// decoder and viewfinder display. The `sourceId` tags the frame so the
     /// device drops it if a different source is currently selected.
     case cameraReportImage(timestamp: Float, data: Data, width: Int, height: Int, sourceId: String)
+
+    /// Toggle playback of an audio chat bubble. Mirrors
+    /// `ChatToggleAudioPlaybackAction` on the Python side; the device's chat
+    /// reducer flips the bubble's `is_playing` flag and starts/stops audio.
+    /// On hardware this is bound to the bubble's L1/L2/L3 button; touch
+    /// clients dispatch it when the bubble is tapped.
+    case chatToggleAudioPlayback(messageId: String)
 }
 
 extension UboAction: CustomStringConvertible {
@@ -249,6 +256,7 @@ extension UboAction: CustomStringConvertible {
         case .cameraRegisterRemote(let id, let label): return "CameraRegisterRemote(\(id), \(label))"
         case .cameraReportImage(let t, _, let w, let h, let sid):
             return "CameraReportImage(t=\(t), \(w)x\(h), source=\(sid))"
+        case .chatToggleAudioPlayback(let id): return "ChatToggleAudioPlayback(\(id))"
         }
     }
 }
