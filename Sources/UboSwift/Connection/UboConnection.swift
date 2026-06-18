@@ -1325,6 +1325,11 @@ public actor UboConnection {
         case .audioReportSample(let timestamp, let sample, let audioSource):
             var reportSample = Ubo_V1_AudioReportSampleAction()
             reportSample.timestamp = timestamp
+            // The assistant pipeline consumes `sample_speech_recognition` (raw
+            // PCM16 bytes), NOT the `sample` AudioSample (that feeds the audio
+            // recording path). The Web UI sets this; we must too, or the core
+            // pushes empty frames and nothing reaches the assistant.
+            reportSample.sampleSpeechRecognition = sample.data
             var protoSample = Ubo_V1_AudioSample()
             protoSample.data = sample.data
             protoSample.channels = Int64(sample.channels)
