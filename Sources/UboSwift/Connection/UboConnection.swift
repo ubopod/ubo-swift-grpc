@@ -88,9 +88,14 @@ public actor UboConnection {
                 // Treat as a soft retry — back off then re-subscribe.
                 attempt += 1
                 if attempt >= policy.maxRetries {
-                    onCancelled()
+                    onFinalError(UboError.subscriptionFailed(
+                        NSError(domain: "UboConnection", code: -1, userInfo: [
+                            NSLocalizedDescriptionKey: "Stream terminated after \(attempt) attempts"
+                        ])
+                    ))
                     return
                 }
+                self.markReconnecting()
             } catch is CancellationError {
                 onCancelled()
                 return

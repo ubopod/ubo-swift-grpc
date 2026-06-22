@@ -55,7 +55,7 @@ public final class UboDiscovery: Sendable {
                     await withTaskGroup(of: DiscoveredDevice?.self) { group in
                         for result in results {
                             group.addTask {
-                                await Self.resolveWithTimeout(result: result, timeoutNanoseconds: 5_000_000_000)
+                                await Self.resolveWithTimeout(result: result)
                             }
                         }
                         for await device in group {
@@ -63,7 +63,8 @@ public final class UboDiscovery: Sendable {
                         }
                     }
                     await state.setSnapshot(snapshot)
-                    if await state.isCurrentToken(token) {
+                    // Only yield if this is still the latest update
+                    if await state.isLatestUpdate(token) {
                         continuation.yield(snapshot)
                     }
                 }
@@ -83,19 +84,20 @@ public final class UboDiscovery: Sendable {
         }
     }
 
-    /// Resolve a single Bonjour result to a `DiscoveredDevice` with a timeout.
-    private static func resolveWithTimeout(result: NWBrowser.Result, timeoutNanoseconds: UInt64) async -> DiscoveredDevice? {
+    /// Resolve a single Bonjour result with a timeout.
+    private static func resolveWithTimeout(result: NWBrowser.Result, timeout: UInt64 = 5_000_000_000) async -> DiscoveredDevice? {
         await withTaskGroup(of: DiscoveredDevice?.self) { group in
             group.addTask {
                 await Self.resolve(result: result)
             }
             group.addTask {
-                try? await Task.sleep(nanoseconds: timeoutNanoseconds)
+                try? await Task.sleep(nanoseconds: timeout)
                 return nil
             }
-            let first = await group.next()
+            // Return first completed task (either resolve or timeout)
+            let firstResult = await group.next()
             group.cancelAll()
-            return first ?? nil
+            return firstResult ?? nil
         }
     }
 
@@ -158,7 +160,7 @@ private actor BrowserState {
         return browseUpdateToken
     }
 
-    func isCurrentToken(_ token: Int) -> Bool {
+    func isLatestUpdate(_ token: Int) -> Bool {
         return token == browseUpdateToken
     }
 }
