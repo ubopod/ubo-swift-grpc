@@ -360,6 +360,87 @@ public actor UboConnection {
         }
     }
 
+    /// Subscribe to navigation-stack changes (`StackChangedEvent`). Yields the
+    /// full stack as breadcrumb-ready items each time the user navigates.
+    public func subscribeToStackChanges() -> AsyncThrowingStream<[UboStackItem], Error> {
+        AsyncThrowingStream { continuation in
+            let task = Task {
+                await self.runWithRetry {
+                    try await self.streamStackChanges(continuation: continuation)
+                } onFinalError: { error in
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                } onCancelled: {
+                    continuation.finish()
+                }
+            }
+            continuation.onTermination = { _ in task.cancel() }
+        }
+    }
+
+    private func streamStackChanges(
+        continuation: AsyncThrowingStream<[UboStackItem], Error>.Continuation
+    ) async throws {
+        guard let client = self.storeClient else {
+            throw UboError.notConnected
+        }
+
+        var requestBuilder = Store_V1_SubscribeEventRequest()
+        var eventBuilder = Ubo_V1_Event()
+        eventBuilder.stackChangedEvent = Ubo_V1_StackChangedEvent()
+        requestBuilder.events = [eventBuilder]
+        let request = requestBuilder
+
+        try await client.subscribeEvent(request) { response in
+            switch response.accepted {
+            case .success(let contents):
+                for try await message in contents.bodyParts {
+                    if case .message(let subscribeResponse) = message {
+                        await self.markConnected()
+                        if case .stackChangedEvent(let stackEvent) = subscribeResponse.event.event {
+                            let items = stackEvent.stack.compactMap { self.convertStackItem($0) }
+                            continuation.yield(items)
+                        }
+                    }
+                }
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+
+    /// Map a proto stack entry to a breadcrumb item, mirroring the Web UI's
+    /// `getStackItemLabel`.
+    nonisolated func convertStackItem(_ item: Ubo_V1_StackItemType) -> UboStackItem? {
+        switch item.stackItemType {
+        case .menuStackItem(let menu):
+            return UboStackItem(id: menu.id, label: Self.formatStackLabel(menu.menuKey))
+        case .applicationStackItem(let app):
+            return UboStackItem(id: app.id, label: "Application")
+        case .renderStackItem(let render):
+            let label = !render.title.isEmpty
+                ? render.title
+                : (!render.kind.isEmpty ? render.kind : "View")
+            return UboStackItem(id: render.id, label: label)
+        case .notificationStackItem(let notification):
+            return UboStackItem(id: notification.id, label: "Notification")
+        case .chatStackItem(let chat):
+            return UboStackItem(id: chat.id, label: "Assistant")
+        case .instructionStackItem(let instruction):
+            return UboStackItem(id: instruction.id, label: "Instruction")
+        case .promptStackItem(let prompt):
+            return UboStackItem(id: prompt.id, label: "Prompt")
+        case .none:
+            return nil
+        }
+    }
+
+    /// "wifi_settings" / "wifi-settings" -> "Wifi Settings".
+    private nonisolated static func formatStackLabel(_ raw: String) -> String {
+        raw.split(whereSeparator: { $0 == "-" || $0 == "_" || $0 == ":" })
+            .map { $0.prefix(1).uppercased() + $0.dropFirst() }
+            .joined(separator: " ")
+    }
+
     /// Subscribe to system stats (CPU, RAM, clock, temperature) - updates continuously regardless of current view
     /// - Returns: An async stream of SystemStats
     public func subscribeToSystemStats() -> AsyncThrowingStream<SystemStats, Error> {

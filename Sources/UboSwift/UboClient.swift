@@ -61,6 +61,9 @@ public final class UboClient: ObservableObject {
     /// Currently pending input demands (drives native InputFormView).
     @Published public private(set) var activeInputs: [WebUIInputDescription] = []
 
+    /// Current navigation stack (root → current), for breadcrumb display.
+    @Published public private(set) var stack: [UboStackItem] = []
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
@@ -69,6 +72,7 @@ public final class UboClient: ObservableObject {
     private var statsSubscriptionTask: Task<Void, Never>?
     private var cameraSubscriptionTask: Task<Void, Never>?
     private var inputsSubscriptionTask: Task<Void, Never>?
+    private var stackSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -120,6 +124,8 @@ public final class UboClient: ObservableObject {
         cameraSubscriptionTask = nil
         inputsSubscriptionTask?.cancel()
         inputsSubscriptionTask = nil
+        stackSubscriptionTask?.cancel()
+        stackSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
@@ -129,6 +135,7 @@ public final class UboClient: ObservableObject {
         isCameraViewfinderActive = false
         cameraPattern = nil
         activeInputs = []
+        stack = []
     }
 
     /// Whether currently connected to a device
@@ -261,6 +268,35 @@ public final class UboClient: ObservableObject {
     public func stopInputsSubscription() {
         inputsSubscriptionTask?.cancel()
         inputsSubscriptionTask = nil
+    }
+
+    // MARK: - Stack Subscription
+
+    /// Start subscribing to navigation-stack changes. Updates `stack` so the
+    /// UI can render a breadcrumb of the current path.
+    public func startStackSubscription() {
+        stackSubscriptionTask?.cancel()
+        stackSubscriptionTask = Task {
+            do {
+                for try await items in await connection.subscribeToStackChanges() {
+                    await MainActor.run {
+                        self.stack = items
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to navigation-stack changes.
+    public func stopStackSubscription() {
+        stackSubscriptionTask?.cancel()
+        stackSubscriptionTask = nil
     }
 
     // MARK: - Camera Subscription
