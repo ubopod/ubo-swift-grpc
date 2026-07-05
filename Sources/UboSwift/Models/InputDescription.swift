@@ -13,6 +13,7 @@ public enum InputFieldType: String, Sendable, CaseIterable {
     case file
     case date
     case time
+    case range
 
     public init(protoValue: Int) {
         switch protoValue {
@@ -26,6 +27,7 @@ public enum InputFieldType: String, Sendable, CaseIterable {
         case 8: self = .file
         case 9: self = .date
         case 10: self = .time
+        case 11: self = .range
         default: self = .text
         }
     }
