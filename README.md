@@ -1,186 +1,231 @@
 # UboSwift
 
-Swift client library for connecting to Ubo devices via gRPC.
+Swift client library for connecting to Ubo devices via gRPC. This is the
+transport layer used by the Apple apps in the sibling
+[`ubo-swift-app`](../ubo-swift-app) repo; it can also be used standalone.
+
+## Table of contents
+
+- [Requirements](#requirements)
+- [Products](#products)
+- [Quick start](#quick-start)
+- [Architecture](#architecture)
+- [Reconnection behaviour](#reconnection-behaviour)
+- [Security model](#security-model)
+- [Proto generation and drift](#proto-generation-and-drift)
+- [Hand-maintained sync points](#hand-maintained-sync-points)
+- [Logging](#logging)
+- [Testing](#testing)
 
 ## Requirements
 
-- iOS 16.0+ / macOS 13.0+ / watchOS 9.0+ / tvOS 16.0+
-- Swift 5.9+
-- Xcode 15.0+
+- Swift tools 6.0+ (sources compile in Swift 5 language mode)
+- iOS 18 / macOS 15 / watchOS 11 / tvOS 18 / visionOS 2
+- grpc-swift **v2** stack (`grpc-swift-2`, `grpc-swift-nio-transport`,
+  `grpc-swift-protobuf`) + `swift-protobuf`
 
-## Installation
+## Products
 
-### Swift Package Manager
+- **`UboSwift`** — the library.
+- **`ubo-test`** — an interactive CLI harness (`swift run ubo-test`) for
+  manually exercising a live core: connect, press keys, subscribe, etc.
+  It is not an automated test.
 
-Add to your `Package.swift`:
+The Apple apps reference this package **locally**
+(`../ubo-swift-grpc` from the Xcode project), so changes here are picked
+up without pushing.
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/ubopod/ubo-swift-grpc.git", from: "0.1.0")
-]
-```
-
-Or in Xcode: File > Add Packages > enter the repository URL.
-
-## Quick Start
+## Quick start
 
 ```swift
 import UboSwift
 
-// Create a client
 let client = UboClient()
+try await client.connect(host: "ubo.local")   // port 50051, plaintext
 
-// Connect to device
-try await client.connect(host: "192.168.1.100", port: 50051)
-
-// Press buttons
+// Dispatch typed actions
 try await client.pressKey(.up)
-try await client.pressKey(.l1)
-
-// Control audio
 try await client.setVolume(0.5)
-try await client.playChime(.done)
-
-// Show notifications
 try await client.notify(title: "Hello", content: "World", chime: .add)
 
-// Control RGB LEDs
-try await client.setLEDColor(.red)
-try await client.rainbowLEDs(rounds: 2)
+// Observe state (UboClient is @MainActor + ObservableObject)
+client.$currentView.sink { view in /* render ViewData */ }
+client.startViewSubscription()
 
-// Disconnect
 await client.disconnect()
 ```
 
-## SwiftUI Example
+`UboClient` exposes ~60 typed helpers (keys, menu navigation, audio,
+display, RGB ring, notifications, power, assistant, camera, input forms)
+— see `UboClient.swift`; each wraps a `UboAction` case.
 
-```swift
-import SwiftUI
-import UboSwift
+## Architecture
 
-@main
-struct UboMirrorApp: App {
-    @StateObject private var client = UboClient()
+Two layers:
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(client)
-                .task {
-                    try? await client.connect(host: "192.168.1.100")
-                }
-        }
-    }
-}
-
-struct ContentView: View {
-    @EnvironmentObject var client: UboClient
-
-    var body: some View {
-        VStack(spacing: 20) {
-            // Connection status
-            HStack {
-                Circle()
-                    .fill(client.isConnected ? Color.green : Color.red)
-                    .frame(width: 10, height: 10)
-                Text(client.isConnected ? "Connected" : "Disconnected")
-            }
-
-            // Navigation buttons
-            HStack(spacing: 20) {
-                Button("Back") { Task { try? await client.goBack() } }
-                Button("Home") { Task { try? await client.goHome() } }
-            }
-
-            // D-pad
-            VStack(spacing: 10) {
-                Button("Up") { Task { try? await client.scrollUp() } }
-                Button("Down") { Task { try? await client.scrollDown() } }
-            }
-
-            // Side buttons
-            HStack(spacing: 10) {
-                Button("L1") { Task { try? await client.pressL1() } }
-                Button("L2") { Task { try? await client.pressL2() } }
-                Button("L3") { Task { try? await client.pressL3() } }
-            }
-        }
-        .buttonStyle(.borderedProminent)
-        .padding()
-    }
-}
+```mermaid
+flowchart TB
+    app["App code"] --> client
+    subgraph UboSwift
+        client["UboClient — @MainActor ObservableObject\n@Published state (connectionState, currentView,\nstatusBar, systemStats, activeInputs, stack, lastError)\n+ typed action helpers\n+ owns one Task per subscription"]
+        conn["UboConnection — actor\ntransport lifecycle, verify probe,\nrunWithRetry backoff, AsyncThrowingStreams,\nproto ↔ Swift model conversion (buildProtoAction, unpack*)"]
+        gen["Generated/ — committed protoc output\n(ubo.pb.swift ~63k lines, store, secrets, package_info)"]
+    end
+    client --> conn --> gen
+    gen <-->|"HTTP/2 :50051"| core["ubo_app core\nStoreService: DispatchAction /\nSubscribeStore / SubscribeEvent"]
 ```
 
-## Available Actions
+- **`UboConnection`** (actor) owns the `GRPCClient` and the generated
+  `StoreService` client. `connect()` tears down any previous transport,
+  starts `runConnections()` in a background task, then probes with
+  lightweight `subscribeStore` calls until the transport verifies or a
+  10 s deadline passes. Failures are classified by typed `RPCError` code
+  (`.unavailable` etc. → keep probing; anything else → abort).
+- **`UboClient`** (`@MainActor`) is the app-facing façade: each
+  `startXxxSubscription()` spawns a task consuming one of the connection's
+  `AsyncThrowingStream`s and mirrors values into `@Published` properties.
+  `disconnect()` cancels them all.
 
-### Button Controls
-- `pressKey(_:)` - Press any key (`.back`, `.home`, `.up`, `.down`, `.l1`, `.l2`, `.l3`)
-- `goBack()`, `goHome()`, `scrollUp()`, `scrollDown()` - Navigation shortcuts
-- `pressL1()`, `pressL2()`, `pressL3()` - Side button shortcuts
+### Subscription model
 
-### Audio
-- `setVolume(_:device:)` - Set volume (0.0 to 1.0)
-- `changeVolume(by:device:)` - Adjust volume relative
-- `toggleMute(device:)` - Toggle mute
-- `playChime(_:)` - Play sound (`.add`, `.done`, `.failure`, `.volumeChange`)
-- `startRecording()`, `stopRecording()`, `playRecording()` - Audio recording
+Two server-streaming primitives, mirroring the core's gRPC contract:
 
-### Display
-- `blankDisplay()`, `unblankDisplay()` - Sleep/wake display
-- `pauseDisplay()`, `resumeDisplay()` - Pause/resume updates
-- `setDisplayTimeout(_:)` - Set auto-blank timeout
-- `requestDisplayRedraw()` - Force redraw
+- **Store subscriptions** (`subscribeStore`) — dotted selector strings
+  (e.g. `"state.main.current_view"`); each response carries positional
+  `google.protobuf.Any` results unpacked by **type-URL suffix**.
+  ⚠️ Unpacking is positional: `results[0]` ↔ first selector. Keep selector
+  order and unpack order in sync.
+- **Event subscriptions** (`subscribeEvent`) — prototype `Event` messages
+  select which oneof variants to receive (display render, playback,
+  frame stream, camera events).
 
-### RGB LED Ring
-- `setLEDColor(_:)` - Set all LEDs to one color
-- `clearLEDs()` - Turn off all LEDs
-- `setLEDBrightness(_:)` - Set brightness (0.0 to 1.0)
-- `pulseLEDs(color:repetitions:wait:)` - Pulse effect
-- `blinkLEDs(color:repetitions:wait:)` - Blink effect
-- `rainbowLEDs(rounds:wait:)` - Rainbow effect
-- `spinningWheelLEDs(color:rounds:length:wait:)` - Spinning effect
-- `progressWheelLEDs(color:percentage:)` - Progress indicator
+All streams are **bounded** (`bufferingNewest`): a stalled consumer drops
+oldest items instead of growing memory. Every stream funnels through
+`runWithRetry` (below), and proto messages are converted into hand-written
+plain-Swift `Sendable` models (`ViewData`, `StatusBarData`, `SystemStats`,
+`MenuItemData`, …) at the connection layer — generated types never leak
+into app code.
 
-### Notifications
-- `notify(title:content:chime:)` - Quick notification
-- `addNotification(_:)` - Add custom notification
-- `removeNotification(id:)` - Remove by ID
-- `clearAllNotifications()` - Clear all
+## Reconnection behaviour
 
-### Power
-- `powerOff()` - Shutdown device
-- `reboot()` - Restart device
+`ReconnectPolicy` (default): 8 fast attempts at 0.2 s, then exponential
+from 1 s capped at 30 s, giving up after 50 attempts. `runWithRetry` adds:
 
-### Assistant
-- `startAssistantListening()`, `stopAssistantListening()`, `toggleAssistantListening()`
+- **attempt reset** after ≥30 s of healthy streaming, so sporadic blips
+  over a long session never exhaust the budget;
+- ±20 % jitter to de-synchronise the parallel subscriptions;
+- a 0.2 s floor so a server that closes streams immediately can't drive a
+  hot re-subscribe loop;
+- give-up is logged (`UboLog.subscription`) and surfaced through the
+  stream's terminal error.
 
-## Proto Generation
+`connectionState` flips to `.reconnecting` during retries and back to
+`.connected` on the first successful message.
 
-`generate-protos.sh` reads its inputs from `../ubo_app/rpc/proto/` (the
-sibling Python repo) by default. The `ubo/v1/ubo.proto` file there is itself
-auto-generated, so regenerate it first:
+## Security model
+
+Be aware of what this client does **not** do:
+
+- Default transport is **plaintext** on `:50051`, matching the core's
+  default listener. The core's `:50051` has **no authentication** — any
+  host that can reach it can dispatch `powerOff`, `reboot`, or read input
+  form contents. Treat network reachability as the security boundary
+  (LAN / tunnel).
+- `.tls(...)` is supported for connecting through a TLS-terminating tunnel
+  (e.g. reverse-proxy at 443 → h2c to the device).
+- There is no token or certificate-pinning hook in the client today; if
+  the core grows an authenticated endpoint this layer must be extended.
+
+## Proto generation and drift
+
+The `Generated/` tree is **committed**. Regeneration flow:
 
 ```bash
-# Install required tools
 brew install protobuf swift-protobuf grpc-swift
 
-# From the ubo-apple-apps root, regenerate proto sources
-uv run poe proto:generate
+# 1. The proto sources live in the sibling Python repo and are themselves
+#    generated from the core's Redux types:
+uv run poe proto:generate          # from the ubo-apple-apps root
 
-# Then regenerate Swift bindings
-cd ubo-swift-grpc
-./generate-protos.sh
+# 2. Regenerate the Swift bindings:
+./generate-protos.sh               # or: uv run poe proto:swift
 
-# Or do both at once from the repo root
-uv run poe proto:swift
-
-# To verify the committed Generated/ tree is in sync
-uv run poe proto:swift:check
+# 3. CI / sanity: regenerate into a temp dir and diff vs committed:
+./generate-protos.sh --check       # or: uv run poe proto:swift:check
 ```
 
-Pass `--proto-dir <path>` to `generate-protos.sh` to override the source
-directory.
+`generate-protos.sh` **pins the tool versions** (protoc, protoc-gen-swift,
+protoc-gen-grpc-swift) and refuses to run with anything else — the
+`--check` drift gate is only meaningful when everyone generates with
+identical tools. Bump the pins in the script together with a full
+regeneration commit (`UBO_SKIP_TOOL_VERSION_CHECK=1` to experiment).
+
+⚠️ **The proto is generated from the running core's Python types, so field
+numbers and oneof tags can differ between core checkouts.** The bindings
+committed here must match the core you talk to; after rebasing the core,
+regenerate and rebuild all clients (see the `client-app-sync` skill in the
+parent repo).
+
+## Hand-maintained sync points
+
+Things that do **not** regenerate automatically and are guarded by tests:
+
+- **`protoValue` enum tables** (`Key`, `Chime`, `AudioDevice`,
+  `NotificationImportance`, `NotificationDisplayType`,
+  `DisplayBlankTimeout`) — hand-transcribed numeric mappings.
+  `EnumTableGuardTests` pins each table to the generated enums by value,
+  name, and case count; a core-side renumber fails these tests instead of
+  silently degrading to `...Unspecified`.
+- **`buildProtoAction`** — the `UboAction` → proto switch is exhaustive
+  (no `default`), so a new enum case without a mapping is a compile error;
+  `ActionBuildTests` additionally asserts every case populates the oneof.
+- **Keypad semantics** — the core's keypad reducer matches on the full
+  pressed set, not just `key`: a bare press must send
+  `pressed_keys == [key]`, a release `[]`, a combo `[key] + modifiers`,
+  and hold also sets `held_keys`. The builders encode this; don't
+  "simplify" the pressed-keys population away.
+- **betterproto casing quirk** — the core names one message `WebUI...` but
+  betterproto emits `WebUi...`; `unpackActiveInputs` matches type-URLs
+  case-insensitively for this reason.
+- **Positional store unpacking** — see the warning in
+  [Subscription model](#subscription-model).
+
+## Logging
+
+`UboLog` wraps `os.Logger` (subsystem `com.ubopod.uboswift`; categories:
+`connection`, `subscription`, `input`, `action`, `audio`, `camera`,
+`discovery`). Set verbosity at app startup:
+
+```swift
+UboLog.level = .debug   // every subscription event and dispatch
+UboLog.level = .info    // lifecycle only (default)
+UboLog.level = .off
+```
+
+Filter in Console.app: `subsystem:com.ubopod.uboswift category:connection`.
+
+## Testing
+
+```bash
+swift test
+```
+
+Offline/in-process suites:
+
+- `ActionBuildTests` — every `UboAction` case builds a populated proto;
+  keypad pressed/held-key shapes.
+- `EnumTableGuardTests` — protoValue tables vs generated enums (drift
+  guard, see above).
+- `ViewDataRoundTripTests` — proto → `ViewData` conversion for all seven
+  view types.
+- `InputDescriptionTests` — `WebUIState.active_inputs` unpacking incl. the
+  casing quirk.
+- `ReconnectPolicyTests` — the backoff schedule.
+
+Not covered (by design, they need a live server): connection
+verification, retry loop timing, stream lifecycle. Exercise those
+manually against a core with `swift run ubo-test`.
 
 ## License
 
-MIT License
+Apache License 2.0
