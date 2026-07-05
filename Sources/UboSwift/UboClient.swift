@@ -387,10 +387,13 @@ public final class UboClient: ObservableObject {
         try await dispatch(.keypadKeyPress(key: key))
     }
 
-    /// Press multiple keys simultaneously (for combos)
-    /// - Parameter keys: The buttons to press
-    public func pressKeys(_ keys: Set<Key>) async throws {
-        try await dispatch(.keypadKeyPressMultiple(keys: keys))
+    /// Press a button while modifier buttons are held (for combos, e.g.
+    /// HOME+L1 = screenshot is `pressKey(.l1, modifiers: [.home])`)
+    /// - Parameters:
+    ///   - key: The button being pressed
+    ///   - modifiers: Buttons already held down during the press
+    public func pressKey(_ key: Key, modifiers: Set<Key>) async throws {
+        try await dispatch(.keypadKeyPressMultiple(key: key, modifiers: modifiers))
     }
 
     /// Release a button on the device

@@ -7,8 +7,10 @@ public enum UboAction: Sendable {
     /// Press a single key
     case keypadKeyPress(key: Key, time: Double = 0)
 
-    /// Press multiple keys simultaneously
-    case keypadKeyPressMultiple(keys: Set<Key>, time: Double = 0)
+    /// Press a key while modifier keys are held (combo press). The core's
+    /// keypad reducer matches on `key` plus the full pressed set, e.g.
+    /// HOME+L1 = screenshot is `key: .l1, modifiers: [.home]`.
+    case keypadKeyPressMultiple(key: Key, modifiers: Set<Key>, time: Double = 0)
 
     /// Release a key
     case keypadKeyRelease(key: Key, time: Double = 0)
@@ -212,7 +214,7 @@ extension UboAction: CustomStringConvertible {
     public var description: String {
         switch self {
         case .keypadKeyPress(let key, _): return "KeyPress(\(key))"
-        case .keypadKeyPressMultiple(let keys, _): return "KeyPressMultiple(\(keys))"
+        case .keypadKeyPressMultiple(let key, let modifiers, _): return "KeyPressMultiple(\(key), modifiers=\(modifiers))"
         case .keypadKeyRelease(let key, _): return "KeyRelease(\(key))"
         case .keypadKeyHold(let key, _): return "KeyHold(\(key))"
         case .keypadKeyUnhold(let key, _): return "KeyUnhold(\(key))"

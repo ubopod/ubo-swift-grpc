@@ -78,6 +78,44 @@ else
     exit 1
 fi
 
+# Pin the codegen toolchain. The committed Generated/ tree (and the --check
+# drift gate) are only meaningful when everyone generates with identical
+# tools — otherwise --check reports false drift or masks real drift. Bump
+# these pins together with a full regeneration commit. Escape hatch for
+# experiments: UBO_SKIP_TOOL_VERSION_CHECK=1.
+EXPECTED_PROTOC_VERSION="34.1"
+EXPECTED_SWIFT_PLUGIN_VERSION="1.37.0"
+EXPECTED_GRPC_PLUGIN_VERSION="2.3.0"
+
+if [ "${UBO_SKIP_TOOL_VERSION_CHECK:-0}" != "1" ]; then
+    PROTOC_VERSION="$(protoc --version | awk '{print $2}')"
+    if [ "$PROTOC_VERSION" != "$EXPECTED_PROTOC_VERSION" ]; then
+        echo "Error: protoc is $PROTOC_VERSION, pinned version is $EXPECTED_PROTOC_VERSION." >&2
+        echo "Install the pinned version (brew: protobuf), or bump the pin together with a full regen." >&2
+        echo "Escape hatch: UBO_SKIP_TOOL_VERSION_CHECK=1" >&2
+        exit 1
+    fi
+
+    SWIFT_PLUGIN_VERSION="$(protoc-gen-swift --version | awk '{print $2}')"
+    if [ "$SWIFT_PLUGIN_VERSION" != "$EXPECTED_SWIFT_PLUGIN_VERSION" ]; then
+        echo "Error: protoc-gen-swift is $SWIFT_PLUGIN_VERSION, pinned version is $EXPECTED_SWIFT_PLUGIN_VERSION." >&2
+        echo "Install the pinned version (brew: swift-protobuf), or bump the pin together with a full regen." >&2
+        echo "Escape hatch: UBO_SKIP_TOOL_VERSION_CHECK=1" >&2
+        exit 1
+    fi
+
+    # The grpc-swift plugin prints no version; fall back to the brew formula.
+    if command -v brew &> /dev/null; then
+        GRPC_PLUGIN_VERSION="$(brew list --versions protoc-gen-grpc-swift 2>/dev/null | awk '{print $2}')"
+        if [ -n "${GRPC_PLUGIN_VERSION:-}" ] && [ "$GRPC_PLUGIN_VERSION" != "$EXPECTED_GRPC_PLUGIN_VERSION" ]; then
+            echo "Error: protoc-gen-grpc-swift is $GRPC_PLUGIN_VERSION, pinned version is $EXPECTED_GRPC_PLUGIN_VERSION." >&2
+            echo "Install the pinned version (brew: protoc-gen-grpc-swift), or bump the pin together with a full regen." >&2
+            echo "Escape hatch: UBO_SKIP_TOOL_VERSION_CHECK=1" >&2
+            exit 1
+        fi
+    fi
+fi
+
 if [ "$CHECK_MODE" -eq 1 ]; then
     TARGET_DIR="$(mktemp -d)"
     trap 'rm -rf "$TARGET_DIR"' EXIT

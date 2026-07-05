@@ -80,38 +80,52 @@ public actor UboConnection {
     ) async {
         let policy = self.reconnectPolicy
         var attempt = 0
+        let clock = ContinuousClock()
+        // A body that streamed healthily for this long resets the backoff.
+        // Without the reset, sporadic blips over a long-lived session
+        // accumulate towards maxRetries and permanently kill the
+        // subscription even though every individual outage recovered.
+        let healthyRunThreshold: Duration = .seconds(30)
 
         while !Task.isCancelled {
+            let started = clock.now
             do {
                 try await body()
                 // Body returned without error: server closed the stream.
                 // Treat as a soft retry — back off then re-subscribe.
+                if clock.now - started >= healthyRunThreshold { attempt = 0 }
                 attempt += 1
                 if attempt >= policy.maxRetries {
-                    onCancelled()
+                    UboLog.subscription.error("Giving up after \(attempt) consecutive short-lived streams")
+                    onFinalError(UboError.subscriptionFailed(UboError.timeout))
                     return
                 }
             } catch is CancellationError {
                 onCancelled()
                 return
             } catch {
+                if clock.now - started >= healthyRunThreshold { attempt = 0 }
                 attempt += 1
                 if attempt >= policy.maxRetries {
+                    UboLog.subscription.error("Giving up after \(attempt) attempts: \(error)")
                     onFinalError(error)
                     return
                 }
                 self.markReconnecting()
             }
 
-            let delaySeconds = policy.delaySeconds(forAttempt: attempt)
-            if delaySeconds > 0 {
-                let nanos = UInt64(delaySeconds * 1_000_000_000)
-                do {
-                    try await Task.sleep(nanoseconds: nanos)
-                } catch {
-                    onCancelled()
-                    return
-                }
+            // ±20% jitter de-synchronises the parallel subscriptions'
+            // reconnect attempts. A 0.2 s floor stops a server that closes
+            // streams immediately from driving a hot re-subscribe loop.
+            let delaySeconds = max(
+                policy.delaySeconds(forAttempt: attempt) * Double.random(in: 0.8...1.2),
+                0.2
+            )
+            do {
+                try await Task.sleep(nanoseconds: UInt64(delaySeconds * 1_000_000_000))
+            } catch {
+                onCancelled()
+                return
             }
         }
         onCancelled()
@@ -131,6 +145,10 @@ public actor UboConnection {
         port: Int = 50051,
         security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext
     ) async throws {
+        // Tear down any previous transport first (connect-after-connect
+        // without an explicit disconnect) so the old `runConnections()`
+        // task and transport don't leak.
+        teardownTransport()
         self.host = host
         self.port = port
         state = .connecting
@@ -155,12 +173,15 @@ public actor UboConnection {
                 try await client.runConnections()
             }
 
-            // Verify the connection is actually ready by attempting a lightweight probe
-            // Try up to 10 times with 500ms intervals (5 seconds total)
+            // Probe with lightweight RPCs until the transport verifies or
+            // the deadline passes. Worst case ≈ deadline + one in-flight
+            // verify attempt (~2 s).
+            let clock = ContinuousClock()
+            let deadline = clock.now + .seconds(10)
             var connectionVerified = false
             var lastError: Error?
 
-            for _ in 1...10 {
+            while clock.now < deadline {
                 // Give the transport time to establish
                 try await Task.sleep(nanoseconds: 500_000_000) // 500ms
 
@@ -183,18 +204,29 @@ public actor UboConnection {
             }
 
             if !connectionVerified {
-                state = .disconnected
-                throw UboError.connectionFailed(lastError ?? NSError(domain: "UboConnection", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to verify connection after 5 seconds"]))
+                throw UboError.connectionFailed(lastError ?? UboError.timeout)
             }
 
             state = .connected
         } catch let error as UboError {
+            teardownTransport()
             state = .disconnected
             throw error
         } catch {
+            teardownTransport()
             state = .disconnected
             throw UboError.connectionFailed(error)
         }
+    }
+
+    /// Shut down the transport and cancel the background `runConnections()`
+    /// task. Safe to call when nothing is connected.
+    private func teardownTransport() {
+        grpcClient?.beginGracefulShutdown()
+        clientTask?.cancel()
+        clientTask = nil
+        grpcClient = nil
+        storeClient = nil
     }
 
     /// Result of connection verification
@@ -234,7 +266,7 @@ public actor UboConnection {
 
                 group.addTask {
                     try await Task.sleep(nanoseconds: 2_000_000_000) // 2 second timeout
-                    throw UboError.connectionFailed(NSError(domain: "UboConnection", code: -1, userInfo: [NSLocalizedDescriptionKey: "Connection test timeout"]))
+                    throw UboError.timeout
                 }
 
                 // Wait for first to complete
@@ -244,27 +276,32 @@ public actor UboConnection {
 
             return .success
         } catch {
-            let errorStr = String(describing: error).lowercased()
-            let isNotReady = errorStr.contains("channel") ||
-                             errorStr.contains("unavailable") ||
-                             errorStr.contains("not ready") ||
-                             errorStr.contains("transport")
+            return classifyVerifyError(error)
+        }
+    }
 
-            if isNotReady {
-                return .notReady(error)
-            } else {
-                return .failed(error)
+    /// Classify a verification failure: transient "transport not ready yet"
+    /// (keep probing) vs a real failure (abort the connect). Inspects typed
+    /// `RPCError` codes rather than matching on error descriptions.
+    private func classifyVerifyError(_ error: Error) -> ConnectionVerifyResult {
+        if case UboError.timeout = error {
+            // The probe RPC hung — the server may still be coming up.
+            return .notReady(error)
+        }
+        if let rpcError = error as? RPCError {
+            switch rpcError.code {
+            case .unavailable, .deadlineExceeded, .aborted:
+                return .notReady(rpcError)
+            default:
+                return .failed(rpcError)
             }
         }
+        return .failed(error)
     }
 
     /// Disconnect from the device
     public func disconnect() async {
-        grpcClient?.beginGracefulShutdown()
-        clientTask?.cancel()
-        clientTask = nil
-        grpcClient = nil
-        storeClient = nil
+        teardownTransport()
         state = .disconnected
         host = nil
         port = nil
@@ -304,7 +341,10 @@ public actor UboConnection {
     /// - Parameter selectors: List of state selectors (e.g., ["state.main.current_view", "state.main.status_bar"])
     /// - Returns: An async stream of (ViewData, StatusBarData?) tuples
     public func subscribeToStoreChanges(selectors: [String] = ["state.main.current_view", "state.main.status_bar"]) -> AsyncThrowingStream<(ViewData, StatusBarData?), Error> {
-        AsyncThrowingStream { continuation in
+        // All streams are bounded (`bufferingNewest`): a stalled consumer
+        // drops the oldest updates instead of growing memory without limit.
+        // State snapshots are newest-wins, so a small buffer is safe.
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(16)) { continuation in
             let task = Task {
                 await self.runWithRetry { [selectors] in
                     try await self.streamStoreChanges(selectors: selectors, continuation: continuation)
@@ -448,7 +488,7 @@ public actor UboConnection {
         // a SensorsState that only carries temperature) keep the previous
         // CPU/RAM values.
         let statsHolder = StatsHolder()
-        return AsyncThrowingStream { continuation in
+        return AsyncThrowingStream(bufferingPolicy: .bufferingNewest(16)) { continuation in
             let task = Task {
                 await self.runWithRetry {
                     try await self.streamSystemStats(
@@ -912,7 +952,10 @@ public actor UboConnection {
 
     /// Subscribe to display render events
     public func subscribeToDisplayRenderEvents() -> AsyncThrowingStream<DisplayRenderData, Error> {
-        AsyncThrowingStream { continuation in
+        // Render events are partial-rect updates, so the buffer is generous —
+        // dropping one leaves a stale region until the next paint. It only
+        // trims when the consumer has stalled for dozens of frames.
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(64)) { continuation in
             let task = Task {
                 await self.runWithRetry {
                     try await self.streamDisplayRenderEvents(continuation: continuation)
@@ -974,7 +1017,9 @@ public actor UboConnection {
     /// the connected client can route audio to its own speaker. Mirrors the
     /// three events the Web UI handles in `audio.ts`.
     public func subscribeToPlaybackEvents() -> AsyncThrowingStream<PlaybackEvent, Error> {
-        AsyncThrowingStream { continuation in
+        // Audio chunks: large enough to absorb bursts without dropping
+        // audible samples, bounded so a stalled consumer can't grow memory.
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(256)) { continuation in
             let task = Task {
                 await self.runWithRetry {
                     try await self.streamPlaybackEvents(continuation: continuation)
@@ -1062,7 +1107,7 @@ public actor UboConnection {
     /// snapshot — newly demanded forms appear as additions, resolved/cancelled
     /// ones disappear.
     public func subscribeToActiveInputs() -> AsyncThrowingStream<[WebUIInputDescription], Error> {
-        AsyncThrowingStream { continuation in
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(16)) { continuation in
             let task = Task {
                 await self.runWithRetry {
                     try await self.streamActiveInputs(continuation: continuation)
@@ -1183,7 +1228,8 @@ public actor UboConnection {
     /// only frames belonging to that stream are yielded; otherwise every
     /// frame is yielded.
     public func subscribeToFrameStream(streamId: String = "") -> AsyncThrowingStream<FrameStreamFrame, Error> {
-        AsyncThrowingStream { continuation in
+        // Each frame is a complete image — newest-wins with a small buffer.
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(8)) { continuation in
             let task = Task {
                 await self.runWithRetry { [streamId] in
                     try await self.streamFrameStream(filter: streamId, continuation: continuation)
@@ -1254,7 +1300,7 @@ public actor UboConnection {
 
     /// Subscribe to camera viewfinder events (start/stop)
     public func subscribeToCameraEvents() -> AsyncThrowingStream<CameraEventType, Error> {
-        AsyncThrowingStream { continuation in
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(32)) { continuation in
             let task = Task {
                 await self.runWithRetry {
                     try await self.streamCameraEvents(continuation: continuation)
@@ -1363,17 +1409,45 @@ public actor UboConnection {
         var protoAction = Ubo_V1_Action()
 
         switch action {
+        // The keypad reducer pattern-matches the full pressed set, not just
+        // `key` (a bare press is `pressed_keys == {key}`, a combo is
+        // `pressed_keys == {key, modifier}`, a release is `pressed_keys == ()`)
+        // — mirror the canonical shapes the core's own GUI client sends.
         case .keypadKeyPress(let key, let time):
             var keyPress = Ubo_V1_KeypadKeyPressAction()
-            keyPress.key = Ubo_V1_Key(rawValue: Int(key.protoValue)) ?? .uboAppDotStoreDotServicesDotKeypadUnspecified
+            keyPress.key = protoKey(key)
+            keyPress.pressedKeys = [protoKey(key)]
+            keyPress.time = Float(time)
+            protoAction.keypadKeyPressAction = keyPress
+
+        case .keypadKeyPressMultiple(let key, let modifiers, let time):
+            var keyPress = Ubo_V1_KeypadKeyPressAction()
+            keyPress.key = protoKey(key)
+            keyPress.pressedKeys = ([key] + modifiers.subtracting([key]).sorted { $0.rawValue < $1.rawValue }).map(protoKey)
             keyPress.time = Float(time)
             protoAction.keypadKeyPressAction = keyPress
 
         case .keypadKeyRelease(let key, let time):
             var keyRelease = Ubo_V1_KeypadKeyReleaseAction()
-            keyRelease.key = Ubo_V1_Key(rawValue: Int(key.protoValue)) ?? .uboAppDotStoreDotServicesDotKeypadUnspecified
+            keyRelease.key = protoKey(key)
             keyRelease.time = Float(time)
             protoAction.keypadKeyReleaseAction = keyRelease
+
+        case .keypadKeyHold(let key, let time):
+            var keyHold = Ubo_V1_KeypadKeyHoldAction()
+            keyHold.key = protoKey(key)
+            keyHold.pressedKeys = [protoKey(key)]
+            var heldKeys = Ubo_V1_KeypadKeyHoldAction.HeldKeys()
+            heldKeys.items = [protoKey(key)]
+            keyHold.heldKeys = heldKeys
+            keyHold.time = Float(time)
+            protoAction.keypadKeyHoldAction = keyHold
+
+        case .keypadKeyUnhold(let key, let time):
+            var keyUnhold = Ubo_V1_KeypadKeyUnholdAction()
+            keyUnhold.key = protoKey(key)
+            keyUnhold.time = Float(time)
+            protoAction.keypadKeyUnholdAction = keyUnhold
 
         case .audioSetVolume(let level, let device):
             var setVolume = Ubo_V1_AudioSetVolumeAction()
@@ -1419,6 +1493,15 @@ public actor UboConnection {
             reportSample.sample = protoSample
             reportSample.audioSource = audioSource
             protoAction.audioReportSampleAction = reportSample
+
+        case .audioStartRecording:
+            protoAction.audioStartRecordingAction = Ubo_V1_AudioStartRecordingAction()
+
+        case .audioStopRecording:
+            protoAction.audioStopRecordingAction = Ubo_V1_AudioStopRecordingAction()
+
+        case .audioPlayRecording:
+            protoAction.audioPlayRecordingAction = Ubo_V1_AudioPlayRecordingAction()
 
         case .inputProvide(let id, let value):
             var provide = Ubo_V1_InputProvideAction()
@@ -1482,6 +1565,11 @@ public actor UboConnection {
         case .notificationClearAll:
             protoAction.notificationsClearAllAction = Ubo_V1_NotificationsClearAllAction()
 
+        case .notificationDisplay(let notification):
+            var displayAction = Ubo_V1_NotificationsDisplayAction()
+            displayAction.notification = buildProtoNotification(notification)
+            protoAction.notificationsDisplayAction = displayAction
+
         // MARK: Menu Navigation Actions
         case .menuGoBack:
             protoAction.menuGoBackAction = Ubo_V1_MenuGoBackAction()
@@ -1522,6 +1610,11 @@ public actor UboConnection {
 
         case .displayRedraw:
             protoAction.displayRedrawAction = Ubo_V1_DisplayRedrawAction()
+
+        case .displaySetBlankTimeout(let timeout):
+            var setTimeout = Ubo_V1_DisplaySetBlankTimeoutAction()
+            setTimeout.timeout = Ubo_V1_DisplayBlankTimeout(rawValue: Int(timeout.protoValue)) ?? .uboAppDotStoreDotServicesDotDisplayUnspecified
+            protoAction.displaySetBlankTimeoutAction = setTimeout
 
         case .assistantStartListening(let audioSource):
             var startListening = Ubo_V1_AssistantStartListeningAction()
@@ -1594,14 +1687,16 @@ public actor UboConnection {
             var toggle = Ubo_V1_ChatToggleAudioPlaybackAction()
             toggle.messageID = messageId
             protoAction.chatToggleAudioPlaybackAction = toggle
-
-        // Handle other action cases with minimal implementation
-        default:
-            // Unsupported actions will send an empty action
-            break
         }
+        // No `default:` — the switch is deliberately exhaustive so adding a
+        // `UboAction` case without a proto mapping is a compile error instead
+        // of a silently-dispatched empty action.
 
         return protoAction
+    }
+
+    private func protoKey(_ key: Key) -> Ubo_V1_Key {
+        Ubo_V1_Key(rawValue: Int(key.protoValue)) ?? .uboAppDotStoreDotServicesDotKeypadUnspecified
     }
 
     private func buildProtoColor(_ color: UboColor) -> Ubo_V1_RgbColor {
