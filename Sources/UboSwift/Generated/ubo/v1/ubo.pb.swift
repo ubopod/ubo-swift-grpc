@@ -741,48 +741,6 @@ public enum Ubo_V1_AudioSequenceSource: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
-public enum Ubo_V1_CameraType: SwiftProtobuf.Enum, Swift.CaseIterable {
-  public typealias RawValue = Int
-  case uboAppDotStoreDotServicesDotCameraUnspecified // = 0
-  case `default` // = 1
-  case autofocus // = 2
-  case fixedFocus // = 3
-  case UNRECOGNIZED(Int)
-
-  public init() {
-    self = .uboAppDotStoreDotServicesDotCameraUnspecified
-  }
-
-  public init?(rawValue: Int) {
-    switch rawValue {
-    case 0: self = .uboAppDotStoreDotServicesDotCameraUnspecified
-    case 1: self = .default
-    case 2: self = .autofocus
-    case 3: self = .fixedFocus
-    default: self = .UNRECOGNIZED(rawValue)
-    }
-  }
-
-  public var rawValue: Int {
-    switch self {
-    case .uboAppDotStoreDotServicesDotCameraUnspecified: return 0
-    case .default: return 1
-    case .autofocus: return 2
-    case .fixedFocus: return 3
-    case .UNRECOGNIZED(let i): return i
-    }
-  }
-
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Ubo_V1_CameraType] = [
-    .uboAppDotStoreDotServicesDotCameraUnspecified,
-    .default,
-    .autofocus,
-    .fixedFocus,
-  ]
-
-}
-
 public enum Ubo_V1_CameraSourceKind: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case uboAppDotStoreDotServicesDotCameraUnspecified // = 0
@@ -1175,6 +1133,48 @@ public enum Ubo_V1_Key: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
+public enum Ubo_V1_KioskPortRole: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotKioskUnspecified // = 0
+  case browser // = 1
+  case terminal // = 2
+  case off // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotKioskUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotKioskUnspecified
+    case 1: self = .browser
+    case 2: self = .terminal
+    case 3: self = .off
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotKioskUnspecified: return 0
+    case .browser: return 1
+    case .terminal: return 2
+    case .off: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_KioskPortRole] = [
+    .uboAppDotStoreDotServicesDotKioskUnspecified,
+    .browser,
+    .terminal,
+    .off,
+  ]
+
+}
+
 public enum Ubo_V1_LanguageCode: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case uboAppDotStoreDotServicesDotLocalizationUnspecified // = 0
@@ -1233,6 +1233,44 @@ public enum Ubo_V1_LanguageCode: SwiftProtobuf.Enum, Swift.CaseIterable {
     .pt,
     .nl,
     .zh,
+  ]
+
+}
+
+public enum Ubo_V1_LocationSource: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotLocalizationUnspecified // = 0
+  case ip // = 1
+  case manual // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotLocalizationUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotLocalizationUnspecified
+    case 1: self = .ip
+    case 2: self = .manual
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotLocalizationUnspecified: return 0
+    case .ip: return 1
+    case .manual: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_LocationSource] = [
+    .uboAppDotStoreDotServicesDotLocalizationUnspecified,
+    .ip,
+    .manual,
   ]
 
 }
@@ -1317,6 +1355,90 @@ public enum Ubo_V1_McpServerStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     .checking,
     .healthy,
     .failed,
+  ]
+
+}
+
+public enum Ubo_V1_MqttConnectionStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotMqttUnspecified // = 0
+  case disabled // = 1
+  case connecting // = 2
+  case connected // = 3
+  case error // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotMqttUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotMqttUnspecified
+    case 1: self = .disabled
+    case 2: self = .connecting
+    case 3: self = .connected
+    case 4: self = .error
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotMqttUnspecified: return 0
+    case .disabled: return 1
+    case .connecting: return 2
+    case .connected: return 3
+    case .error: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_MqttConnectionStatus] = [
+    .uboAppDotStoreDotServicesDotMqttUnspecified,
+    .disabled,
+    .connecting,
+    .connected,
+    .error,
+  ]
+
+}
+
+public enum Ubo_V1_MqttBrokerSource: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotMqttUnspecified // = 0
+  case bundled // = 1
+  case external // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotMqttUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotMqttUnspecified
+    case 1: self = .bundled
+    case 2: self = .external
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotMqttUnspecified: return 0
+    case .bundled: return 1
+    case .external: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_MqttBrokerSource] = [
+    .uboAppDotStoreDotServicesDotMqttUnspecified,
+    .bundled,
+    .external,
   ]
 
 }
@@ -1497,6 +1619,52 @@ public enum Ubo_V1_Sensor: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
+public enum Ubo_V1_SensorStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotSensorsUnspecified // = 0
+  case active // = 1
+  case error // = 2
+  case unsupported // = 3
+  case ambiguous // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotSensorsUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotSensorsUnspecified
+    case 1: self = .active
+    case 2: self = .error
+    case 3: self = .unsupported
+    case 4: self = .ambiguous
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotSensorsUnspecified: return 0
+    case .active: return 1
+    case .error: return 2
+    case .unsupported: return 3
+    case .ambiguous: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_SensorStatus] = [
+    .uboAppDotStoreDotServicesDotSensorsUnspecified,
+    .active,
+    .error,
+    .unsupported,
+    .ambiguous,
+  ]
+
+}
+
 public enum Ubo_V1_WakeMode: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case uboAppDotStoreDotServicesDotSpeechRecognitionUnspecified // = 0
@@ -1504,6 +1672,7 @@ public enum Ubo_V1_WakeMode: SwiftProtobuf.Enum, Swift.CaseIterable {
   case quickChat // = 2
   case conversation // = 3
   case stopTalking // = 4
+  case homeAssistant // = 5
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -1517,6 +1686,7 @@ public enum Ubo_V1_WakeMode: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 2: self = .quickChat
     case 3: self = .conversation
     case 4: self = .stopTalking
+    case 5: self = .homeAssistant
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -1528,6 +1698,7 @@ public enum Ubo_V1_WakeMode: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .quickChat: return 2
     case .conversation: return 3
     case .stopTalking: return 4
+    case .homeAssistant: return 5
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -1539,6 +1710,7 @@ public enum Ubo_V1_WakeMode: SwiftProtobuf.Enum, Swift.CaseIterable {
     .quickChat,
     .conversation,
     .stopTalking,
+    .homeAssistant,
   ]
 
 }
@@ -1741,6 +1913,64 @@ public enum Ubo_V1_SpeechSynthesisEngineName: SwiftProtobuf.Enum, Swift.CaseIter
 
 }
 
+public enum Ubo_V1_WebUIInputCommand: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotWebUiUnspecified // = 0
+  case up // = 1
+  case down // = 2
+  case left // = 3
+  case right // = 4
+  case select // = 5
+  case back // = 6
+  case home // = 7
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotWebUiUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotWebUiUnspecified
+    case 1: self = .up
+    case 2: self = .down
+    case 3: self = .left
+    case 4: self = .right
+    case 5: self = .select
+    case 6: self = .back
+    case 7: self = .home
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotWebUiUnspecified: return 0
+    case .up: return 1
+    case .down: return 2
+    case .left: return 3
+    case .right: return 4
+    case .select: return 5
+    case .back: return 6
+    case .home: return 7
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_WebUIInputCommand] = [
+    .uboAppDotStoreDotServicesDotWebUiUnspecified,
+    .up,
+    .down,
+    .left,
+    .right,
+    .select,
+    .back,
+    .home,
+  ]
+
+}
+
 public enum Ubo_V1_WiFiType: SwiftProtobuf.Enum, Swift.CaseIterable {
   public typealias RawValue = Int
   case uboAppDotStoreDotServicesDotWifiUnspecified // = 0
@@ -1829,6 +2059,140 @@ public enum Ubo_V1_ConnectionState: SwiftProtobuf.Enum, Swift.CaseIterable {
     .connecting,
     .disconnected,
     .unknown,
+  ]
+
+}
+
+public enum Ubo_V1_WyomingAccessPolicyKind: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotWyomingUnspecified // = 0
+  case docker // = 1
+  case network // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+    case 1: self = .docker
+    case 2: self = .network
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotWyomingUnspecified: return 0
+    case .docker: return 1
+    case .network: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_WyomingAccessPolicyKind] = [
+    .uboAppDotStoreDotServicesDotWyomingUnspecified,
+    .docker,
+    .network,
+  ]
+
+}
+
+public enum Ubo_V1_WyomingSatelliteStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotWyomingUnspecified // = 0
+  case stopped // = 1
+  case listening // = 2
+  case connected // = 3
+  case streaming // = 4
+  case playing // = 5
+  case paused // = 6
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+    case 1: self = .stopped
+    case 2: self = .listening
+    case 3: self = .connected
+    case 4: self = .streaming
+    case 5: self = .playing
+    case 6: self = .paused
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotWyomingUnspecified: return 0
+    case .stopped: return 1
+    case .listening: return 2
+    case .connected: return 3
+    case .streaming: return 4
+    case .playing: return 5
+    case .paused: return 6
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_WyomingSatelliteStatus] = [
+    .uboAppDotStoreDotServicesDotWyomingUnspecified,
+    .stopped,
+    .listening,
+    .connected,
+    .streaming,
+    .playing,
+    .paused,
+  ]
+
+}
+
+public enum Ubo_V1_WyomingEnginesStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case uboAppDotStoreDotServicesDotWyomingUnspecified // = 0
+  case stopped // = 1
+  case listening // = 2
+  case busy // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .uboAppDotStoreDotServicesDotWyomingUnspecified
+    case 1: self = .stopped
+    case 2: self = .listening
+    case 3: self = .busy
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .uboAppDotStoreDotServicesDotWyomingUnspecified: return 0
+    case .stopped: return 1
+    case .listening: return 2
+    case .busy: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Ubo_V1_WyomingEnginesStatus] = [
+    .uboAppDotStoreDotServicesDotWyomingUnspecified,
+    .stopped,
+    .listening,
+    .busy,
   ]
 
 }
@@ -7736,6 +8100,37 @@ public struct Ubo_V1_FrameStreamDataEvent: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents: String? = nil
 }
 
+public struct Ubo_V1_FrameStreamChunkEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents: Bool {self._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents() {self._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents = nil}
+
+  public var streamID: String = String()
+
+  public var data: Data = Data()
+
+  public var width: Int64 = 0
+
+  public var height: Int64 = 0
+
+  public var rowOffset: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents: String? = nil
+}
+
 public struct Ubo_V1_ScreenshotDataEvent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -8854,6 +9249,48 @@ public struct Ubo_V1_SettingsToggleBetaVersionsAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: String? = nil
 }
 
+public struct Ubo_V1_SettingsToggleGrpcRemoteAccessAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: Bool {self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotSettingsDotTypes() {self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: String? = nil
+}
+
+public struct Ubo_V1_SettingsToggleAssistantDebugAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: Bool {self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotSettingsDotTypes() {self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes: String? = nil
+}
+
 public struct Ubo_V1_SettingsSetServicesAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -9325,6 +9762,24 @@ public struct Ubo_V1_SettingsState: Sendable {
   /// Clears the value of `betaVersions`. Subsequent reads from it will return its default value.
   public mutating func clearBetaVersions() {self._betaVersions = nil}
 
+  public var grpcRemoteAccess: Bool {
+    get {_grpcRemoteAccess ?? false}
+    set {_grpcRemoteAccess = newValue}
+  }
+  /// Returns true if `grpcRemoteAccess` has been explicitly set.
+  public var hasGrpcRemoteAccess: Bool {self._grpcRemoteAccess != nil}
+  /// Clears the value of `grpcRemoteAccess`. Subsequent reads from it will return its default value.
+  public mutating func clearGrpcRemoteAccess() {self._grpcRemoteAccess = nil}
+
+  public var assistantDebug: Bool {
+    get {_assistantDebug ?? false}
+    set {_assistantDebug = newValue}
+  }
+  /// Returns true if `assistantDebug` has been explicitly set.
+  public var hasAssistantDebug: Bool {self._assistantDebug != nil}
+  /// Clears the value of `assistantDebug`. Subsequent reads from it will return its default value.
+  public mutating func clearAssistantDebug() {self._assistantDebug = nil}
+
   public var services: Ubo_V1_SettingsState.ServicesDict {
     get {_services ?? Ubo_V1_SettingsState.ServicesDict()}
     set {_services = newValue}
@@ -9363,6 +9818,8 @@ public struct Ubo_V1_SettingsState: Sendable {
   fileprivate var _pdbSignal: Bool? = nil
   fileprivate var _visualDebug: Bool? = nil
   fileprivate var _betaVersions: Bool? = nil
+  fileprivate var _grpcRemoteAccess: Bool? = nil
+  fileprivate var _assistantDebug: Bool? = nil
   fileprivate var _services: Ubo_V1_SettingsState.ServicesDict? = nil
   fileprivate var _servicesStatus: Ubo_V1_ServicesStatus? = nil
 }
@@ -11980,12 +12437,22 @@ public struct Ubo_V1_AssistantSynthesizeAction: Sendable {
   /// Clears the value of `ttsProvider`. Subsequent reads from it will return its default value.
   public mutating func clearTtsProvider() {self._ttsProvider = nil}
 
+  public var playLocally: Bool {
+    get {_playLocally ?? false}
+    set {_playLocally = newValue}
+  }
+  /// Returns true if `playLocally` has been explicitly set.
+  public var hasPlayLocally: Bool {self._playLocally != nil}
+  /// Clears the value of `playLocally`. Subsequent reads from it will return its default value.
+  public mutating func clearPlayLocally() {self._playLocally = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String? = nil
   fileprivate var _ttsProvider: Ubo_V1_AssistantTTSName? = nil
+  fileprivate var _playLocally: Bool? = nil
 }
 
 public struct Ubo_V1_AssistantCompleteAction: Sendable {
@@ -12151,6 +12618,15 @@ public struct Ubo_V1_AssistantRunPipelineAction: Sendable {
   /// Clears the value of `enableTools`. Subsequent reads from it will return its default value.
   public mutating func clearEnableTools() {self._enableTools = nil}
 
+  public var playLocally: Bool {
+    get {_playLocally ?? false}
+    set {_playLocally = newValue}
+  }
+  /// Returns true if `playLocally` has been explicitly set.
+  public var hasPlayLocally: Bool {self._playLocally != nil}
+  /// Clears the value of `playLocally`. Subsequent reads from it will return its default value.
+  public mutating func clearPlayLocally() {self._playLocally = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -12166,6 +12642,30 @@ public struct Ubo_V1_AssistantRunPipelineAction: Sendable {
   fileprivate var _llmModel: String? = nil
   fileprivate var _systemPrompt: String? = nil
   fileprivate var _enableTools: Bool? = nil
+  fileprivate var _playLocally: Bool? = nil
+}
+
+public struct Ubo_V1_AssistantCancelRequestAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = nil}
+
+  public var sessionID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String? = nil
 }
 
 public struct Ubo_V1_AssistantEvent: Sendable {
@@ -12181,6 +12681,31 @@ public struct Ubo_V1_AssistantEvent: Sendable {
   public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != nil}
   /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant`. Subsequent reads from it will return its default value.
   public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String? = nil
+}
+
+public struct Ubo_V1_AssistantRequestMicStreamEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = nil}
+
+  public var audioSource: String = String()
+
+  public var isActive: Bool = false
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -12761,11 +13286,43 @@ public struct Ubo_V1_AssistantRunPipelineEvent: @unchecked Sendable {
   /// Clears the value of `ttsVoiceID`. Subsequent reads from it will return its default value.
   public mutating func clearTtsVoiceID() {_uniqueStorage()._ttsVoiceID = nil}
 
+  public var playLocally: Bool {
+    get {_storage._playLocally ?? false}
+    set {_uniqueStorage()._playLocally = newValue}
+  }
+  /// Returns true if `playLocally` has been explicitly set.
+  public var hasPlayLocally: Bool {_storage._playLocally != nil}
+  /// Clears the value of `playLocally`. Subsequent reads from it will return its default value.
+  public mutating func clearPlayLocally() {_uniqueStorage()._playLocally = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+public struct Ubo_V1_AssistantCancelRequestEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotAssistant() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant = nil}
+
+  public var sessionID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String? = nil
 }
 
 public struct Ubo_V1_AssistantState: @unchecked Sendable {
@@ -13627,6 +14184,29 @@ public struct Ubo_V1_AudioSetMuteStatusAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAudio: String? = nil
 }
 
+public struct Ubo_V1_AudioReportRemoteCaptureAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotAudio: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotAudio ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotAudio = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotAudio` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotAudio: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotAudio`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotAudio() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio = nil}
+
+  public var isActive: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotAudio: String? = nil
+}
+
 public struct Ubo_V1_AudioToggleMuteStatusAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -14255,6 +14835,15 @@ public struct Ubo_V1_AudioState: Sendable {
   /// Clears the value of `isCaptureMute`. Subsequent reads from it will return its default value.
   public mutating func clearIsCaptureMute() {self._isCaptureMute = nil}
 
+  public var isRemoteCaptureActive: Bool {
+    get {_isRemoteCaptureActive ?? false}
+    set {_isRemoteCaptureActive = newValue}
+  }
+  /// Returns true if `isRemoteCaptureActive` has been explicitly set.
+  public var hasIsRemoteCaptureActive: Bool {self._isRemoteCaptureActive != nil}
+  /// Clears the value of `isRemoteCaptureActive`. Subsequent reads from it will return its default value.
+  public mutating func clearIsRemoteCaptureActive() {self._isRemoteCaptureActive = nil}
+
   public var isRecording: Bool {
     get {_isRecording ?? false}
     set {_isRecording = newValue}
@@ -14282,6 +14871,7 @@ public struct Ubo_V1_AudioState: Sendable {
   fileprivate var _isPlaybackMute: Bool? = nil
   fileprivate var _captureVolume: Float? = nil
   fileprivate var _isCaptureMute: Bool? = nil
+  fileprivate var _isRemoteCaptureActive: Bool? = nil
   fileprivate var _isRecording: Bool? = nil
   fileprivate var _recording: Ubo_V1_AudioSample? = nil
 }
@@ -14889,15 +15479,6 @@ public struct Ubo_V1_CameraState: Sendable {
   /// Clears the value of `pendingRemoteRegistrations`. Subsequent reads from it will return its default value.
   public mutating func clearPendingRemoteRegistrations() {self._pendingRemoteRegistrations = nil}
 
-  public var cameraType: Ubo_V1_CameraType {
-    get {_cameraType ?? .uboAppDotStoreDotServicesDotCameraUnspecified}
-    set {_cameraType = newValue}
-  }
-  /// Returns true if `cameraType` has been explicitly set.
-  public var hasCameraType: Bool {self._cameraType != nil}
-  /// Clears the value of `cameraType`. Subsequent reads from it will return its default value.
-  public mutating func clearCameraType() {self._cameraType = nil}
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public struct AvailableCameras: Sendable {
@@ -14930,7 +15511,6 @@ public struct Ubo_V1_CameraState: Sendable {
   fileprivate var _selectedSourceID: String? = nil
   fileprivate var _availableCameras: Ubo_V1_CameraState.AvailableCameras? = nil
   fileprivate var _pendingRemoteRegistrations: Ubo_V1_CameraState.PendingRemoteRegistrations? = nil
-  fileprivate var _cameraType: Ubo_V1_CameraType? = nil
 }
 
 public struct Ubo_V1_ChatMessage: Sendable {
@@ -16145,7 +16725,7 @@ public struct Ubo_V1_DockerSetZigbeeIntentAction: Sendable {
   fileprivate var _adapterByID: String? = nil
 }
 
-public struct Ubo_V1_DockerSetMacvlanConfigAction: Sendable {
+public struct Ubo_V1_DockerSetHostNetworkAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -16161,51 +16741,11 @@ public struct Ubo_V1_DockerSetMacvlanConfigAction: Sendable {
 
   public var enabled: Bool = false
 
-  public var parent: String {
-    get {_parent ?? String()}
-    set {_parent = newValue}
-  }
-  /// Returns true if `parent` has been explicitly set.
-  public var hasParent: Bool {self._parent != nil}
-  /// Clears the value of `parent`. Subsequent reads from it will return its default value.
-  public mutating func clearParent() {self._parent = nil}
-
-  public var subnet: String {
-    get {_subnet ?? String()}
-    set {_subnet = newValue}
-  }
-  /// Returns true if `subnet` has been explicitly set.
-  public var hasSubnet: Bool {self._subnet != nil}
-  /// Clears the value of `subnet`. Subsequent reads from it will return its default value.
-  public mutating func clearSubnet() {self._subnet = nil}
-
-  public var gateway: String {
-    get {_gateway ?? String()}
-    set {_gateway = newValue}
-  }
-  /// Returns true if `gateway` has been explicitly set.
-  public var hasGateway: Bool {self._gateway != nil}
-  /// Clears the value of `gateway`. Subsequent reads from it will return its default value.
-  public mutating func clearGateway() {self._gateway = nil}
-
-  public var ip: String {
-    get {_ip ?? String()}
-    set {_ip = newValue}
-  }
-  /// Returns true if `ip` has been explicitly set.
-  public var hasIp: Bool {self._ip != nil}
-  /// Clears the value of `ip`. Subsequent reads from it will return its default value.
-  public mutating func clearIp() {self._ip = nil}
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotDocker: String? = nil
-  fileprivate var _parent: String? = nil
-  fileprivate var _subnet: String? = nil
-  fileprivate var _gateway: String? = nil
-  fileprivate var _ip: String? = nil
 }
 
 public struct Ubo_V1_DockerImageAction: Sendable {
@@ -16627,50 +17167,14 @@ public struct Ubo_V1_DockerServiceState: Sendable {
   /// Clears the value of `zigbeeAdapterByID`. Subsequent reads from it will return its default value.
   public mutating func clearZigbeeAdapterByID() {self._zigbeeAdapterByID = nil}
 
-  public var macvlanEnabled: Bool {
-    get {_macvlanEnabled ?? false}
-    set {_macvlanEnabled = newValue}
+  public var hostNetworkEnabled: Bool {
+    get {_hostNetworkEnabled ?? false}
+    set {_hostNetworkEnabled = newValue}
   }
-  /// Returns true if `macvlanEnabled` has been explicitly set.
-  public var hasMacvlanEnabled: Bool {self._macvlanEnabled != nil}
-  /// Clears the value of `macvlanEnabled`. Subsequent reads from it will return its default value.
-  public mutating func clearMacvlanEnabled() {self._macvlanEnabled = nil}
-
-  public var macvlanParent: String {
-    get {_macvlanParent ?? String()}
-    set {_macvlanParent = newValue}
-  }
-  /// Returns true if `macvlanParent` has been explicitly set.
-  public var hasMacvlanParent: Bool {self._macvlanParent != nil}
-  /// Clears the value of `macvlanParent`. Subsequent reads from it will return its default value.
-  public mutating func clearMacvlanParent() {self._macvlanParent = nil}
-
-  public var macvlanSubnet: String {
-    get {_macvlanSubnet ?? String()}
-    set {_macvlanSubnet = newValue}
-  }
-  /// Returns true if `macvlanSubnet` has been explicitly set.
-  public var hasMacvlanSubnet: Bool {self._macvlanSubnet != nil}
-  /// Clears the value of `macvlanSubnet`. Subsequent reads from it will return its default value.
-  public mutating func clearMacvlanSubnet() {self._macvlanSubnet = nil}
-
-  public var macvlanGateway: String {
-    get {_macvlanGateway ?? String()}
-    set {_macvlanGateway = newValue}
-  }
-  /// Returns true if `macvlanGateway` has been explicitly set.
-  public var hasMacvlanGateway: Bool {self._macvlanGateway != nil}
-  /// Clears the value of `macvlanGateway`. Subsequent reads from it will return its default value.
-  public mutating func clearMacvlanGateway() {self._macvlanGateway = nil}
-
-  public var macvlanIp: String {
-    get {_macvlanIp ?? String()}
-    set {_macvlanIp = newValue}
-  }
-  /// Returns true if `macvlanIp` has been explicitly set.
-  public var hasMacvlanIp: Bool {self._macvlanIp != nil}
-  /// Clears the value of `macvlanIp`. Subsequent reads from it will return its default value.
-  public mutating func clearMacvlanIp() {self._macvlanIp = nil}
+  /// Returns true if `hostNetworkEnabled` has been explicitly set.
+  public var hasHostNetworkEnabled: Bool {self._hostNetworkEnabled != nil}
+  /// Clears the value of `hostNetworkEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearHostNetworkEnabled() {self._hostNetworkEnabled = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -16706,11 +17210,7 @@ public struct Ubo_V1_DockerServiceState: Sendable {
   fileprivate var _exposeToLan: Ubo_V1_DockerServiceState.ExposeToLanDict? = nil
   fileprivate var _zigbeeEnabled: Bool? = nil
   fileprivate var _zigbeeAdapterByID: String? = nil
-  fileprivate var _macvlanEnabled: Bool? = nil
-  fileprivate var _macvlanParent: String? = nil
-  fileprivate var _macvlanSubnet: String? = nil
-  fileprivate var _macvlanGateway: String? = nil
-  fileprivate var _macvlanIp: String? = nil
+  fileprivate var _hostNetworkEnabled: Bool? = nil
 }
 
 public struct Ubo_V1_DockerImageEvent: Sendable {
@@ -19057,6 +19557,505 @@ public struct Ubo_V1_KeypadState: Sendable {
   fileprivate var _isDisplayBlanked: Bool? = nil
 }
 
+public struct Ubo_V1_KioskDashboard: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var id: String = String()
+
+  public var name: String = String()
+
+  public var url: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskPortSelection: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var role: Ubo_V1_KioskPortRole {
+    get {_role ?? .uboAppDotStoreDotServicesDotKioskUnspecified}
+    set {_role = newValue}
+  }
+  /// Returns true if `role` has been explicitly set.
+  public var hasRole: Bool {self._role != nil}
+  /// Clears the value of `role`. Subsequent reads from it will return its default value.
+  public mutating func clearRole() {self._role = nil}
+
+  public var dashboardID: String {
+    get {_dashboardID ?? String()}
+    set {_dashboardID = newValue}
+  }
+  /// Returns true if `dashboardID` has been explicitly set.
+  public var hasDashboardID: Bool {self._dashboardID != nil}
+  /// Clears the value of `dashboardID`. Subsequent reads from it will return its default value.
+  public mutating func clearDashboardID() {self._dashboardID = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+  fileprivate var _role: Ubo_V1_KioskPortRole? = nil
+  fileprivate var _dashboardID: String? = nil
+}
+
+public struct Ubo_V1_KioskPortSelections: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var hdmiA1: Ubo_V1_KioskPortSelection {
+    get {_hdmiA1 ?? Ubo_V1_KioskPortSelection()}
+    set {_hdmiA1 = newValue}
+  }
+  /// Returns true if `hdmiA1` has been explicitly set.
+  public var hasHdmiA1: Bool {self._hdmiA1 != nil}
+  /// Clears the value of `hdmiA1`. Subsequent reads from it will return its default value.
+  public mutating func clearHdmiA1() {self._hdmiA1 = nil}
+
+  public var hdmiA2: Ubo_V1_KioskPortSelection {
+    get {_hdmiA2 ?? Ubo_V1_KioskPortSelection()}
+    set {_hdmiA2 = newValue}
+  }
+  /// Returns true if `hdmiA2` has been explicitly set.
+  public var hasHdmiA2: Bool {self._hdmiA2 != nil}
+  /// Clears the value of `hdmiA2`. Subsequent reads from it will return its default value.
+  public mutating func clearHdmiA2() {self._hdmiA2 = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+  fileprivate var _hdmiA1: Ubo_V1_KioskPortSelection? = nil
+  fileprivate var _hdmiA2: Ubo_V1_KioskPortSelection? = nil
+}
+
+public struct Ubo_V1_KioskAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskUpdateStateAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var isActive: Bool {
+    get {_isActive ?? false}
+    set {_isActive = newValue}
+  }
+  /// Returns true if `isActive` has been explicitly set.
+  public var hasIsActive: Bool {self._isActive != nil}
+  /// Clears the value of `isActive`. Subsequent reads from it will return its default value.
+  public mutating func clearIsActive() {self._isActive = nil}
+
+  public var isEnabled: Bool {
+    get {_isEnabled ?? false}
+    set {_isEnabled = newValue}
+  }
+  /// Returns true if `isEnabled` has been explicitly set.
+  public var hasIsEnabled: Bool {self._isEnabled != nil}
+  /// Clears the value of `isEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsEnabled() {self._isEnabled = nil}
+
+  public var isInstalled: Bool {
+    get {_isInstalled ?? false}
+    set {_isInstalled = newValue}
+  }
+  /// Returns true if `isInstalled` has been explicitly set.
+  public var hasIsInstalled: Bool {self._isInstalled != nil}
+  /// Clears the value of `isInstalled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsInstalled() {self._isInstalled = nil}
+
+  public var isInstalling: Bool {
+    get {_isInstalling ?? false}
+    set {_isInstalling = newValue}
+  }
+  /// Returns true if `isInstalling` has been explicitly set.
+  public var hasIsInstalling: Bool {self._isInstalling != nil}
+  /// Clears the value of `isInstalling`. Subsequent reads from it will return its default value.
+  public mutating func clearIsInstalling() {self._isInstalling = nil}
+
+  public var connectedPorts: Ubo_V1_KioskUpdateStateAction.ConnectedPorts {
+    get {_connectedPorts ?? Ubo_V1_KioskUpdateStateAction.ConnectedPorts()}
+    set {_connectedPorts = newValue}
+  }
+  /// Returns true if `connectedPorts` has been explicitly set.
+  public var hasConnectedPorts: Bool {self._connectedPorts != nil}
+  /// Clears the value of `connectedPorts`. Subsequent reads from it will return its default value.
+  public mutating func clearConnectedPorts() {self._connectedPorts = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct ConnectedPorts: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [String] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+  fileprivate var _isActive: Bool? = nil
+  fileprivate var _isEnabled: Bool? = nil
+  fileprivate var _isInstalled: Bool? = nil
+  fileprivate var _isInstalling: Bool? = nil
+  fileprivate var _connectedPorts: Ubo_V1_KioskUpdateStateAction.ConnectedPorts? = nil
+}
+
+public struct Ubo_V1_KioskClearEnabledStateAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskSetPortSelectionAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var port: String = String()
+
+  public var role: Ubo_V1_KioskPortRole = .uboAppDotStoreDotServicesDotKioskUnspecified
+
+  public var dashboardID: String {
+    get {_dashboardID ?? String()}
+    set {_dashboardID = newValue}
+  }
+  /// Returns true if `dashboardID` has been explicitly set.
+  public var hasDashboardID: Bool {self._dashboardID != nil}
+  /// Clears the value of `dashboardID`. Subsequent reads from it will return its default value.
+  public mutating func clearDashboardID() {self._dashboardID = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+  fileprivate var _dashboardID: String? = nil
+}
+
+public struct Ubo_V1_KioskAddDashboardAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var id: String = String()
+
+  public var name: String = String()
+
+  public var url: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskDeleteDashboardAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var dashboardID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskRotatePortAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var port: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskApplyConfigEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+}
+
+public struct Ubo_V1_KioskState: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotKiosk() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk = nil}
+
+  public var isActive: Bool {
+    get {_isActive ?? false}
+    set {_isActive = newValue}
+  }
+  /// Returns true if `isActive` has been explicitly set.
+  public var hasIsActive: Bool {self._isActive != nil}
+  /// Clears the value of `isActive`. Subsequent reads from it will return its default value.
+  public mutating func clearIsActive() {self._isActive = nil}
+
+  public var isEnabled: Bool {
+    get {_isEnabled ?? false}
+    set {_isEnabled = newValue}
+  }
+  /// Returns true if `isEnabled` has been explicitly set.
+  public var hasIsEnabled: Bool {self._isEnabled != nil}
+  /// Clears the value of `isEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsEnabled() {self._isEnabled = nil}
+
+  public var isInstalled: Bool {
+    get {_isInstalled ?? false}
+    set {_isInstalled = newValue}
+  }
+  /// Returns true if `isInstalled` has been explicitly set.
+  public var hasIsInstalled: Bool {self._isInstalled != nil}
+  /// Clears the value of `isInstalled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsInstalled() {self._isInstalled = nil}
+
+  public var isInstalling: Bool {
+    get {_isInstalling ?? false}
+    set {_isInstalling = newValue}
+  }
+  /// Returns true if `isInstalling` has been explicitly set.
+  public var hasIsInstalling: Bool {self._isInstalling != nil}
+  /// Clears the value of `isInstalling`. Subsequent reads from it will return its default value.
+  public mutating func clearIsInstalling() {self._isInstalling = nil}
+
+  public var portSelections: Ubo_V1_KioskPortSelections {
+    get {_portSelections ?? Ubo_V1_KioskPortSelections()}
+    set {_portSelections = newValue}
+  }
+  /// Returns true if `portSelections` has been explicitly set.
+  public var hasPortSelections: Bool {self._portSelections != nil}
+  /// Clears the value of `portSelections`. Subsequent reads from it will return its default value.
+  public mutating func clearPortSelections() {self._portSelections = nil}
+
+  public var dashboards: Ubo_V1_KioskState.Dashboards {
+    get {_dashboards ?? Ubo_V1_KioskState.Dashboards()}
+    set {_dashboards = newValue}
+  }
+  /// Returns true if `dashboards` has been explicitly set.
+  public var hasDashboards: Bool {self._dashboards != nil}
+  /// Clears the value of `dashboards`. Subsequent reads from it will return its default value.
+  public mutating func clearDashboards() {self._dashboards = nil}
+
+  public var connectedPorts: Ubo_V1_KioskState.ConnectedPorts {
+    get {_connectedPorts ?? Ubo_V1_KioskState.ConnectedPorts()}
+    set {_connectedPorts = newValue}
+  }
+  /// Returns true if `connectedPorts` has been explicitly set.
+  public var hasConnectedPorts: Bool {self._connectedPorts != nil}
+  /// Clears the value of `connectedPorts`. Subsequent reads from it will return its default value.
+  public mutating func clearConnectedPorts() {self._connectedPorts = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct Dashboards: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_KioskDashboard] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public struct ConnectedPorts: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [String] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk: String? = nil
+  fileprivate var _isActive: Bool? = nil
+  fileprivate var _isEnabled: Bool? = nil
+  fileprivate var _isInstalled: Bool? = nil
+  fileprivate var _isInstalling: Bool? = nil
+  fileprivate var _portSelections: Ubo_V1_KioskPortSelections? = nil
+  fileprivate var _dashboards: Ubo_V1_KioskState.Dashboards? = nil
+  fileprivate var _connectedPorts: Ubo_V1_KioskState.ConnectedPorts? = nil
+}
+
 public struct Ubo_V1_LightDMAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -19221,6 +20220,126 @@ public struct Ubo_V1_LightDMState: Sendable {
   fileprivate var _isInstalling: Bool? = nil
 }
 
+public struct Ubo_V1_LocationInfo: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var latitude: Float = 0
+
+  public var longitude: Float = 0
+
+  public var city: String {
+    get {_city ?? String()}
+    set {_city = newValue}
+  }
+  /// Returns true if `city` has been explicitly set.
+  public var hasCity: Bool {self._city != nil}
+  /// Clears the value of `city`. Subsequent reads from it will return its default value.
+  public mutating func clearCity() {self._city = nil}
+
+  public var country: String {
+    get {_country ?? String()}
+    set {_country = newValue}
+  }
+  /// Returns true if `country` has been explicitly set.
+  public var hasCountry: Bool {self._country != nil}
+  /// Clears the value of `country`. Subsequent reads from it will return its default value.
+  public mutating func clearCountry() {self._country = nil}
+
+  public var countryCode: String {
+    get {_countryCode ?? String()}
+    set {_countryCode = newValue}
+  }
+  /// Returns true if `countryCode` has been explicitly set.
+  public var hasCountryCode: Bool {self._countryCode != nil}
+  /// Clears the value of `countryCode`. Subsequent reads from it will return its default value.
+  public mutating func clearCountryCode() {self._countryCode = nil}
+
+  public var timezone: String {
+    get {_timezone ?? String()}
+    set {_timezone = newValue}
+  }
+  /// Returns true if `timezone` has been explicitly set.
+  public var hasTimezone: Bool {self._timezone != nil}
+  /// Clears the value of `timezone`. Subsequent reads from it will return its default value.
+  public mutating func clearTimezone() {self._timezone = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _city: String? = nil
+  fileprivate var _country: String? = nil
+  fileprivate var _countryCode: String? = nil
+  fileprivate var _timezone: String? = nil
+}
+
+public struct Ubo_V1_WeatherCondition: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var symbolCode: String = String()
+
+  public var temperatureCelsius: Float = 0
+
+  public var windSpeedMps: Float {
+    get {_windSpeedMps ?? 0}
+    set {_windSpeedMps = newValue}
+  }
+  /// Returns true if `windSpeedMps` has been explicitly set.
+  public var hasWindSpeedMps: Bool {self._windSpeedMps != nil}
+  /// Clears the value of `windSpeedMps`. Subsequent reads from it will return its default value.
+  public mutating func clearWindSpeedMps() {self._windSpeedMps = nil}
+
+  public var fetchedAt: Float {
+    get {_fetchedAt ?? 0}
+    set {_fetchedAt = newValue}
+  }
+  /// Returns true if `fetchedAt` has been explicitly set.
+  public var hasFetchedAt: Bool {self._fetchedAt != nil}
+  /// Clears the value of `fetchedAt`. Subsequent reads from it will return its default value.
+  public mutating func clearFetchedAt() {self._fetchedAt = nil}
+
+  public var expiresAt: Float {
+    get {_expiresAt ?? 0}
+    set {_expiresAt = newValue}
+  }
+  /// Returns true if `expiresAt` has been explicitly set.
+  public var hasExpiresAt: Bool {self._expiresAt != nil}
+  /// Clears the value of `expiresAt`. Subsequent reads from it will return its default value.
+  public mutating func clearExpiresAt() {self._expiresAt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _windSpeedMps: Float? = nil
+  fileprivate var _fetchedAt: Float? = nil
+  fileprivate var _expiresAt: Float? = nil
+}
+
 public struct Ubo_V1_LocalizationAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -19286,6 +20405,185 @@ public struct Ubo_V1_LocalizationSetLanguageAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
 }
 
+public struct Ubo_V1_LocalizationSetLocationAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var location: Ubo_V1_LocationInfo {
+    get {_location ?? Ubo_V1_LocationInfo()}
+    set {_location = newValue}
+  }
+  /// Returns true if `location` has been explicitly set.
+  public var hasLocation: Bool {self._location != nil}
+  /// Clears the value of `location`. Subsequent reads from it will return its default value.
+  public mutating func clearLocation() {self._location = nil}
+
+  public var source: Ubo_V1_LocationSource = .uboAppDotStoreDotServicesDotLocalizationUnspecified
+
+  public var publicIp: String {
+    get {_publicIp ?? String()}
+    set {_publicIp = newValue}
+  }
+  /// Returns true if `publicIp` has been explicitly set.
+  public var hasPublicIp: Bool {self._publicIp != nil}
+  /// Clears the value of `publicIp`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicIp() {self._publicIp = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _location: Ubo_V1_LocationInfo? = nil
+  fileprivate var _publicIp: String? = nil
+}
+
+public struct Ubo_V1_LocalizationResetLocationAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
+public struct Ubo_V1_LocalizationUpdateWeatherAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var weather: Ubo_V1_WeatherCondition {
+    get {_weather ?? Ubo_V1_WeatherCondition()}
+    set {_weather = newValue}
+  }
+  /// Returns true if `weather` has been explicitly set.
+  public var hasWeather: Bool {self._weather != nil}
+  /// Clears the value of `weather`. Subsequent reads from it will return its default value.
+  public mutating func clearWeather() {self._weather = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _weather: Ubo_V1_WeatherCondition? = nil
+}
+
+public struct Ubo_V1_LocalizationRefreshWeatherAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakTimeAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakDateAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakWeatherAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
 public struct Ubo_V1_LocalizationLanguageChangedEvent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -19309,7 +20607,7 @@ public struct Ubo_V1_LocalizationLanguageChangedEvent: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
 }
 
-public struct Ubo_V1_LocalizationState: Sendable {
+public struct Ubo_V1_LocalizationLocationChangedEvent: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -19323,21 +20621,244 @@ public struct Ubo_V1_LocalizationState: Sendable {
   /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
   public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
 
-  public var language: Ubo_V1_LanguageCode {
-    get {_language ?? .uboAppDotStoreDotServicesDotLocalizationUnspecified}
-    set {_language = newValue}
+  public var location: Ubo_V1_LocationInfo {
+    get {_location ?? Ubo_V1_LocationInfo()}
+    set {_location = newValue}
   }
-  /// Returns true if `language` has been explicitly set.
-  public var hasLanguage: Bool {self._language != nil}
-  /// Clears the value of `language`. Subsequent reads from it will return its default value.
-  public mutating func clearLanguage() {self._language = nil}
+  /// Returns true if `location` has been explicitly set.
+  public var hasLocation: Bool {self._location != nil}
+  /// Clears the value of `location`. Subsequent reads from it will return its default value.
+  public mutating func clearLocation() {self._location = nil}
+
+  public var source: Ubo_V1_LocationSource = .uboAppDotStoreDotServicesDotLocalizationUnspecified
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
-  fileprivate var _language: Ubo_V1_LanguageCode? = nil
+  fileprivate var _location: Ubo_V1_LocationInfo? = nil
+}
+
+public struct Ubo_V1_LocalizationLocationResetEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+}
+
+public struct Ubo_V1_LocalizationWeatherRefreshRequestedEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var location: Ubo_V1_LocationInfo {
+    get {_location ?? Ubo_V1_LocationInfo()}
+    set {_location = newValue}
+  }
+  /// Returns true if `location` has been explicitly set.
+  public var hasLocation: Bool {self._location != nil}
+  /// Clears the value of `location`. Subsequent reads from it will return its default value.
+  public mutating func clearLocation() {self._location = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _location: Ubo_V1_LocationInfo? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakTimeEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var timezone: String {
+    get {_timezone ?? String()}
+    set {_timezone = newValue}
+  }
+  /// Returns true if `timezone` has been explicitly set.
+  public var hasTimezone: Bool {self._timezone != nil}
+  /// Clears the value of `timezone`. Subsequent reads from it will return its default value.
+  public mutating func clearTimezone() {self._timezone = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _timezone: String? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakDateEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var timezone: String {
+    get {_timezone ?? String()}
+    set {_timezone = newValue}
+  }
+  /// Returns true if `timezone` has been explicitly set.
+  public var hasTimezone: Bool {self._timezone != nil}
+  /// Clears the value of `timezone`. Subsequent reads from it will return its default value.
+  public mutating func clearTimezone() {self._timezone = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _timezone: String? = nil
+}
+
+public struct Ubo_V1_LocalizationSpeakWeatherEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var weather: Ubo_V1_WeatherCondition {
+    get {_weather ?? Ubo_V1_WeatherCondition()}
+    set {_weather = newValue}
+  }
+  /// Returns true if `weather` has been explicitly set.
+  public var hasWeather: Bool {self._weather != nil}
+  /// Clears the value of `weather`. Subsequent reads from it will return its default value.
+  public mutating func clearWeather() {self._weather = nil}
+
+  public var location: Ubo_V1_LocationInfo {
+    get {_location ?? Ubo_V1_LocationInfo()}
+    set {_location = newValue}
+  }
+  /// Returns true if `location` has been explicitly set.
+  public var hasLocation: Bool {self._location != nil}
+  /// Clears the value of `location`. Subsequent reads from it will return its default value.
+  public mutating func clearLocation() {self._location = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+  fileprivate var _weather: Ubo_V1_WeatherCondition? = nil
+  fileprivate var _location: Ubo_V1_LocationInfo? = nil
+}
+
+public struct Ubo_V1_LocalizationState: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String {
+    get {_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization ?? String()}
+    set {_uniqueStorage()._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: Bool {_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotLocalization() {_uniqueStorage()._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = nil}
+
+  public var language: Ubo_V1_LanguageCode {
+    get {_storage._language ?? .uboAppDotStoreDotServicesDotLocalizationUnspecified}
+    set {_uniqueStorage()._language = newValue}
+  }
+  /// Returns true if `language` has been explicitly set.
+  public var hasLanguage: Bool {_storage._language != nil}
+  /// Clears the value of `language`. Subsequent reads from it will return its default value.
+  public mutating func clearLanguage() {_uniqueStorage()._language = nil}
+
+  public var location: Ubo_V1_LocationInfo {
+    get {_storage._location ?? Ubo_V1_LocationInfo()}
+    set {_uniqueStorage()._location = newValue}
+  }
+  /// Returns true if `location` has been explicitly set.
+  public var hasLocation: Bool {_storage._location != nil}
+  /// Clears the value of `location`. Subsequent reads from it will return its default value.
+  public mutating func clearLocation() {_uniqueStorage()._location = nil}
+
+  public var locationSource: Ubo_V1_LocationSource {
+    get {_storage._locationSource ?? .uboAppDotStoreDotServicesDotLocalizationUnspecified}
+    set {_uniqueStorage()._locationSource = newValue}
+  }
+  /// Returns true if `locationSource` has been explicitly set.
+  public var hasLocationSource: Bool {_storage._locationSource != nil}
+  /// Clears the value of `locationSource`. Subsequent reads from it will return its default value.
+  public mutating func clearLocationSource() {_uniqueStorage()._locationSource = nil}
+
+  public var publicIp: String {
+    get {_storage._publicIp ?? String()}
+    set {_uniqueStorage()._publicIp = newValue}
+  }
+  /// Returns true if `publicIp` has been explicitly set.
+  public var hasPublicIp: Bool {_storage._publicIp != nil}
+  /// Clears the value of `publicIp`. Subsequent reads from it will return its default value.
+  public mutating func clearPublicIp() {_uniqueStorage()._publicIp = nil}
+
+  public var weather: Ubo_V1_WeatherCondition {
+    get {_storage._weather ?? Ubo_V1_WeatherCondition()}
+    set {_uniqueStorage()._weather = newValue}
+  }
+  /// Returns true if `weather` has been explicitly set.
+  public var hasWeather: Bool {_storage._weather != nil}
+  /// Clears the value of `weather`. Subsequent reads from it will return its default value.
+  public mutating func clearWeather() {_uniqueStorage()._weather = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct Ubo_V1_McpServerHealth: Sendable {
@@ -20054,6 +21575,783 @@ public struct Ubo_V1_McpState: Sendable {
   fileprivate var _enabledMcpServers: Ubo_V1_McpState.EnabledMcpServers? = nil
   fileprivate var _enabledMcpServersWithMetadata: Ubo_V1_EnabledMcpServersWithMetadata? = nil
   fileprivate var _serverStatuses: Ubo_V1_McpState.ServerStatusesDict? = nil
+}
+
+public struct Ubo_V1_MqttAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttBrokerConfig: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var source: Ubo_V1_MqttBrokerSource {
+    get {_source ?? .uboAppDotStoreDotServicesDotMqttUnspecified}
+    set {_source = newValue}
+  }
+  /// Returns true if `source` has been explicitly set.
+  public var hasSource: Bool {self._source != nil}
+  /// Clears the value of `source`. Subsequent reads from it will return its default value.
+  public mutating func clearSource() {self._source = nil}
+
+  public var host: String {
+    get {_host ?? String()}
+    set {_host = newValue}
+  }
+  /// Returns true if `host` has been explicitly set.
+  public var hasHost: Bool {self._host != nil}
+  /// Clears the value of `host`. Subsequent reads from it will return its default value.
+  public mutating func clearHost() {self._host = nil}
+
+  public var port: Int64 {
+    get {_port ?? 0}
+    set {_port = newValue}
+  }
+  /// Returns true if `port` has been explicitly set.
+  public var hasPort: Bool {self._port != nil}
+  /// Clears the value of `port`. Subsequent reads from it will return its default value.
+  public mutating func clearPort() {self._port = nil}
+
+  public var username: String {
+    get {_username ?? String()}
+    set {_username = newValue}
+  }
+  /// Returns true if `username` has been explicitly set.
+  public var hasUsername: Bool {self._username != nil}
+  /// Clears the value of `username`. Subsequent reads from it will return its default value.
+  public mutating func clearUsername() {self._username = nil}
+
+  public var hasPassword_p: Bool {
+    get {_hasPassword_p ?? false}
+    set {_hasPassword_p = newValue}
+  }
+  /// Returns true if `hasPassword_p` has been explicitly set.
+  public var hasHasPassword_p: Bool {self._hasPassword_p != nil}
+  /// Clears the value of `hasPassword_p`. Subsequent reads from it will return its default value.
+  public mutating func clearHasPassword_p() {self._hasPassword_p = nil}
+
+  public var useTls: Bool {
+    get {_useTls ?? false}
+    set {_useTls = newValue}
+  }
+  /// Returns true if `useTls` has been explicitly set.
+  public var hasUseTls: Bool {self._useTls != nil}
+  /// Clears the value of `useTls`. Subsequent reads from it will return its default value.
+  public mutating func clearUseTls() {self._useTls = nil}
+
+  public var caCertPath: String {
+    get {_caCertPath ?? String()}
+    set {_caCertPath = newValue}
+  }
+  /// Returns true if `caCertPath` has been explicitly set.
+  public var hasCaCertPath: Bool {self._caCertPath != nil}
+  /// Clears the value of `caCertPath`. Subsequent reads from it will return its default value.
+  public mutating func clearCaCertPath() {self._caCertPath = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _source: Ubo_V1_MqttBrokerSource? = nil
+  fileprivate var _host: String? = nil
+  fileprivate var _port: Int64? = nil
+  fileprivate var _username: String? = nil
+  fileprivate var _hasPassword_p: Bool? = nil
+  fileprivate var _useTls: Bool? = nil
+  fileprivate var _caCertPath: String? = nil
+}
+
+public struct Ubo_V1_MqttComponent: @unchecked Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_uniqueStorage()._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {_uniqueStorage()._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var componentID: String {
+    get {_storage._componentID}
+    set {_uniqueStorage()._componentID = newValue}
+  }
+
+  public var platform: String {
+    get {_storage._platform}
+    set {_uniqueStorage()._platform = newValue}
+  }
+
+  public var name: String {
+    get {_storage._name}
+    set {_uniqueStorage()._name = newValue}
+  }
+
+  public var stateChannel: String {
+    get {_storage._stateChannel ?? String()}
+    set {_uniqueStorage()._stateChannel = newValue}
+  }
+  /// Returns true if `stateChannel` has been explicitly set.
+  public var hasStateChannel: Bool {_storage._stateChannel != nil}
+  /// Clears the value of `stateChannel`. Subsequent reads from it will return its default value.
+  public mutating func clearStateChannel() {_uniqueStorage()._stateChannel = nil}
+
+  public var valueTemplate: String {
+    get {_storage._valueTemplate ?? String()}
+    set {_uniqueStorage()._valueTemplate = newValue}
+  }
+  /// Returns true if `valueTemplate` has been explicitly set.
+  public var hasValueTemplate: Bool {_storage._valueTemplate != nil}
+  /// Clears the value of `valueTemplate`. Subsequent reads from it will return its default value.
+  public mutating func clearValueTemplate() {_uniqueStorage()._valueTemplate = nil}
+
+  public var commandChannel: String {
+    get {_storage._commandChannel ?? String()}
+    set {_uniqueStorage()._commandChannel = newValue}
+  }
+  /// Returns true if `commandChannel` has been explicitly set.
+  public var hasCommandChannel: Bool {_storage._commandChannel != nil}
+  /// Clears the value of `commandChannel`. Subsequent reads from it will return its default value.
+  public mutating func clearCommandChannel() {_uniqueStorage()._commandChannel = nil}
+
+  public var payloadPress: String {
+    get {_storage._payloadPress ?? String()}
+    set {_uniqueStorage()._payloadPress = newValue}
+  }
+  /// Returns true if `payloadPress` has been explicitly set.
+  public var hasPayloadPress: Bool {_storage._payloadPress != nil}
+  /// Clears the value of `payloadPress`. Subsequent reads from it will return its default value.
+  public mutating func clearPayloadPress() {_uniqueStorage()._payloadPress = nil}
+
+  public var deviceClass: String {
+    get {_storage._deviceClass ?? String()}
+    set {_uniqueStorage()._deviceClass = newValue}
+  }
+  /// Returns true if `deviceClass` has been explicitly set.
+  public var hasDeviceClass: Bool {_storage._deviceClass != nil}
+  /// Clears the value of `deviceClass`. Subsequent reads from it will return its default value.
+  public mutating func clearDeviceClass() {_uniqueStorage()._deviceClass = nil}
+
+  public var unitOfMeasurement: String {
+    get {_storage._unitOfMeasurement ?? String()}
+    set {_uniqueStorage()._unitOfMeasurement = newValue}
+  }
+  /// Returns true if `unitOfMeasurement` has been explicitly set.
+  public var hasUnitOfMeasurement: Bool {_storage._unitOfMeasurement != nil}
+  /// Clears the value of `unitOfMeasurement`. Subsequent reads from it will return its default value.
+  public mutating func clearUnitOfMeasurement() {_uniqueStorage()._unitOfMeasurement = nil}
+
+  public var stateClass: String {
+    get {_storage._stateClass ?? String()}
+    set {_uniqueStorage()._stateClass = newValue}
+  }
+  /// Returns true if `stateClass` has been explicitly set.
+  public var hasStateClass: Bool {_storage._stateClass != nil}
+  /// Clears the value of `stateClass`. Subsequent reads from it will return its default value.
+  public mutating func clearStateClass() {_uniqueStorage()._stateClass = nil}
+
+  public var suggestedDisplayPrecision: Int64 {
+    get {_storage._suggestedDisplayPrecision ?? 0}
+    set {_uniqueStorage()._suggestedDisplayPrecision = newValue}
+  }
+  /// Returns true if `suggestedDisplayPrecision` has been explicitly set.
+  public var hasSuggestedDisplayPrecision: Bool {_storage._suggestedDisplayPrecision != nil}
+  /// Clears the value of `suggestedDisplayPrecision`. Subsequent reads from it will return its default value.
+  public mutating func clearSuggestedDisplayPrecision() {_uniqueStorage()._suggestedDisplayPrecision = nil}
+
+  public var eventTypes: Ubo_V1_MqttComponent.EventTypes {
+    get {_storage._eventTypes ?? Ubo_V1_MqttComponent.EventTypes()}
+    set {_uniqueStorage()._eventTypes = newValue}
+  }
+  /// Returns true if `eventTypes` has been explicitly set.
+  public var hasEventTypes: Bool {_storage._eventTypes != nil}
+  /// Clears the value of `eventTypes`. Subsequent reads from it will return its default value.
+  public mutating func clearEventTypes() {_uniqueStorage()._eventTypes = nil}
+
+  public var options: Ubo_V1_MqttComponent.Options {
+    get {_storage._options ?? Ubo_V1_MqttComponent.Options()}
+    set {_uniqueStorage()._options = newValue}
+  }
+  /// Returns true if `options` has been explicitly set.
+  public var hasOptions: Bool {_storage._options != nil}
+  /// Clears the value of `options`. Subsequent reads from it will return its default value.
+  public mutating func clearOptions() {_uniqueStorage()._options = nil}
+
+  public var expireAfter: Int64 {
+    get {_storage._expireAfter ?? 0}
+    set {_uniqueStorage()._expireAfter = newValue}
+  }
+  /// Returns true if `expireAfter` has been explicitly set.
+  public var hasExpireAfter: Bool {_storage._expireAfter != nil}
+  /// Clears the value of `expireAfter`. Subsequent reads from it will return its default value.
+  public mutating func clearExpireAfter() {_uniqueStorage()._expireAfter = nil}
+
+  public var commandTemplate: String {
+    get {_storage._commandTemplate ?? String()}
+    set {_uniqueStorage()._commandTemplate = newValue}
+  }
+  /// Returns true if `commandTemplate` has been explicitly set.
+  public var hasCommandTemplate: Bool {_storage._commandTemplate != nil}
+  /// Clears the value of `commandTemplate`. Subsequent reads from it will return its default value.
+  public mutating func clearCommandTemplate() {_uniqueStorage()._commandTemplate = nil}
+
+  public var minValue: Float {
+    get {_storage._minValue ?? 0}
+    set {_uniqueStorage()._minValue = newValue}
+  }
+  /// Returns true if `minValue` has been explicitly set.
+  public var hasMinValue: Bool {_storage._minValue != nil}
+  /// Clears the value of `minValue`. Subsequent reads from it will return its default value.
+  public mutating func clearMinValue() {_uniqueStorage()._minValue = nil}
+
+  public var maxValue: Float {
+    get {_storage._maxValue ?? 0}
+    set {_uniqueStorage()._maxValue = newValue}
+  }
+  /// Returns true if `maxValue` has been explicitly set.
+  public var hasMaxValue: Bool {_storage._maxValue != nil}
+  /// Clears the value of `maxValue`. Subsequent reads from it will return its default value.
+  public mutating func clearMaxValue() {_uniqueStorage()._maxValue = nil}
+
+  public var step: Float {
+    get {_storage._step ?? 0}
+    set {_uniqueStorage()._step = newValue}
+  }
+  /// Returns true if `step` has been explicitly set.
+  public var hasStep: Bool {_storage._step != nil}
+  /// Clears the value of `step`. Subsequent reads from it will return its default value.
+  public mutating func clearStep() {_uniqueStorage()._step = nil}
+
+  public var mode: String {
+    get {_storage._mode ?? String()}
+    set {_uniqueStorage()._mode = newValue}
+  }
+  /// Returns true if `mode` has been explicitly set.
+  public var hasMode: Bool {_storage._mode != nil}
+  /// Clears the value of `mode`. Subsequent reads from it will return its default value.
+  public mutating func clearMode() {_uniqueStorage()._mode = nil}
+
+  public var retain: Bool {
+    get {_storage._retain ?? false}
+    set {_uniqueStorage()._retain = newValue}
+  }
+  /// Returns true if `retain` has been explicitly set.
+  public var hasRetain: Bool {_storage._retain != nil}
+  /// Clears the value of `retain`. Subsequent reads from it will return its default value.
+  public mutating func clearRetain() {_uniqueStorage()._retain = nil}
+
+  public var qos: Int64 {
+    get {_storage._qos ?? 0}
+    set {_uniqueStorage()._qos = newValue}
+  }
+  /// Returns true if `qos` has been explicitly set.
+  public var hasQos: Bool {_storage._qos != nil}
+  /// Clears the value of `qos`. Subsequent reads from it will return its default value.
+  public mutating func clearQos() {_uniqueStorage()._qos = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct EventTypes: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [String] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public struct Options: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [String] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+public struct Ubo_V1_MqttSetStatusAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var status: Ubo_V1_MqttConnectionStatus = .uboAppDotStoreDotServicesDotMqttUnspecified
+
+  public var error: String {
+    get {_error ?? String()}
+    set {_error = newValue}
+  }
+  /// Returns true if `error` has been explicitly set.
+  public var hasError: Bool {self._error != nil}
+  /// Clears the value of `error`. Subsequent reads from it will return its default value.
+  public mutating func clearError() {self._error = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _error: String? = nil
+}
+
+public struct Ubo_V1_MqttSetBrokerAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var broker: Ubo_V1_MqttBrokerConfig {
+    get {_broker ?? Ubo_V1_MqttBrokerConfig()}
+    set {_broker = newValue}
+  }
+  /// Returns true if `broker` has been explicitly set.
+  public var hasBroker: Bool {self._broker != nil}
+  /// Clears the value of `broker`. Subsequent reads from it will return its default value.
+  public mutating func clearBroker() {self._broker = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _broker: Ubo_V1_MqttBrokerConfig? = nil
+}
+
+public struct Ubo_V1_MqttSetEnabledAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var isEnabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttSetBundledExposeToLanAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var exposeToLan: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttBundledCredentialsChangedAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttSetAllowRemoteControlAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var allowRemoteControl: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttSetPublishedComponentsAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var publishedComponents: Dictionary<String,String> = [:]
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttPublishAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var channel: String = String()
+
+  public var payload: String = String()
+
+  public var retain: Bool {
+    get {_retain ?? false}
+    set {_retain = newValue}
+  }
+  /// Returns true if `retain` has been explicitly set.
+  public var hasRetain: Bool {self._retain != nil}
+  /// Clears the value of `retain`. Subsequent reads from it will return its default value.
+  public mutating func clearRetain() {self._retain = nil}
+
+  public var qos: Int64 {
+    get {_qos ?? 0}
+    set {_qos = newValue}
+  }
+  /// Returns true if `qos` has been explicitly set.
+  public var hasQos: Bool {self._qos != nil}
+  /// Clears the value of `qos`. Subsequent reads from it will return its default value.
+  public mutating func clearQos() {self._qos = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _retain: Bool? = nil
+  fileprivate var _qos: Int64? = nil
+}
+
+public struct Ubo_V1_MqttPublishEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var channel: String = String()
+
+  public var payload: String = String()
+
+  public var retain: Bool {
+    get {_retain ?? false}
+    set {_retain = newValue}
+  }
+  /// Returns true if `retain` has been explicitly set.
+  public var hasRetain: Bool {self._retain != nil}
+  /// Clears the value of `retain`. Subsequent reads from it will return its default value.
+  public mutating func clearRetain() {self._retain = nil}
+
+  public var qos: Int64 {
+    get {_qos ?? 0}
+    set {_qos = newValue}
+  }
+  /// Returns true if `qos` has been explicitly set.
+  public var hasQos: Bool {self._qos != nil}
+  /// Clears the value of `qos`. Subsequent reads from it will return its default value.
+  public mutating func clearQos() {self._qos = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _retain: Bool? = nil
+  fileprivate var _qos: Int64? = nil
+}
+
+public struct Ubo_V1_MqttRequestAnnounceAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttAnnounceRequestedEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+}
+
+public struct Ubo_V1_MqttState: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotMqtt() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = nil}
+
+  public var status: Ubo_V1_MqttConnectionStatus {
+    get {_status ?? .uboAppDotStoreDotServicesDotMqttUnspecified}
+    set {_status = newValue}
+  }
+  /// Returns true if `status` has been explicitly set.
+  public var hasStatus: Bool {self._status != nil}
+  /// Clears the value of `status`. Subsequent reads from it will return its default value.
+  public mutating func clearStatus() {self._status = nil}
+
+  public var broker: Ubo_V1_MqttBrokerConfig {
+    get {_broker ?? Ubo_V1_MqttBrokerConfig()}
+    set {_broker = newValue}
+  }
+  /// Returns true if `broker` has been explicitly set.
+  public var hasBroker: Bool {self._broker != nil}
+  /// Clears the value of `broker`. Subsequent reads from it will return its default value.
+  public mutating func clearBroker() {self._broker = nil}
+
+  public var isEnabled: Bool {
+    get {_isEnabled ?? false}
+    set {_isEnabled = newValue}
+  }
+  /// Returns true if `isEnabled` has been explicitly set.
+  public var hasIsEnabled: Bool {self._isEnabled != nil}
+  /// Clears the value of `isEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsEnabled() {self._isEnabled = nil}
+
+  public var allowRemoteControl: Bool {
+    get {_allowRemoteControl ?? false}
+    set {_allowRemoteControl = newValue}
+  }
+  /// Returns true if `allowRemoteControl` has been explicitly set.
+  public var hasAllowRemoteControl: Bool {self._allowRemoteControl != nil}
+  /// Clears the value of `allowRemoteControl`. Subsequent reads from it will return its default value.
+  public mutating func clearAllowRemoteControl() {self._allowRemoteControl = nil}
+
+  public var bundledExposeToLan: Bool {
+    get {_bundledExposeToLan ?? false}
+    set {_bundledExposeToLan = newValue}
+  }
+  /// Returns true if `bundledExposeToLan` has been explicitly set.
+  public var hasBundledExposeToLan: Bool {self._bundledExposeToLan != nil}
+  /// Clears the value of `bundledExposeToLan`. Subsequent reads from it will return its default value.
+  public mutating func clearBundledExposeToLan() {self._bundledExposeToLan = nil}
+
+  public var bundledCredentialsRevision: Int64 {
+    get {_bundledCredentialsRevision ?? 0}
+    set {_bundledCredentialsRevision = newValue}
+  }
+  /// Returns true if `bundledCredentialsRevision` has been explicitly set.
+  public var hasBundledCredentialsRevision: Bool {self._bundledCredentialsRevision != nil}
+  /// Clears the value of `bundledCredentialsRevision`. Subsequent reads from it will return its default value.
+  public mutating func clearBundledCredentialsRevision() {self._bundledCredentialsRevision = nil}
+
+  public var lastError: String {
+    get {_lastError ?? String()}
+    set {_lastError = newValue}
+  }
+  /// Returns true if `lastError` has been explicitly set.
+  public var hasLastError: Bool {self._lastError != nil}
+  /// Clears the value of `lastError`. Subsequent reads from it will return its default value.
+  public mutating func clearLastError() {self._lastError = nil}
+
+  public var publishedComponents: Ubo_V1_MqttState.PublishedComponentsDict {
+    get {_publishedComponents ?? Ubo_V1_MqttState.PublishedComponentsDict()}
+    set {_publishedComponents = newValue}
+  }
+  /// Returns true if `publishedComponents` has been explicitly set.
+  public var hasPublishedComponents: Bool {self._publishedComponents != nil}
+  /// Clears the value of `publishedComponents`. Subsequent reads from it will return its default value.
+  public mutating func clearPublishedComponents() {self._publishedComponents = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct PublishedComponentsDict: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: Dictionary<String,String> = [:]
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+  fileprivate var _status: Ubo_V1_MqttConnectionStatus? = nil
+  fileprivate var _broker: Ubo_V1_MqttBrokerConfig? = nil
+  fileprivate var _isEnabled: Bool? = nil
+  fileprivate var _allowRemoteControl: Bool? = nil
+  fileprivate var _bundledExposeToLan: Bool? = nil
+  fileprivate var _bundledCredentialsRevision: Int64? = nil
+  fileprivate var _lastError: String? = nil
+  fileprivate var _publishedComponents: Ubo_V1_MqttState.PublishedComponentsDict? = nil
 }
 
 public struct Ubo_V1_NotificationActionItem: Sendable {
@@ -21976,6 +24274,27 @@ public struct Ubo_V1_SensorsAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
 }
 
+public struct Ubo_V1_SensorsEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+}
+
 public struct Ubo_V1_SensorsReportReadingAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -21993,6 +24312,206 @@ public struct Ubo_V1_SensorsReportReadingAction: Sendable {
   public var sensor: Ubo_V1_Sensor = .uboAppDotStoreDotServicesDotSensorsUnspecified
 
   public var reading: Float = 0
+
+  public var timestamp: Float = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+}
+
+public struct Ubo_V1_SensorEntityReading: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var key: String = String()
+
+  public var value: Float {
+    get {_value ?? 0}
+    set {_value = newValue}
+  }
+  /// Returns true if `value` has been explicitly set.
+  public var hasValue: Bool {self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
+  public mutating func clearValue() {self._value = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+  fileprivate var _value: Float? = nil
+}
+
+public struct Ubo_V1_SensorDeviceState: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var id: String = String()
+
+  public var definitionID: String = String()
+
+  public var label: String = String()
+
+  public var address: Int64 = 0
+
+  public var isBuiltin: Bool = false
+
+  public var status: Ubo_V1_SensorStatus = .uboAppDotStoreDotServicesDotSensorsUnspecified
+
+  public var entities: Ubo_V1_SensorDeviceState.Entities {
+    get {_entities ?? Ubo_V1_SensorDeviceState.Entities()}
+    set {_entities = newValue}
+  }
+  /// Returns true if `entities` has been explicitly set.
+  public var hasEntities: Bool {self._entities != nil}
+  /// Clears the value of `entities`. Subsequent reads from it will return its default value.
+  public mutating func clearEntities() {self._entities = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct Entities: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_SensorEntityReading] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+  fileprivate var _entities: Ubo_V1_SensorDeviceState.Entities? = nil
+}
+
+public struct Ubo_V1_SensorsScanAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+}
+
+public struct Ubo_V1_SensorsScanEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+}
+
+public struct Ubo_V1_SensorsScanCompletedAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var devices: Ubo_V1_SensorsScanCompletedAction.Devices {
+    get {_devices ?? Ubo_V1_SensorsScanCompletedAction.Devices()}
+    set {_devices = newValue}
+  }
+  /// Returns true if `devices` has been explicitly set.
+  public var hasDevices: Bool {self._devices != nil}
+  /// Clears the value of `devices`. Subsequent reads from it will return its default value.
+  public mutating func clearDevices() {self._devices = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct Devices: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_SensorDeviceState] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
+  fileprivate var _devices: Ubo_V1_SensorsScanCompletedAction.Devices? = nil
+}
+
+public struct Ubo_V1_SensorsReportDeviceReadingsAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSensors`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSensors() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors = nil}
+
+  public var deviceID: String = String()
+
+  public var entities: [Ubo_V1_SensorEntityReading] = []
 
   public var timestamp: Float = 0
 
@@ -22066,13 +24585,45 @@ public struct Ubo_V1_SensorsState: Sendable {
   /// Clears the value of `light`. Subsequent reads from it will return its default value.
   public mutating func clearLight() {self._light = nil}
 
+  public var devices: Ubo_V1_SensorsState.DevicesDict {
+    get {_devices ?? Ubo_V1_SensorsState.DevicesDict()}
+    set {_devices = newValue}
+  }
+  /// Returns true if `devices` has been explicitly set.
+  public var hasDevices: Bool {self._devices != nil}
+  /// Clears the value of `devices`. Subsequent reads from it will return its default value.
+  public mutating func clearDevices() {self._devices = nil}
+
+  public var isScanning: Bool {
+    get {_isScanning ?? false}
+    set {_isScanning = newValue}
+  }
+  /// Returns true if `isScanning` has been explicitly set.
+  public var hasIsScanning: Bool {self._isScanning != nil}
+  /// Clears the value of `isScanning`. Subsequent reads from it will return its default value.
+  public mutating func clearIsScanning() {self._isScanning = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct DevicesDict: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: Dictionary<String,Ubo_V1_SensorDeviceState> = [:]
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
 
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSensors: String? = nil
   fileprivate var _temperature: Ubo_V1_SensorState? = nil
   fileprivate var _light: Ubo_V1_SensorState? = nil
+  fileprivate var _devices: Ubo_V1_SensorsState.DevicesDict? = nil
+  fileprivate var _isScanning: Bool? = nil
 }
 
 public struct Ubo_V1_WakeWordModelStatusEntry: Sendable {
@@ -22225,6 +24776,31 @@ public struct Ubo_V1_SpeechRecognitionSetAssistantEnabledAction: Sendable {
   public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
   /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
   public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var enabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+}
+
+public struct Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var mode: Ubo_V1_WakeMode = .uboAppDotStoreDotServicesDotSpeechRecognitionUnspecified
 
   public var enabled: Bool = false
 
@@ -22414,6 +24990,29 @@ public struct Ubo_V1_SpeechRecognitionRemoveCommandAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
 }
 
+public struct Ubo_V1_SpeechRecognitionRunCommandAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var commandID: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+}
+
 public struct Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -22464,6 +25063,76 @@ public struct Ubo_V1_SpeechRecognitionIntent: Sendable {
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+}
+
+public struct Ubo_V1_SpeechRecognitionCommandDescriptor: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var id: String = String()
+
+  public var label: String = String()
+
+  public var samplePhrases: [String] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+}
+
+public struct Ubo_V1_SpeechRecognitionCommandsCatalog: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var items: Ubo_V1_SpeechRecognitionCommandsCatalog.Items {
+    get {_items ?? Ubo_V1_SpeechRecognitionCommandsCatalog.Items()}
+    set {_items = newValue}
+  }
+  /// Returns true if `items` has been explicitly set.
+  public var hasItems: Bool {self._items != nil}
+  /// Clears the value of `items`. Subsequent reads from it will return its default value.
+  public mutating func clearItems() {self._items = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct Items: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_SpeechRecognitionCommandDescriptor] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+  fileprivate var _items: Ubo_V1_SpeechRecognitionCommandsCatalog.Items? = nil
 }
 
 public struct Ubo_V1_SpeechRecognitionReportWakeWordDetectionAction: Sendable {
@@ -22542,6 +25211,39 @@ public struct Ubo_V1_SpeechRecognitionTriggerModeAction: Sendable {
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
   fileprivate var _phrase: String? = nil
   fileprivate var _detector: String? = nil
+}
+
+public struct Ubo_V1_SpeechRecognitionSetAssistantListeningAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition = nil}
+
+  public var active: Bool = false
+
+  public var audioSource: String {
+    get {_audioSource ?? String()}
+    set {_audioSource = newValue}
+  }
+  /// Returns true if `audioSource` has been explicitly set.
+  public var hasAudioSource: Bool {self._audioSource != nil}
+  /// Clears the value of `audioSource`. Subsequent reads from it will return its default value.
+  public mutating func clearAudioSource() {self._audioSource = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
+  fileprivate var _audioSource: String? = nil
 }
 
 public struct Ubo_V1_SpeechRecognitionReportIntentDetectionAction: Sendable {
@@ -22842,14 +25544,14 @@ public struct Ubo_V1_SpeechRecognitionState: Sendable {
   /// Clears the value of `wakeEngines`. Subsequent reads from it will return its default value.
   public mutating func clearWakeEngines() {self._wakeEngines = nil}
 
-  public var assistantEnabled: Bool {
-    get {_assistantEnabled ?? false}
-    set {_assistantEnabled = newValue}
+  public var enabledWakeModes: Ubo_V1_SpeechRecognitionState.EnabledWakeModes {
+    get {_enabledWakeModes ?? Ubo_V1_SpeechRecognitionState.EnabledWakeModes()}
+    set {_enabledWakeModes = newValue}
   }
-  /// Returns true if `assistantEnabled` has been explicitly set.
-  public var hasAssistantEnabled: Bool {self._assistantEnabled != nil}
-  /// Clears the value of `assistantEnabled`. Subsequent reads from it will return its default value.
-  public mutating func clearAssistantEnabled() {self._assistantEnabled = nil}
+  /// Returns true if `enabledWakeModes` has been explicitly set.
+  public var hasEnabledWakeModes: Bool {self._enabledWakeModes != nil}
+  /// Clears the value of `enabledWakeModes`. Subsequent reads from it will return its default value.
+  public mutating func clearEnabledWakeModes() {self._enabledWakeModes = nil}
 
   public var openwakewordModels: Ubo_V1_SpeechRecognitionState.OpenwakewordModels {
     get {_openwakewordModels ?? Ubo_V1_SpeechRecognitionState.OpenwakewordModels()}
@@ -22878,6 +25580,24 @@ public struct Ubo_V1_SpeechRecognitionState: Sendable {
   /// Clears the value of `status`. Subsequent reads from it will return its default value.
   public mutating func clearStatus() {self._status = nil}
 
+  public var assistantSessionAudioSource: String {
+    get {_assistantSessionAudioSource ?? String()}
+    set {_assistantSessionAudioSource = newValue}
+  }
+  /// Returns true if `assistantSessionAudioSource` has been explicitly set.
+  public var hasAssistantSessionAudioSource: Bool {self._assistantSessionAudioSource != nil}
+  /// Clears the value of `assistantSessionAudioSource`. Subsequent reads from it will return its default value.
+  public mutating func clearAssistantSessionAudioSource() {self._assistantSessionAudioSource = nil}
+
+  public var commandsCatalog: Ubo_V1_SpeechRecognitionCommandsCatalog {
+    get {_commandsCatalog ?? Ubo_V1_SpeechRecognitionCommandsCatalog()}
+    set {_commandsCatalog = newValue}
+  }
+  /// Returns true if `commandsCatalog` has been explicitly set.
+  public var hasCommandsCatalog: Bool {self._commandsCatalog != nil}
+  /// Clears the value of `commandsCatalog`. Subsequent reads from it will return its default value.
+  public mutating func clearCommandsCatalog() {self._commandsCatalog = nil}
+
   public var wakeWordModelsStatus: Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus {
     get {_wakeWordModelsStatus ?? Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus()}
     set {_wakeWordModelsStatus = newValue}
@@ -22886,6 +25606,15 @@ public struct Ubo_V1_SpeechRecognitionState: Sendable {
   public var hasWakeWordModelsStatus: Bool {self._wakeWordModelsStatus != nil}
   /// Clears the value of `wakeWordModelsStatus`. Subsequent reads from it will return its default value.
   public mutating func clearWakeWordModelsStatus() {self._wakeWordModelsStatus = nil}
+
+  public var seededDefaultIds: Ubo_V1_SpeechRecognitionState.SeededDefaultIds {
+    get {_seededDefaultIds ?? Ubo_V1_SpeechRecognitionState.SeededDefaultIds()}
+    set {_seededDefaultIds = newValue}
+  }
+  /// Returns true if `seededDefaultIds` has been explicitly set.
+  public var hasSeededDefaultIds: Bool {self._seededDefaultIds != nil}
+  /// Clears the value of `seededDefaultIds`. Subsequent reads from it will return its default value.
+  public mutating func clearSeededDefaultIds() {self._seededDefaultIds = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -22907,6 +25636,18 @@ public struct Ubo_V1_SpeechRecognitionState: Sendable {
     // methods supported on all messages.
 
     public var items: [Ubo_V1_WakeWordEngineConfig] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public struct EnabledWakeModes: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_WakeMode] = []
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -22949,16 +25690,31 @@ public struct Ubo_V1_SpeechRecognitionState: Sendable {
     public init() {}
   }
 
+  public struct SeededDefaultIds: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [String] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
   public init() {}
 
   fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition: String? = nil
   fileprivate var _intents: Ubo_V1_SpeechRecognitionState.Intents? = nil
   fileprivate var _wakeEngines: Ubo_V1_SpeechRecognitionState.WakeEngines? = nil
-  fileprivate var _assistantEnabled: Bool? = nil
+  fileprivate var _enabledWakeModes: Ubo_V1_SpeechRecognitionState.EnabledWakeModes? = nil
   fileprivate var _openwakewordModels: Ubo_V1_SpeechRecognitionState.OpenwakewordModels? = nil
   fileprivate var _conversationEndPhrases: Ubo_V1_SpeechRecognitionState.ConversationEndPhrases? = nil
   fileprivate var _status: Ubo_V1_SpeechRecognitionStatus? = nil
+  fileprivate var _assistantSessionAudioSource: String? = nil
+  fileprivate var _commandsCatalog: Ubo_V1_SpeechRecognitionCommandsCatalog? = nil
   fileprivate var _wakeWordModelsStatus: Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus? = nil
+  fileprivate var _seededDefaultIds: Ubo_V1_SpeechRecognitionState.SeededDefaultIds? = nil
 }
 
 public struct Ubo_V1_SpeechSynthesisAction: Sendable {
@@ -24286,6 +27042,52 @@ public struct Ubo_V1_WebUIInitializeEvent: Sendable {
   fileprivate var _description_p: Ubo_V1_WebUIInputDescription? = nil
 }
 
+public struct Ubo_V1_WebUIInputAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWebUi() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi = nil}
+
+  public var command: Ubo_V1_WebUIInputCommand = .uboAppDotStoreDotServicesDotWebUiUnspecified
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: String? = nil
+}
+
+public struct Ubo_V1_WebUIInputEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWebUi() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi = nil}
+
+  public var command: Ubo_V1_WebUIInputCommand = .uboAppDotStoreDotServicesDotWebUiUnspecified
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi: String? = nil
+}
+
 public struct Ubo_V1_WebUIState: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -24798,6 +27600,485 @@ public struct Ubo_V1_WiFiState: Sendable {
   fileprivate var _hotspotUserEnabled: Bool? = nil
 }
 
+public struct Ubo_V1_WyomingAccessPolicy: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var kind: Ubo_V1_WyomingAccessPolicyKind = .uboAppDotStoreDotServicesDotWyomingUnspecified
+
+  public var value: String {
+    get {_value ?? String()}
+    set {_value = newValue}
+  }
+  /// Returns true if `value` has been explicitly set.
+  public var hasValue: Bool {self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
+  public mutating func clearValue() {self._value = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _value: String? = nil
+}
+
+public struct Ubo_V1_WyomingState: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var isSatelliteEnabled: Bool {
+    get {_isSatelliteEnabled ?? false}
+    set {_isSatelliteEnabled = newValue}
+  }
+  /// Returns true if `isSatelliteEnabled` has been explicitly set.
+  public var hasIsSatelliteEnabled: Bool {self._isSatelliteEnabled != nil}
+  /// Clears the value of `isSatelliteEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsSatelliteEnabled() {self._isSatelliteEnabled = nil}
+
+  public var isEnginesEnabled: Bool {
+    get {_isEnginesEnabled ?? false}
+    set {_isEnginesEnabled = newValue}
+  }
+  /// Returns true if `isEnginesEnabled` has been explicitly set.
+  public var hasIsEnginesEnabled: Bool {self._isEnginesEnabled != nil}
+  /// Clears the value of `isEnginesEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsEnginesEnabled() {self._isEnginesEnabled = nil}
+
+  public var accessPolicies: Ubo_V1_WyomingState.AccessPolicies {
+    get {_accessPolicies ?? Ubo_V1_WyomingState.AccessPolicies()}
+    set {_accessPolicies = newValue}
+  }
+  /// Returns true if `accessPolicies` has been explicitly set.
+  public var hasAccessPolicies: Bool {self._accessPolicies != nil}
+  /// Clears the value of `accessPolicies`. Subsequent reads from it will return its default value.
+  public mutating func clearAccessPolicies() {self._accessPolicies = nil}
+
+  public var isZeroconfEnabled: Bool {
+    get {_isZeroconfEnabled ?? false}
+    set {_isZeroconfEnabled = newValue}
+  }
+  /// Returns true if `isZeroconfEnabled` has been explicitly set.
+  public var hasIsZeroconfEnabled: Bool {self._isZeroconfEnabled != nil}
+  /// Clears the value of `isZeroconfEnabled`. Subsequent reads from it will return its default value.
+  public mutating func clearIsZeroconfEnabled() {self._isZeroconfEnabled = nil}
+
+  public var satelliteStatus: Ubo_V1_WyomingSatelliteStatus {
+    get {_satelliteStatus ?? .uboAppDotStoreDotServicesDotWyomingUnspecified}
+    set {_satelliteStatus = newValue}
+  }
+  /// Returns true if `satelliteStatus` has been explicitly set.
+  public var hasSatelliteStatus: Bool {self._satelliteStatus != nil}
+  /// Clears the value of `satelliteStatus`. Subsequent reads from it will return its default value.
+  public mutating func clearSatelliteStatus() {self._satelliteStatus = nil}
+
+  public var satelliteClient: String {
+    get {_satelliteClient ?? String()}
+    set {_satelliteClient = newValue}
+  }
+  /// Returns true if `satelliteClient` has been explicitly set.
+  public var hasSatelliteClient: Bool {self._satelliteClient != nil}
+  /// Clears the value of `satelliteClient`. Subsequent reads from it will return its default value.
+  public mutating func clearSatelliteClient() {self._satelliteClient = nil}
+
+  public var enginesStatus: Ubo_V1_WyomingEnginesStatus {
+    get {_enginesStatus ?? .uboAppDotStoreDotServicesDotWyomingUnspecified}
+    set {_enginesStatus = newValue}
+  }
+  /// Returns true if `enginesStatus` has been explicitly set.
+  public var hasEnginesStatus: Bool {self._enginesStatus != nil}
+  /// Clears the value of `enginesStatus`. Subsequent reads from it will return its default value.
+  public mutating func clearEnginesStatus() {self._enginesStatus = nil}
+
+  public var activeEngineRequests: Int64 {
+    get {_activeEngineRequests ?? 0}
+    set {_activeEngineRequests = newValue}
+  }
+  /// Returns true if `activeEngineRequests` has been explicitly set.
+  public var hasActiveEngineRequests: Bool {self._activeEngineRequests != nil}
+  /// Clears the value of `activeEngineRequests`. Subsequent reads from it will return its default value.
+  public mutating func clearActiveEngineRequests() {self._activeEngineRequests = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public struct AccessPolicies: Sendable {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var items: [Ubo_V1_WyomingAccessPolicy] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _isSatelliteEnabled: Bool? = nil
+  fileprivate var _isEnginesEnabled: Bool? = nil
+  fileprivate var _accessPolicies: Ubo_V1_WyomingState.AccessPolicies? = nil
+  fileprivate var _isZeroconfEnabled: Bool? = nil
+  fileprivate var _satelliteStatus: Ubo_V1_WyomingSatelliteStatus? = nil
+  fileprivate var _satelliteClient: String? = nil
+  fileprivate var _enginesStatus: Ubo_V1_WyomingEnginesStatus? = nil
+  fileprivate var _activeEngineRequests: Int64? = nil
+}
+
+public struct Ubo_V1_WyomingAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+}
+
+public struct Ubo_V1_WyomingSetSatelliteEnabledAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var enabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+}
+
+public struct Ubo_V1_WyomingSetEnginesEnabledAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var enabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+}
+
+public struct Ubo_V1_WyomingAddAccessPolicyAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var kind: Ubo_V1_WyomingAccessPolicyKind = .uboAppDotStoreDotServicesDotWyomingUnspecified
+
+  public var value: String {
+    get {_value ?? String()}
+    set {_value = newValue}
+  }
+  /// Returns true if `value` has been explicitly set.
+  public var hasValue: Bool {self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
+  public mutating func clearValue() {self._value = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _value: String? = nil
+}
+
+public struct Ubo_V1_WyomingRemoveAccessPolicyAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var kind: Ubo_V1_WyomingAccessPolicyKind = .uboAppDotStoreDotServicesDotWyomingUnspecified
+
+  public var value: String {
+    get {_value ?? String()}
+    set {_value = newValue}
+  }
+  /// Returns true if `value` has been explicitly set.
+  public var hasValue: Bool {self._value != nil}
+  /// Clears the value of `value`. Subsequent reads from it will return its default value.
+  public mutating func clearValue() {self._value = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _value: String? = nil
+}
+
+public struct Ubo_V1_WyomingSetZeroconfEnabledAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var enabled: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+}
+
+public struct Ubo_V1_WyomingReportSatelliteStatusAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var status: Ubo_V1_WyomingSatelliteStatus = .uboAppDotStoreDotServicesDotWyomingUnspecified
+
+  public var client: String {
+    get {_client ?? String()}
+    set {_client = newValue}
+  }
+  /// Returns true if `client` has been explicitly set.
+  public var hasClient: Bool {self._client != nil}
+  /// Clears the value of `client`. Subsequent reads from it will return its default value.
+  public mutating func clearClient() {self._client = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _client: String? = nil
+}
+
+public struct Ubo_V1_WyomingReportEnginesStatusAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var status: Ubo_V1_WyomingEnginesStatus {
+    get {_status ?? .uboAppDotStoreDotServicesDotWyomingUnspecified}
+    set {_status = newValue}
+  }
+  /// Returns true if `status` has been explicitly set.
+  public var hasStatus: Bool {self._status != nil}
+  /// Clears the value of `status`. Subsequent reads from it will return its default value.
+  public mutating func clearStatus() {self._status = nil}
+
+  public var activeRequests: Int64 {
+    get {_activeRequests ?? 0}
+    set {_activeRequests = newValue}
+  }
+  /// Returns true if `activeRequests` has been explicitly set.
+  public var hasActiveRequests: Bool {self._activeRequests != nil}
+  /// Clears the value of `activeRequests`. Subsequent reads from it will return its default value.
+  public mutating func clearActiveRequests() {self._activeRequests = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _status: Ubo_V1_WyomingEnginesStatus? = nil
+  fileprivate var _activeRequests: Int64? = nil
+}
+
+public struct Ubo_V1_WyomingSatelliteWakeAction: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var phrase: String {
+    get {_phrase ?? String()}
+    set {_phrase = newValue}
+  }
+  /// Returns true if `phrase` has been explicitly set.
+  public var hasPhrase: Bool {self._phrase != nil}
+  /// Clears the value of `phrase`. Subsequent reads from it will return its default value.
+  public mutating func clearPhrase() {self._phrase = nil}
+
+  public var detector: String {
+    get {_detector ?? String()}
+    set {_detector = newValue}
+  }
+  /// Returns true if `detector` has been explicitly set.
+  public var hasDetector: Bool {self._detector != nil}
+  /// Clears the value of `detector`. Subsequent reads from it will return its default value.
+  public mutating func clearDetector() {self._detector = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _phrase: String? = nil
+  fileprivate var _detector: String? = nil
+}
+
+public struct Ubo_V1_WyomingEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+}
+
+public struct Ubo_V1_WyomingSatelliteWakeEvent: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String {
+    get {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming ?? String()}
+    set {_metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = newValue}
+  }
+  /// Returns true if `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming` has been explicitly set.
+  public var hasMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: Bool {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != nil}
+  /// Clears the value of `metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming`. Subsequent reads from it will return its default value.
+  public mutating func clearMetaFieldPackageNameUboAppDotStoreDotServicesDotWyoming() {self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming = nil}
+
+  public var phrase: String {
+    get {_phrase ?? String()}
+    set {_phrase = newValue}
+  }
+  /// Returns true if `phrase` has been explicitly set.
+  public var hasPhrase: Bool {self._phrase != nil}
+  /// Clears the value of `phrase`. Subsequent reads from it will return its default value.
+  public mutating func clearPhrase() {self._phrase = nil}
+
+  public var detector: String {
+    get {_detector ?? String()}
+    set {_detector = newValue}
+  }
+  /// Returns true if `detector` has been explicitly set.
+  public var hasDetector: Bool {self._detector != nil}
+  /// Clears the value of `detector`. Subsequent reads from it will return its default value.
+  public mutating func clearDetector() {self._detector = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming: String? = nil
+  fileprivate var _phrase: String? = nil
+  fileprivate var _detector: String? = nil
+}
+
 public struct Ubo_V1_Action: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -24835,6 +28116,14 @@ public struct Ubo_V1_Action: Sendable {
       return Ubo_V1_AssistantAddMoonshineDownloadedModelAction()
     }
     set {action = .assistantAddMoonshineDownloadedModelAction(newValue)}
+  }
+
+  public var assistantCancelRequestAction: Ubo_V1_AssistantCancelRequestAction {
+    get {
+      if case .assistantCancelRequestAction(let v)? = action {return v}
+      return Ubo_V1_AssistantCancelRequestAction()
+    }
+    set {action = .assistantCancelRequestAction(newValue)}
   }
 
   public var assistantCompleteAction: Ubo_V1_AssistantCompleteAction {
@@ -25259,6 +28548,14 @@ public struct Ubo_V1_Action: Sendable {
       return Ubo_V1_AudioPlaybackDoneAction()
     }
     set {action = .audioPlaybackDoneAction(newValue)}
+  }
+
+  public var audioReportRemoteCaptureAction: Ubo_V1_AudioReportRemoteCaptureAction {
+    get {
+      if case .audioReportRemoteCaptureAction(let v)? = action {return v}
+      return Ubo_V1_AudioReportRemoteCaptureAction()
+    }
+    set {action = .audioReportRemoteCaptureAction(newValue)}
   }
 
   public var audioReportSampleAction: Ubo_V1_AudioReportSampleAction {
@@ -25693,12 +28990,12 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .dockerRemoveUsernameAction(newValue)}
   }
 
-  public var dockerSetMacvlanConfigAction: Ubo_V1_DockerSetMacvlanConfigAction {
+  public var dockerSetHostNetworkAction: Ubo_V1_DockerSetHostNetworkAction {
     get {
-      if case .dockerSetMacvlanConfigAction(let v)? = action {return v}
-      return Ubo_V1_DockerSetMacvlanConfigAction()
+      if case .dockerSetHostNetworkAction(let v)? = action {return v}
+      return Ubo_V1_DockerSetHostNetworkAction()
     }
-    set {action = .dockerSetMacvlanConfigAction(newValue)}
+    set {action = .dockerSetHostNetworkAction(newValue)}
   }
 
   public var dockerSetStatusAction: Ubo_V1_DockerSetStatusAction {
@@ -26045,6 +29342,62 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .keypadReportContextAction(newValue)}
   }
 
+  public var kioskAction: Ubo_V1_KioskAction {
+    get {
+      if case .kioskAction(let v)? = action {return v}
+      return Ubo_V1_KioskAction()
+    }
+    set {action = .kioskAction(newValue)}
+  }
+
+  public var kioskAddDashboardAction: Ubo_V1_KioskAddDashboardAction {
+    get {
+      if case .kioskAddDashboardAction(let v)? = action {return v}
+      return Ubo_V1_KioskAddDashboardAction()
+    }
+    set {action = .kioskAddDashboardAction(newValue)}
+  }
+
+  public var kioskClearEnabledStateAction: Ubo_V1_KioskClearEnabledStateAction {
+    get {
+      if case .kioskClearEnabledStateAction(let v)? = action {return v}
+      return Ubo_V1_KioskClearEnabledStateAction()
+    }
+    set {action = .kioskClearEnabledStateAction(newValue)}
+  }
+
+  public var kioskDeleteDashboardAction: Ubo_V1_KioskDeleteDashboardAction {
+    get {
+      if case .kioskDeleteDashboardAction(let v)? = action {return v}
+      return Ubo_V1_KioskDeleteDashboardAction()
+    }
+    set {action = .kioskDeleteDashboardAction(newValue)}
+  }
+
+  public var kioskRotatePortAction: Ubo_V1_KioskRotatePortAction {
+    get {
+      if case .kioskRotatePortAction(let v)? = action {return v}
+      return Ubo_V1_KioskRotatePortAction()
+    }
+    set {action = .kioskRotatePortAction(newValue)}
+  }
+
+  public var kioskSetPortSelectionAction: Ubo_V1_KioskSetPortSelectionAction {
+    get {
+      if case .kioskSetPortSelectionAction(let v)? = action {return v}
+      return Ubo_V1_KioskSetPortSelectionAction()
+    }
+    set {action = .kioskSetPortSelectionAction(newValue)}
+  }
+
+  public var kioskUpdateStateAction: Ubo_V1_KioskUpdateStateAction {
+    get {
+      if case .kioskUpdateStateAction(let v)? = action {return v}
+      return Ubo_V1_KioskUpdateStateAction()
+    }
+    set {action = .kioskUpdateStateAction(newValue)}
+  }
+
   public var lightDmAction: Ubo_V1_LightDMAction {
     get {
       if case .lightDmAction(let v)? = action {return v}
@@ -26077,12 +29430,68 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .localizationAction(newValue)}
   }
 
+  public var localizationRefreshWeatherAction: Ubo_V1_LocalizationRefreshWeatherAction {
+    get {
+      if case .localizationRefreshWeatherAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationRefreshWeatherAction()
+    }
+    set {action = .localizationRefreshWeatherAction(newValue)}
+  }
+
+  public var localizationResetLocationAction: Ubo_V1_LocalizationResetLocationAction {
+    get {
+      if case .localizationResetLocationAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationResetLocationAction()
+    }
+    set {action = .localizationResetLocationAction(newValue)}
+  }
+
   public var localizationSetLanguageAction: Ubo_V1_LocalizationSetLanguageAction {
     get {
       if case .localizationSetLanguageAction(let v)? = action {return v}
       return Ubo_V1_LocalizationSetLanguageAction()
     }
     set {action = .localizationSetLanguageAction(newValue)}
+  }
+
+  public var localizationSetLocationAction: Ubo_V1_LocalizationSetLocationAction {
+    get {
+      if case .localizationSetLocationAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationSetLocationAction()
+    }
+    set {action = .localizationSetLocationAction(newValue)}
+  }
+
+  public var localizationSpeakDateAction: Ubo_V1_LocalizationSpeakDateAction {
+    get {
+      if case .localizationSpeakDateAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationSpeakDateAction()
+    }
+    set {action = .localizationSpeakDateAction(newValue)}
+  }
+
+  public var localizationSpeakTimeAction: Ubo_V1_LocalizationSpeakTimeAction {
+    get {
+      if case .localizationSpeakTimeAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationSpeakTimeAction()
+    }
+    set {action = .localizationSpeakTimeAction(newValue)}
+  }
+
+  public var localizationSpeakWeatherAction: Ubo_V1_LocalizationSpeakWeatherAction {
+    get {
+      if case .localizationSpeakWeatherAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationSpeakWeatherAction()
+    }
+    set {action = .localizationSpeakWeatherAction(newValue)}
+  }
+
+  public var localizationUpdateWeatherAction: Ubo_V1_LocalizationUpdateWeatherAction {
+    get {
+      if case .localizationUpdateWeatherAction(let v)? = action {return v}
+      return Ubo_V1_LocalizationUpdateWeatherAction()
+    }
+    set {action = .localizationUpdateWeatherAction(newValue)}
   }
 
   public var mainAction: Ubo_V1_MainAction {
@@ -26203,6 +29612,86 @@ public struct Ubo_V1_Action: Sendable {
       return Ubo_V1_MenuScrollAction()
     }
     set {action = .menuScrollAction(newValue)}
+  }
+
+  public var mqttAction: Ubo_V1_MqttAction {
+    get {
+      if case .mqttAction(let v)? = action {return v}
+      return Ubo_V1_MqttAction()
+    }
+    set {action = .mqttAction(newValue)}
+  }
+
+  public var mqttBundledCredentialsChangedAction: Ubo_V1_MqttBundledCredentialsChangedAction {
+    get {
+      if case .mqttBundledCredentialsChangedAction(let v)? = action {return v}
+      return Ubo_V1_MqttBundledCredentialsChangedAction()
+    }
+    set {action = .mqttBundledCredentialsChangedAction(newValue)}
+  }
+
+  public var mqttPublishAction: Ubo_V1_MqttPublishAction {
+    get {
+      if case .mqttPublishAction(let v)? = action {return v}
+      return Ubo_V1_MqttPublishAction()
+    }
+    set {action = .mqttPublishAction(newValue)}
+  }
+
+  public var mqttRequestAnnounceAction: Ubo_V1_MqttRequestAnnounceAction {
+    get {
+      if case .mqttRequestAnnounceAction(let v)? = action {return v}
+      return Ubo_V1_MqttRequestAnnounceAction()
+    }
+    set {action = .mqttRequestAnnounceAction(newValue)}
+  }
+
+  public var mqttSetAllowRemoteControlAction: Ubo_V1_MqttSetAllowRemoteControlAction {
+    get {
+      if case .mqttSetAllowRemoteControlAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetAllowRemoteControlAction()
+    }
+    set {action = .mqttSetAllowRemoteControlAction(newValue)}
+  }
+
+  public var mqttSetBrokerAction: Ubo_V1_MqttSetBrokerAction {
+    get {
+      if case .mqttSetBrokerAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetBrokerAction()
+    }
+    set {action = .mqttSetBrokerAction(newValue)}
+  }
+
+  public var mqttSetBundledExposeToLanAction: Ubo_V1_MqttSetBundledExposeToLanAction {
+    get {
+      if case .mqttSetBundledExposeToLanAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetBundledExposeToLanAction()
+    }
+    set {action = .mqttSetBundledExposeToLanAction(newValue)}
+  }
+
+  public var mqttSetEnabledAction: Ubo_V1_MqttSetEnabledAction {
+    get {
+      if case .mqttSetEnabledAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetEnabledAction()
+    }
+    set {action = .mqttSetEnabledAction(newValue)}
+  }
+
+  public var mqttSetPublishedComponentsAction: Ubo_V1_MqttSetPublishedComponentsAction {
+    get {
+      if case .mqttSetPublishedComponentsAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetPublishedComponentsAction()
+    }
+    set {action = .mqttSetPublishedComponentsAction(newValue)}
+  }
+
+  public var mqttSetStatusAction: Ubo_V1_MqttSetStatusAction {
+    get {
+      if case .mqttSetStatusAction(let v)? = action {return v}
+      return Ubo_V1_MqttSetStatusAction()
+    }
+    set {action = .mqttSetStatusAction(newValue)}
   }
 
   public var notificationsAction: Ubo_V1_NotificationsAction {
@@ -26565,12 +30054,36 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .sensorsAction(newValue)}
   }
 
+  public var sensorsReportDeviceReadingsAction: Ubo_V1_SensorsReportDeviceReadingsAction {
+    get {
+      if case .sensorsReportDeviceReadingsAction(let v)? = action {return v}
+      return Ubo_V1_SensorsReportDeviceReadingsAction()
+    }
+    set {action = .sensorsReportDeviceReadingsAction(newValue)}
+  }
+
   public var sensorsReportReadingAction: Ubo_V1_SensorsReportReadingAction {
     get {
       if case .sensorsReportReadingAction(let v)? = action {return v}
       return Ubo_V1_SensorsReportReadingAction()
     }
     set {action = .sensorsReportReadingAction(newValue)}
+  }
+
+  public var sensorsScanAction: Ubo_V1_SensorsScanAction {
+    get {
+      if case .sensorsScanAction(let v)? = action {return v}
+      return Ubo_V1_SensorsScanAction()
+    }
+    set {action = .sensorsScanAction(newValue)}
+  }
+
+  public var sensorsScanCompletedAction: Ubo_V1_SensorsScanCompletedAction {
+    get {
+      if case .sensorsScanCompletedAction(let v)? = action {return v}
+      return Ubo_V1_SensorsScanCompletedAction()
+    }
+    set {action = .sensorsScanCompletedAction(newValue)}
   }
 
   public var setAreEnclosuresVisibleAction: Ubo_V1_SetAreEnclosuresVisibleAction {
@@ -26677,12 +30190,28 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .settingsStopServiceAction(newValue)}
   }
 
+  public var settingsToggleAssistantDebugAction: Ubo_V1_SettingsToggleAssistantDebugAction {
+    get {
+      if case .settingsToggleAssistantDebugAction(let v)? = action {return v}
+      return Ubo_V1_SettingsToggleAssistantDebugAction()
+    }
+    set {action = .settingsToggleAssistantDebugAction(newValue)}
+  }
+
   public var settingsToggleBetaVersionsAction: Ubo_V1_SettingsToggleBetaVersionsAction {
     get {
       if case .settingsToggleBetaVersionsAction(let v)? = action {return v}
       return Ubo_V1_SettingsToggleBetaVersionsAction()
     }
     set {action = .settingsToggleBetaVersionsAction(newValue)}
+  }
+
+  public var settingsToggleGrpcRemoteAccessAction: Ubo_V1_SettingsToggleGrpcRemoteAccessAction {
+    get {
+      if case .settingsToggleGrpcRemoteAccessAction(let v)? = action {return v}
+      return Ubo_V1_SettingsToggleGrpcRemoteAccessAction()
+    }
+    set {action = .settingsToggleGrpcRemoteAccessAction(newValue)}
   }
 
   public var settingsTogglePdbSignalAction: Ubo_V1_SettingsTogglePdbSignalAction {
@@ -26757,6 +30286,14 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .speechRecognitionReportWakeWordDetectionAction(newValue)}
   }
 
+  public var speechRecognitionRunCommandAction: Ubo_V1_SpeechRecognitionRunCommandAction {
+    get {
+      if case .speechRecognitionRunCommandAction(let v)? = action {return v}
+      return Ubo_V1_SpeechRecognitionRunCommandAction()
+    }
+    set {action = .speechRecognitionRunCommandAction(newValue)}
+  }
+
   public var speechRecognitionSetAssistantEnabledAction: Ubo_V1_SpeechRecognitionSetAssistantEnabledAction {
     get {
       if case .speechRecognitionSetAssistantEnabledAction(let v)? = action {return v}
@@ -26765,12 +30302,28 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .speechRecognitionSetAssistantEnabledAction(newValue)}
   }
 
+  public var speechRecognitionSetAssistantListeningAction: Ubo_V1_SpeechRecognitionSetAssistantListeningAction {
+    get {
+      if case .speechRecognitionSetAssistantListeningAction(let v)? = action {return v}
+      return Ubo_V1_SpeechRecognitionSetAssistantListeningAction()
+    }
+    set {action = .speechRecognitionSetAssistantListeningAction(newValue)}
+  }
+
   public var speechRecognitionSetConversationEndPhrasesAction: Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction {
     get {
       if case .speechRecognitionSetConversationEndPhrasesAction(let v)? = action {return v}
       return Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction()
     }
     set {action = .speechRecognitionSetConversationEndPhrasesAction(newValue)}
+  }
+
+  public var speechRecognitionSetWakeModeEnabledAction: Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction {
+    get {
+      if case .speechRecognitionSetWakeModeEnabledAction(let v)? = action {return v}
+      return Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction()
+    }
+    set {action = .speechRecognitionSetWakeModeEnabledAction(newValue)}
   }
 
   public var speechRecognitionTriggerModeAction: Ubo_V1_SpeechRecognitionTriggerModeAction {
@@ -27253,6 +30806,14 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .webUiAction(newValue)}
   }
 
+  public var webUiInputAction: Ubo_V1_WebUIInputAction {
+    get {
+      if case .webUiInputAction(let v)? = action {return v}
+      return Ubo_V1_WebUIInputAction()
+    }
+    set {action = .webUiInputAction(newValue)}
+  }
+
   public var wiFiAction: Ubo_V1_WiFiAction {
     get {
       if case .wiFiAction(let v)? = action {return v}
@@ -27317,6 +30878,78 @@ public struct Ubo_V1_Action: Sendable {
     set {action = .wiFiUpdateRequestAction(newValue)}
   }
 
+  public var wyomingAction: Ubo_V1_WyomingAction {
+    get {
+      if case .wyomingAction(let v)? = action {return v}
+      return Ubo_V1_WyomingAction()
+    }
+    set {action = .wyomingAction(newValue)}
+  }
+
+  public var wyomingAddAccessPolicyAction: Ubo_V1_WyomingAddAccessPolicyAction {
+    get {
+      if case .wyomingAddAccessPolicyAction(let v)? = action {return v}
+      return Ubo_V1_WyomingAddAccessPolicyAction()
+    }
+    set {action = .wyomingAddAccessPolicyAction(newValue)}
+  }
+
+  public var wyomingRemoveAccessPolicyAction: Ubo_V1_WyomingRemoveAccessPolicyAction {
+    get {
+      if case .wyomingRemoveAccessPolicyAction(let v)? = action {return v}
+      return Ubo_V1_WyomingRemoveAccessPolicyAction()
+    }
+    set {action = .wyomingRemoveAccessPolicyAction(newValue)}
+  }
+
+  public var wyomingReportEnginesStatusAction: Ubo_V1_WyomingReportEnginesStatusAction {
+    get {
+      if case .wyomingReportEnginesStatusAction(let v)? = action {return v}
+      return Ubo_V1_WyomingReportEnginesStatusAction()
+    }
+    set {action = .wyomingReportEnginesStatusAction(newValue)}
+  }
+
+  public var wyomingReportSatelliteStatusAction: Ubo_V1_WyomingReportSatelliteStatusAction {
+    get {
+      if case .wyomingReportSatelliteStatusAction(let v)? = action {return v}
+      return Ubo_V1_WyomingReportSatelliteStatusAction()
+    }
+    set {action = .wyomingReportSatelliteStatusAction(newValue)}
+  }
+
+  public var wyomingSatelliteWakeAction: Ubo_V1_WyomingSatelliteWakeAction {
+    get {
+      if case .wyomingSatelliteWakeAction(let v)? = action {return v}
+      return Ubo_V1_WyomingSatelliteWakeAction()
+    }
+    set {action = .wyomingSatelliteWakeAction(newValue)}
+  }
+
+  public var wyomingSetEnginesEnabledAction: Ubo_V1_WyomingSetEnginesEnabledAction {
+    get {
+      if case .wyomingSetEnginesEnabledAction(let v)? = action {return v}
+      return Ubo_V1_WyomingSetEnginesEnabledAction()
+    }
+    set {action = .wyomingSetEnginesEnabledAction(newValue)}
+  }
+
+  public var wyomingSetSatelliteEnabledAction: Ubo_V1_WyomingSetSatelliteEnabledAction {
+    get {
+      if case .wyomingSetSatelliteEnabledAction(let v)? = action {return v}
+      return Ubo_V1_WyomingSetSatelliteEnabledAction()
+    }
+    set {action = .wyomingSetSatelliteEnabledAction(newValue)}
+  }
+
+  public var wyomingSetZeroconfEnabledAction: Ubo_V1_WyomingSetZeroconfEnabledAction {
+    get {
+      if case .wyomingSetZeroconfEnabledAction(let v)? = action {return v}
+      return Ubo_V1_WyomingSetZeroconfEnabledAction()
+    }
+    set {action = .wyomingSetZeroconfEnabledAction(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Action: Equatable, Sendable {
@@ -27324,6 +30957,7 @@ public struct Ubo_V1_Action: Sendable {
     case assistantAddElevenLabsVoiceAction(Ubo_V1_AssistantAddElevenLabsVoiceAction)
     case assistantAddGenericLlmProviderAction(Ubo_V1_AssistantAddGenericLLMProviderAction)
     case assistantAddMoonshineDownloadedModelAction(Ubo_V1_AssistantAddMoonshineDownloadedModelAction)
+    case assistantCancelRequestAction(Ubo_V1_AssistantCancelRequestAction)
     case assistantCompleteAction(Ubo_V1_AssistantCompleteAction)
     case assistantDeleteElevenLabsVoiceAction(Ubo_V1_AssistantDeleteElevenLabsVoiceAction)
     case assistantDeleteKokoroAction(Ubo_V1_AssistantDeleteKokoroAction)
@@ -27377,6 +31011,7 @@ public struct Ubo_V1_Action: Sendable {
     case audioPlayChimeAction(Ubo_V1_AudioPlayChimeAction)
     case audioPlayRecordingAction(Ubo_V1_AudioPlayRecordingAction)
     case audioPlaybackDoneAction(Ubo_V1_AudioPlaybackDoneAction)
+    case audioReportRemoteCaptureAction(Ubo_V1_AudioReportRemoteCaptureAction)
     case audioReportSampleAction(Ubo_V1_AudioReportSampleAction)
     case audioSetMuteStatusAction(Ubo_V1_AudioSetMuteStatusAction)
     case audioSetVolumeAction(Ubo_V1_AudioSetVolumeAction)
@@ -27431,7 +31066,7 @@ public struct Ubo_V1_Action: Sendable {
     case dockerImageUpdateMetadataAction(Ubo_V1_DockerImageUpdateMetadataAction)
     case dockerInstallAction(Ubo_V1_DockerInstallAction)
     case dockerRemoveUsernameAction(Ubo_V1_DockerRemoveUsernameAction)
-    case dockerSetMacvlanConfigAction(Ubo_V1_DockerSetMacvlanConfigAction)
+    case dockerSetHostNetworkAction(Ubo_V1_DockerSetHostNetworkAction)
     case dockerSetStatusAction(Ubo_V1_DockerSetStatusAction)
     case dockerSetZigbeeIntentAction(Ubo_V1_DockerSetZigbeeIntentAction)
     case dockerStartAction(Ubo_V1_DockerStartAction)
@@ -27475,11 +31110,25 @@ public struct Ubo_V1_Action: Sendable {
     case keypadKeyReleaseAction(Ubo_V1_KeypadKeyReleaseAction)
     case keypadKeyUnholdAction(Ubo_V1_KeypadKeyUnholdAction)
     case keypadReportContextAction(Ubo_V1_KeypadReportContextAction)
+    case kioskAction(Ubo_V1_KioskAction)
+    case kioskAddDashboardAction(Ubo_V1_KioskAddDashboardAction)
+    case kioskClearEnabledStateAction(Ubo_V1_KioskClearEnabledStateAction)
+    case kioskDeleteDashboardAction(Ubo_V1_KioskDeleteDashboardAction)
+    case kioskRotatePortAction(Ubo_V1_KioskRotatePortAction)
+    case kioskSetPortSelectionAction(Ubo_V1_KioskSetPortSelectionAction)
+    case kioskUpdateStateAction(Ubo_V1_KioskUpdateStateAction)
     case lightDmAction(Ubo_V1_LightDMAction)
     case lightDmClearEnabledStateAction(Ubo_V1_LightDMClearEnabledStateAction)
     case lightDmUpdateStateAction(Ubo_V1_LightDMUpdateStateAction)
     case localizationAction(Ubo_V1_LocalizationAction)
+    case localizationRefreshWeatherAction(Ubo_V1_LocalizationRefreshWeatherAction)
+    case localizationResetLocationAction(Ubo_V1_LocalizationResetLocationAction)
     case localizationSetLanguageAction(Ubo_V1_LocalizationSetLanguageAction)
+    case localizationSetLocationAction(Ubo_V1_LocalizationSetLocationAction)
+    case localizationSpeakDateAction(Ubo_V1_LocalizationSpeakDateAction)
+    case localizationSpeakTimeAction(Ubo_V1_LocalizationSpeakTimeAction)
+    case localizationSpeakWeatherAction(Ubo_V1_LocalizationSpeakWeatherAction)
+    case localizationUpdateWeatherAction(Ubo_V1_LocalizationUpdateWeatherAction)
     case mainAction(Ubo_V1_MainAction)
     case mcpAction(Ubo_V1_McpAction)
     case mcpAddServerAction(Ubo_V1_McpAddServerAction)
@@ -27495,6 +31144,16 @@ public struct Ubo_V1_Action: Sendable {
     case menuGoBackAction(Ubo_V1_MenuGoBackAction)
     case menuGoHomeAction(Ubo_V1_MenuGoHomeAction)
     case menuScrollAction(Ubo_V1_MenuScrollAction)
+    case mqttAction(Ubo_V1_MqttAction)
+    case mqttBundledCredentialsChangedAction(Ubo_V1_MqttBundledCredentialsChangedAction)
+    case mqttPublishAction(Ubo_V1_MqttPublishAction)
+    case mqttRequestAnnounceAction(Ubo_V1_MqttRequestAnnounceAction)
+    case mqttSetAllowRemoteControlAction(Ubo_V1_MqttSetAllowRemoteControlAction)
+    case mqttSetBrokerAction(Ubo_V1_MqttSetBrokerAction)
+    case mqttSetBundledExposeToLanAction(Ubo_V1_MqttSetBundledExposeToLanAction)
+    case mqttSetEnabledAction(Ubo_V1_MqttSetEnabledAction)
+    case mqttSetPublishedComponentsAction(Ubo_V1_MqttSetPublishedComponentsAction)
+    case mqttSetStatusAction(Ubo_V1_MqttSetStatusAction)
     case notificationsAction(Ubo_V1_NotificationsAction)
     case notificationsAddAction(Ubo_V1_NotificationsAddAction)
     case notificationsClearAction(Ubo_V1_NotificationsClearAction)
@@ -27540,7 +31199,10 @@ public struct Ubo_V1_Action: Sendable {
     case sshUpdateStateAction(Ubo_V1_SSHUpdateStateAction)
     case screenshotDataAction(Ubo_V1_ScreenshotDataAction)
     case sensorsAction(Ubo_V1_SensorsAction)
+    case sensorsReportDeviceReadingsAction(Ubo_V1_SensorsReportDeviceReadingsAction)
     case sensorsReportReadingAction(Ubo_V1_SensorsReportReadingAction)
+    case sensorsScanAction(Ubo_V1_SensorsScanAction)
+    case sensorsScanCompletedAction(Ubo_V1_SensorsScanCompletedAction)
     case setAreEnclosuresVisibleAction(Ubo_V1_SetAreEnclosuresVisibleAction)
     case setLocalOverlayOpenAction(Ubo_V1_SetLocalOverlayOpenAction)
     case settingsAction(Ubo_V1_SettingsAction)
@@ -27554,7 +31216,9 @@ public struct Ubo_V1_Action: Sendable {
     case settingsSetServicesAction(Ubo_V1_SettingsSetServicesAction)
     case settingsStartServiceAction(Ubo_V1_SettingsStartServiceAction)
     case settingsStopServiceAction(Ubo_V1_SettingsStopServiceAction)
+    case settingsToggleAssistantDebugAction(Ubo_V1_SettingsToggleAssistantDebugAction)
     case settingsToggleBetaVersionsAction(Ubo_V1_SettingsToggleBetaVersionsAction)
+    case settingsToggleGrpcRemoteAccessAction(Ubo_V1_SettingsToggleGrpcRemoteAccessAction)
     case settingsTogglePdbSignalAction(Ubo_V1_SettingsTogglePdbSignalAction)
     case settingsToggleVisualDebugAction(Ubo_V1_SettingsToggleVisualDebugAction)
     case speechRecognitionAction(Ubo_V1_SpeechRecognitionAction)
@@ -27564,8 +31228,11 @@ public struct Ubo_V1_Action: Sendable {
     case speechRecognitionReportIntentTimeoutAction(Ubo_V1_SpeechRecognitionReportIntentTimeoutAction)
     case speechRecognitionReportSpeechAction(Ubo_V1_SpeechRecognitionReportSpeechAction)
     case speechRecognitionReportWakeWordDetectionAction(Ubo_V1_SpeechRecognitionReportWakeWordDetectionAction)
+    case speechRecognitionRunCommandAction(Ubo_V1_SpeechRecognitionRunCommandAction)
     case speechRecognitionSetAssistantEnabledAction(Ubo_V1_SpeechRecognitionSetAssistantEnabledAction)
+    case speechRecognitionSetAssistantListeningAction(Ubo_V1_SpeechRecognitionSetAssistantListeningAction)
     case speechRecognitionSetConversationEndPhrasesAction(Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction)
+    case speechRecognitionSetWakeModeEnabledAction(Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction)
     case speechRecognitionTriggerModeAction(Ubo_V1_SpeechRecognitionTriggerModeAction)
     case speechRecognitionUpdateCommandAction(Ubo_V1_SpeechRecognitionUpdateCommandAction)
     case speechSynthesisAction(Ubo_V1_SpeechSynthesisAction)
@@ -27626,6 +31293,7 @@ public struct Ubo_V1_Action: Sendable {
     case wakeWordSetAvailableModelsAction(Ubo_V1_WakeWordSetAvailableModelsAction)
     case wakeWordSetModelsStatusAction(Ubo_V1_WakeWordSetModelsStatusAction)
     case webUiAction(Ubo_V1_WebUIAction)
+    case webUiInputAction(Ubo_V1_WebUIInputAction)
     case wiFiAction(Ubo_V1_WiFiAction)
     case wiFiInputConnectionAction(Ubo_V1_WiFiInputConnectionAction)
     case wiFiSetHasVisitedOnboardingAction(Ubo_V1_WiFiSetHasVisitedOnboardingAction)
@@ -27634,6 +31302,15 @@ public struct Ubo_V1_Action: Sendable {
     case wiFiStopHotspotAction(Ubo_V1_WiFiStopHotspotAction)
     case wiFiUpdateAction(Ubo_V1_WiFiUpdateAction)
     case wiFiUpdateRequestAction(Ubo_V1_WiFiUpdateRequestAction)
+    case wyomingAction(Ubo_V1_WyomingAction)
+    case wyomingAddAccessPolicyAction(Ubo_V1_WyomingAddAccessPolicyAction)
+    case wyomingRemoveAccessPolicyAction(Ubo_V1_WyomingRemoveAccessPolicyAction)
+    case wyomingReportEnginesStatusAction(Ubo_V1_WyomingReportEnginesStatusAction)
+    case wyomingReportSatelliteStatusAction(Ubo_V1_WyomingReportSatelliteStatusAction)
+    case wyomingSatelliteWakeAction(Ubo_V1_WyomingSatelliteWakeAction)
+    case wyomingSetEnginesEnabledAction(Ubo_V1_WyomingSetEnginesEnabledAction)
+    case wyomingSetSatelliteEnabledAction(Ubo_V1_WyomingSetSatelliteEnabledAction)
+    case wyomingSetZeroconfEnabledAction(Ubo_V1_WyomingSetZeroconfEnabledAction)
 
   }
 
@@ -27653,6 +31330,14 @@ public struct Ubo_V1_Event: Sendable {
       return Ubo_V1_ApplicationScrollEvent()
     }
     set {event = .applicationScrollEvent(newValue)}
+  }
+
+  public var assistantCancelRequestEvent: Ubo_V1_AssistantCancelRequestEvent {
+    get {
+      if case .assistantCancelRequestEvent(let v)? = event {return v}
+      return Ubo_V1_AssistantCancelRequestEvent()
+    }
+    set {event = .assistantCancelRequestEvent(newValue)}
   }
 
   public var assistantDeleteKokoroEvent: Ubo_V1_AssistantDeleteKokoroEvent {
@@ -27789,6 +31474,14 @@ public struct Ubo_V1_Event: Sendable {
       return Ubo_V1_AssistantPiperVoiceChangedEvent()
     }
     set {event = .assistantPiperVoiceChangedEvent(newValue)}
+  }
+
+  public var assistantRequestMicStreamEvent: Ubo_V1_AssistantRequestMicStreamEvent {
+    get {
+      if case .assistantRequestMicStreamEvent(let v)? = event {return v}
+      return Ubo_V1_AssistantRequestMicStreamEvent()
+    }
+    set {event = .assistantRequestMicStreamEvent(newValue)}
   }
 
   public var assistantRunPipelineEvent: Ubo_V1_AssistantRunPipelineEvent {
@@ -28327,6 +32020,14 @@ public struct Ubo_V1_Event: Sendable {
     set {event = .fileUploadStartEvent(newValue)}
   }
 
+  public var frameStreamChunkEvent: Ubo_V1_FrameStreamChunkEvent {
+    get {
+      if case .frameStreamChunkEvent(let v)? = event {return v}
+      return Ubo_V1_FrameStreamChunkEvent()
+    }
+    set {event = .frameStreamChunkEvent(newValue)}
+  }
+
   public var frameStreamDataEvent: Ubo_V1_FrameStreamDataEvent {
     get {
       if case .frameStreamDataEvent(let v)? = event {return v}
@@ -28415,6 +32116,22 @@ public struct Ubo_V1_Event: Sendable {
     set {event = .ipEvent(newValue)}
   }
 
+  public var kioskApplyConfigEvent: Ubo_V1_KioskApplyConfigEvent {
+    get {
+      if case .kioskApplyConfigEvent(let v)? = event {return v}
+      return Ubo_V1_KioskApplyConfigEvent()
+    }
+    set {event = .kioskApplyConfigEvent(newValue)}
+  }
+
+  public var kioskEvent: Ubo_V1_KioskEvent {
+    get {
+      if case .kioskEvent(let v)? = event {return v}
+      return Ubo_V1_KioskEvent()
+    }
+    set {event = .kioskEvent(newValue)}
+  }
+
   public var localOverlayGoBackEvent: Ubo_V1_LocalOverlayGoBackEvent {
     get {
       if case .localOverlayGoBackEvent(let v)? = event {return v}
@@ -28437,6 +32154,54 @@ public struct Ubo_V1_Event: Sendable {
       return Ubo_V1_LocalizationLanguageChangedEvent()
     }
     set {event = .localizationLanguageChangedEvent(newValue)}
+  }
+
+  public var localizationLocationChangedEvent: Ubo_V1_LocalizationLocationChangedEvent {
+    get {
+      if case .localizationLocationChangedEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationLocationChangedEvent()
+    }
+    set {event = .localizationLocationChangedEvent(newValue)}
+  }
+
+  public var localizationLocationResetEvent: Ubo_V1_LocalizationLocationResetEvent {
+    get {
+      if case .localizationLocationResetEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationLocationResetEvent()
+    }
+    set {event = .localizationLocationResetEvent(newValue)}
+  }
+
+  public var localizationSpeakDateEvent: Ubo_V1_LocalizationSpeakDateEvent {
+    get {
+      if case .localizationSpeakDateEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationSpeakDateEvent()
+    }
+    set {event = .localizationSpeakDateEvent(newValue)}
+  }
+
+  public var localizationSpeakTimeEvent: Ubo_V1_LocalizationSpeakTimeEvent {
+    get {
+      if case .localizationSpeakTimeEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationSpeakTimeEvent()
+    }
+    set {event = .localizationSpeakTimeEvent(newValue)}
+  }
+
+  public var localizationSpeakWeatherEvent: Ubo_V1_LocalizationSpeakWeatherEvent {
+    get {
+      if case .localizationSpeakWeatherEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationSpeakWeatherEvent()
+    }
+    set {event = .localizationSpeakWeatherEvent(newValue)}
+  }
+
+  public var localizationWeatherRefreshRequestedEvent: Ubo_V1_LocalizationWeatherRefreshRequestedEvent {
+    get {
+      if case .localizationWeatherRefreshRequestedEvent(let v)? = event {return v}
+      return Ubo_V1_LocalizationWeatherRefreshRequestedEvent()
+    }
+    set {event = .localizationWeatherRefreshRequestedEvent(newValue)}
   }
 
   public var mainEvent: Ubo_V1_MainEvent {
@@ -28517,6 +32282,30 @@ public struct Ubo_V1_Event: Sendable {
       return Ubo_V1_MenuEvent()
     }
     set {event = .menuEvent(newValue)}
+  }
+
+  public var mqttAnnounceRequestedEvent: Ubo_V1_MqttAnnounceRequestedEvent {
+    get {
+      if case .mqttAnnounceRequestedEvent(let v)? = event {return v}
+      return Ubo_V1_MqttAnnounceRequestedEvent()
+    }
+    set {event = .mqttAnnounceRequestedEvent(newValue)}
+  }
+
+  public var mqttEvent: Ubo_V1_MqttEvent {
+    get {
+      if case .mqttEvent(let v)? = event {return v}
+      return Ubo_V1_MqttEvent()
+    }
+    set {event = .mqttEvent(newValue)}
+  }
+
+  public var mqttPublishEvent: Ubo_V1_MqttPublishEvent {
+    get {
+      if case .mqttPublishEvent(let v)? = event {return v}
+      return Ubo_V1_MqttPublishEvent()
+    }
+    set {event = .mqttPublishEvent(newValue)}
   }
 
   public var notificationsClearEvent: Ubo_V1_NotificationsClearEvent {
@@ -28621,6 +32410,22 @@ public struct Ubo_V1_Event: Sendable {
       return Ubo_V1_ScreenshotEvent()
     }
     set {event = .screenshotEvent(newValue)}
+  }
+
+  public var sensorsEvent: Ubo_V1_SensorsEvent {
+    get {
+      if case .sensorsEvent(let v)? = event {return v}
+      return Ubo_V1_SensorsEvent()
+    }
+    set {event = .sensorsEvent(newValue)}
+  }
+
+  public var sensorsScanEvent: Ubo_V1_SensorsScanEvent {
+    get {
+      if case .sensorsScanEvent(let v)? = event {return v}
+      return Ubo_V1_SensorsScanEvent()
+    }
+    set {event = .sensorsScanEvent(newValue)}
   }
 
   public var settingsEvent: Ubo_V1_SettingsEvent {
@@ -28863,6 +32668,14 @@ public struct Ubo_V1_Event: Sendable {
     set {event = .webUiInitializeEvent(newValue)}
   }
 
+  public var webUiInputEvent: Ubo_V1_WebUIInputEvent {
+    get {
+      if case .webUiInputEvent(let v)? = event {return v}
+      return Ubo_V1_WebUIInputEvent()
+    }
+    set {event = .webUiInputEvent(newValue)}
+  }
+
   public var wiFiEvent: Ubo_V1_WiFiEvent {
     get {
       if case .wiFiEvent(let v)? = event {return v}
@@ -28903,10 +32716,27 @@ public struct Ubo_V1_Event: Sendable {
     set {event = .wiFiUpdateRequestEvent(newValue)}
   }
 
+  public var wyomingEvent: Ubo_V1_WyomingEvent {
+    get {
+      if case .wyomingEvent(let v)? = event {return v}
+      return Ubo_V1_WyomingEvent()
+    }
+    set {event = .wyomingEvent(newValue)}
+  }
+
+  public var wyomingSatelliteWakeEvent: Ubo_V1_WyomingSatelliteWakeEvent {
+    get {
+      if case .wyomingSatelliteWakeEvent(let v)? = event {return v}
+      return Ubo_V1_WyomingSatelliteWakeEvent()
+    }
+    set {event = .wyomingSatelliteWakeEvent(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Event: Equatable, Sendable {
     case applicationScrollEvent(Ubo_V1_ApplicationScrollEvent)
+    case assistantCancelRequestEvent(Ubo_V1_AssistantCancelRequestEvent)
     case assistantDeleteKokoroEvent(Ubo_V1_AssistantDeleteKokoroEvent)
     case assistantDeleteMoonshineModelEvent(Ubo_V1_AssistantDeleteMoonshineModelEvent)
     case assistantDeleteOllamaModelEvent(Ubo_V1_AssistantDeleteOllamaModelEvent)
@@ -28924,6 +32754,7 @@ public struct Ubo_V1_Event: Sendable {
     case assistantModelChangedEvent(Ubo_V1_AssistantModelChangedEvent)
     case assistantOllamaThinkingChangedEvent(Ubo_V1_AssistantOllamaThinkingChangedEvent)
     case assistantPiperVoiceChangedEvent(Ubo_V1_AssistantPiperVoiceChangedEvent)
+    case assistantRequestMicStreamEvent(Ubo_V1_AssistantRequestMicStreamEvent)
     case assistantRunPipelineEvent(Ubo_V1_AssistantRunPipelineEvent)
     case assistantStopTalkingEvent(Ubo_V1_AssistantStopTalkingEvent)
     case assistantUpdateProvidersEvent(Ubo_V1_AssistantUpdateProvidersEvent)
@@ -28991,6 +32822,7 @@ public struct Ubo_V1_Event: Sendable {
     case fileUploadErrorEvent(Ubo_V1_FileUploadErrorEvent)
     case fileUploadEvent(Ubo_V1_FileUploadEvent)
     case fileUploadStartEvent(Ubo_V1_FileUploadStartEvent)
+    case frameStreamChunkEvent(Ubo_V1_FrameStreamChunkEvent)
     case frameStreamDataEvent(Ubo_V1_FrameStreamDataEvent)
     case infraredBoundActionTriggeredEvent(Ubo_V1_InfraredBoundActionTriggeredEvent)
     case infraredDeviceRegistrationCompleteEvent(Ubo_V1_InfraredDeviceRegistrationCompleteEvent)
@@ -29002,9 +32834,17 @@ public struct Ubo_V1_Event: Sendable {
     case inputProvideEvent(Ubo_V1_InputProvideEvent)
     case inputResolveEvent(Ubo_V1_InputResolveEvent)
     case ipEvent(Ubo_V1_IpEvent)
+    case kioskApplyConfigEvent(Ubo_V1_KioskApplyConfigEvent)
+    case kioskEvent(Ubo_V1_KioskEvent)
     case localOverlayGoBackEvent(Ubo_V1_LocalOverlayGoBackEvent)
     case localizationEvent(Ubo_V1_LocalizationEvent)
     case localizationLanguageChangedEvent(Ubo_V1_LocalizationLanguageChangedEvent)
+    case localizationLocationChangedEvent(Ubo_V1_LocalizationLocationChangedEvent)
+    case localizationLocationResetEvent(Ubo_V1_LocalizationLocationResetEvent)
+    case localizationSpeakDateEvent(Ubo_V1_LocalizationSpeakDateEvent)
+    case localizationSpeakTimeEvent(Ubo_V1_LocalizationSpeakTimeEvent)
+    case localizationSpeakWeatherEvent(Ubo_V1_LocalizationSpeakWeatherEvent)
+    case localizationWeatherRefreshRequestedEvent(Ubo_V1_LocalizationWeatherRefreshRequestedEvent)
     case mainEvent(Ubo_V1_MainEvent)
     case mcpAddServerEvent(Ubo_V1_McpAddServerEvent)
     case mcpDeleteServerEvent(Ubo_V1_McpDeleteServerEvent)
@@ -29015,6 +32855,9 @@ public struct Ubo_V1_Event: Sendable {
     case menuChooseByIndexEvent(Ubo_V1_MenuChooseByIndexEvent)
     case menuChooseByLabelEvent(Ubo_V1_MenuChooseByLabelEvent)
     case menuEvent(Ubo_V1_MenuEvent)
+    case mqttAnnounceRequestedEvent(Ubo_V1_MqttAnnounceRequestedEvent)
+    case mqttEvent(Ubo_V1_MqttEvent)
+    case mqttPublishEvent(Ubo_V1_MqttPublishEvent)
     case notificationsClearEvent(Ubo_V1_NotificationsClearEvent)
     case notificationsDisplayEvent(Ubo_V1_NotificationsDisplayEvent)
     case notificationsEvent(Ubo_V1_NotificationsEvent)
@@ -29028,6 +32871,8 @@ public struct Ubo_V1_Event: Sendable {
     case rgbRingEvent(Ubo_V1_RgbRingEvent)
     case screenshotDataEvent(Ubo_V1_ScreenshotDataEvent)
     case screenshotEvent(Ubo_V1_ScreenshotEvent)
+    case sensorsEvent(Ubo_V1_SensorsEvent)
+    case sensorsScanEvent(Ubo_V1_SensorsScanEvent)
     case settingsEvent(Ubo_V1_SettingsEvent)
     case settingsServiceEvent(Ubo_V1_SettingsServiceEvent)
     case settingsStartServiceEvent(Ubo_V1_SettingsStartServiceEvent)
@@ -29058,11 +32903,14 @@ public struct Ubo_V1_Event: Sendable {
     case wakeWordDownloadModelsEvent(Ubo_V1_WakeWordDownloadModelsEvent)
     case webUiEvent(Ubo_V1_WebUIEvent)
     case webUiInitializeEvent(Ubo_V1_WebUIInitializeEvent)
+    case webUiInputEvent(Ubo_V1_WebUIInputEvent)
     case wiFiEvent(Ubo_V1_WiFiEvent)
     case wiFiInputConnectionEvent(Ubo_V1_WiFiInputConnectionEvent)
     case wiFiStartHotspotEvent(Ubo_V1_WiFiStartHotspotEvent)
     case wiFiStopHotspotEvent(Ubo_V1_WiFiStopHotspotEvent)
     case wiFiUpdateRequestEvent(Ubo_V1_WiFiUpdateRequestEvent)
+    case wyomingEvent(Ubo_V1_WyomingEvent)
+    case wyomingSatelliteWakeEvent(Ubo_V1_WyomingSatelliteWakeEvent)
 
   }
 
@@ -29129,10 +32977,6 @@ extension Ubo_V1_AudioSequenceSource: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AUDIO_SEQUENCE_SOURCE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_AUDIO_UNSPECIFIED\0\u{1}AUDIO_SEQUENCE_SOURCE_OTHER\0\u{1}AUDIO_SEQUENCE_SOURCE_ASSISTANT_LIVE\0")
 }
 
-extension Ubo_V1_CameraType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0CAMERA_TYPE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_CAMERA_UNSPECIFIED\0\u{1}CAMERA_TYPE_DEFAULT\0\u{1}CAMERA_TYPE_AUTOFOCUS\0\u{1}CAMERA_TYPE_FIXED_FOCUS\0")
-}
-
 extension Ubo_V1_CameraSourceKind: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0CAMERA_SOURCE_KIND_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_CAMERA_UNSPECIFIED\0\u{1}CAMERA_SOURCE_KIND_LOCAL\0\u{1}CAMERA_SOURCE_KIND_REMOTE\0")
 }
@@ -29165,8 +33009,16 @@ extension Ubo_V1_Key: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0KEY_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_KEYPAD_UNSPECIFIED\0\u{1}KEY_BACK\0\u{1}KEY_HOME\0\u{1}KEY_UP\0\u{1}KEY_DOWN\0\u{1}KEY_L1\0\u{1}KEY_L2\0\u{1}KEY_L3\0")
 }
 
+extension Ubo_V1_KioskPortRole: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0KIOSK_PORT_ROLE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_KIOSK_UNSPECIFIED\0\u{1}KIOSK_PORT_ROLE_BROWSER\0\u{1}KIOSK_PORT_ROLE_TERMINAL\0\u{1}KIOSK_PORT_ROLE_OFF\0")
+}
+
 extension Ubo_V1_LanguageCode: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0LANGUAGE_CODE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_LOCALIZATION_UNSPECIFIED\0\u{1}LANGUAGE_CODE_EN\0\u{1}LANGUAGE_CODE_DE\0\u{1}LANGUAGE_CODE_ES\0\u{1}LANGUAGE_CODE_FR\0\u{1}LANGUAGE_CODE_IT\0\u{1}LANGUAGE_CODE_PT\0\u{1}LANGUAGE_CODE_NL\0\u{1}LANGUAGE_CODE_ZH\0")
+}
+
+extension Ubo_V1_LocationSource: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0LOCATION_SOURCE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_LOCALIZATION_UNSPECIFIED\0\u{1}LOCATION_SOURCE_IP\0\u{1}LOCATION_SOURCE_MANUAL\0")
 }
 
 extension Ubo_V1_McpServerType: SwiftProtobuf._ProtoNameProviding {
@@ -29175,6 +33027,14 @@ extension Ubo_V1_McpServerType: SwiftProtobuf._ProtoNameProviding {
 
 extension Ubo_V1_McpServerStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0MCP_SERVER_STATUS_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_MCP_UNSPECIFIED\0\u{1}MCP_SERVER_STATUS_UNKNOWN\0\u{1}MCP_SERVER_STATUS_CHECKING\0\u{1}MCP_SERVER_STATUS_HEALTHY\0\u{1}MCP_SERVER_STATUS_FAILED\0")
+}
+
+extension Ubo_V1_MqttConnectionStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0MQTT_CONNECTION_STATUS_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_MQTT_UNSPECIFIED\0\u{1}MQTT_CONNECTION_STATUS_DISABLED\0\u{1}MQTT_CONNECTION_STATUS_CONNECTING\0\u{1}MQTT_CONNECTION_STATUS_CONNECTED\0\u{1}MQTT_CONNECTION_STATUS_ERROR\0")
+}
+
+extension Ubo_V1_MqttBrokerSource: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0MQTT_BROKER_SOURCE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_MQTT_UNSPECIFIED\0\u{1}MQTT_BROKER_SOURCE_BUNDLED\0\u{1}MQTT_BROKER_SOURCE_EXTERNAL\0")
 }
 
 extension Ubo_V1_Importance: SwiftProtobuf._ProtoNameProviding {
@@ -29193,8 +33053,12 @@ extension Ubo_V1_Sensor: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SENSOR_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_SENSORS_UNSPECIFIED\0\u{1}SENSOR_TEMPERATURE\0\u{1}SENSOR_LIGHT\0")
 }
 
+extension Ubo_V1_SensorStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SENSOR_STATUS_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_SENSORS_UNSPECIFIED\0\u{1}SENSOR_STATUS_ACTIVE\0\u{1}SENSOR_STATUS_ERROR\0\u{1}SENSOR_STATUS_UNSUPPORTED\0\u{1}SENSOR_STATUS_AMBIGUOUS\0")
+}
+
 extension Ubo_V1_WakeMode: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WAKE_MODE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_SPEECH_RECOGNITION_UNSPECIFIED\0\u{1}WAKE_MODE_INTENTS\0\u{1}WAKE_MODE_QUICK_CHAT\0\u{1}WAKE_MODE_CONVERSATION\0\u{1}WAKE_MODE_STOP_TALKING\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WAKE_MODE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_SPEECH_RECOGNITION_UNSPECIFIED\0\u{1}WAKE_MODE_INTENTS\0\u{1}WAKE_MODE_QUICK_CHAT\0\u{1}WAKE_MODE_CONVERSATION\0\u{1}WAKE_MODE_STOP_TALKING\0\u{1}WAKE_MODE_HOME_ASSISTANT\0")
 }
 
 extension Ubo_V1_WakeWordEngineName: SwiftProtobuf._ProtoNameProviding {
@@ -29217,12 +33081,28 @@ extension Ubo_V1_SpeechSynthesisEngineName: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SPEECH_SYNTHESIS_ENGINE_NAME_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_SPEECH_SYNTHESIS_UNSPECIFIED\0\u{1}SPEECH_SYNTHESIS_ENGINE_NAME_PIPER\0\u{1}SPEECH_SYNTHESIS_ENGINE_NAME_PICOVOICE\0")
 }
 
+extension Ubo_V1_WebUIInputCommand: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WEB_UI_INPUT_COMMAND_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WEB_UI_UNSPECIFIED\0\u{1}WEB_UI_INPUT_COMMAND_UP\0\u{1}WEB_UI_INPUT_COMMAND_DOWN\0\u{1}WEB_UI_INPUT_COMMAND_LEFT\0\u{1}WEB_UI_INPUT_COMMAND_RIGHT\0\u{1}WEB_UI_INPUT_COMMAND_SELECT\0\u{1}WEB_UI_INPUT_COMMAND_BACK\0\u{1}WEB_UI_INPUT_COMMAND_HOME\0")
+}
+
 extension Ubo_V1_WiFiType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WI_FI_TYPE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WIFI_UNSPECIFIED\0\u{1}WI_FI_TYPE_WEP\0\u{1}WI_FI_TYPE_WPA\0\u{1}WI_FI_TYPE_WPA2\0\u{1}WI_FI_TYPE_NOPASS\0")
 }
 
 extension Ubo_V1_ConnectionState: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0CONNECTION_STATE_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WIFI_UNSPECIFIED\0\u{1}CONNECTION_STATE_CONNECTED\0\u{1}CONNECTION_STATE_CONNECTING\0\u{1}CONNECTION_STATE_DISCONNECTED\0\u{1}CONNECTION_STATE_UNKNOWN\0")
+}
+
+extension Ubo_V1_WyomingAccessPolicyKind: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WYOMING_ACCESS_POLICY_KIND_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WYOMING_UNSPECIFIED\0\u{1}WYOMING_ACCESS_POLICY_KIND_DOCKER\0\u{1}WYOMING_ACCESS_POLICY_KIND_NETWORK\0")
+}
+
+extension Ubo_V1_WyomingSatelliteStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WYOMING_SATELLITE_STATUS_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WYOMING_UNSPECIFIED\0\u{1}WYOMING_SATELLITE_STATUS_STOPPED\0\u{1}WYOMING_SATELLITE_STATUS_LISTENING\0\u{1}WYOMING_SATELLITE_STATUS_CONNECTED\0\u{1}WYOMING_SATELLITE_STATUS_STREAMING\0\u{1}WYOMING_SATELLITE_STATUS_PLAYING\0\u{1}WYOMING_SATELLITE_STATUS_PAUSED\0")
+}
+
+extension Ubo_V1_WyomingEnginesStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WYOMING_ENGINES_STATUS_UBO_APP_DOT_STORE_DOT_SERVICES_DOT_WYOMING_UNSPECIFIED\0\u{1}WYOMING_ENGINES_STATUS_STOPPED\0\u{1}WYOMING_ENGINES_STATUS_LISTENING\0\u{1}WYOMING_ENGINES_STATUS_BUSY\0")
 }
 
 extension Ubo_V1_BaseMenu: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
@@ -37070,6 +40950,65 @@ extension Ubo_V1_FrameStreamDataEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
+extension Ubo_V1_FrameStreamChunkEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".FrameStreamChunkEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}stream_id\0\u{1}data\0\u{1}width\0\u{1}height\0\u{3}row_offset\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_core_dot_types_dot_events\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.streamID) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.width) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.height) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.rowOffset) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.streamID.isEmpty {
+      try visitor.visitSingularStringField(value: self.streamID, fieldNumber: 2)
+    }
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 3)
+    }
+    if self.width != 0 {
+      try visitor.visitSingularInt64Field(value: self.width, fieldNumber: 4)
+    }
+    if self.height != 0 {
+      try visitor.visitSingularInt64Field(value: self.height, fieldNumber: 5)
+    }
+    if self.rowOffset != 0 {
+      try visitor.visitSingularInt64Field(value: self.rowOffset, fieldNumber: 6)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_FrameStreamChunkEvent, rhs: Ubo_V1_FrameStreamChunkEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents != rhs._metaFieldPackageNameUboAppDotStoreDotCoreDotTypesDotEvents {return false}
+    if lhs.streamID != rhs.streamID {return false}
+    if lhs.data != rhs.data {return false}
+    if lhs.width != rhs.width {return false}
+    if lhs.height != rhs.height {return false}
+    if lhs.rowOffset != rhs.rowOffset {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_ScreenshotDataEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ScreenshotDataEvent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}data\0\u{1}hash\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_core_dot_types_dot_events\0")
@@ -38543,6 +42482,74 @@ extension Ubo_V1_SettingsToggleBetaVersionsAction: SwiftProtobuf.Message, SwiftP
   }
 }
 
+extension Ubo_V1_SettingsToggleGrpcRemoteAccessAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SettingsToggleGrpcRemoteAccessAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_settings_dot_types\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SettingsToggleGrpcRemoteAccessAction, rhs: Ubo_V1_SettingsToggleGrpcRemoteAccessAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes != rhs._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SettingsToggleAssistantDebugAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SettingsToggleAssistantDebugAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_settings_dot_types\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SettingsToggleAssistantDebugAction, rhs: Ubo_V1_SettingsToggleAssistantDebugAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes != rhs._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_SettingsSetServicesAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SettingsSetServicesAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}services\0\u{3}gap_duration\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_settings_dot_types\0")
@@ -39264,7 +43271,7 @@ extension Ubo_V1_ServiceState.Errors: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
 extension Ubo_V1_SettingsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SettingsState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}pdb_signal\0\u{3}visual_debug\0\u{3}beta_versions\0\u{1}services\0\u{3}services_status\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_settings_dot_types\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}pdb_signal\0\u{3}visual_debug\0\u{3}beta_versions\0\u{3}grpc_remote_access\0\u{3}assistant_debug\0\u{1}services\0\u{3}services_status\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_settings_dot_types\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -39275,8 +43282,10 @@ extension Ubo_V1_SettingsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 2: try { try decoder.decodeSingularBoolField(value: &self._pdbSignal) }()
       case 3: try { try decoder.decodeSingularBoolField(value: &self._visualDebug) }()
       case 4: try { try decoder.decodeSingularBoolField(value: &self._betaVersions) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._services) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self._servicesStatus) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._grpcRemoteAccess) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._assistantDebug) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._services) }()
+      case 8: try { try decoder.decodeSingularEnumField(value: &self._servicesStatus) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes) }()
       default: break
       }
@@ -39297,11 +43306,17 @@ extension Ubo_V1_SettingsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try { if let v = self._betaVersions {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._grpcRemoteAccess {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._assistantDebug {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
     try { if let v = self._services {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
     } }()
     try { if let v = self._servicesStatus {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
     } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotSettingsDotTypes {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
@@ -39314,6 +43329,8 @@ extension Ubo_V1_SettingsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs._pdbSignal != rhs._pdbSignal {return false}
     if lhs._visualDebug != rhs._visualDebug {return false}
     if lhs._betaVersions != rhs._betaVersions {return false}
+    if lhs._grpcRemoteAccess != rhs._grpcRemoteAccess {return false}
+    if lhs._assistantDebug != rhs._assistantDebug {return false}
     if lhs._services != rhs._services {return false}
     if lhs._servicesStatus != rhs._servicesStatus {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -43190,7 +47207,7 @@ extension Ubo_V1_AssistantTranscribeAction: SwiftProtobuf.Message, SwiftProtobuf
 
 extension Ubo_V1_AssistantSynthesizeAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AssistantSynthesizeAction"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}text\0\u{3}session_id\0\u{3}tts_provider\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}text\0\u{3}session_id\0\u{3}tts_provider\0\u{3}play_locally\0\u{4}c\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -43201,6 +47218,7 @@ extension Ubo_V1_AssistantSynthesizeAction: SwiftProtobuf.Message, SwiftProtobuf
       case 2: try { try decoder.decodeSingularStringField(value: &self.text) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.sessionID) }()
       case 4: try { try decoder.decodeSingularEnumField(value: &self._ttsProvider) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._playLocally) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
       default: break
       }
@@ -43221,6 +47239,9 @@ extension Ubo_V1_AssistantSynthesizeAction: SwiftProtobuf.Message, SwiftProtobuf
     try { if let v = self._ttsProvider {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._playLocally {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
@@ -43232,6 +47253,7 @@ extension Ubo_V1_AssistantSynthesizeAction: SwiftProtobuf.Message, SwiftProtobuf
     if lhs.text != rhs.text {return false}
     if lhs.sessionID != rhs.sessionID {return false}
     if lhs._ttsProvider != rhs._ttsProvider {return false}
+    if lhs._playLocally != rhs._playLocally {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -43298,7 +47320,7 @@ extension Ubo_V1_AssistantCompleteAction: SwiftProtobuf.Message, SwiftProtobuf._
 
 extension Ubo_V1_AssistantRunPipelineAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AssistantRunPipelineAction"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{1}stages\0\u{1}audio\0\u{1}text\0\u{3}sample_rate\0\u{3}num_channels\0\u{3}stt_provider\0\u{3}llm_provider\0\u{3}tts_provider\0\u{3}llm_model\0\u{3}system_prompt\0\u{3}enable_tools\0\u{4}[\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{1}stages\0\u{1}audio\0\u{1}text\0\u{3}sample_rate\0\u{3}num_channels\0\u{3}stt_provider\0\u{3}llm_provider\0\u{3}tts_provider\0\u{3}llm_model\0\u{3}system_prompt\0\u{3}enable_tools\0\u{3}play_locally\0\u{4}Z\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -43318,6 +47340,7 @@ extension Ubo_V1_AssistantRunPipelineAction: SwiftProtobuf.Message, SwiftProtobu
       case 11: try { try decoder.decodeSingularStringField(value: &self._llmModel) }()
       case 12: try { try decoder.decodeSingularStringField(value: &self._systemPrompt) }()
       case 13: try { try decoder.decodeSingularBoolField(value: &self._enableTools) }()
+      case 14: try { try decoder.decodeSingularBoolField(value: &self._playLocally) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
       default: break
       }
@@ -43365,6 +47388,9 @@ extension Ubo_V1_AssistantRunPipelineAction: SwiftProtobuf.Message, SwiftProtobu
     try { if let v = self._enableTools {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 13)
     } }()
+    try { if let v = self._playLocally {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 14)
+    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
@@ -43385,6 +47411,46 @@ extension Ubo_V1_AssistantRunPipelineAction: SwiftProtobuf.Message, SwiftProtobu
     if lhs._llmModel != rhs._llmModel {return false}
     if lhs._systemPrompt != rhs._systemPrompt {return false}
     if lhs._enableTools != rhs._enableTools {return false}
+    if lhs._playLocally != rhs._playLocally {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_AssistantCancelRequestAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssistantCancelRequestAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.sessionID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.sessionID.isEmpty {
+      try visitor.visitSingularStringField(value: self.sessionID, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_AssistantCancelRequestAction, rhs: Ubo_V1_AssistantCancelRequestAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {return false}
+    if lhs.sessionID != rhs.sessionID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -43419,6 +47485,50 @@ extension Ubo_V1_AssistantEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   public static func ==(lhs: Ubo_V1_AssistantEvent, rhs: Ubo_V1_AssistantEvent) -> Bool {
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_AssistantRequestMicStreamEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssistantRequestMicStreamEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}audio_source\0\u{3}is_active\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.audioSource) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.isActive) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.audioSource.isEmpty {
+      try visitor.visitSingularStringField(value: self.audioSource, fieldNumber: 2)
+    }
+    if self.isActive != false {
+      try visitor.visitSingularBoolField(value: self.isActive, fieldNumber: 3)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_AssistantRequestMicStreamEvent, rhs: Ubo_V1_AssistantRequestMicStreamEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {return false}
+    if lhs.audioSource != rhs.audioSource {return false}
+    if lhs.isActive != rhs.isActive {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -44177,7 +48287,7 @@ extension Ubo_V1_AssistantDeleteVoskModelEvent: SwiftProtobuf.Message, SwiftProt
 
 extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AssistantRunPipelineEvent"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{1}stages\0\u{1}audio\0\u{1}text\0\u{3}sample_rate\0\u{3}num_channels\0\u{3}stt_provider\0\u{3}llm_provider\0\u{3}tts_provider\0\u{3}llm_model\0\u{3}system_prompt\0\u{3}enable_tools\0\u{3}vosk_model_id\0\u{3}moonshine_model_id\0\u{3}piper_voice_id\0\u{3}kokoro_voice_id\0\u{3}tts_voice_id\0\u{4}V\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{1}stages\0\u{1}audio\0\u{1}text\0\u{3}sample_rate\0\u{3}num_channels\0\u{3}stt_provider\0\u{3}llm_provider\0\u{3}tts_provider\0\u{3}llm_model\0\u{3}system_prompt\0\u{3}enable_tools\0\u{3}vosk_model_id\0\u{3}moonshine_model_id\0\u{3}piper_voice_id\0\u{3}kokoro_voice_id\0\u{3}tts_voice_id\0\u{3}play_locally\0\u{4}U\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
 
   fileprivate class _StorageClass {
     var _metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant: String? = nil
@@ -44198,6 +48308,7 @@ extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf
     var _piperVoiceID: String? = nil
     var _kokoroVoiceID: String? = nil
     var _ttsVoiceID: String? = nil
+    var _playLocally: Bool? = nil
 
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
@@ -44226,6 +48337,7 @@ extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf
       _piperVoiceID = source._piperVoiceID
       _kokoroVoiceID = source._kokoroVoiceID
       _ttsVoiceID = source._ttsVoiceID
+      _playLocally = source._playLocally
     }
   }
 
@@ -44261,6 +48373,7 @@ extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf
         case 16: try { try decoder.decodeSingularStringField(value: &_storage._piperVoiceID) }()
         case 17: try { try decoder.decodeSingularStringField(value: &_storage._kokoroVoiceID) }()
         case 18: try { try decoder.decodeSingularStringField(value: &_storage._ttsVoiceID) }()
+        case 19: try { try decoder.decodeSingularBoolField(value: &_storage._playLocally) }()
         case 1000: try { try decoder.decodeSingularStringField(value: &_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
         default: break
         }
@@ -44325,6 +48438,9 @@ extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf
       try { if let v = _storage._ttsVoiceID {
         try visitor.visitSingularStringField(value: v, fieldNumber: 18)
       } }()
+      try { if let v = _storage._playLocally {
+        try visitor.visitSingularBoolField(value: v, fieldNumber: 19)
+      } }()
       try { if let v = _storage._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
         try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
       } }()
@@ -44355,10 +48471,50 @@ extension Ubo_V1_AssistantRunPipelineEvent: SwiftProtobuf.Message, SwiftProtobuf
         if _storage._piperVoiceID != rhs_storage._piperVoiceID {return false}
         if _storage._kokoroVoiceID != rhs_storage._kokoroVoiceID {return false}
         if _storage._ttsVoiceID != rhs_storage._ttsVoiceID {return false}
+        if _storage._playLocally != rhs_storage._playLocally {return false}
         return true
       }
       if !storagesAreEqual {return false}
     }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_AssistantCancelRequestEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssistantCancelRequestEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}session_id\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_assistant\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.sessionID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.sessionID.isEmpty {
+      try visitor.visitSingularStringField(value: self.sessionID, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_AssistantCancelRequestEvent, rhs: Ubo_V1_AssistantCancelRequestEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAssistant {return false}
+    if lhs.sessionID != rhs.sessionID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -45777,6 +49933,45 @@ extension Ubo_V1_AudioSetMuteStatusAction: SwiftProtobuf.Message, SwiftProtobuf.
   }
 }
 
+extension Ubo_V1_AudioReportRemoteCaptureAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AudioReportRemoteCaptureAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}is_active\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_audio\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.isActive) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.isActive != false {
+      try visitor.visitSingularBoolField(value: self.isActive, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_AudioReportRemoteCaptureAction, rhs: Ubo_V1_AudioReportRemoteCaptureAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio {return false}
+    if lhs.isActive != rhs.isActive {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_AudioToggleMuteStatusAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AudioToggleMuteStatusAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}device\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_audio\0")
@@ -46614,7 +50809,7 @@ extension Ubo_V1_AudioPlaybackDoneEvent: SwiftProtobuf.Message, SwiftProtobuf._M
 
 extension Ubo_V1_AudioState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AudioState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}playback_volume\0\u{3}is_playback_mute\0\u{3}capture_volume\0\u{3}is_capture_mute\0\u{3}is_recording\0\u{1}recording\0\u{4}a\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_audio\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}playback_volume\0\u{3}is_playback_mute\0\u{3}capture_volume\0\u{3}is_capture_mute\0\u{3}is_remote_capture_active\0\u{3}is_recording\0\u{1}recording\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_audio\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -46626,8 +50821,9 @@ extension Ubo_V1_AudioState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 3: try { try decoder.decodeSingularBoolField(value: &self._isPlaybackMute) }()
       case 4: try { try decoder.decodeSingularFloatField(value: &self._captureVolume) }()
       case 5: try { try decoder.decodeSingularBoolField(value: &self._isCaptureMute) }()
-      case 6: try { try decoder.decodeSingularBoolField(value: &self._isRecording) }()
-      case 7: try { try decoder.decodeSingularMessageField(value: &self._recording) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._isRemoteCaptureActive) }()
+      case 7: try { try decoder.decodeSingularBoolField(value: &self._isRecording) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._recording) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio) }()
       default: break
       }
@@ -46651,11 +50847,14 @@ extension Ubo_V1_AudioState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     try { if let v = self._isCaptureMute {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
     } }()
-    try { if let v = self._isRecording {
+    try { if let v = self._isRemoteCaptureActive {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
     } }()
+    try { if let v = self._isRecording {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 7)
+    } }()
     try { if let v = self._recording {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
     } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotAudio {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
@@ -46669,6 +50868,7 @@ extension Ubo_V1_AudioState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     if lhs._isPlaybackMute != rhs._isPlaybackMute {return false}
     if lhs._captureVolume != rhs._captureVolume {return false}
     if lhs._isCaptureMute != rhs._isCaptureMute {return false}
+    if lhs._isRemoteCaptureActive != rhs._isRemoteCaptureActive {return false}
     if lhs._isRecording != rhs._isRecording {return false}
     if lhs._recording != rhs._recording {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -47571,7 +51771,7 @@ extension Ubo_V1_CameraReinitializeEvent: SwiftProtobuf.Message, SwiftProtobuf._
 
 extension Ubo_V1_CameraState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".CameraState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}queue\0\u{3}selected_source_id\0\u{3}available_cameras\0\u{3}pending_remote_registrations\0\u{3}camera_type\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_camera\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}queue\0\u{3}selected_source_id\0\u{3}available_cameras\0\u{3}pending_remote_registrations\0\u{4}c\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_camera\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -47583,7 +51783,6 @@ extension Ubo_V1_CameraState: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       case 3: try { try decoder.decodeSingularStringField(value: &self._selectedSourceID) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._availableCameras) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._pendingRemoteRegistrations) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self._cameraType) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotCamera) }()
       default: break
       }
@@ -47607,9 +51806,6 @@ extension Ubo_V1_CameraState: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try { if let v = self._pendingRemoteRegistrations {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     } }()
-    try { if let v = self._cameraType {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
-    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotCamera {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
@@ -47622,7 +51818,6 @@ extension Ubo_V1_CameraState: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if lhs._selectedSourceID != rhs._selectedSourceID {return false}
     if lhs._availableCameras != rhs._availableCameras {return false}
     if lhs._pendingRemoteRegistrations != rhs._pendingRemoteRegistrations {return false}
-    if lhs._cameraType != rhs._cameraType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -49398,9 +53593,9 @@ extension Ubo_V1_DockerSetZigbeeIntentAction: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Ubo_V1_DockerSetMacvlanConfigAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".DockerSetMacvlanConfigAction"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}enabled\0\u{1}parent\0\u{1}subnet\0\u{1}gateway\0\u{1}ip\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_docker\0")
+extension Ubo_V1_DockerSetHostNetworkAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".DockerSetHostNetworkAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}enabled\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_docker\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -49409,10 +53604,6 @@ extension Ubo_V1_DockerSetMacvlanConfigAction: SwiftProtobuf.Message, SwiftProto
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 2: try { try decoder.decodeSingularBoolField(value: &self.enabled) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self._parent) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._subnet) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self._gateway) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self._ip) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker) }()
       default: break
       }
@@ -49427,31 +53618,15 @@ extension Ubo_V1_DockerSetMacvlanConfigAction: SwiftProtobuf.Message, SwiftProto
     if self.enabled != false {
       try visitor.visitSingularBoolField(value: self.enabled, fieldNumber: 2)
     }
-    try { if let v = self._parent {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._subnet {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-    } }()
-    try { if let v = self._gateway {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
-    } }()
-    try { if let v = self._ip {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
-    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Ubo_V1_DockerSetMacvlanConfigAction, rhs: Ubo_V1_DockerSetMacvlanConfigAction) -> Bool {
+  public static func ==(lhs: Ubo_V1_DockerSetHostNetworkAction, rhs: Ubo_V1_DockerSetHostNetworkAction) -> Bool {
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker {return false}
     if lhs.enabled != rhs.enabled {return false}
-    if lhs._parent != rhs._parent {return false}
-    if lhs._subnet != rhs._subnet {return false}
-    if lhs._gateway != rhs._gateway {return false}
-    if lhs._ip != rhs._ip {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -50040,7 +54215,7 @@ extension Ubo_V1_DockerStopEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
 extension Ubo_V1_DockerServiceState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".DockerServiceState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{1}usernames\0\u{3}expose_to_lan\0\u{3}zigbee_enabled\0\u{3}zigbee_adapter_by_id\0\u{3}macvlan_enabled\0\u{3}macvlan_parent\0\u{3}macvlan_subnet\0\u{3}macvlan_gateway\0\u{3}macvlan_ip\0\u{4}]\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_docker\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{1}usernames\0\u{3}expose_to_lan\0\u{3}zigbee_enabled\0\u{3}zigbee_adapter_by_id\0\u{3}host_network_enabled\0\u{4}a\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_docker\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -50053,11 +54228,7 @@ extension Ubo_V1_DockerServiceState: SwiftProtobuf.Message, SwiftProtobuf._Messa
       case 4: try { try decoder.decodeSingularMessageField(value: &self._exposeToLan) }()
       case 5: try { try decoder.decodeSingularBoolField(value: &self._zigbeeEnabled) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self._zigbeeAdapterByID) }()
-      case 7: try { try decoder.decodeSingularBoolField(value: &self._macvlanEnabled) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self._macvlanParent) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self._macvlanSubnet) }()
-      case 10: try { try decoder.decodeSingularStringField(value: &self._macvlanGateway) }()
-      case 11: try { try decoder.decodeSingularStringField(value: &self._macvlanIp) }()
+      case 7: try { try decoder.decodeSingularBoolField(value: &self._hostNetworkEnabled) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker) }()
       default: break
       }
@@ -50084,20 +54255,8 @@ extension Ubo_V1_DockerServiceState: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try { if let v = self._zigbeeAdapterByID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 6)
     } }()
-    try { if let v = self._macvlanEnabled {
+    try { if let v = self._hostNetworkEnabled {
       try visitor.visitSingularBoolField(value: v, fieldNumber: 7)
-    } }()
-    try { if let v = self._macvlanParent {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
-    } }()
-    try { if let v = self._macvlanSubnet {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
-    } }()
-    try { if let v = self._macvlanGateway {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 10)
-    } }()
-    try { if let v = self._macvlanIp {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 11)
     } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotDocker {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
@@ -50112,11 +54271,7 @@ extension Ubo_V1_DockerServiceState: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if lhs._exposeToLan != rhs._exposeToLan {return false}
     if lhs._zigbeeEnabled != rhs._zigbeeEnabled {return false}
     if lhs._zigbeeAdapterByID != rhs._zigbeeAdapterByID {return false}
-    if lhs._macvlanEnabled != rhs._macvlanEnabled {return false}
-    if lhs._macvlanParent != rhs._macvlanParent {return false}
-    if lhs._macvlanSubnet != rhs._macvlanSubnet {return false}
-    if lhs._macvlanGateway != rhs._macvlanGateway {return false}
-    if lhs._macvlanIp != rhs._macvlanIp {return false}
+    if lhs._hostNetworkEnabled != rhs._hostNetworkEnabled {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -53673,6 +57828,673 @@ extension Ubo_V1_KeypadState: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
+extension Ubo_V1_KioskDashboard: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskDashboard"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}id\0\u{1}name\0\u{1}url\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.url) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
+    if !self.url.isEmpty {
+      try visitor.visitSingularStringField(value: self.url, fieldNumber: 4)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskDashboard, rhs: Ubo_V1_KioskDashboard) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.url != rhs.url {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskPortSelection: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskPortSelection"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}role\0\u{3}dashboard_id\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self._role) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._dashboardID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._role {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._dashboardID {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskPortSelection, rhs: Ubo_V1_KioskPortSelection) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs._role != rhs._role {return false}
+    if lhs._dashboardID != rhs._dashboardID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskPortSelections: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskPortSelections"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}hdmi_a_1\0\u{3}hdmi_a_2\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._hdmiA1) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._hdmiA2) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._hdmiA1 {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._hdmiA2 {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskPortSelections, rhs: Ubo_V1_KioskPortSelections) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs._hdmiA1 != rhs._hdmiA1 {return false}
+    if lhs._hdmiA2 != rhs._hdmiA2 {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskAction, rhs: Ubo_V1_KioskAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskEvent, rhs: Ubo_V1_KioskEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskUpdateStateAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskUpdateStateAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}is_active\0\u{3}is_enabled\0\u{3}is_installed\0\u{3}is_installing\0\u{3}connected_ports\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self._isActive) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self._isEnabled) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self._isInstalled) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._isInstalling) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._connectedPorts) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._isActive {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._isEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._isInstalled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._isInstalling {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._connectedPorts {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskUpdateStateAction, rhs: Ubo_V1_KioskUpdateStateAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs._isActive != rhs._isActive {return false}
+    if lhs._isEnabled != rhs._isEnabled {return false}
+    if lhs._isInstalled != rhs._isInstalled {return false}
+    if lhs._isInstalling != rhs._isInstalling {return false}
+    if lhs._connectedPorts != rhs._connectedPorts {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskUpdateStateAction.ConnectedPorts: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_KioskUpdateStateAction.protoMessageName + ".ConnectedPorts"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskUpdateStateAction.ConnectedPorts, rhs: Ubo_V1_KioskUpdateStateAction.ConnectedPorts) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskClearEnabledStateAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskClearEnabledStateAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskClearEnabledStateAction, rhs: Ubo_V1_KioskClearEnabledStateAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskSetPortSelectionAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskSetPortSelectionAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}port\0\u{1}role\0\u{3}dashboard_id\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.port) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self.role) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._dashboardID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.port.isEmpty {
+      try visitor.visitSingularStringField(value: self.port, fieldNumber: 2)
+    }
+    if self.role != .uboAppDotStoreDotServicesDotKioskUnspecified {
+      try visitor.visitSingularEnumField(value: self.role, fieldNumber: 3)
+    }
+    try { if let v = self._dashboardID {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskSetPortSelectionAction, rhs: Ubo_V1_KioskSetPortSelectionAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.port != rhs.port {return false}
+    if lhs.role != rhs.role {return false}
+    if lhs._dashboardID != rhs._dashboardID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskAddDashboardAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskAddDashboardAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}id\0\u{1}name\0\u{1}url\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.url) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
+    if !self.url.isEmpty {
+      try visitor.visitSingularStringField(value: self.url, fieldNumber: 4)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskAddDashboardAction, rhs: Ubo_V1_KioskAddDashboardAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.url != rhs.url {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskDeleteDashboardAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskDeleteDashboardAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}dashboard_id\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.dashboardID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.dashboardID.isEmpty {
+      try visitor.visitSingularStringField(value: self.dashboardID, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskDeleteDashboardAction, rhs: Ubo_V1_KioskDeleteDashboardAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.dashboardID != rhs.dashboardID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskRotatePortAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskRotatePortAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}port\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.port) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.port.isEmpty {
+      try visitor.visitSingularStringField(value: self.port, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskRotatePortAction, rhs: Ubo_V1_KioskRotatePortAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.port != rhs.port {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskApplyConfigEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskApplyConfigEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskApplyConfigEvent, rhs: Ubo_V1_KioskApplyConfigEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".KioskState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}is_active\0\u{3}is_enabled\0\u{3}is_installed\0\u{3}is_installing\0\u{3}port_selections\0\u{1}dashboards\0\u{3}connected_ports\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_kiosk\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self._isActive) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self._isEnabled) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self._isInstalled) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._isInstalling) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._portSelections) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._dashboards) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._connectedPorts) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._isActive {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._isEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._isInstalled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._isInstalling {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._portSelections {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._dashboards {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._connectedPorts {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskState, rhs: Ubo_V1_KioskState) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotKiosk {return false}
+    if lhs._isActive != rhs._isActive {return false}
+    if lhs._isEnabled != rhs._isEnabled {return false}
+    if lhs._isInstalled != rhs._isInstalled {return false}
+    if lhs._isInstalling != rhs._isInstalling {return false}
+    if lhs._portSelections != rhs._portSelections {return false}
+    if lhs._dashboards != rhs._dashboards {return false}
+    if lhs._connectedPorts != rhs._connectedPorts {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskState.Dashboards: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_KioskState.protoMessageName + ".Dashboards"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskState.Dashboards, rhs: Ubo_V1_KioskState.Dashboards) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_KioskState.ConnectedPorts: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_KioskState.protoMessageName + ".ConnectedPorts"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_KioskState.ConnectedPorts, rhs: Ubo_V1_KioskState.ConnectedPorts) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_LightDMAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LightDMAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_lightdm\0")
@@ -53849,6 +58671,129 @@ extension Ubo_V1_LightDMState: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   }
 }
 
+extension Ubo_V1_LocationInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocationInfo"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}latitude\0\u{1}longitude\0\u{1}city\0\u{1}country\0\u{3}country_code\0\u{1}timezone\0\u{4}a\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularFloatField(value: &self.latitude) }()
+      case 3: try { try decoder.decodeSingularFloatField(value: &self.longitude) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._city) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._country) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._countryCode) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._timezone) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.latitude.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.latitude, fieldNumber: 2)
+    }
+    if self.longitude.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.longitude, fieldNumber: 3)
+    }
+    try { if let v = self._city {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._country {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._countryCode {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._timezone {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocationInfo, rhs: Ubo_V1_LocationInfo) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.latitude != rhs.latitude {return false}
+    if lhs.longitude != rhs.longitude {return false}
+    if lhs._city != rhs._city {return false}
+    if lhs._country != rhs._country {return false}
+    if lhs._countryCode != rhs._countryCode {return false}
+    if lhs._timezone != rhs._timezone {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WeatherCondition: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WeatherCondition"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}symbol_code\0\u{3}temperature_celsius\0\u{3}wind_speed_mps\0\u{3}fetched_at\0\u{3}expires_at\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbolCode) }()
+      case 3: try { try decoder.decodeSingularFloatField(value: &self.temperatureCelsius) }()
+      case 4: try { try decoder.decodeSingularFloatField(value: &self._windSpeedMps) }()
+      case 5: try { try decoder.decodeSingularFloatField(value: &self._fetchedAt) }()
+      case 6: try { try decoder.decodeSingularFloatField(value: &self._expiresAt) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.symbolCode.isEmpty {
+      try visitor.visitSingularStringField(value: self.symbolCode, fieldNumber: 2)
+    }
+    if self.temperatureCelsius.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.temperatureCelsius, fieldNumber: 3)
+    }
+    try { if let v = self._windSpeedMps {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._fetchedAt {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._expiresAt {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WeatherCondition, rhs: Ubo_V1_WeatherCondition) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.symbolCode != rhs.symbolCode {return false}
+    if lhs.temperatureCelsius != rhs.temperatureCelsius {return false}
+    if lhs._windSpeedMps != rhs._windSpeedMps {return false}
+    if lhs._fetchedAt != rhs._fetchedAt {return false}
+    if lhs._expiresAt != rhs._expiresAt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_LocalizationAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LocalizationAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
@@ -53956,6 +58901,264 @@ extension Ubo_V1_LocalizationSetLanguageAction: SwiftProtobuf.Message, SwiftProt
   }
 }
 
+extension Ubo_V1_LocalizationSetLocationAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSetLocationAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}location\0\u{1}source\0\u{3}public_ip\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._location) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self.source) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self._publicIp) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._location {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    if self.source != .uboAppDotStoreDotServicesDotLocalizationUnspecified {
+      try visitor.visitSingularEnumField(value: self.source, fieldNumber: 3)
+    }
+    try { if let v = self._publicIp {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSetLocationAction, rhs: Ubo_V1_LocalizationSetLocationAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._location != rhs._location {return false}
+    if lhs.source != rhs.source {return false}
+    if lhs._publicIp != rhs._publicIp {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationResetLocationAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationResetLocationAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationResetLocationAction, rhs: Ubo_V1_LocalizationResetLocationAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationUpdateWeatherAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationUpdateWeatherAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}weather\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._weather) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._weather {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationUpdateWeatherAction, rhs: Ubo_V1_LocalizationUpdateWeatherAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._weather != rhs._weather {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationRefreshWeatherAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationRefreshWeatherAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationRefreshWeatherAction, rhs: Ubo_V1_LocalizationRefreshWeatherAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakTimeAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakTimeAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakTimeAction, rhs: Ubo_V1_LocalizationSpeakTimeAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakDateAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakDateAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakDateAction, rhs: Ubo_V1_LocalizationSpeakDateAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakWeatherAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakWeatherAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakWeatherAction, rhs: Ubo_V1_LocalizationSpeakWeatherAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_LocalizationLanguageChangedEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LocalizationLanguageChangedEvent"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}language\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
@@ -53995,9 +59198,9 @@ extension Ubo_V1_LocalizationLanguageChangedEvent: SwiftProtobuf.Message, SwiftP
   }
 }
 
-extension Ubo_V1_LocalizationState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".LocalizationState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}language\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+extension Ubo_V1_LocalizationLocationChangedEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationLocationChangedEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}location\0\u{1}source\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -54005,7 +59208,8 @@ extension Ubo_V1_LocalizationState: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 2: try { try decoder.decodeSingularEnumField(value: &self._language) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._location) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self.source) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
       default: break
       }
@@ -54017,8 +59221,85 @@ extension Ubo_V1_LocalizationState: SwiftProtobuf.Message, SwiftProtobuf._Messag
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._language {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    try { if let v = self._location {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    if self.source != .uboAppDotStoreDotServicesDotLocalizationUnspecified {
+      try visitor.visitSingularEnumField(value: self.source, fieldNumber: 3)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationLocationChangedEvent, rhs: Ubo_V1_LocalizationLocationChangedEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._location != rhs._location {return false}
+    if lhs.source != rhs.source {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationLocationResetEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationLocationResetEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationLocationResetEvent, rhs: Ubo_V1_LocalizationLocationResetEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationWeatherRefreshRequestedEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationWeatherRefreshRequestedEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}location\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._location) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._location {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
@@ -54026,9 +59307,236 @@ extension Ubo_V1_LocalizationState: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Ubo_V1_LocalizationState, rhs: Ubo_V1_LocalizationState) -> Bool {
+  public static func ==(lhs: Ubo_V1_LocalizationWeatherRefreshRequestedEvent, rhs: Ubo_V1_LocalizationWeatherRefreshRequestedEvent) -> Bool {
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
-    if lhs._language != rhs._language {return false}
+    if lhs._location != rhs._location {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakTimeEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakTimeEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}timezone\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self._timezone) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._timezone {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakTimeEvent, rhs: Ubo_V1_LocalizationSpeakTimeEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._timezone != rhs._timezone {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakDateEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakDateEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}timezone\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self._timezone) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._timezone {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakDateEvent, rhs: Ubo_V1_LocalizationSpeakDateEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._timezone != rhs._timezone {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationSpeakWeatherEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationSpeakWeatherEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}weather\0\u{1}location\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._weather) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._location) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._weather {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._location {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationSpeakWeatherEvent, rhs: Ubo_V1_LocalizationSpeakWeatherEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+    if lhs._weather != rhs._weather {return false}
+    if lhs._location != rhs._location {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_LocalizationState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".LocalizationState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}language\0\u{1}location\0\u{3}location_source\0\u{3}public_ip\0\u{1}weather\0\u{4}b\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_localization\0")
+
+  fileprivate class _StorageClass {
+    var _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization: String? = nil
+    var _language: Ubo_V1_LanguageCode? = nil
+    var _location: Ubo_V1_LocationInfo? = nil
+    var _locationSource: Ubo_V1_LocationSource? = nil
+    var _publicIp: String? = nil
+    var _weather: Ubo_V1_WeatherCondition? = nil
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization = source._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization
+      _language = source._language
+      _location = source._location
+      _locationSource = source._locationSource
+      _publicIp = source._publicIp
+      _weather = source._weather
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 2: try { try decoder.decodeSingularEnumField(value: &_storage._language) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._location) }()
+        case 4: try { try decoder.decodeSingularEnumField(value: &_storage._locationSource) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._publicIp) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._weather) }()
+        case 1000: try { try decoder.decodeSingularStringField(value: &_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._language {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._location {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._locationSource {
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+      } }()
+      try { if let v = _storage._publicIp {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+      } }()
+      try { if let v = _storage._weather {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      try { if let v = _storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+      } }()
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_LocalizationState, rhs: Ubo_V1_LocalizationState) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization != rhs_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotLocalization {return false}
+        if _storage._language != rhs_storage._language {return false}
+        if _storage._location != rhs_storage._location {return false}
+        if _storage._locationSource != rhs_storage._locationSource {return false}
+        if _storage._publicIp != rhs_storage._publicIp {return false}
+        if _storage._weather != rhs_storage._weather {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -55171,6 +60679,973 @@ extension Ubo_V1_McpState.ServerStatusesDict: SwiftProtobuf.Message, SwiftProtob
   }
 
   public static func ==(lhs: Ubo_V1_McpState.ServerStatusesDict, rhs: Ubo_V1_McpState.ServerStatusesDict) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttAction, rhs: Ubo_V1_MqttAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttEvent, rhs: Ubo_V1_MqttEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttBrokerConfig: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttBrokerConfig"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}source\0\u{1}host\0\u{1}port\0\u{1}username\0\u{3}has_password\0\u{3}use_tls\0\u{3}ca_cert_path\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self._source) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._host) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self._port) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._username) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._hasPassword_p) }()
+      case 7: try { try decoder.decodeSingularBoolField(value: &self._useTls) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._caCertPath) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._source {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._host {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._port {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._username {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._hasPassword_p {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._useTls {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._caCertPath {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttBrokerConfig, rhs: Ubo_V1_MqttBrokerConfig) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs._source != rhs._source {return false}
+    if lhs._host != rhs._host {return false}
+    if lhs._port != rhs._port {return false}
+    if lhs._username != rhs._username {return false}
+    if lhs._hasPassword_p != rhs._hasPassword_p {return false}
+    if lhs._useTls != rhs._useTls {return false}
+    if lhs._caCertPath != rhs._caCertPath {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttComponent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttComponent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}component_id\0\u{1}platform\0\u{1}name\0\u{3}state_channel\0\u{3}value_template\0\u{3}command_channel\0\u{3}payload_press\0\u{3}device_class\0\u{3}unit_of_measurement\0\u{3}state_class\0\u{3}suggested_display_precision\0\u{3}event_types\0\u{1}options\0\u{3}expire_after\0\u{3}command_template\0\u{3}min_value\0\u{3}max_value\0\u{1}step\0\u{1}mode\0\u{1}retain\0\u{1}qos\0\u{4}R\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  fileprivate class _StorageClass {
+    var _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt: String? = nil
+    var _componentID: String = String()
+    var _platform: String = String()
+    var _name: String = String()
+    var _stateChannel: String? = nil
+    var _valueTemplate: String? = nil
+    var _commandChannel: String? = nil
+    var _payloadPress: String? = nil
+    var _deviceClass: String? = nil
+    var _unitOfMeasurement: String? = nil
+    var _stateClass: String? = nil
+    var _suggestedDisplayPrecision: Int64? = nil
+    var _eventTypes: Ubo_V1_MqttComponent.EventTypes? = nil
+    var _options: Ubo_V1_MqttComponent.Options? = nil
+    var _expireAfter: Int64? = nil
+    var _commandTemplate: String? = nil
+    var _minValue: Float? = nil
+    var _maxValue: Float? = nil
+    var _step: Float? = nil
+    var _mode: String? = nil
+    var _retain: Bool? = nil
+    var _qos: Int64? = nil
+
+      // This property is used as the initial default value for new instances of the type.
+      // The type itself is protecting the reference to its storage via CoW semantics.
+      // This will force a copy to be made of this reference when the first mutation occurs;
+      // hence, it is safe to mark this as `nonisolated(unsafe)`.
+      static nonisolated(unsafe) let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt = source._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt
+      _componentID = source._componentID
+      _platform = source._platform
+      _name = source._name
+      _stateChannel = source._stateChannel
+      _valueTemplate = source._valueTemplate
+      _commandChannel = source._commandChannel
+      _payloadPress = source._payloadPress
+      _deviceClass = source._deviceClass
+      _unitOfMeasurement = source._unitOfMeasurement
+      _stateClass = source._stateClass
+      _suggestedDisplayPrecision = source._suggestedDisplayPrecision
+      _eventTypes = source._eventTypes
+      _options = source._options
+      _expireAfter = source._expireAfter
+      _commandTemplate = source._commandTemplate
+      _minValue = source._minValue
+      _maxValue = source._maxValue
+      _step = source._step
+      _mode = source._mode
+      _retain = source._retain
+      _qos = source._qos
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._componentID) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._platform) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._name) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._stateChannel) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._valueTemplate) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._commandChannel) }()
+        case 8: try { try decoder.decodeSingularStringField(value: &_storage._payloadPress) }()
+        case 9: try { try decoder.decodeSingularStringField(value: &_storage._deviceClass) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._unitOfMeasurement) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._stateClass) }()
+        case 12: try { try decoder.decodeSingularInt64Field(value: &_storage._suggestedDisplayPrecision) }()
+        case 13: try { try decoder.decodeSingularMessageField(value: &_storage._eventTypes) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._options) }()
+        case 15: try { try decoder.decodeSingularInt64Field(value: &_storage._expireAfter) }()
+        case 16: try { try decoder.decodeSingularStringField(value: &_storage._commandTemplate) }()
+        case 17: try { try decoder.decodeSingularFloatField(value: &_storage._minValue) }()
+        case 18: try { try decoder.decodeSingularFloatField(value: &_storage._maxValue) }()
+        case 19: try { try decoder.decodeSingularFloatField(value: &_storage._step) }()
+        case 20: try { try decoder.decodeSingularStringField(value: &_storage._mode) }()
+        case 21: try { try decoder.decodeSingularBoolField(value: &_storage._retain) }()
+        case 22: try { try decoder.decodeSingularInt64Field(value: &_storage._qos) }()
+        case 1000: try { try decoder.decodeSingularStringField(value: &_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._componentID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._componentID, fieldNumber: 2)
+      }
+      if !_storage._platform.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._platform, fieldNumber: 3)
+      }
+      if !_storage._name.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 4)
+      }
+      try { if let v = _storage._stateChannel {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+      } }()
+      try { if let v = _storage._valueTemplate {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+      } }()
+      try { if let v = _storage._commandChannel {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+      } }()
+      try { if let v = _storage._payloadPress {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+      } }()
+      try { if let v = _storage._deviceClass {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+      } }()
+      try { if let v = _storage._unitOfMeasurement {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 10)
+      } }()
+      try { if let v = _storage._stateClass {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 11)
+      } }()
+      try { if let v = _storage._suggestedDisplayPrecision {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 12)
+      } }()
+      try { if let v = _storage._eventTypes {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+      } }()
+      try { if let v = _storage._options {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      try { if let v = _storage._expireAfter {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 15)
+      } }()
+      try { if let v = _storage._commandTemplate {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 16)
+      } }()
+      try { if let v = _storage._minValue {
+        try visitor.visitSingularFloatField(value: v, fieldNumber: 17)
+      } }()
+      try { if let v = _storage._maxValue {
+        try visitor.visitSingularFloatField(value: v, fieldNumber: 18)
+      } }()
+      try { if let v = _storage._step {
+        try visitor.visitSingularFloatField(value: v, fieldNumber: 19)
+      } }()
+      try { if let v = _storage._mode {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 20)
+      } }()
+      try { if let v = _storage._retain {
+        try visitor.visitSingularBoolField(value: v, fieldNumber: 21)
+      } }()
+      try { if let v = _storage._qos {
+        try visitor.visitSingularInt64Field(value: v, fieldNumber: 22)
+      } }()
+      try { if let v = _storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+        try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+      } }()
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttComponent, rhs: Ubo_V1_MqttComponent) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs_storage._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+        if _storage._componentID != rhs_storage._componentID {return false}
+        if _storage._platform != rhs_storage._platform {return false}
+        if _storage._name != rhs_storage._name {return false}
+        if _storage._stateChannel != rhs_storage._stateChannel {return false}
+        if _storage._valueTemplate != rhs_storage._valueTemplate {return false}
+        if _storage._commandChannel != rhs_storage._commandChannel {return false}
+        if _storage._payloadPress != rhs_storage._payloadPress {return false}
+        if _storage._deviceClass != rhs_storage._deviceClass {return false}
+        if _storage._unitOfMeasurement != rhs_storage._unitOfMeasurement {return false}
+        if _storage._stateClass != rhs_storage._stateClass {return false}
+        if _storage._suggestedDisplayPrecision != rhs_storage._suggestedDisplayPrecision {return false}
+        if _storage._eventTypes != rhs_storage._eventTypes {return false}
+        if _storage._options != rhs_storage._options {return false}
+        if _storage._expireAfter != rhs_storage._expireAfter {return false}
+        if _storage._commandTemplate != rhs_storage._commandTemplate {return false}
+        if _storage._minValue != rhs_storage._minValue {return false}
+        if _storage._maxValue != rhs_storage._maxValue {return false}
+        if _storage._step != rhs_storage._step {return false}
+        if _storage._mode != rhs_storage._mode {return false}
+        if _storage._retain != rhs_storage._retain {return false}
+        if _storage._qos != rhs_storage._qos {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttComponent.EventTypes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_MqttComponent.protoMessageName + ".EventTypes"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttComponent.EventTypes, rhs: Ubo_V1_MqttComponent.EventTypes) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttComponent.Options: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_MqttComponent.protoMessageName + ".Options"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttComponent.Options, rhs: Ubo_V1_MqttComponent.Options) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetStatusAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetStatusAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{1}error\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._error) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.status != .uboAppDotStoreDotServicesDotMqttUnspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 2)
+    }
+    try { if let v = self._error {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetStatusAction, rhs: Ubo_V1_MqttSetStatusAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs._error != rhs._error {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetBrokerAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetBrokerAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}broker\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._broker) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._broker {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetBrokerAction, rhs: Ubo_V1_MqttSetBrokerAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs._broker != rhs._broker {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetEnabledAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetEnabledAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}is_enabled\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.isEnabled) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.isEnabled != false {
+      try visitor.visitSingularBoolField(value: self.isEnabled, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetEnabledAction, rhs: Ubo_V1_MqttSetEnabledAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.isEnabled != rhs.isEnabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetBundledExposeToLanAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetBundledExposeToLanAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}expose_to_lan\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.exposeToLan) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.exposeToLan != false {
+      try visitor.visitSingularBoolField(value: self.exposeToLan, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetBundledExposeToLanAction, rhs: Ubo_V1_MqttSetBundledExposeToLanAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.exposeToLan != rhs.exposeToLan {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttBundledCredentialsChangedAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttBundledCredentialsChangedAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttBundledCredentialsChangedAction, rhs: Ubo_V1_MqttBundledCredentialsChangedAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetAllowRemoteControlAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetAllowRemoteControlAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}allow_remote_control\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.allowRemoteControl) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.allowRemoteControl != false {
+      try visitor.visitSingularBoolField(value: self.allowRemoteControl, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetAllowRemoteControlAction, rhs: Ubo_V1_MqttSetAllowRemoteControlAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.allowRemoteControl != rhs.allowRemoteControl {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttSetPublishedComponentsAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttSetPublishedComponentsAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}published_components\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: &self.publishedComponents) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.publishedComponents.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: self.publishedComponents, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttSetPublishedComponentsAction, rhs: Ubo_V1_MqttSetPublishedComponentsAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.publishedComponents != rhs.publishedComponents {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttPublishAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttPublishAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}channel\0\u{1}payload\0\u{1}retain\0\u{1}qos\0\u{4}c\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.channel) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.payload) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self._retain) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self._qos) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.channel.isEmpty {
+      try visitor.visitSingularStringField(value: self.channel, fieldNumber: 2)
+    }
+    if !self.payload.isEmpty {
+      try visitor.visitSingularStringField(value: self.payload, fieldNumber: 3)
+    }
+    try { if let v = self._retain {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._qos {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttPublishAction, rhs: Ubo_V1_MqttPublishAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.channel != rhs.channel {return false}
+    if lhs.payload != rhs.payload {return false}
+    if lhs._retain != rhs._retain {return false}
+    if lhs._qos != rhs._qos {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttPublishEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttPublishEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}channel\0\u{1}payload\0\u{1}retain\0\u{1}qos\0\u{4}c\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.channel) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.payload) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self._retain) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self._qos) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.channel.isEmpty {
+      try visitor.visitSingularStringField(value: self.channel, fieldNumber: 2)
+    }
+    if !self.payload.isEmpty {
+      try visitor.visitSingularStringField(value: self.payload, fieldNumber: 3)
+    }
+    try { if let v = self._retain {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._qos {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttPublishEvent, rhs: Ubo_V1_MqttPublishEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.channel != rhs.channel {return false}
+    if lhs.payload != rhs.payload {return false}
+    if lhs._retain != rhs._retain {return false}
+    if lhs._qos != rhs._qos {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttRequestAnnounceAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttRequestAnnounceAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttRequestAnnounceAction, rhs: Ubo_V1_MqttRequestAnnounceAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttAnnounceRequestedEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttAnnounceRequestedEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttAnnounceRequestedEvent, rhs: Ubo_V1_MqttAnnounceRequestedEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MqttState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{1}broker\0\u{3}is_enabled\0\u{3}allow_remote_control\0\u{3}bundled_expose_to_lan\0\u{3}bundled_credentials_revision\0\u{3}last_error\0\u{3}published_components\0\u{4}_\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_mqtt\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self._status) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._broker) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self._isEnabled) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._allowRemoteControl) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._bundledExposeToLan) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self._bundledCredentialsRevision) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._lastError) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._publishedComponents) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._status {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._broker {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._isEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._allowRemoteControl {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._bundledExposeToLan {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._bundledCredentialsRevision {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._lastError {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._publishedComponents {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttState, rhs: Ubo_V1_MqttState) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotMqtt {return false}
+    if lhs._status != rhs._status {return false}
+    if lhs._broker != rhs._broker {return false}
+    if lhs._isEnabled != rhs._isEnabled {return false}
+    if lhs._allowRemoteControl != rhs._allowRemoteControl {return false}
+    if lhs._bundledExposeToLan != rhs._bundledExposeToLan {return false}
+    if lhs._bundledCredentialsRevision != rhs._bundledCredentialsRevision {return false}
+    if lhs._lastError != rhs._lastError {return false}
+    if lhs._publishedComponents != rhs._publishedComponents {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_MqttState.PublishedComponentsDict: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_MqttState.protoMessageName + ".PublishedComponentsDict"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_MqttState.PublishedComponentsDict, rhs: Ubo_V1_MqttState.PublishedComponentsDict) -> Bool {
     if lhs.items != rhs.items {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -57592,6 +64067,40 @@ extension Ubo_V1_SensorsAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   }
 }
 
+extension Ubo_V1_SensorsEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorsEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsEvent, rhs: Ubo_V1_SensorsEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_SensorsReportReadingAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SensorsReportReadingAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}sensor\0\u{1}reading\0\u{1}timestamp\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
@@ -57641,6 +64150,335 @@ extension Ubo_V1_SensorsReportReadingAction: SwiftProtobuf.Message, SwiftProtobu
   }
 }
 
+extension Ubo_V1_SensorEntityReading: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorEntityReading"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}key\0\u{1}value\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.key) }()
+      case 3: try { try decoder.decodeSingularFloatField(value: &self._value) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.key.isEmpty {
+      try visitor.visitSingularStringField(value: self.key, fieldNumber: 2)
+    }
+    try { if let v = self._value {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorEntityReading, rhs: Ubo_V1_SensorEntityReading) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.key != rhs.key {return false}
+    if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorDeviceState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorDeviceState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}id\0\u{3}definition_id\0\u{1}label\0\u{1}address\0\u{3}is_builtin\0\u{1}status\0\u{1}entities\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.definitionID) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.label) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.address) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.isBuiltin) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._entities) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+    }
+    if !self.definitionID.isEmpty {
+      try visitor.visitSingularStringField(value: self.definitionID, fieldNumber: 3)
+    }
+    if !self.label.isEmpty {
+      try visitor.visitSingularStringField(value: self.label, fieldNumber: 4)
+    }
+    if self.address != 0 {
+      try visitor.visitSingularInt64Field(value: self.address, fieldNumber: 5)
+    }
+    if self.isBuiltin != false {
+      try visitor.visitSingularBoolField(value: self.isBuiltin, fieldNumber: 6)
+    }
+    if self.status != .uboAppDotStoreDotServicesDotSensorsUnspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 7)
+    }
+    try { if let v = self._entities {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorDeviceState, rhs: Ubo_V1_SensorDeviceState) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.definitionID != rhs.definitionID {return false}
+    if lhs.label != rhs.label {return false}
+    if lhs.address != rhs.address {return false}
+    if lhs.isBuiltin != rhs.isBuiltin {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs._entities != rhs._entities {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorDeviceState.Entities: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SensorDeviceState.protoMessageName + ".Entities"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorDeviceState.Entities, rhs: Ubo_V1_SensorDeviceState.Entities) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsScanAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorsScanAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsScanAction, rhs: Ubo_V1_SensorsScanAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsScanEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorsScanEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsScanEvent, rhs: Ubo_V1_SensorsScanEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsScanCompletedAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorsScanCompletedAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}devices\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._devices) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._devices {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsScanCompletedAction, rhs: Ubo_V1_SensorsScanCompletedAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs._devices != rhs._devices {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsScanCompletedAction.Devices: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SensorsScanCompletedAction.protoMessageName + ".Devices"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsScanCompletedAction.Devices, rhs: Ubo_V1_SensorsScanCompletedAction.Devices) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsReportDeviceReadingsAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SensorsReportDeviceReadingsAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}device_id\0\u{1}entities\0\u{1}timestamp\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.deviceID) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.entities) }()
+      case 4: try { try decoder.decodeSingularFloatField(value: &self.timestamp) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.deviceID.isEmpty {
+      try visitor.visitSingularStringField(value: self.deviceID, fieldNumber: 2)
+    }
+    if !self.entities.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.entities, fieldNumber: 3)
+    }
+    if self.timestamp.bitPattern != 0 {
+      try visitor.visitSingularFloatField(value: self.timestamp, fieldNumber: 4)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsReportDeviceReadingsAction, rhs: Ubo_V1_SensorsReportDeviceReadingsAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
+    if lhs.deviceID != rhs.deviceID {return false}
+    if lhs.entities != rhs.entities {return false}
+    if lhs.timestamp != rhs.timestamp {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_SensorState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SensorState"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}value\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
@@ -57682,7 +64520,7 @@ extension Ubo_V1_SensorState: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
 
 extension Ubo_V1_SensorsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SensorsState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}temperature\0\u{1}light\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}temperature\0\u{1}light\0\u{1}devices\0\u{3}is_scanning\0\u{4}c\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -57692,6 +64530,8 @@ extension Ubo_V1_SensorsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       switch fieldNumber {
       case 2: try { try decoder.decodeSingularMessageField(value: &self._temperature) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._light) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._devices) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._isScanning) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
       default: break
       }
@@ -57709,6 +64549,12 @@ extension Ubo_V1_SensorsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try { if let v = self._light {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
+    try { if let v = self._devices {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._isScanning {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
@@ -57719,6 +64565,38 @@ extension Ubo_V1_SensorsState: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {return false}
     if lhs._temperature != rhs._temperature {return false}
     if lhs._light != rhs._light {return false}
+    if lhs._devices != rhs._devices {return false}
+    if lhs._isScanning != rhs._isScanning {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SensorsState.DevicesDict: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SensorsState.protoMessageName + ".DevicesDict"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Ubo_V1_SensorDeviceState>.self, value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,Ubo_V1_SensorDeviceState>.self, value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SensorsState.DevicesDict, rhs: Ubo_V1_SensorsState.DevicesDict) -> Bool {
+    if lhs.items != rhs.items {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -57987,6 +64865,50 @@ extension Ubo_V1_SpeechRecognitionSetAssistantEnabledAction: SwiftProtobuf.Messa
 
   public static func ==(lhs: Ubo_V1_SpeechRecognitionSetAssistantEnabledAction, rhs: Ubo_V1_SpeechRecognitionSetAssistantEnabledAction) -> Bool {
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs.enabled != rhs.enabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionSetWakeModeEnabledAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}mode\0\u{1}enabled\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.mode) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.enabled) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.mode != .uboAppDotStoreDotServicesDotSpeechRecognitionUnspecified {
+      try visitor.visitSingularEnumField(value: self.mode, fieldNumber: 2)
+    }
+    if self.enabled != false {
+      try visitor.visitSingularBoolField(value: self.enabled, fieldNumber: 3)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction, rhs: Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs.mode != rhs.mode {return false}
     if lhs.enabled != rhs.enabled {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -58311,6 +65233,45 @@ extension Ubo_V1_SpeechRecognitionRemoveCommandAction: SwiftProtobuf.Message, Sw
   }
 }
 
+extension Ubo_V1_SpeechRecognitionRunCommandAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionRunCommandAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}command_id\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.commandID) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.commandID.isEmpty {
+      try visitor.visitSingularStringField(value: self.commandID, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionRunCommandAction, rhs: Ubo_V1_SpeechRecognitionRunCommandAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs.commandID != rhs.commandID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionSetConversationEndPhrasesAction"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}phrases\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
@@ -58399,6 +65360,124 @@ extension Ubo_V1_SpeechRecognitionIntent: SwiftProtobuf.Message, SwiftProtobuf._
     if lhs.label != rhs.label {return false}
     if lhs.phrases != rhs.phrases {return false}
     if lhs.actionKeys != rhs.actionKeys {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionCommandDescriptor: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionCommandDescriptor"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}id\0\u{1}label\0\u{3}sample_phrases\0\u{4}d\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.label) }()
+      case 4: try { try decoder.decodeRepeatedStringField(value: &self.samplePhrases) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+    }
+    if !self.label.isEmpty {
+      try visitor.visitSingularStringField(value: self.label, fieldNumber: 3)
+    }
+    if !self.samplePhrases.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.samplePhrases, fieldNumber: 4)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionCommandDescriptor, rhs: Ubo_V1_SpeechRecognitionCommandDescriptor) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.label != rhs.label {return false}
+    if lhs.samplePhrases != rhs.samplePhrases {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionCommandsCatalog: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionCommandsCatalog"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}items\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._items) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._items {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionCommandsCatalog, rhs: Ubo_V1_SpeechRecognitionCommandsCatalog) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs._items != rhs._items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionCommandsCatalog.Items: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SpeechRecognitionCommandsCatalog.protoMessageName + ".Items"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionCommandsCatalog.Items, rhs: Ubo_V1_SpeechRecognitionCommandsCatalog.Items) -> Bool {
+    if lhs.items != rhs.items {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -58497,6 +65576,50 @@ extension Ubo_V1_SpeechRecognitionTriggerModeAction: SwiftProtobuf.Message, Swif
     if lhs.mode != rhs.mode {return false}
     if lhs._phrase != rhs._phrase {return false}
     if lhs._detector != rhs._detector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionSetAssistantListeningAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionSetAssistantListeningAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}active\0\u{3}audio_source\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.active) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._audioSource) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.active != false {
+      try visitor.visitSingularBoolField(value: self.active, fieldNumber: 2)
+    }
+    try { if let v = self._audioSource {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionSetAssistantListeningAction, rhs: Ubo_V1_SpeechRecognitionSetAssistantListeningAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
+    if lhs.active != rhs.active {return false}
+    if lhs._audioSource != rhs._audioSource {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -58944,7 +66067,7 @@ extension Ubo_V1_WakeWordEngineConfig: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
 extension Ubo_V1_SpeechRecognitionState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SpeechRecognitionState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}intents\0\u{3}wake_engines\0\u{3}assistant_enabled\0\u{3}openwakeword_models\0\u{3}conversation_end_phrases\0\u{1}status\0\u{3}wake_word_models_status\0\u{4}`\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}intents\0\u{3}wake_engines\0\u{3}enabled_wake_modes\0\u{3}openwakeword_models\0\u{3}conversation_end_phrases\0\u{1}status\0\u{3}assistant_session_audio_source\0\u{3}commands_catalog\0\u{3}wake_word_models_status\0\u{3}seeded_default_ids\0\u{4}]\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_speech_recognition\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -58954,11 +66077,14 @@ extension Ubo_V1_SpeechRecognitionState: SwiftProtobuf.Message, SwiftProtobuf._M
       switch fieldNumber {
       case 2: try { try decoder.decodeSingularMessageField(value: &self._intents) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._wakeEngines) }()
-      case 4: try { try decoder.decodeSingularBoolField(value: &self._assistantEnabled) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._enabledWakeModes) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._openwakewordModels) }()
       case 6: try { try decoder.decodeSingularMessageField(value: &self._conversationEndPhrases) }()
       case 7: try { try decoder.decodeSingularEnumField(value: &self._status) }()
-      case 8: try { try decoder.decodeSingularMessageField(value: &self._wakeWordModelsStatus) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._assistantSessionAudioSource) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._commandsCatalog) }()
+      case 10: try { try decoder.decodeSingularMessageField(value: &self._wakeWordModelsStatus) }()
+      case 11: try { try decoder.decodeSingularMessageField(value: &self._seededDefaultIds) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition) }()
       default: break
       }
@@ -58976,8 +66102,8 @@ extension Ubo_V1_SpeechRecognitionState: SwiftProtobuf.Message, SwiftProtobuf._M
     try { if let v = self._wakeEngines {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
-    try { if let v = self._assistantEnabled {
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 4)
+    try { if let v = self._enabledWakeModes {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
     try { if let v = self._openwakewordModels {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
@@ -58988,8 +66114,17 @@ extension Ubo_V1_SpeechRecognitionState: SwiftProtobuf.Message, SwiftProtobuf._M
     try { if let v = self._status {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 7)
     } }()
+    try { if let v = self._assistantSessionAudioSource {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._commandsCatalog {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    } }()
     try { if let v = self._wakeWordModelsStatus {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    } }()
+    try { if let v = self._seededDefaultIds {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
     } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
@@ -59001,11 +66136,14 @@ extension Ubo_V1_SpeechRecognitionState: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotSpeechRecognition {return false}
     if lhs._intents != rhs._intents {return false}
     if lhs._wakeEngines != rhs._wakeEngines {return false}
-    if lhs._assistantEnabled != rhs._assistantEnabled {return false}
+    if lhs._enabledWakeModes != rhs._enabledWakeModes {return false}
     if lhs._openwakewordModels != rhs._openwakewordModels {return false}
     if lhs._conversationEndPhrases != rhs._conversationEndPhrases {return false}
     if lhs._status != rhs._status {return false}
+    if lhs._assistantSessionAudioSource != rhs._assistantSessionAudioSource {return false}
+    if lhs._commandsCatalog != rhs._commandsCatalog {return false}
     if lhs._wakeWordModelsStatus != rhs._wakeWordModelsStatus {return false}
+    if lhs._seededDefaultIds != rhs._seededDefaultIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -59065,6 +66203,36 @@ extension Ubo_V1_SpeechRecognitionState.WakeEngines: SwiftProtobuf.Message, Swif
   }
 
   public static func ==(lhs: Ubo_V1_SpeechRecognitionState.WakeEngines, rhs: Ubo_V1_SpeechRecognitionState.WakeEngines) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionState.EnabledWakeModes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SpeechRecognitionState.protoMessageName + ".EnabledWakeModes"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedEnumField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitPackedEnumField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionState.EnabledWakeModes, rhs: Ubo_V1_SpeechRecognitionState.EnabledWakeModes) -> Bool {
     if lhs.items != rhs.items {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -59155,6 +66323,36 @@ extension Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus: SwiftProtobuf.Mess
   }
 
   public static func ==(lhs: Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus, rhs: Ubo_V1_SpeechRecognitionState.WakeWordModelsStatus) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_SpeechRecognitionState.SeededDefaultIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_SpeechRecognitionState.protoMessageName + ".SeededDefaultIds"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_SpeechRecognitionState.SeededDefaultIds, rhs: Ubo_V1_SpeechRecognitionState.SeededDefaultIds) -> Bool {
     if lhs.items != rhs.items {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -61024,6 +68222,84 @@ extension Ubo_V1_WebUIInitializeEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
+extension Ubo_V1_WebUIInputAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WebUIInputAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}command\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_web_ui\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.command) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.command != .uboAppDotStoreDotServicesDotWebUiUnspecified {
+      try visitor.visitSingularEnumField(value: self.command, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WebUIInputAction, rhs: Ubo_V1_WebUIInputAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi {return false}
+    if lhs.command != rhs.command {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WebUIInputEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WebUIInputEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}command\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_web_ui\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.command) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.command != .uboAppDotStoreDotServicesDotWebUiUnspecified {
+      try visitor.visitSingularEnumField(value: self.command, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WebUIInputEvent, rhs: Ubo_V1_WebUIInputEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWebUi {return false}
+    if lhs.command != rhs.command {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_WebUIState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".WebUIState"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}active_inputs\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_web_ui\0")
@@ -61708,9 +68984,606 @@ extension Ubo_V1_WiFiState.Connections: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
+extension Ubo_V1_WyomingAccessPolicy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingAccessPolicy"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}kind\0\u{1}value\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.kind) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._value) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.kind != .uboAppDotStoreDotServicesDotWyomingUnspecified {
+      try visitor.visitSingularEnumField(value: self.kind, fieldNumber: 2)
+    }
+    try { if let v = self._value {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingAccessPolicy, rhs: Ubo_V1_WyomingAccessPolicy) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.kind != rhs.kind {return false}
+    if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingState"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}\u{2}is_satellite_enabled\0\u{3}is_engines_enabled\0\u{3}access_policies\0\u{3}is_zeroconf_enabled\0\u{3}satellite_status\0\u{3}satellite_client\0\u{3}engines_status\0\u{3}active_engine_requests\0\u{4}_\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self._isSatelliteEnabled) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self._isEnginesEnabled) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._accessPolicies) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._isZeroconfEnabled) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self._satelliteStatus) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._satelliteClient) }()
+      case 8: try { try decoder.decodeSingularEnumField(value: &self._enginesStatus) }()
+      case 9: try { try decoder.decodeSingularInt64Field(value: &self._activeEngineRequests) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._isSatelliteEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._isEnginesEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._accessPolicies {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._isZeroconfEnabled {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
+    try { if let v = self._satelliteStatus {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
+    } }()
+    try { if let v = self._satelliteClient {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._enginesStatus {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._activeEngineRequests {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 9)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingState, rhs: Ubo_V1_WyomingState) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs._isSatelliteEnabled != rhs._isSatelliteEnabled {return false}
+    if lhs._isEnginesEnabled != rhs._isEnginesEnabled {return false}
+    if lhs._accessPolicies != rhs._accessPolicies {return false}
+    if lhs._isZeroconfEnabled != rhs._isZeroconfEnabled {return false}
+    if lhs._satelliteStatus != rhs._satelliteStatus {return false}
+    if lhs._satelliteClient != rhs._satelliteClient {return false}
+    if lhs._enginesStatus != rhs._enginesStatus {return false}
+    if lhs._activeEngineRequests != rhs._activeEngineRequests {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingState.AccessPolicies: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Ubo_V1_WyomingState.protoMessageName + ".AccessPolicies"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}items\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.items.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingState.AccessPolicies, rhs: Ubo_V1_WyomingState.AccessPolicies) -> Bool {
+    if lhs.items != rhs.items {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingAction, rhs: Ubo_V1_WyomingAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingSetSatelliteEnabledAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingSetSatelliteEnabledAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}enabled\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.enabled) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.enabled != false {
+      try visitor.visitSingularBoolField(value: self.enabled, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingSetSatelliteEnabledAction, rhs: Ubo_V1_WyomingSetSatelliteEnabledAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.enabled != rhs.enabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingSetEnginesEnabledAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingSetEnginesEnabledAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}enabled\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.enabled) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.enabled != false {
+      try visitor.visitSingularBoolField(value: self.enabled, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingSetEnginesEnabledAction, rhs: Ubo_V1_WyomingSetEnginesEnabledAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.enabled != rhs.enabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingAddAccessPolicyAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingAddAccessPolicyAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}kind\0\u{1}value\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.kind) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._value) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.kind != .uboAppDotStoreDotServicesDotWyomingUnspecified {
+      try visitor.visitSingularEnumField(value: self.kind, fieldNumber: 2)
+    }
+    try { if let v = self._value {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingAddAccessPolicyAction, rhs: Ubo_V1_WyomingAddAccessPolicyAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.kind != rhs.kind {return false}
+    if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingRemoveAccessPolicyAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingRemoveAccessPolicyAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}kind\0\u{1}value\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.kind) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._value) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.kind != .uboAppDotStoreDotServicesDotWyomingUnspecified {
+      try visitor.visitSingularEnumField(value: self.kind, fieldNumber: 2)
+    }
+    try { if let v = self._value {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingRemoveAccessPolicyAction, rhs: Ubo_V1_WyomingRemoveAccessPolicyAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.kind != rhs.kind {return false}
+    if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingSetZeroconfEnabledAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingSetZeroconfEnabledAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}enabled\0\u{4}f\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.enabled) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.enabled != false {
+      try visitor.visitSingularBoolField(value: self.enabled, fieldNumber: 2)
+    }
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingSetZeroconfEnabledAction, rhs: Ubo_V1_WyomingSetZeroconfEnabledAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.enabled != rhs.enabled {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingReportSatelliteStatusAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingReportSatelliteStatusAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{1}client\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._client) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.status != .uboAppDotStoreDotServicesDotWyomingUnspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 2)
+    }
+    try { if let v = self._client {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingReportSatelliteStatusAction, rhs: Ubo_V1_WyomingReportSatelliteStatusAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.status != rhs.status {return false}
+    if lhs._client != rhs._client {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingReportEnginesStatusAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingReportEnginesStatusAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}status\0\u{3}active_requests\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularEnumField(value: &self._status) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self._activeRequests) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._status {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._activeRequests {
+      try visitor.visitSingularInt64Field(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingReportEnginesStatusAction, rhs: Ubo_V1_WyomingReportEnginesStatusAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs._status != rhs._status {return false}
+    if lhs._activeRequests != rhs._activeRequests {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingSatelliteWakeAction: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingSatelliteWakeAction"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}phrase\0\u{1}detector\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self._phrase) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._detector) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._phrase {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._detector {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingSatelliteWakeAction, rhs: Ubo_V1_WyomingSatelliteWakeAction) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs._phrase != rhs._phrase {return false}
+    if lhs._detector != rhs._detector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{4}h\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingEvent, rhs: Ubo_V1_WyomingEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ubo_V1_WyomingSatelliteWakeEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".WyomingSatelliteWakeEvent"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}phrase\0\u{1}detector\0\u{4}e\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_wyoming\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeSingularStringField(value: &self._phrase) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._detector) }()
+      case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._phrase {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._detector {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Ubo_V1_WyomingSatelliteWakeEvent, rhs: Ubo_V1_WyomingSatelliteWakeEvent) -> Bool {
+    if lhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming != rhs._metaFieldPackageNameUboAppDotStoreDotServicesDotWyoming {return false}
+    if lhs._phrase != rhs._phrase {return false}
+    if lhs._detector != rhs._detector {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Action"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}assistant_action\0\u{3}assistant_add_eleven_labs_voice_action\0\u{3}assistant_add_generic_llm_provider_action\0\u{3}assistant_add_moonshine_downloaded_model_action\0\u{3}assistant_complete_action\0\u{3}assistant_delete_eleven_labs_voice_action\0\u{3}assistant_delete_kokoro_action\0\u{3}assistant_delete_moonshine_model_action\0\u{3}assistant_delete_ollama_model_action\0\u{3}assistant_delete_piper_voice_action\0\u{3}assistant_delete_vosk_model_action\0\u{3}assistant_download_kokoro_action\0\u{3}assistant_download_moonshine_model_action\0\u{3}assistant_download_ollama_model_action\0\u{3}assistant_download_piper_voice_action\0\u{3}assistant_download_vosk_model_action\0\u{3}assistant_remove_generic_llm_provider_action\0\u{3}assistant_remove_moonshine_downloaded_model_action\0\u{3}assistant_report_action\0\u{3}assistant_run_pipeline_action\0\u{3}assistant_select_generic_llm_provider_action\0\u{3}assistant_set_conversation_end_phrases_action\0\u{3}assistant_set_eleven_labs_available_voices_action\0\u{3}assistant_set_is_active_action\0\u{3}assistant_set_kokoro_downloaded_action\0\u{3}assistant_set_mistral_available_voices_action\0\u{3}assistant_set_moonshine_downloading_action\0\u{3}assistant_set_ollama_downloaded_models_action\0\u{3}assistant_set_ollama_model_capabilities_action\0\u{3}assistant_set_ollama_thinking_action\0\u{3}assistant_set_piper_downloaded_voices_action\0\u{3}assistant_set_selected_image_generator_action\0\u{3}assistant_set_selected_kokoro_voice_action\0\u{3}assistant_set_selected_llm_action\0\u{3}assistant_set_selected_model_action\0\u{3}assistant_set_selected_moonshine_model_action\0\u{3}assistant_set_selected_piper_voice_action\0\u{3}assistant_set_selected_stt_action\0\u{3}assistant_set_selected_tts_action\0\u{3}assistant_set_selected_voice_action\0\u{3}assistant_set_selected_vosk_model_action\0\u{3}assistant_set_vosk_downloaded_models_action\0\u{3}assistant_start_listening_action\0\u{3}assistant_stop_listening_action\0\u{3}assistant_stop_talking_action\0\u{3}assistant_synthesize_action\0\u{3}assistant_toggle_listening_action\0\u{3}assistant_transcribe_action\0\u{3}assistant_update_providers_action\0\u{3}audio_action\0\u{3}audio_change_volume_action\0\u{3}audio_install_driver_action\0\u{3}audio_play_audio_sample_action\0\u{3}audio_play_audio_sequence_action\0\u{3}audio_play_chime_action\0\u{3}audio_play_recording_action\0\u{3}audio_playback_done_action\0\u{3}audio_report_sample_action\0\u{3}audio_set_mute_status_action\0\u{3}audio_set_volume_action\0\u{3}audio_start_recording_action\0\u{3}audio_stop_playback_action\0\u{3}audio_stop_recording_action\0\u{3}audio_toggle_mute_status_action\0\u{3}audio_toggle_recording_action\0\u{3}camera_action\0\u{3}camera_detect_action\0\u{3}camera_install_driver_action\0\u{3}camera_register_remote_action\0\u{3}camera_report_barcode_action\0\u{3}camera_report_image_action\0\u{3}camera_restore_default_action\0\u{3}camera_set_available_cameras_action\0\u{3}camera_set_index_action\0\u{3}camera_set_selected_source_action\0\u{3}camera_start_viewfinder_action\0\u{3}chat_action\0\u{3}chat_add_message_action\0\u{3}chat_append_to_message_action\0\u{3}chat_clear_action\0\u{3}chat_end_session_action\0\u{3}chat_send_user_message_action\0\u{3}chat_set_message_text_action\0\u{3}chat_start_session_action\0\u{3}chat_toggle_audio_playback_action\0\u{3}clear_dynamic_menu_action\0\u{3}close_application_action\0\u{3}close_instruction_action\0\u{3}deregister_regular_app_action\0\u{3}display_action\0\u{3}display_blank_action\0\u{3}display_pause_action\0\u{3}display_redraw_action\0\u{3}display_resume_action\0\u{3}display_set_blank_timeout_action\0\u{3}display_unblank_action\0\u{3}display_update_activity_action\0\u{3}docker_action\0\u{3}docker_image_action\0\u{3}docker_image_fetch_action\0\u{3}docker_image_release_action\0\u{3}docker_image_remove_action\0\u{3}docker_image_remove_container_action\0\u{3}docker_image_run_action\0\u{3}docker_image_set_docker_id_action\0\u{3}docker_image_set_expose_to_lan_action\0\u{3}docker_image_set_status_action\0\u{3}docker_image_stop_action\0\u{3}docker_image_update_metadata_action\0\u{3}docker_install_action\0\u{3}docker_remove_username_action\0\u{3}docker_set_macvlan_config_action\0\u{3}docker_set_status_action\0\u{3}docker_set_zigbee_intent_action\0\u{3}docker_start_action\0\u{3}docker_stop_action\0\u{3}docker_store_username_action\0\u{3}dynamic_menu_action\0\u{3}execute_menu_action_action\0\u{3}file_download_action\0\u{3}file_download_ready_action\0\u{3}file_download_request_action\0\u{3}file_system_action\0\u{3}file_system_copy_action\0\u{3}file_system_move_action\0\u{3}file_system_remove_action\0\u{3}file_system_report_selection_action\0\u{3}file_system_selector_pushed_action\0\u{3}file_upload_action\0\u{3}file_upload_chunk_action\0\u{3}file_upload_complete_action\0\u{3}file_upload_start_action\0\u{3}infrared_action\0\u{3}infrared_add_device_action\0\u{3}infrared_handle_received_code_action\0\u{3}infrared_register_device_action\0\u{3}infrared_remove_device_action\0\u{3}infrared_send_code_action\0\u{3}infrared_set_is_registering_device_action\0\u{3}infrared_set_should_propagate_action\0\u{3}infrared_set_should_receive_action\0\u{3}input_action\0\u{3}input_cancel_action\0\u{3}input_demand_action\0\u{3}input_provide_action\0\u{3}input_resolve_action\0\u{3}ip_action\0\u{3}ip_set_is_connected_action\0\u{3}ip_update_interfaces_action\0\u{3}keypad_action\0\u{3}keypad_key_hold_action\0\u{3}keypad_key_press_action\0\u{3}keypad_key_release_action\0\u{3}keypad_key_unhold_action\0\u{3}keypad_report_context_action\0\u{3}light_dm_action\0\u{3}light_dm_clear_enabled_state_action\0\u{3}light_dm_update_state_action\0\u{3}localization_action\0\u{3}localization_set_language_action\0\u{3}main_action\0\u{3}mcp_action\0\u{3}mcp_add_server_action\0\u{3}mcp_delete_server_action\0\u{3}mcp_set_server_status_action\0\u{3}mcp_set_servers_action\0\u{3}mcp_sync_servers_action\0\u{3}mcp_toggle_server_action\0\u{3}menu_action\0\u{3}menu_choose_by_icon_action\0\u{3}menu_choose_by_index_action\0\u{3}menu_choose_by_label_action\0\u{3}menu_go_back_action\0\u{3}menu_go_home_action\0\u{3}menu_scroll_action\0\u{3}notifications_action\0\u{3}notifications_add_action\0\u{3}notifications_clear_action\0\u{3}notifications_clear_all_action\0\u{3}notifications_clear_by_id_action\0\u{3}notifications_display_action\0\u{3}open_application_action\0\u{3}open_render_action\0\u{3}power_action\0\u{3}power_off_action\0\u{3}r_pi_connect_action\0\u{3}r_pi_connect_done_downloading_action\0\u{3}r_pi_connect_set_pending_action\0\u{3}r_pi_connect_set_status_action\0\u{3}r_pi_connect_start_downloading_action\0\u{3}r_pi_connect_update_service_state_action\0\u{3}reboot_action\0\u{3}register_app_action\0\u{3}register_regular_app_action\0\u{3}register_setting_app_action\0\u{3}replay_recorded_sequence_action\0\u{3}report_replaying_done_action\0\u{3}rgb_ring_action\0\u{3}rgb_ring_blank_action\0\u{3}rgb_ring_blink_action\0\u{3}rgb_ring_colorful_command_action\0\u{3}rgb_ring_command_action\0\u{3}rgb_ring_fill_downfrom_action\0\u{3}rgb_ring_fill_upto_action\0\u{3}rgb_ring_progress_wheel_action\0\u{3}rgb_ring_progress_wheel_step_action\0\u{3}rgb_ring_pulse_action\0\u{3}rgb_ring_rainbow_action\0\u{3}rgb_ring_sequence_action\0\u{3}rgb_ring_set_all_action\0\u{3}rgb_ring_set_brightness_action\0\u{3}rgb_ring_set_enabled_action\0\u{3}rgb_ring_set_is_busy_action\0\u{3}rgb_ring_spinning_wheel_action\0\u{3}rgb_ring_waitable_command_action\0\u{3}ssh_action\0\u{3}ssh_clear_enabled_state_action\0\u{3}ssh_update_state_action\0\u{3}screenshot_data_action\0\u{3}sensors_action\0\u{3}sensors_report_reading_action\0\u{3}set_are_enclosures_visible_action\0\u{3}set_local_overlay_open_action\0\u{3}settings_action\0\u{3}settings_clear_service_errors_action\0\u{3}settings_report_service_error_action\0\u{3}settings_service_action\0\u{3}settings_service_set_is_enabled_action\0\u{3}settings_service_set_log_level_action\0\u{3}settings_service_set_should_restart_action\0\u{3}settings_service_set_status_action\0\u{3}settings_set_services_action\0\u{3}settings_start_service_action\0\u{3}settings_stop_service_action\0\u{3}settings_toggle_beta_versions_action\0\u{3}settings_toggle_pdb_signal_action\0\u{3}settings_toggle_visual_debug_action\0\u{3}speech_recognition_action\0\u{3}speech_recognition_add_command_action\0\u{3}speech_recognition_remove_command_action\0\u{3}speech_recognition_report_intent_detection_action\0\u{3}speech_recognition_report_intent_timeout_action\0\u{3}speech_recognition_report_speech_action\0\u{3}speech_recognition_report_wake_word_detection_action\0\u{3}speech_recognition_set_assistant_enabled_action\0\u{3}speech_recognition_set_conversation_end_phrases_action\0\u{3}speech_recognition_trigger_mode_action\0\u{3}speech_recognition_update_command_action\0\u{3}speech_synthesis_action\0\u{3}speech_synthesis_read_text_action\0\u{3}speech_synthesis_set_is_enabled_action\0\u{3}speech_synthesis_set_prefer_local_action\0\u{3}stack_action\0\u{3}stack_pop_action\0\u{3}stack_pop_chat_action\0\u{3}stack_pop_item_action\0\u{3}stack_pop_notification_action\0\u{3}stack_pop_to_root_action\0\u{3}stack_push_application_action\0\u{3}stack_push_chat_action\0\u{3}stack_push_instruction_action\0\u{3}stack_push_menu_action\0\u{3}stack_push_notification_action\0\u{3}stack_push_prompt_action\0\u{3}stack_push_render_action\0\u{3}stack_set_page_index_action\0\u{3}status_icons_action\0\u{3}status_icons_register_action\0\u{3}system_action\0\u{3}system_metrics_update_action\0\u{3}tailscale_action\0\u{3}tailscale_done_downloading_action\0\u{3}tailscale_set_pending_action\0\u{3}tailscale_set_status_action\0\u{3}tailscale_start_downloading_action\0\u{3}take_screenshot_action\0\u{3}toggle_recording_action\0\u{3}update_application_kwargs_action\0\u{3}update_current_view_action\0\u{3}update_dynamic_menu_action\0\u{3}update_instruction_progress_action\0\u{3}update_manager_action\0\u{3}update_manager_report_failed_check_action\0\u{3}update_manager_request_check_action\0\u{3}update_manager_request_update_action\0\u{3}update_manager_set_versions_action\0\u{3}update_prompt_action\0\u{3}update_render_props_action\0\u{3}users_action\0\u{3}users_create_user_action\0\u{3}users_delete_user_action\0\u{3}users_reset_password_action\0\u{3}users_set_users_action\0\u{3}vs_code_action\0\u{3}vs_code_done_downloading_action\0\u{3}vs_code_set_pending_action\0\u{3}vs_code_set_status_action\0\u{3}vs_code_start_downloading_action\0\u{3}wake_engine_set_enabled_action\0\u{3}wake_trigger_add_action\0\u{3}wake_trigger_remove_action\0\u{3}wake_word_delete_model_action\0\u{3}wake_word_download_models_action\0\u{3}wake_word_set_available_models_action\0\u{3}wake_word_set_models_status_action\0\u{3}web_ui_action\0\u{3}wi_fi_action\0\u{3}wi_fi_input_connection_action\0\u{3}wi_fi_set_has_visited_onboarding_action\0\u{3}wi_fi_set_hotspot_running_action\0\u{3}wi_fi_start_hotspot_action\0\u{3}wi_fi_stop_hotspot_action\0\u{3}wi_fi_update_action\0\u{3}wi_fi_update_request_action\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}assistant_action\0\u{3}assistant_add_eleven_labs_voice_action\0\u{3}assistant_add_generic_llm_provider_action\0\u{3}assistant_add_moonshine_downloaded_model_action\0\u{3}assistant_cancel_request_action\0\u{3}assistant_complete_action\0\u{3}assistant_delete_eleven_labs_voice_action\0\u{3}assistant_delete_kokoro_action\0\u{3}assistant_delete_moonshine_model_action\0\u{3}assistant_delete_ollama_model_action\0\u{3}assistant_delete_piper_voice_action\0\u{3}assistant_delete_vosk_model_action\0\u{3}assistant_download_kokoro_action\0\u{3}assistant_download_moonshine_model_action\0\u{3}assistant_download_ollama_model_action\0\u{3}assistant_download_piper_voice_action\0\u{3}assistant_download_vosk_model_action\0\u{3}assistant_remove_generic_llm_provider_action\0\u{3}assistant_remove_moonshine_downloaded_model_action\0\u{3}assistant_report_action\0\u{3}assistant_run_pipeline_action\0\u{3}assistant_select_generic_llm_provider_action\0\u{3}assistant_set_conversation_end_phrases_action\0\u{3}assistant_set_eleven_labs_available_voices_action\0\u{3}assistant_set_is_active_action\0\u{3}assistant_set_kokoro_downloaded_action\0\u{3}assistant_set_mistral_available_voices_action\0\u{3}assistant_set_moonshine_downloading_action\0\u{3}assistant_set_ollama_downloaded_models_action\0\u{3}assistant_set_ollama_model_capabilities_action\0\u{3}assistant_set_ollama_thinking_action\0\u{3}assistant_set_piper_downloaded_voices_action\0\u{3}assistant_set_selected_image_generator_action\0\u{3}assistant_set_selected_kokoro_voice_action\0\u{3}assistant_set_selected_llm_action\0\u{3}assistant_set_selected_model_action\0\u{3}assistant_set_selected_moonshine_model_action\0\u{3}assistant_set_selected_piper_voice_action\0\u{3}assistant_set_selected_stt_action\0\u{3}assistant_set_selected_tts_action\0\u{3}assistant_set_selected_voice_action\0\u{3}assistant_set_selected_vosk_model_action\0\u{3}assistant_set_vosk_downloaded_models_action\0\u{3}assistant_start_listening_action\0\u{3}assistant_stop_listening_action\0\u{3}assistant_stop_talking_action\0\u{3}assistant_synthesize_action\0\u{3}assistant_toggle_listening_action\0\u{3}assistant_transcribe_action\0\u{3}assistant_update_providers_action\0\u{3}audio_action\0\u{3}audio_change_volume_action\0\u{3}audio_install_driver_action\0\u{3}audio_play_audio_sample_action\0\u{3}audio_play_audio_sequence_action\0\u{3}audio_play_chime_action\0\u{3}audio_play_recording_action\0\u{3}audio_playback_done_action\0\u{3}audio_report_remote_capture_action\0\u{3}audio_report_sample_action\0\u{3}audio_set_mute_status_action\0\u{3}audio_set_volume_action\0\u{3}audio_start_recording_action\0\u{3}audio_stop_playback_action\0\u{3}audio_stop_recording_action\0\u{3}audio_toggle_mute_status_action\0\u{3}audio_toggle_recording_action\0\u{3}camera_action\0\u{3}camera_detect_action\0\u{3}camera_install_driver_action\0\u{3}camera_register_remote_action\0\u{3}camera_report_barcode_action\0\u{3}camera_report_image_action\0\u{3}camera_restore_default_action\0\u{3}camera_set_available_cameras_action\0\u{3}camera_set_index_action\0\u{3}camera_set_selected_source_action\0\u{3}camera_start_viewfinder_action\0\u{3}chat_action\0\u{3}chat_add_message_action\0\u{3}chat_append_to_message_action\0\u{3}chat_clear_action\0\u{3}chat_end_session_action\0\u{3}chat_send_user_message_action\0\u{3}chat_set_message_text_action\0\u{3}chat_start_session_action\0\u{3}chat_toggle_audio_playback_action\0\u{3}clear_dynamic_menu_action\0\u{3}close_application_action\0\u{3}close_instruction_action\0\u{3}deregister_regular_app_action\0\u{3}display_action\0\u{3}display_blank_action\0\u{3}display_pause_action\0\u{3}display_redraw_action\0\u{3}display_resume_action\0\u{3}display_set_blank_timeout_action\0\u{3}display_unblank_action\0\u{3}display_update_activity_action\0\u{3}docker_action\0\u{3}docker_image_action\0\u{3}docker_image_fetch_action\0\u{3}docker_image_release_action\0\u{3}docker_image_remove_action\0\u{3}docker_image_remove_container_action\0\u{3}docker_image_run_action\0\u{3}docker_image_set_docker_id_action\0\u{3}docker_image_set_expose_to_lan_action\0\u{3}docker_image_set_status_action\0\u{3}docker_image_stop_action\0\u{3}docker_image_update_metadata_action\0\u{3}docker_install_action\0\u{3}docker_remove_username_action\0\u{3}docker_set_host_network_action\0\u{3}docker_set_status_action\0\u{3}docker_set_zigbee_intent_action\0\u{3}docker_start_action\0\u{3}docker_stop_action\0\u{3}docker_store_username_action\0\u{3}dynamic_menu_action\0\u{3}execute_menu_action_action\0\u{3}file_download_action\0\u{3}file_download_ready_action\0\u{3}file_download_request_action\0\u{3}file_system_action\0\u{3}file_system_copy_action\0\u{3}file_system_move_action\0\u{3}file_system_remove_action\0\u{3}file_system_report_selection_action\0\u{3}file_system_selector_pushed_action\0\u{3}file_upload_action\0\u{3}file_upload_chunk_action\0\u{3}file_upload_complete_action\0\u{3}file_upload_start_action\0\u{3}infrared_action\0\u{3}infrared_add_device_action\0\u{3}infrared_handle_received_code_action\0\u{3}infrared_register_device_action\0\u{3}infrared_remove_device_action\0\u{3}infrared_send_code_action\0\u{3}infrared_set_is_registering_device_action\0\u{3}infrared_set_should_propagate_action\0\u{3}infrared_set_should_receive_action\0\u{3}input_action\0\u{3}input_cancel_action\0\u{3}input_demand_action\0\u{3}input_provide_action\0\u{3}input_resolve_action\0\u{3}ip_action\0\u{3}ip_set_is_connected_action\0\u{3}ip_update_interfaces_action\0\u{3}keypad_action\0\u{3}keypad_key_hold_action\0\u{3}keypad_key_press_action\0\u{3}keypad_key_release_action\0\u{3}keypad_key_unhold_action\0\u{3}keypad_report_context_action\0\u{3}kiosk_action\0\u{3}kiosk_add_dashboard_action\0\u{3}kiosk_clear_enabled_state_action\0\u{3}kiosk_delete_dashboard_action\0\u{3}kiosk_rotate_port_action\0\u{3}kiosk_set_port_selection_action\0\u{3}kiosk_update_state_action\0\u{3}light_dm_action\0\u{3}light_dm_clear_enabled_state_action\0\u{3}light_dm_update_state_action\0\u{3}localization_action\0\u{3}localization_refresh_weather_action\0\u{3}localization_reset_location_action\0\u{3}localization_set_language_action\0\u{3}localization_set_location_action\0\u{3}localization_speak_date_action\0\u{3}localization_speak_time_action\0\u{3}localization_speak_weather_action\0\u{3}localization_update_weather_action\0\u{3}main_action\0\u{3}mcp_action\0\u{3}mcp_add_server_action\0\u{3}mcp_delete_server_action\0\u{3}mcp_set_server_status_action\0\u{3}mcp_set_servers_action\0\u{3}mcp_sync_servers_action\0\u{3}mcp_toggle_server_action\0\u{3}menu_action\0\u{3}menu_choose_by_icon_action\0\u{3}menu_choose_by_index_action\0\u{3}menu_choose_by_label_action\0\u{3}menu_go_back_action\0\u{3}menu_go_home_action\0\u{3}menu_scroll_action\0\u{3}mqtt_action\0\u{3}mqtt_bundled_credentials_changed_action\0\u{3}mqtt_publish_action\0\u{3}mqtt_request_announce_action\0\u{3}mqtt_set_allow_remote_control_action\0\u{3}mqtt_set_broker_action\0\u{3}mqtt_set_bundled_expose_to_lan_action\0\u{3}mqtt_set_enabled_action\0\u{3}mqtt_set_published_components_action\0\u{3}mqtt_set_status_action\0\u{3}notifications_action\0\u{3}notifications_add_action\0\u{3}notifications_clear_action\0\u{3}notifications_clear_all_action\0\u{3}notifications_clear_by_id_action\0\u{3}notifications_display_action\0\u{3}open_application_action\0\u{3}open_render_action\0\u{3}power_action\0\u{3}power_off_action\0\u{3}r_pi_connect_action\0\u{3}r_pi_connect_done_downloading_action\0\u{3}r_pi_connect_set_pending_action\0\u{3}r_pi_connect_set_status_action\0\u{3}r_pi_connect_start_downloading_action\0\u{3}r_pi_connect_update_service_state_action\0\u{3}reboot_action\0\u{3}register_app_action\0\u{3}register_regular_app_action\0\u{3}register_setting_app_action\0\u{3}replay_recorded_sequence_action\0\u{3}report_replaying_done_action\0\u{3}rgb_ring_action\0\u{3}rgb_ring_blank_action\0\u{3}rgb_ring_blink_action\0\u{3}rgb_ring_colorful_command_action\0\u{3}rgb_ring_command_action\0\u{3}rgb_ring_fill_downfrom_action\0\u{3}rgb_ring_fill_upto_action\0\u{3}rgb_ring_progress_wheel_action\0\u{3}rgb_ring_progress_wheel_step_action\0\u{3}rgb_ring_pulse_action\0\u{3}rgb_ring_rainbow_action\0\u{3}rgb_ring_sequence_action\0\u{3}rgb_ring_set_all_action\0\u{3}rgb_ring_set_brightness_action\0\u{3}rgb_ring_set_enabled_action\0\u{3}rgb_ring_set_is_busy_action\0\u{3}rgb_ring_spinning_wheel_action\0\u{3}rgb_ring_waitable_command_action\0\u{3}ssh_action\0\u{3}ssh_clear_enabled_state_action\0\u{3}ssh_update_state_action\0\u{3}screenshot_data_action\0\u{3}sensors_action\0\u{3}sensors_report_device_readings_action\0\u{3}sensors_report_reading_action\0\u{3}sensors_scan_action\0\u{3}sensors_scan_completed_action\0\u{3}set_are_enclosures_visible_action\0\u{3}set_local_overlay_open_action\0\u{3}settings_action\0\u{3}settings_clear_service_errors_action\0\u{3}settings_report_service_error_action\0\u{3}settings_service_action\0\u{3}settings_service_set_is_enabled_action\0\u{3}settings_service_set_log_level_action\0\u{3}settings_service_set_should_restart_action\0\u{3}settings_service_set_status_action\0\u{3}settings_set_services_action\0\u{3}settings_start_service_action\0\u{3}settings_stop_service_action\0\u{3}settings_toggle_assistant_debug_action\0\u{3}settings_toggle_beta_versions_action\0\u{3}settings_toggle_grpc_remote_access_action\0\u{3}settings_toggle_pdb_signal_action\0\u{3}settings_toggle_visual_debug_action\0\u{3}speech_recognition_action\0\u{3}speech_recognition_add_command_action\0\u{3}speech_recognition_remove_command_action\0\u{3}speech_recognition_report_intent_detection_action\0\u{3}speech_recognition_report_intent_timeout_action\0\u{3}speech_recognition_report_speech_action\0\u{3}speech_recognition_report_wake_word_detection_action\0\u{3}speech_recognition_run_command_action\0\u{3}speech_recognition_set_assistant_enabled_action\0\u{3}speech_recognition_set_assistant_listening_action\0\u{3}speech_recognition_set_conversation_end_phrases_action\0\u{3}speech_recognition_set_wake_mode_enabled_action\0\u{3}speech_recognition_trigger_mode_action\0\u{3}speech_recognition_update_command_action\0\u{3}speech_synthesis_action\0\u{3}speech_synthesis_read_text_action\0\u{3}speech_synthesis_set_is_enabled_action\0\u{3}speech_synthesis_set_prefer_local_action\0\u{3}stack_action\0\u{3}stack_pop_action\0\u{3}stack_pop_chat_action\0\u{3}stack_pop_item_action\0\u{3}stack_pop_notification_action\0\u{3}stack_pop_to_root_action\0\u{3}stack_push_application_action\0\u{3}stack_push_chat_action\0\u{3}stack_push_instruction_action\0\u{3}stack_push_menu_action\0\u{3}stack_push_notification_action\0\u{3}stack_push_prompt_action\0\u{3}stack_push_render_action\0\u{3}stack_set_page_index_action\0\u{3}status_icons_action\0\u{3}status_icons_register_action\0\u{3}system_action\0\u{3}system_metrics_update_action\0\u{3}tailscale_action\0\u{3}tailscale_done_downloading_action\0\u{3}tailscale_set_pending_action\0\u{3}tailscale_set_status_action\0\u{3}tailscale_start_downloading_action\0\u{3}take_screenshot_action\0\u{3}toggle_recording_action\0\u{3}update_application_kwargs_action\0\u{3}update_current_view_action\0\u{3}update_dynamic_menu_action\0\u{3}update_instruction_progress_action\0\u{3}update_manager_action\0\u{3}update_manager_report_failed_check_action\0\u{3}update_manager_request_check_action\0\u{3}update_manager_request_update_action\0\u{3}update_manager_set_versions_action\0\u{3}update_prompt_action\0\u{3}update_render_props_action\0\u{3}users_action\0\u{3}users_create_user_action\0\u{3}users_delete_user_action\0\u{3}users_reset_password_action\0\u{3}users_set_users_action\0\u{3}vs_code_action\0\u{3}vs_code_done_downloading_action\0\u{3}vs_code_set_pending_action\0\u{3}vs_code_set_status_action\0\u{3}vs_code_start_downloading_action\0\u{3}wake_engine_set_enabled_action\0\u{3}wake_trigger_add_action\0\u{3}wake_trigger_remove_action\0\u{3}wake_word_delete_model_action\0\u{3}wake_word_download_models_action\0\u{3}wake_word_set_available_models_action\0\u{3}wake_word_set_models_status_action\0\u{3}web_ui_action\0\u{3}web_ui_input_action\0\u{3}wi_fi_action\0\u{3}wi_fi_input_connection_action\0\u{3}wi_fi_set_has_visited_onboarding_action\0\u{3}wi_fi_set_hotspot_running_action\0\u{3}wi_fi_start_hotspot_action\0\u{3}wi_fi_stop_hotspot_action\0\u{3}wi_fi_update_action\0\u{3}wi_fi_update_request_action\0\u{3}wyoming_action\0\u{3}wyoming_add_access_policy_action\0\u{3}wyoming_remove_access_policy_action\0\u{3}wyoming_report_engines_status_action\0\u{3}wyoming_report_satellite_status_action\0\u{3}wyoming_satellite_wake_action\0\u{3}wyoming_set_engines_enabled_action\0\u{3}wyoming_set_satellite_enabled_action\0\u{3}wyoming_set_zeroconf_enabled_action\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -61771,6 +69644,19 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
         }
       }()
       case 5: try {
+        var v: Ubo_V1_AssistantCancelRequestAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .assistantCancelRequestAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .assistantCancelRequestAction(v)
+        }
+      }()
+      case 6: try {
         var v: Ubo_V1_AssistantCompleteAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61783,7 +69669,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantCompleteAction(v)
         }
       }()
-      case 6: try {
+      case 7: try {
         var v: Ubo_V1_AssistantDeleteElevenLabsVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61796,7 +69682,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeleteElevenLabsVoiceAction(v)
         }
       }()
-      case 7: try {
+      case 8: try {
         var v: Ubo_V1_AssistantDeleteKokoroAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61809,7 +69695,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeleteKokoroAction(v)
         }
       }()
-      case 8: try {
+      case 9: try {
         var v: Ubo_V1_AssistantDeleteMoonshineModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61822,7 +69708,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeleteMoonshineModelAction(v)
         }
       }()
-      case 9: try {
+      case 10: try {
         var v: Ubo_V1_AssistantDeleteOllamaModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61835,7 +69721,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeleteOllamaModelAction(v)
         }
       }()
-      case 10: try {
+      case 11: try {
         var v: Ubo_V1_AssistantDeletePiperVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61848,7 +69734,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeletePiperVoiceAction(v)
         }
       }()
-      case 11: try {
+      case 12: try {
         var v: Ubo_V1_AssistantDeleteVoskModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61861,7 +69747,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDeleteVoskModelAction(v)
         }
       }()
-      case 12: try {
+      case 13: try {
         var v: Ubo_V1_AssistantDownloadKokoroAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61874,7 +69760,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDownloadKokoroAction(v)
         }
       }()
-      case 13: try {
+      case 14: try {
         var v: Ubo_V1_AssistantDownloadMoonshineModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61887,7 +69773,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDownloadMoonshineModelAction(v)
         }
       }()
-      case 14: try {
+      case 15: try {
         var v: Ubo_V1_AssistantDownloadOllamaModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61900,7 +69786,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDownloadOllamaModelAction(v)
         }
       }()
-      case 15: try {
+      case 16: try {
         var v: Ubo_V1_AssistantDownloadPiperVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61913,7 +69799,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDownloadPiperVoiceAction(v)
         }
       }()
-      case 16: try {
+      case 17: try {
         var v: Ubo_V1_AssistantDownloadVoskModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61926,7 +69812,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantDownloadVoskModelAction(v)
         }
       }()
-      case 17: try {
+      case 18: try {
         var v: Ubo_V1_AssistantRemoveGenericLLMProviderAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61939,7 +69825,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantRemoveGenericLlmProviderAction(v)
         }
       }()
-      case 18: try {
+      case 19: try {
         var v: Ubo_V1_AssistantRemoveMoonshineDownloadedModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61952,7 +69838,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantRemoveMoonshineDownloadedModelAction(v)
         }
       }()
-      case 19: try {
+      case 20: try {
         var v: Ubo_V1_AssistantReportAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61965,7 +69851,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantReportAction(v)
         }
       }()
-      case 20: try {
+      case 21: try {
         var v: Ubo_V1_AssistantRunPipelineAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61978,7 +69864,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantRunPipelineAction(v)
         }
       }()
-      case 21: try {
+      case 22: try {
         var v: Ubo_V1_AssistantSelectGenericLLMProviderAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -61991,7 +69877,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSelectGenericLlmProviderAction(v)
         }
       }()
-      case 22: try {
+      case 23: try {
         var v: Ubo_V1_AssistantSetConversationEndPhrasesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62004,7 +69890,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetConversationEndPhrasesAction(v)
         }
       }()
-      case 23: try {
+      case 24: try {
         var v: Ubo_V1_AssistantSetElevenLabsAvailableVoicesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62017,7 +69903,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetElevenLabsAvailableVoicesAction(v)
         }
       }()
-      case 24: try {
+      case 25: try {
         var v: Ubo_V1_AssistantSetIsActiveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62030,7 +69916,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetIsActiveAction(v)
         }
       }()
-      case 25: try {
+      case 26: try {
         var v: Ubo_V1_AssistantSetKokoroDownloadedAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62043,7 +69929,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetKokoroDownloadedAction(v)
         }
       }()
-      case 26: try {
+      case 27: try {
         var v: Ubo_V1_AssistantSetMistralAvailableVoicesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62056,7 +69942,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetMistralAvailableVoicesAction(v)
         }
       }()
-      case 27: try {
+      case 28: try {
         var v: Ubo_V1_AssistantSetMoonshineDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62069,7 +69955,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetMoonshineDownloadingAction(v)
         }
       }()
-      case 28: try {
+      case 29: try {
         var v: Ubo_V1_AssistantSetOllamaDownloadedModelsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62082,7 +69968,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetOllamaDownloadedModelsAction(v)
         }
       }()
-      case 29: try {
+      case 30: try {
         var v: Ubo_V1_AssistantSetOllamaModelCapabilitiesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62095,7 +69981,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetOllamaModelCapabilitiesAction(v)
         }
       }()
-      case 30: try {
+      case 31: try {
         var v: Ubo_V1_AssistantSetOllamaThinkingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62108,7 +69994,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetOllamaThinkingAction(v)
         }
       }()
-      case 31: try {
+      case 32: try {
         var v: Ubo_V1_AssistantSetPiperDownloadedVoicesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62121,7 +70007,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetPiperDownloadedVoicesAction(v)
         }
       }()
-      case 32: try {
+      case 33: try {
         var v: Ubo_V1_AssistantSetSelectedImageGeneratorAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62134,7 +70020,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedImageGeneratorAction(v)
         }
       }()
-      case 33: try {
+      case 34: try {
         var v: Ubo_V1_AssistantSetSelectedKokoroVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62147,7 +70033,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedKokoroVoiceAction(v)
         }
       }()
-      case 34: try {
+      case 35: try {
         var v: Ubo_V1_AssistantSetSelectedLLMAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62160,7 +70046,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedLlmAction(v)
         }
       }()
-      case 35: try {
+      case 36: try {
         var v: Ubo_V1_AssistantSetSelectedModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62173,7 +70059,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedModelAction(v)
         }
       }()
-      case 36: try {
+      case 37: try {
         var v: Ubo_V1_AssistantSetSelectedMoonshineModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62186,7 +70072,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedMoonshineModelAction(v)
         }
       }()
-      case 37: try {
+      case 38: try {
         var v: Ubo_V1_AssistantSetSelectedPiperVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62199,7 +70085,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedPiperVoiceAction(v)
         }
       }()
-      case 38: try {
+      case 39: try {
         var v: Ubo_V1_AssistantSetSelectedSTTAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62212,7 +70098,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedSttAction(v)
         }
       }()
-      case 39: try {
+      case 40: try {
         var v: Ubo_V1_AssistantSetSelectedTTSAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62225,7 +70111,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedTtsAction(v)
         }
       }()
-      case 40: try {
+      case 41: try {
         var v: Ubo_V1_AssistantSetSelectedVoiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62238,7 +70124,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedVoiceAction(v)
         }
       }()
-      case 41: try {
+      case 42: try {
         var v: Ubo_V1_AssistantSetSelectedVoskModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62251,7 +70137,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetSelectedVoskModelAction(v)
         }
       }()
-      case 42: try {
+      case 43: try {
         var v: Ubo_V1_AssistantSetVoskDownloadedModelsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62264,7 +70150,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSetVoskDownloadedModelsAction(v)
         }
       }()
-      case 43: try {
+      case 44: try {
         var v: Ubo_V1_AssistantStartListeningAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62277,7 +70163,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantStartListeningAction(v)
         }
       }()
-      case 44: try {
+      case 45: try {
         var v: Ubo_V1_AssistantStopListeningAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62290,7 +70176,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantStopListeningAction(v)
         }
       }()
-      case 45: try {
+      case 46: try {
         var v: Ubo_V1_AssistantStopTalkingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62303,7 +70189,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantStopTalkingAction(v)
         }
       }()
-      case 46: try {
+      case 47: try {
         var v: Ubo_V1_AssistantSynthesizeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62316,7 +70202,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantSynthesizeAction(v)
         }
       }()
-      case 47: try {
+      case 48: try {
         var v: Ubo_V1_AssistantToggleListeningAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62329,7 +70215,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantToggleListeningAction(v)
         }
       }()
-      case 48: try {
+      case 49: try {
         var v: Ubo_V1_AssistantTranscribeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62342,7 +70228,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantTranscribeAction(v)
         }
       }()
-      case 49: try {
+      case 50: try {
         var v: Ubo_V1_AssistantUpdateProvidersAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62355,7 +70241,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .assistantUpdateProvidersAction(v)
         }
       }()
-      case 50: try {
+      case 51: try {
         var v: Ubo_V1_AudioAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62368,7 +70254,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioAction(v)
         }
       }()
-      case 51: try {
+      case 52: try {
         var v: Ubo_V1_AudioChangeVolumeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62381,7 +70267,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioChangeVolumeAction(v)
         }
       }()
-      case 52: try {
+      case 53: try {
         var v: Ubo_V1_AudioInstallDriverAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62394,7 +70280,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioInstallDriverAction(v)
         }
       }()
-      case 53: try {
+      case 54: try {
         var v: Ubo_V1_AudioPlayAudioSampleAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62407,7 +70293,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioPlayAudioSampleAction(v)
         }
       }()
-      case 54: try {
+      case 55: try {
         var v: Ubo_V1_AudioPlayAudioSequenceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62420,7 +70306,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioPlayAudioSequenceAction(v)
         }
       }()
-      case 55: try {
+      case 56: try {
         var v: Ubo_V1_AudioPlayChimeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62433,7 +70319,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioPlayChimeAction(v)
         }
       }()
-      case 56: try {
+      case 57: try {
         var v: Ubo_V1_AudioPlayRecordingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62446,7 +70332,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioPlayRecordingAction(v)
         }
       }()
-      case 57: try {
+      case 58: try {
         var v: Ubo_V1_AudioPlaybackDoneAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62459,7 +70345,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioPlaybackDoneAction(v)
         }
       }()
-      case 58: try {
+      case 59: try {
+        var v: Ubo_V1_AudioReportRemoteCaptureAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .audioReportRemoteCaptureAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .audioReportRemoteCaptureAction(v)
+        }
+      }()
+      case 60: try {
         var v: Ubo_V1_AudioReportSampleAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62472,7 +70371,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioReportSampleAction(v)
         }
       }()
-      case 59: try {
+      case 61: try {
         var v: Ubo_V1_AudioSetMuteStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62485,7 +70384,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioSetMuteStatusAction(v)
         }
       }()
-      case 60: try {
+      case 62: try {
         var v: Ubo_V1_AudioSetVolumeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62498,7 +70397,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioSetVolumeAction(v)
         }
       }()
-      case 61: try {
+      case 63: try {
         var v: Ubo_V1_AudioStartRecordingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62511,7 +70410,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioStartRecordingAction(v)
         }
       }()
-      case 62: try {
+      case 64: try {
         var v: Ubo_V1_AudioStopPlaybackAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62524,7 +70423,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioStopPlaybackAction(v)
         }
       }()
-      case 63: try {
+      case 65: try {
         var v: Ubo_V1_AudioStopRecordingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62537,7 +70436,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioStopRecordingAction(v)
         }
       }()
-      case 64: try {
+      case 66: try {
         var v: Ubo_V1_AudioToggleMuteStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62550,7 +70449,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioToggleMuteStatusAction(v)
         }
       }()
-      case 65: try {
+      case 67: try {
         var v: Ubo_V1_AudioToggleRecordingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62563,7 +70462,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .audioToggleRecordingAction(v)
         }
       }()
-      case 66: try {
+      case 68: try {
         var v: Ubo_V1_CameraAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62576,7 +70475,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraAction(v)
         }
       }()
-      case 67: try {
+      case 69: try {
         var v: Ubo_V1_CameraDetectAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62589,7 +70488,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraDetectAction(v)
         }
       }()
-      case 68: try {
+      case 70: try {
         var v: Ubo_V1_CameraInstallDriverAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62602,7 +70501,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraInstallDriverAction(v)
         }
       }()
-      case 69: try {
+      case 71: try {
         var v: Ubo_V1_CameraRegisterRemoteAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62615,7 +70514,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraRegisterRemoteAction(v)
         }
       }()
-      case 70: try {
+      case 72: try {
         var v: Ubo_V1_CameraReportBarcodeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62628,7 +70527,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraReportBarcodeAction(v)
         }
       }()
-      case 71: try {
+      case 73: try {
         var v: Ubo_V1_CameraReportImageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62641,7 +70540,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraReportImageAction(v)
         }
       }()
-      case 72: try {
+      case 74: try {
         var v: Ubo_V1_CameraRestoreDefaultAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62654,7 +70553,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraRestoreDefaultAction(v)
         }
       }()
-      case 73: try {
+      case 75: try {
         var v: Ubo_V1_CameraSetAvailableCamerasAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62667,7 +70566,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraSetAvailableCamerasAction(v)
         }
       }()
-      case 74: try {
+      case 76: try {
         var v: Ubo_V1_CameraSetIndexAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62680,7 +70579,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraSetIndexAction(v)
         }
       }()
-      case 75: try {
+      case 77: try {
         var v: Ubo_V1_CameraSetSelectedSourceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62693,7 +70592,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraSetSelectedSourceAction(v)
         }
       }()
-      case 76: try {
+      case 78: try {
         var v: Ubo_V1_CameraStartViewfinderAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62706,7 +70605,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .cameraStartViewfinderAction(v)
         }
       }()
-      case 77: try {
+      case 79: try {
         var v: Ubo_V1_ChatAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62719,7 +70618,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatAction(v)
         }
       }()
-      case 78: try {
+      case 80: try {
         var v: Ubo_V1_ChatAddMessageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62732,7 +70631,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatAddMessageAction(v)
         }
       }()
-      case 79: try {
+      case 81: try {
         var v: Ubo_V1_ChatAppendToMessageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62745,7 +70644,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatAppendToMessageAction(v)
         }
       }()
-      case 80: try {
+      case 82: try {
         var v: Ubo_V1_ChatClearAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62758,7 +70657,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatClearAction(v)
         }
       }()
-      case 81: try {
+      case 83: try {
         var v: Ubo_V1_ChatEndSessionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62771,7 +70670,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatEndSessionAction(v)
         }
       }()
-      case 82: try {
+      case 84: try {
         var v: Ubo_V1_ChatSendUserMessageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62784,7 +70683,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatSendUserMessageAction(v)
         }
       }()
-      case 83: try {
+      case 85: try {
         var v: Ubo_V1_ChatSetMessageTextAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62797,7 +70696,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatSetMessageTextAction(v)
         }
       }()
-      case 84: try {
+      case 86: try {
         var v: Ubo_V1_ChatStartSessionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62810,7 +70709,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatStartSessionAction(v)
         }
       }()
-      case 85: try {
+      case 87: try {
         var v: Ubo_V1_ChatToggleAudioPlaybackAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62823,7 +70722,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .chatToggleAudioPlaybackAction(v)
         }
       }()
-      case 86: try {
+      case 88: try {
         var v: Ubo_V1_ClearDynamicMenuAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62836,7 +70735,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .clearDynamicMenuAction_p(v)
         }
       }()
-      case 87: try {
+      case 89: try {
         var v: Ubo_V1_CloseApplicationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62849,7 +70748,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .closeApplicationAction(v)
         }
       }()
-      case 88: try {
+      case 90: try {
         var v: Ubo_V1_CloseInstructionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62862,7 +70761,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .closeInstructionAction(v)
         }
       }()
-      case 89: try {
+      case 91: try {
         var v: Ubo_V1_DeregisterRegularAppAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62875,7 +70774,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .deregisterRegularAppAction(v)
         }
       }()
-      case 90: try {
+      case 92: try {
         var v: Ubo_V1_DisplayAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62888,7 +70787,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayAction(v)
         }
       }()
-      case 91: try {
+      case 93: try {
         var v: Ubo_V1_DisplayBlankAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62901,7 +70800,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayBlankAction(v)
         }
       }()
-      case 92: try {
+      case 94: try {
         var v: Ubo_V1_DisplayPauseAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62914,7 +70813,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayPauseAction(v)
         }
       }()
-      case 93: try {
+      case 95: try {
         var v: Ubo_V1_DisplayRedrawAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62927,7 +70826,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayRedrawAction(v)
         }
       }()
-      case 94: try {
+      case 96: try {
         var v: Ubo_V1_DisplayResumeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62940,7 +70839,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayResumeAction(v)
         }
       }()
-      case 95: try {
+      case 97: try {
         var v: Ubo_V1_DisplaySetBlankTimeoutAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62953,7 +70852,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displaySetBlankTimeoutAction(v)
         }
       }()
-      case 96: try {
+      case 98: try {
         var v: Ubo_V1_DisplayUnblankAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62966,7 +70865,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayUnblankAction(v)
         }
       }()
-      case 97: try {
+      case 99: try {
         var v: Ubo_V1_DisplayUpdateActivityAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62979,7 +70878,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .displayUpdateActivityAction(v)
         }
       }()
-      case 98: try {
+      case 100: try {
         var v: Ubo_V1_DockerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -62992,7 +70891,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerAction(v)
         }
       }()
-      case 99: try {
+      case 101: try {
         var v: Ubo_V1_DockerImageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63005,7 +70904,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageAction(v)
         }
       }()
-      case 100: try {
+      case 102: try {
         var v: Ubo_V1_DockerImageFetchAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63018,7 +70917,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageFetchAction(v)
         }
       }()
-      case 101: try {
+      case 103: try {
         var v: Ubo_V1_DockerImageReleaseAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63031,7 +70930,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageReleaseAction(v)
         }
       }()
-      case 102: try {
+      case 104: try {
         var v: Ubo_V1_DockerImageRemoveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63044,7 +70943,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageRemoveAction(v)
         }
       }()
-      case 103: try {
+      case 105: try {
         var v: Ubo_V1_DockerImageRemoveContainerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63057,7 +70956,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageRemoveContainerAction(v)
         }
       }()
-      case 104: try {
+      case 106: try {
         var v: Ubo_V1_DockerImageRunAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63070,7 +70969,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageRunAction(v)
         }
       }()
-      case 105: try {
+      case 107: try {
         var v: Ubo_V1_DockerImageSetDockerIdAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63083,7 +70982,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageSetDockerIDAction(v)
         }
       }()
-      case 106: try {
+      case 108: try {
         var v: Ubo_V1_DockerImageSetExposeToLanAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63096,7 +70995,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageSetExposeToLanAction(v)
         }
       }()
-      case 107: try {
+      case 109: try {
         var v: Ubo_V1_DockerImageSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63109,7 +71008,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageSetStatusAction(v)
         }
       }()
-      case 108: try {
+      case 110: try {
         var v: Ubo_V1_DockerImageStopAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63122,7 +71021,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageStopAction(v)
         }
       }()
-      case 109: try {
+      case 111: try {
         var v: Ubo_V1_DockerImageUpdateMetadataAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63135,7 +71034,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerImageUpdateMetadataAction(v)
         }
       }()
-      case 110: try {
+      case 112: try {
         var v: Ubo_V1_DockerInstallAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63148,7 +71047,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerInstallAction(v)
         }
       }()
-      case 111: try {
+      case 113: try {
         var v: Ubo_V1_DockerRemoveUsernameAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63161,20 +71060,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerRemoveUsernameAction(v)
         }
       }()
-      case 112: try {
-        var v: Ubo_V1_DockerSetMacvlanConfigAction?
+      case 114: try {
+        var v: Ubo_V1_DockerSetHostNetworkAction?
         var hadOneofValue = false
         if let current = self.action {
           hadOneofValue = true
-          if case .dockerSetMacvlanConfigAction(let m) = current {v = m}
+          if case .dockerSetHostNetworkAction(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {
           if hadOneofValue {try decoder.handleConflictingOneOf()}
-          self.action = .dockerSetMacvlanConfigAction(v)
+          self.action = .dockerSetHostNetworkAction(v)
         }
       }()
-      case 113: try {
+      case 115: try {
         var v: Ubo_V1_DockerSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63187,7 +71086,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerSetStatusAction(v)
         }
       }()
-      case 114: try {
+      case 116: try {
         var v: Ubo_V1_DockerSetZigbeeIntentAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63200,7 +71099,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerSetZigbeeIntentAction(v)
         }
       }()
-      case 115: try {
+      case 117: try {
         var v: Ubo_V1_DockerStartAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63213,7 +71112,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerStartAction(v)
         }
       }()
-      case 116: try {
+      case 118: try {
         var v: Ubo_V1_DockerStopAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63226,7 +71125,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerStopAction(v)
         }
       }()
-      case 117: try {
+      case 119: try {
         var v: Ubo_V1_DockerStoreUsernameAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63239,7 +71138,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dockerStoreUsernameAction(v)
         }
       }()
-      case 118: try {
+      case 120: try {
         var v: Ubo_V1_DynamicMenuAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63252,7 +71151,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .dynamicMenuAction(v)
         }
       }()
-      case 119: try {
+      case 121: try {
         var v: Ubo_V1_ExecuteMenuActionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63265,7 +71164,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .executeMenuActionAction(v)
         }
       }()
-      case 120: try {
+      case 122: try {
         var v: Ubo_V1_FileDownloadAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63278,7 +71177,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileDownloadAction(v)
         }
       }()
-      case 121: try {
+      case 123: try {
         var v: Ubo_V1_FileDownloadReadyAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63291,7 +71190,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileDownloadReadyAction(v)
         }
       }()
-      case 122: try {
+      case 124: try {
         var v: Ubo_V1_FileDownloadRequestAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63304,7 +71203,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileDownloadRequestAction(v)
         }
       }()
-      case 123: try {
+      case 125: try {
         var v: Ubo_V1_FileSystemAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63317,7 +71216,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemAction(v)
         }
       }()
-      case 124: try {
+      case 126: try {
         var v: Ubo_V1_FileSystemCopyAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63330,7 +71229,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemCopyAction(v)
         }
       }()
-      case 125: try {
+      case 127: try {
         var v: Ubo_V1_FileSystemMoveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63343,7 +71242,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemMoveAction(v)
         }
       }()
-      case 126: try {
+      case 128: try {
         var v: Ubo_V1_FileSystemRemoveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63356,7 +71255,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemRemoveAction(v)
         }
       }()
-      case 127: try {
+      case 129: try {
         var v: Ubo_V1_FileSystemReportSelectionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63369,7 +71268,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemReportSelectionAction(v)
         }
       }()
-      case 128: try {
+      case 130: try {
         var v: Ubo_V1_FileSystemSelectorPushedAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63382,7 +71281,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileSystemSelectorPushedAction(v)
         }
       }()
-      case 129: try {
+      case 131: try {
         var v: Ubo_V1_FileUploadAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63395,7 +71294,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileUploadAction(v)
         }
       }()
-      case 130: try {
+      case 132: try {
         var v: Ubo_V1_FileUploadChunkAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63408,7 +71307,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileUploadChunkAction(v)
         }
       }()
-      case 131: try {
+      case 133: try {
         var v: Ubo_V1_FileUploadCompleteAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63421,7 +71320,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileUploadCompleteAction(v)
         }
       }()
-      case 132: try {
+      case 134: try {
         var v: Ubo_V1_FileUploadStartAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63434,7 +71333,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .fileUploadStartAction(v)
         }
       }()
-      case 133: try {
+      case 135: try {
         var v: Ubo_V1_InfraredAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63447,7 +71346,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredAction(v)
         }
       }()
-      case 134: try {
+      case 136: try {
         var v: Ubo_V1_InfraredAddDeviceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63460,7 +71359,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredAddDeviceAction(v)
         }
       }()
-      case 135: try {
+      case 137: try {
         var v: Ubo_V1_InfraredHandleReceivedCodeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63473,7 +71372,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredHandleReceivedCodeAction(v)
         }
       }()
-      case 136: try {
+      case 138: try {
         var v: Ubo_V1_InfraredRegisterDeviceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63486,7 +71385,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredRegisterDeviceAction(v)
         }
       }()
-      case 137: try {
+      case 139: try {
         var v: Ubo_V1_InfraredRemoveDeviceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63499,7 +71398,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredRemoveDeviceAction(v)
         }
       }()
-      case 138: try {
+      case 140: try {
         var v: Ubo_V1_InfraredSendCodeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63512,7 +71411,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredSendCodeAction(v)
         }
       }()
-      case 139: try {
+      case 141: try {
         var v: Ubo_V1_InfraredSetIsRegisteringDeviceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63525,7 +71424,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredSetIsRegisteringDeviceAction(v)
         }
       }()
-      case 140: try {
+      case 142: try {
         var v: Ubo_V1_InfraredSetShouldPropagateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63538,7 +71437,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredSetShouldPropagateAction(v)
         }
       }()
-      case 141: try {
+      case 143: try {
         var v: Ubo_V1_InfraredSetShouldReceiveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63551,7 +71450,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .infraredSetShouldReceiveAction(v)
         }
       }()
-      case 142: try {
+      case 144: try {
         var v: Ubo_V1_InputAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63564,7 +71463,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .inputAction(v)
         }
       }()
-      case 143: try {
+      case 145: try {
         var v: Ubo_V1_InputCancelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63577,7 +71476,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .inputCancelAction(v)
         }
       }()
-      case 144: try {
+      case 146: try {
         var v: Ubo_V1_InputDemandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63590,7 +71489,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .inputDemandAction(v)
         }
       }()
-      case 145: try {
+      case 147: try {
         var v: Ubo_V1_InputProvideAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63603,7 +71502,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .inputProvideAction(v)
         }
       }()
-      case 146: try {
+      case 148: try {
         var v: Ubo_V1_InputResolveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63616,7 +71515,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .inputResolveAction(v)
         }
       }()
-      case 147: try {
+      case 149: try {
         var v: Ubo_V1_IpAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63629,7 +71528,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .ipAction(v)
         }
       }()
-      case 148: try {
+      case 150: try {
         var v: Ubo_V1_IpSetIsConnectedAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63642,7 +71541,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .ipSetIsConnectedAction(v)
         }
       }()
-      case 149: try {
+      case 151: try {
         var v: Ubo_V1_IpUpdateInterfacesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63655,7 +71554,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .ipUpdateInterfacesAction(v)
         }
       }()
-      case 150: try {
+      case 152: try {
         var v: Ubo_V1_KeypadAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63668,7 +71567,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadAction(v)
         }
       }()
-      case 151: try {
+      case 153: try {
         var v: Ubo_V1_KeypadKeyHoldAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63681,7 +71580,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadKeyHoldAction(v)
         }
       }()
-      case 152: try {
+      case 154: try {
         var v: Ubo_V1_KeypadKeyPressAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63694,7 +71593,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadKeyPressAction(v)
         }
       }()
-      case 153: try {
+      case 155: try {
         var v: Ubo_V1_KeypadKeyReleaseAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63707,7 +71606,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadKeyReleaseAction(v)
         }
       }()
-      case 154: try {
+      case 156: try {
         var v: Ubo_V1_KeypadKeyUnholdAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63720,7 +71619,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadKeyUnholdAction(v)
         }
       }()
-      case 155: try {
+      case 157: try {
         var v: Ubo_V1_KeypadReportContextAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63733,7 +71632,98 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .keypadReportContextAction(v)
         }
       }()
-      case 156: try {
+      case 158: try {
+        var v: Ubo_V1_KioskAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskAction(v)
+        }
+      }()
+      case 159: try {
+        var v: Ubo_V1_KioskAddDashboardAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskAddDashboardAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskAddDashboardAction(v)
+        }
+      }()
+      case 160: try {
+        var v: Ubo_V1_KioskClearEnabledStateAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskClearEnabledStateAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskClearEnabledStateAction(v)
+        }
+      }()
+      case 161: try {
+        var v: Ubo_V1_KioskDeleteDashboardAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskDeleteDashboardAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskDeleteDashboardAction(v)
+        }
+      }()
+      case 162: try {
+        var v: Ubo_V1_KioskRotatePortAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskRotatePortAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskRotatePortAction(v)
+        }
+      }()
+      case 163: try {
+        var v: Ubo_V1_KioskSetPortSelectionAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskSetPortSelectionAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskSetPortSelectionAction(v)
+        }
+      }()
+      case 164: try {
+        var v: Ubo_V1_KioskUpdateStateAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .kioskUpdateStateAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .kioskUpdateStateAction(v)
+        }
+      }()
+      case 165: try {
         var v: Ubo_V1_LightDMAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63746,7 +71736,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .lightDmAction(v)
         }
       }()
-      case 157: try {
+      case 166: try {
         var v: Ubo_V1_LightDMClearEnabledStateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63759,7 +71749,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .lightDmClearEnabledStateAction(v)
         }
       }()
-      case 158: try {
+      case 167: try {
         var v: Ubo_V1_LightDMUpdateStateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63772,7 +71762,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .lightDmUpdateStateAction(v)
         }
       }()
-      case 159: try {
+      case 168: try {
         var v: Ubo_V1_LocalizationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63785,7 +71775,33 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .localizationAction(v)
         }
       }()
-      case 160: try {
+      case 169: try {
+        var v: Ubo_V1_LocalizationRefreshWeatherAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationRefreshWeatherAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationRefreshWeatherAction(v)
+        }
+      }()
+      case 170: try {
+        var v: Ubo_V1_LocalizationResetLocationAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationResetLocationAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationResetLocationAction(v)
+        }
+      }()
+      case 171: try {
         var v: Ubo_V1_LocalizationSetLanguageAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63798,7 +71814,72 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .localizationSetLanguageAction(v)
         }
       }()
-      case 161: try {
+      case 172: try {
+        var v: Ubo_V1_LocalizationSetLocationAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationSetLocationAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationSetLocationAction(v)
+        }
+      }()
+      case 173: try {
+        var v: Ubo_V1_LocalizationSpeakDateAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationSpeakDateAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationSpeakDateAction(v)
+        }
+      }()
+      case 174: try {
+        var v: Ubo_V1_LocalizationSpeakTimeAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationSpeakTimeAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationSpeakTimeAction(v)
+        }
+      }()
+      case 175: try {
+        var v: Ubo_V1_LocalizationSpeakWeatherAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationSpeakWeatherAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationSpeakWeatherAction(v)
+        }
+      }()
+      case 176: try {
+        var v: Ubo_V1_LocalizationUpdateWeatherAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .localizationUpdateWeatherAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .localizationUpdateWeatherAction(v)
+        }
+      }()
+      case 177: try {
         var v: Ubo_V1_MainAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63811,7 +71892,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mainAction(v)
         }
       }()
-      case 162: try {
+      case 178: try {
         var v: Ubo_V1_McpAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63824,7 +71905,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpAction(v)
         }
       }()
-      case 163: try {
+      case 179: try {
         var v: Ubo_V1_McpAddServerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63837,7 +71918,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpAddServerAction(v)
         }
       }()
-      case 164: try {
+      case 180: try {
         var v: Ubo_V1_McpDeleteServerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63850,7 +71931,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpDeleteServerAction(v)
         }
       }()
-      case 165: try {
+      case 181: try {
         var v: Ubo_V1_McpSetServerStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63863,7 +71944,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpSetServerStatusAction(v)
         }
       }()
-      case 166: try {
+      case 182: try {
         var v: Ubo_V1_McpSetServersAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63876,7 +71957,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpSetServersAction(v)
         }
       }()
-      case 167: try {
+      case 183: try {
         var v: Ubo_V1_McpSyncServersAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63889,7 +71970,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpSyncServersAction(v)
         }
       }()
-      case 168: try {
+      case 184: try {
         var v: Ubo_V1_McpToggleServerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63902,7 +71983,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .mcpToggleServerAction(v)
         }
       }()
-      case 169: try {
+      case 185: try {
         var v: Ubo_V1_MenuAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63915,7 +71996,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuAction(v)
         }
       }()
-      case 170: try {
+      case 186: try {
         var v: Ubo_V1_MenuChooseByIconAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63928,7 +72009,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuChooseByIconAction(v)
         }
       }()
-      case 171: try {
+      case 187: try {
         var v: Ubo_V1_MenuChooseByIndexAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63941,7 +72022,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuChooseByIndexAction(v)
         }
       }()
-      case 172: try {
+      case 188: try {
         var v: Ubo_V1_MenuChooseByLabelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63954,7 +72035,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuChooseByLabelAction(v)
         }
       }()
-      case 173: try {
+      case 189: try {
         var v: Ubo_V1_MenuGoBackAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63967,7 +72048,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuGoBackAction(v)
         }
       }()
-      case 174: try {
+      case 190: try {
         var v: Ubo_V1_MenuGoHomeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63980,7 +72061,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuGoHomeAction(v)
         }
       }()
-      case 175: try {
+      case 191: try {
         var v: Ubo_V1_MenuScrollAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -63993,7 +72074,137 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .menuScrollAction(v)
         }
       }()
-      case 176: try {
+      case 192: try {
+        var v: Ubo_V1_MqttAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttAction(v)
+        }
+      }()
+      case 193: try {
+        var v: Ubo_V1_MqttBundledCredentialsChangedAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttBundledCredentialsChangedAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttBundledCredentialsChangedAction(v)
+        }
+      }()
+      case 194: try {
+        var v: Ubo_V1_MqttPublishAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttPublishAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttPublishAction(v)
+        }
+      }()
+      case 195: try {
+        var v: Ubo_V1_MqttRequestAnnounceAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttRequestAnnounceAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttRequestAnnounceAction(v)
+        }
+      }()
+      case 196: try {
+        var v: Ubo_V1_MqttSetAllowRemoteControlAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetAllowRemoteControlAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetAllowRemoteControlAction(v)
+        }
+      }()
+      case 197: try {
+        var v: Ubo_V1_MqttSetBrokerAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetBrokerAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetBrokerAction(v)
+        }
+      }()
+      case 198: try {
+        var v: Ubo_V1_MqttSetBundledExposeToLanAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetBundledExposeToLanAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetBundledExposeToLanAction(v)
+        }
+      }()
+      case 199: try {
+        var v: Ubo_V1_MqttSetEnabledAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetEnabledAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetEnabledAction(v)
+        }
+      }()
+      case 200: try {
+        var v: Ubo_V1_MqttSetPublishedComponentsAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetPublishedComponentsAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetPublishedComponentsAction(v)
+        }
+      }()
+      case 201: try {
+        var v: Ubo_V1_MqttSetStatusAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .mqttSetStatusAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .mqttSetStatusAction(v)
+        }
+      }()
+      case 202: try {
         var v: Ubo_V1_NotificationsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64006,7 +72217,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsAction(v)
         }
       }()
-      case 177: try {
+      case 203: try {
         var v: Ubo_V1_NotificationsAddAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64019,7 +72230,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsAddAction(v)
         }
       }()
-      case 178: try {
+      case 204: try {
         var v: Ubo_V1_NotificationsClearAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64032,7 +72243,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsClearAction(v)
         }
       }()
-      case 179: try {
+      case 205: try {
         var v: Ubo_V1_NotificationsClearAllAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64045,7 +72256,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsClearAllAction(v)
         }
       }()
-      case 180: try {
+      case 206: try {
         var v: Ubo_V1_NotificationsClearByIdAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64058,7 +72269,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsClearByIDAction(v)
         }
       }()
-      case 181: try {
+      case 207: try {
         var v: Ubo_V1_NotificationsDisplayAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64071,7 +72282,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .notificationsDisplayAction(v)
         }
       }()
-      case 182: try {
+      case 208: try {
         var v: Ubo_V1_OpenApplicationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64084,7 +72295,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .openApplicationAction(v)
         }
       }()
-      case 183: try {
+      case 209: try {
         var v: Ubo_V1_OpenRenderAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64097,7 +72308,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .openRenderAction(v)
         }
       }()
-      case 184: try {
+      case 210: try {
         var v: Ubo_V1_PowerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64110,7 +72321,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .powerAction(v)
         }
       }()
-      case 185: try {
+      case 211: try {
         var v: Ubo_V1_PowerOffAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64123,7 +72334,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .powerOffAction(v)
         }
       }()
-      case 186: try {
+      case 212: try {
         var v: Ubo_V1_RPiConnectAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64136,7 +72347,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectAction(v)
         }
       }()
-      case 187: try {
+      case 213: try {
         var v: Ubo_V1_RPiConnectDoneDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64149,7 +72360,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectDoneDownloadingAction(v)
         }
       }()
-      case 188: try {
+      case 214: try {
         var v: Ubo_V1_RPiConnectSetPendingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64162,7 +72373,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectSetPendingAction(v)
         }
       }()
-      case 189: try {
+      case 215: try {
         var v: Ubo_V1_RPiConnectSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64175,7 +72386,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectSetStatusAction(v)
         }
       }()
-      case 190: try {
+      case 216: try {
         var v: Ubo_V1_RPiConnectStartDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64188,7 +72399,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectStartDownloadingAction(v)
         }
       }()
-      case 191: try {
+      case 217: try {
         var v: Ubo_V1_RPiConnectUpdateServiceStateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64201,7 +72412,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rPiConnectUpdateServiceStateAction(v)
         }
       }()
-      case 192: try {
+      case 218: try {
         var v: Ubo_V1_RebootAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64214,7 +72425,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rebootAction(v)
         }
       }()
-      case 193: try {
+      case 219: try {
         var v: Ubo_V1_RegisterAppAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64227,7 +72438,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .registerAppAction(v)
         }
       }()
-      case 194: try {
+      case 220: try {
         var v: Ubo_V1_RegisterRegularAppAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64240,7 +72451,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .registerRegularAppAction(v)
         }
       }()
-      case 195: try {
+      case 221: try {
         var v: Ubo_V1_RegisterSettingAppAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64253,7 +72464,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .registerSettingAppAction(v)
         }
       }()
-      case 196: try {
+      case 222: try {
         var v: Ubo_V1_ReplayRecordedSequenceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64266,7 +72477,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .replayRecordedSequenceAction(v)
         }
       }()
-      case 197: try {
+      case 223: try {
         var v: Ubo_V1_ReportReplayingDoneAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64279,7 +72490,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .reportReplayingDoneAction(v)
         }
       }()
-      case 198: try {
+      case 224: try {
         var v: Ubo_V1_RgbRingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64292,7 +72503,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingAction(v)
         }
       }()
-      case 199: try {
+      case 225: try {
         var v: Ubo_V1_RgbRingBlankAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64305,7 +72516,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingBlankAction(v)
         }
       }()
-      case 200: try {
+      case 226: try {
         var v: Ubo_V1_RgbRingBlinkAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64318,7 +72529,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingBlinkAction(v)
         }
       }()
-      case 201: try {
+      case 227: try {
         var v: Ubo_V1_RgbRingColorfulCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64331,7 +72542,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingColorfulCommandAction(v)
         }
       }()
-      case 202: try {
+      case 228: try {
         var v: Ubo_V1_RgbRingCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64344,7 +72555,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingCommandAction(v)
         }
       }()
-      case 203: try {
+      case 229: try {
         var v: Ubo_V1_RgbRingFillDownfromAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64357,7 +72568,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingFillDownfromAction(v)
         }
       }()
-      case 204: try {
+      case 230: try {
         var v: Ubo_V1_RgbRingFillUptoAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64370,7 +72581,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingFillUptoAction(v)
         }
       }()
-      case 205: try {
+      case 231: try {
         var v: Ubo_V1_RgbRingProgressWheelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64383,7 +72594,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingProgressWheelAction(v)
         }
       }()
-      case 206: try {
+      case 232: try {
         var v: Ubo_V1_RgbRingProgressWheelStepAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64396,7 +72607,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingProgressWheelStepAction(v)
         }
       }()
-      case 207: try {
+      case 233: try {
         var v: Ubo_V1_RgbRingPulseAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64409,7 +72620,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingPulseAction(v)
         }
       }()
-      case 208: try {
+      case 234: try {
         var v: Ubo_V1_RgbRingRainbowAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64422,7 +72633,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingRainbowAction(v)
         }
       }()
-      case 209: try {
+      case 235: try {
         var v: Ubo_V1_RgbRingSequenceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64435,7 +72646,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSequenceAction(v)
         }
       }()
-      case 210: try {
+      case 236: try {
         var v: Ubo_V1_RgbRingSetAllAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64448,7 +72659,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSetAllAction(v)
         }
       }()
-      case 211: try {
+      case 237: try {
         var v: Ubo_V1_RgbRingSetBrightnessAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64461,7 +72672,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSetBrightnessAction(v)
         }
       }()
-      case 212: try {
+      case 238: try {
         var v: Ubo_V1_RgbRingSetEnabledAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64474,7 +72685,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSetEnabledAction(v)
         }
       }()
-      case 213: try {
+      case 239: try {
         var v: Ubo_V1_RgbRingSetIsBusyAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64487,7 +72698,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSetIsBusyAction(v)
         }
       }()
-      case 214: try {
+      case 240: try {
         var v: Ubo_V1_RgbRingSpinningWheelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64500,7 +72711,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingSpinningWheelAction(v)
         }
       }()
-      case 215: try {
+      case 241: try {
         var v: Ubo_V1_RgbRingWaitableCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64513,7 +72724,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .rgbRingWaitableCommandAction(v)
         }
       }()
-      case 216: try {
+      case 242: try {
         var v: Ubo_V1_SSHAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64526,7 +72737,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .sshAction(v)
         }
       }()
-      case 217: try {
+      case 243: try {
         var v: Ubo_V1_SSHClearEnabledStateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64539,7 +72750,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .sshClearEnabledStateAction(v)
         }
       }()
-      case 218: try {
+      case 244: try {
         var v: Ubo_V1_SSHUpdateStateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64552,7 +72763,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .sshUpdateStateAction(v)
         }
       }()
-      case 219: try {
+      case 245: try {
         var v: Ubo_V1_ScreenshotDataAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64565,7 +72776,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .screenshotDataAction(v)
         }
       }()
-      case 220: try {
+      case 246: try {
         var v: Ubo_V1_SensorsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64578,7 +72789,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .sensorsAction(v)
         }
       }()
-      case 221: try {
+      case 247: try {
+        var v: Ubo_V1_SensorsReportDeviceReadingsAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .sensorsReportDeviceReadingsAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .sensorsReportDeviceReadingsAction(v)
+        }
+      }()
+      case 248: try {
         var v: Ubo_V1_SensorsReportReadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64591,7 +72815,33 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .sensorsReportReadingAction(v)
         }
       }()
-      case 222: try {
+      case 249: try {
+        var v: Ubo_V1_SensorsScanAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .sensorsScanAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .sensorsScanAction(v)
+        }
+      }()
+      case 250: try {
+        var v: Ubo_V1_SensorsScanCompletedAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .sensorsScanCompletedAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .sensorsScanCompletedAction(v)
+        }
+      }()
+      case 251: try {
         var v: Ubo_V1_SetAreEnclosuresVisibleAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64604,7 +72854,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .setAreEnclosuresVisibleAction(v)
         }
       }()
-      case 223: try {
+      case 252: try {
         var v: Ubo_V1_SetLocalOverlayOpenAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64617,7 +72867,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .setLocalOverlayOpenAction(v)
         }
       }()
-      case 224: try {
+      case 253: try {
         var v: Ubo_V1_SettingsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64630,7 +72880,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsAction(v)
         }
       }()
-      case 225: try {
+      case 254: try {
         var v: Ubo_V1_SettingsClearServiceErrorsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64643,7 +72893,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsClearServiceErrorsAction(v)
         }
       }()
-      case 226: try {
+      case 255: try {
         var v: Ubo_V1_SettingsReportServiceErrorAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64656,7 +72906,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsReportServiceErrorAction(v)
         }
       }()
-      case 227: try {
+      case 256: try {
         var v: Ubo_V1_SettingsServiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64669,7 +72919,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsServiceAction(v)
         }
       }()
-      case 228: try {
+      case 257: try {
         var v: Ubo_V1_SettingsServiceSetIsEnabledAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64682,7 +72932,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsServiceSetIsEnabledAction(v)
         }
       }()
-      case 229: try {
+      case 258: try {
         var v: Ubo_V1_SettingsServiceSetLogLevelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64695,7 +72945,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsServiceSetLogLevelAction(v)
         }
       }()
-      case 230: try {
+      case 259: try {
         var v: Ubo_V1_SettingsServiceSetShouldRestartAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64708,7 +72958,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsServiceSetShouldRestartAction(v)
         }
       }()
-      case 231: try {
+      case 260: try {
         var v: Ubo_V1_SettingsServiceSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64721,7 +72971,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsServiceSetStatusAction(v)
         }
       }()
-      case 232: try {
+      case 261: try {
         var v: Ubo_V1_SettingsSetServicesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64734,7 +72984,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsSetServicesAction(v)
         }
       }()
-      case 233: try {
+      case 262: try {
         var v: Ubo_V1_SettingsStartServiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64747,7 +72997,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsStartServiceAction(v)
         }
       }()
-      case 234: try {
+      case 263: try {
         var v: Ubo_V1_SettingsStopServiceAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64760,7 +73010,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsStopServiceAction(v)
         }
       }()
-      case 235: try {
+      case 264: try {
+        var v: Ubo_V1_SettingsToggleAssistantDebugAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .settingsToggleAssistantDebugAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .settingsToggleAssistantDebugAction(v)
+        }
+      }()
+      case 265: try {
         var v: Ubo_V1_SettingsToggleBetaVersionsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64773,7 +73036,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsToggleBetaVersionsAction(v)
         }
       }()
-      case 236: try {
+      case 266: try {
+        var v: Ubo_V1_SettingsToggleGrpcRemoteAccessAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .settingsToggleGrpcRemoteAccessAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .settingsToggleGrpcRemoteAccessAction(v)
+        }
+      }()
+      case 267: try {
         var v: Ubo_V1_SettingsTogglePdbSignalAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64786,7 +73062,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsTogglePdbSignalAction(v)
         }
       }()
-      case 237: try {
+      case 268: try {
         var v: Ubo_V1_SettingsToggleVisualDebugAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64799,7 +73075,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .settingsToggleVisualDebugAction(v)
         }
       }()
-      case 238: try {
+      case 269: try {
         var v: Ubo_V1_SpeechRecognitionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64812,7 +73088,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionAction(v)
         }
       }()
-      case 239: try {
+      case 270: try {
         var v: Ubo_V1_SpeechRecognitionAddCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64825,7 +73101,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionAddCommandAction(v)
         }
       }()
-      case 240: try {
+      case 271: try {
         var v: Ubo_V1_SpeechRecognitionRemoveCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64838,7 +73114,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionRemoveCommandAction(v)
         }
       }()
-      case 241: try {
+      case 272: try {
         var v: Ubo_V1_SpeechRecognitionReportIntentDetectionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64851,7 +73127,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionReportIntentDetectionAction(v)
         }
       }()
-      case 242: try {
+      case 273: try {
         var v: Ubo_V1_SpeechRecognitionReportIntentTimeoutAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64864,7 +73140,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionReportIntentTimeoutAction(v)
         }
       }()
-      case 243: try {
+      case 274: try {
         var v: Ubo_V1_SpeechRecognitionReportSpeechAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64877,7 +73153,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionReportSpeechAction(v)
         }
       }()
-      case 244: try {
+      case 275: try {
         var v: Ubo_V1_SpeechRecognitionReportWakeWordDetectionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64890,7 +73166,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionReportWakeWordDetectionAction(v)
         }
       }()
-      case 245: try {
+      case 276: try {
+        var v: Ubo_V1_SpeechRecognitionRunCommandAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .speechRecognitionRunCommandAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .speechRecognitionRunCommandAction(v)
+        }
+      }()
+      case 277: try {
         var v: Ubo_V1_SpeechRecognitionSetAssistantEnabledAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64903,7 +73192,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionSetAssistantEnabledAction(v)
         }
       }()
-      case 246: try {
+      case 278: try {
+        var v: Ubo_V1_SpeechRecognitionSetAssistantListeningAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .speechRecognitionSetAssistantListeningAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .speechRecognitionSetAssistantListeningAction(v)
+        }
+      }()
+      case 279: try {
         var v: Ubo_V1_SpeechRecognitionSetConversationEndPhrasesAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64916,7 +73218,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionSetConversationEndPhrasesAction(v)
         }
       }()
-      case 247: try {
+      case 280: try {
+        var v: Ubo_V1_SpeechRecognitionSetWakeModeEnabledAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .speechRecognitionSetWakeModeEnabledAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .speechRecognitionSetWakeModeEnabledAction(v)
+        }
+      }()
+      case 281: try {
         var v: Ubo_V1_SpeechRecognitionTriggerModeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64929,7 +73244,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionTriggerModeAction(v)
         }
       }()
-      case 248: try {
+      case 282: try {
         var v: Ubo_V1_SpeechRecognitionUpdateCommandAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64942,7 +73257,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechRecognitionUpdateCommandAction(v)
         }
       }()
-      case 249: try {
+      case 283: try {
         var v: Ubo_V1_SpeechSynthesisAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64955,7 +73270,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechSynthesisAction(v)
         }
       }()
-      case 250: try {
+      case 284: try {
         var v: Ubo_V1_SpeechSynthesisReadTextAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64968,7 +73283,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechSynthesisReadTextAction(v)
         }
       }()
-      case 251: try {
+      case 285: try {
         var v: Ubo_V1_SpeechSynthesisSetIsEnabledAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64981,7 +73296,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechSynthesisSetIsEnabledAction(v)
         }
       }()
-      case 252: try {
+      case 286: try {
         var v: Ubo_V1_SpeechSynthesisSetPreferLocalAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -64994,7 +73309,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .speechSynthesisSetPreferLocalAction(v)
         }
       }()
-      case 253: try {
+      case 287: try {
         var v: Ubo_V1_StackAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65007,7 +73322,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackAction(v)
         }
       }()
-      case 254: try {
+      case 288: try {
         var v: Ubo_V1_StackPopAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65020,7 +73335,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPopAction(v)
         }
       }()
-      case 255: try {
+      case 289: try {
         var v: Ubo_V1_StackPopChatAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65033,7 +73348,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPopChatAction(v)
         }
       }()
-      case 256: try {
+      case 290: try {
         var v: Ubo_V1_StackPopItemAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65046,7 +73361,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPopItemAction(v)
         }
       }()
-      case 257: try {
+      case 291: try {
         var v: Ubo_V1_StackPopNotificationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65059,7 +73374,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPopNotificationAction(v)
         }
       }()
-      case 258: try {
+      case 292: try {
         var v: Ubo_V1_StackPopToRootAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65072,7 +73387,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPopToRootAction(v)
         }
       }()
-      case 259: try {
+      case 293: try {
         var v: Ubo_V1_StackPushApplicationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65085,7 +73400,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushApplicationAction(v)
         }
       }()
-      case 260: try {
+      case 294: try {
         var v: Ubo_V1_StackPushChatAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65098,7 +73413,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushChatAction(v)
         }
       }()
-      case 261: try {
+      case 295: try {
         var v: Ubo_V1_StackPushInstructionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65111,7 +73426,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushInstructionAction(v)
         }
       }()
-      case 262: try {
+      case 296: try {
         var v: Ubo_V1_StackPushMenuAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65124,7 +73439,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushMenuAction(v)
         }
       }()
-      case 263: try {
+      case 297: try {
         var v: Ubo_V1_StackPushNotificationAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65137,7 +73452,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushNotificationAction(v)
         }
       }()
-      case 264: try {
+      case 298: try {
         var v: Ubo_V1_StackPushPromptAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65150,7 +73465,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushPromptAction(v)
         }
       }()
-      case 265: try {
+      case 299: try {
         var v: Ubo_V1_StackPushRenderAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65163,7 +73478,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackPushRenderAction(v)
         }
       }()
-      case 266: try {
+      case 300: try {
         var v: Ubo_V1_StackSetPageIndexAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65176,7 +73491,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .stackSetPageIndexAction(v)
         }
       }()
-      case 267: try {
+      case 301: try {
         var v: Ubo_V1_StatusIconsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65189,7 +73504,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .statusIconsAction(v)
         }
       }()
-      case 268: try {
+      case 302: try {
         var v: Ubo_V1_StatusIconsRegisterAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65202,7 +73517,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .statusIconsRegisterAction(v)
         }
       }()
-      case 269: try {
+      case 303: try {
         var v: Ubo_V1_SystemAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65215,7 +73530,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .systemAction(v)
         }
       }()
-      case 270: try {
+      case 304: try {
         var v: Ubo_V1_SystemMetricsUpdateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65228,7 +73543,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .systemMetricsUpdateAction(v)
         }
       }()
-      case 271: try {
+      case 305: try {
         var v: Ubo_V1_TailscaleAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65241,7 +73556,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .tailscaleAction(v)
         }
       }()
-      case 272: try {
+      case 306: try {
         var v: Ubo_V1_TailscaleDoneDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65254,7 +73569,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .tailscaleDoneDownloadingAction(v)
         }
       }()
-      case 273: try {
+      case 307: try {
         var v: Ubo_V1_TailscaleSetPendingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65267,7 +73582,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .tailscaleSetPendingAction(v)
         }
       }()
-      case 274: try {
+      case 308: try {
         var v: Ubo_V1_TailscaleSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65280,7 +73595,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .tailscaleSetStatusAction(v)
         }
       }()
-      case 275: try {
+      case 309: try {
         var v: Ubo_V1_TailscaleStartDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65293,7 +73608,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .tailscaleStartDownloadingAction(v)
         }
       }()
-      case 276: try {
+      case 310: try {
         var v: Ubo_V1_TakeScreenshotAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65306,7 +73621,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .takeScreenshotAction(v)
         }
       }()
-      case 277: try {
+      case 311: try {
         var v: Ubo_V1_ToggleRecordingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65319,7 +73634,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .toggleRecordingAction(v)
         }
       }()
-      case 278: try {
+      case 312: try {
         var v: Ubo_V1_UpdateApplicationKwargsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65332,7 +73647,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateApplicationKwargsAction(v)
         }
       }()
-      case 279: try {
+      case 313: try {
         var v: Ubo_V1_UpdateCurrentViewAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65345,7 +73660,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateCurrentViewAction(v)
         }
       }()
-      case 280: try {
+      case 314: try {
         var v: Ubo_V1_UpdateDynamicMenuAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65358,7 +73673,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateDynamicMenuAction(v)
         }
       }()
-      case 281: try {
+      case 315: try {
         var v: Ubo_V1_UpdateInstructionProgressAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65371,7 +73686,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateInstructionProgressAction(v)
         }
       }()
-      case 282: try {
+      case 316: try {
         var v: Ubo_V1_UpdateManagerAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65384,7 +73699,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateManagerAction(v)
         }
       }()
-      case 283: try {
+      case 317: try {
         var v: Ubo_V1_UpdateManagerReportFailedCheckAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65397,7 +73712,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateManagerReportFailedCheckAction(v)
         }
       }()
-      case 284: try {
+      case 318: try {
         var v: Ubo_V1_UpdateManagerRequestCheckAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65410,7 +73725,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateManagerRequestCheckAction(v)
         }
       }()
-      case 285: try {
+      case 319: try {
         var v: Ubo_V1_UpdateManagerRequestUpdateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65423,7 +73738,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateManagerRequestUpdateAction(v)
         }
       }()
-      case 286: try {
+      case 320: try {
         var v: Ubo_V1_UpdateManagerSetVersionsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65436,7 +73751,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateManagerSetVersionsAction(v)
         }
       }()
-      case 287: try {
+      case 321: try {
         var v: Ubo_V1_UpdatePromptAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65449,7 +73764,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updatePromptAction(v)
         }
       }()
-      case 288: try {
+      case 322: try {
         var v: Ubo_V1_UpdateRenderPropsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65462,7 +73777,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .updateRenderPropsAction(v)
         }
       }()
-      case 289: try {
+      case 323: try {
         var v: Ubo_V1_UsersAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65475,7 +73790,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .usersAction(v)
         }
       }()
-      case 290: try {
+      case 324: try {
         var v: Ubo_V1_UsersCreateUserAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65488,7 +73803,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .usersCreateUserAction(v)
         }
       }()
-      case 291: try {
+      case 325: try {
         var v: Ubo_V1_UsersDeleteUserAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65501,7 +73816,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .usersDeleteUserAction(v)
         }
       }()
-      case 292: try {
+      case 326: try {
         var v: Ubo_V1_UsersResetPasswordAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65514,7 +73829,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .usersResetPasswordAction(v)
         }
       }()
-      case 293: try {
+      case 327: try {
         var v: Ubo_V1_UsersSetUsersAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65527,7 +73842,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .usersSetUsersAction(v)
         }
       }()
-      case 294: try {
+      case 328: try {
         var v: Ubo_V1_VSCodeAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65540,7 +73855,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .vsCodeAction(v)
         }
       }()
-      case 295: try {
+      case 329: try {
         var v: Ubo_V1_VSCodeDoneDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65553,7 +73868,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .vsCodeDoneDownloadingAction(v)
         }
       }()
-      case 296: try {
+      case 330: try {
         var v: Ubo_V1_VSCodeSetPendingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65566,7 +73881,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .vsCodeSetPendingAction(v)
         }
       }()
-      case 297: try {
+      case 331: try {
         var v: Ubo_V1_VSCodeSetStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65579,7 +73894,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .vsCodeSetStatusAction(v)
         }
       }()
-      case 298: try {
+      case 332: try {
         var v: Ubo_V1_VSCodeStartDownloadingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65592,7 +73907,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .vsCodeStartDownloadingAction(v)
         }
       }()
-      case 299: try {
+      case 333: try {
         var v: Ubo_V1_WakeEngineSetEnabledAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65605,7 +73920,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeEngineSetEnabledAction(v)
         }
       }()
-      case 300: try {
+      case 334: try {
         var v: Ubo_V1_WakeTriggerAddAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65618,7 +73933,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeTriggerAddAction(v)
         }
       }()
-      case 301: try {
+      case 335: try {
         var v: Ubo_V1_WakeTriggerRemoveAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65631,7 +73946,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeTriggerRemoveAction(v)
         }
       }()
-      case 302: try {
+      case 336: try {
         var v: Ubo_V1_WakeWordDeleteModelAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65644,7 +73959,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeWordDeleteModelAction(v)
         }
       }()
-      case 303: try {
+      case 337: try {
         var v: Ubo_V1_WakeWordDownloadModelsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65657,7 +73972,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeWordDownloadModelsAction(v)
         }
       }()
-      case 304: try {
+      case 338: try {
         var v: Ubo_V1_WakeWordSetAvailableModelsAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65670,7 +73985,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeWordSetAvailableModelsAction(v)
         }
       }()
-      case 305: try {
+      case 339: try {
         var v: Ubo_V1_WakeWordSetModelsStatusAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65683,7 +73998,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wakeWordSetModelsStatusAction(v)
         }
       }()
-      case 306: try {
+      case 340: try {
         var v: Ubo_V1_WebUIAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65696,7 +74011,20 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .webUiAction(v)
         }
       }()
-      case 307: try {
+      case 341: try {
+        var v: Ubo_V1_WebUIInputAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .webUiInputAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .webUiInputAction(v)
+        }
+      }()
+      case 342: try {
         var v: Ubo_V1_WiFiAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65709,7 +74037,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiAction(v)
         }
       }()
-      case 308: try {
+      case 343: try {
         var v: Ubo_V1_WiFiInputConnectionAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65722,7 +74050,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiInputConnectionAction(v)
         }
       }()
-      case 309: try {
+      case 344: try {
         var v: Ubo_V1_WiFiSetHasVisitedOnboardingAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65735,7 +74063,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiSetHasVisitedOnboardingAction(v)
         }
       }()
-      case 310: try {
+      case 345: try {
         var v: Ubo_V1_WiFiSetHotspotRunningAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65748,7 +74076,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiSetHotspotRunningAction(v)
         }
       }()
-      case 311: try {
+      case 346: try {
         var v: Ubo_V1_WiFiStartHotspotAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65761,7 +74089,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiStartHotspotAction(v)
         }
       }()
-      case 312: try {
+      case 347: try {
         var v: Ubo_V1_WiFiStopHotspotAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65774,7 +74102,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiStopHotspotAction(v)
         }
       }()
-      case 313: try {
+      case 348: try {
         var v: Ubo_V1_WiFiUpdateAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65787,7 +74115,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
           self.action = .wiFiUpdateAction(v)
         }
       }()
-      case 314: try {
+      case 349: try {
         var v: Ubo_V1_WiFiUpdateRequestAction?
         var hadOneofValue = false
         if let current = self.action {
@@ -65798,6 +74126,123 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
         if let v = v {
           if hadOneofValue {try decoder.handleConflictingOneOf()}
           self.action = .wiFiUpdateRequestAction(v)
+        }
+      }()
+      case 350: try {
+        var v: Ubo_V1_WyomingAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingAction(v)
+        }
+      }()
+      case 351: try {
+        var v: Ubo_V1_WyomingAddAccessPolicyAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingAddAccessPolicyAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingAddAccessPolicyAction(v)
+        }
+      }()
+      case 352: try {
+        var v: Ubo_V1_WyomingRemoveAccessPolicyAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingRemoveAccessPolicyAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingRemoveAccessPolicyAction(v)
+        }
+      }()
+      case 353: try {
+        var v: Ubo_V1_WyomingReportEnginesStatusAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingReportEnginesStatusAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingReportEnginesStatusAction(v)
+        }
+      }()
+      case 354: try {
+        var v: Ubo_V1_WyomingReportSatelliteStatusAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingReportSatelliteStatusAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingReportSatelliteStatusAction(v)
+        }
+      }()
+      case 355: try {
+        var v: Ubo_V1_WyomingSatelliteWakeAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingSatelliteWakeAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingSatelliteWakeAction(v)
+        }
+      }()
+      case 356: try {
+        var v: Ubo_V1_WyomingSetEnginesEnabledAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingSetEnginesEnabledAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingSetEnginesEnabledAction(v)
+        }
+      }()
+      case 357: try {
+        var v: Ubo_V1_WyomingSetSatelliteEnabledAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingSetSatelliteEnabledAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingSetSatelliteEnabledAction(v)
+        }
+      }()
+      case 358: try {
+        var v: Ubo_V1_WyomingSetZeroconfEnabledAction?
+        var hadOneofValue = false
+        if let current = self.action {
+          hadOneofValue = true
+          if case .wyomingSetZeroconfEnabledAction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.action = .wyomingSetZeroconfEnabledAction(v)
         }
       }()
       default: break
@@ -65827,1245 +74272,1421 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
       guard case .assistantAddMoonshineDownloadedModelAction(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     }()
+    case .assistantCancelRequestAction?: try {
+      guard case .assistantCancelRequestAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
     case .assistantCompleteAction?: try {
       guard case .assistantCompleteAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
     }()
     case .assistantDeleteElevenLabsVoiceAction?: try {
       guard case .assistantDeleteElevenLabsVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
     }()
     case .assistantDeleteKokoroAction?: try {
       guard case .assistantDeleteKokoroAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
     }()
     case .assistantDeleteMoonshineModelAction?: try {
       guard case .assistantDeleteMoonshineModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
     }()
     case .assistantDeleteOllamaModelAction?: try {
       guard case .assistantDeleteOllamaModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     }()
     case .assistantDeletePiperVoiceAction?: try {
       guard case .assistantDeletePiperVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
     }()
     case .assistantDeleteVoskModelAction?: try {
       guard case .assistantDeleteVoskModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
     }()
     case .assistantDownloadKokoroAction?: try {
       guard case .assistantDownloadKokoroAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
     }()
     case .assistantDownloadMoonshineModelAction?: try {
       guard case .assistantDownloadMoonshineModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
     }()
     case .assistantDownloadOllamaModelAction?: try {
       guard case .assistantDownloadOllamaModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
     }()
     case .assistantDownloadPiperVoiceAction?: try {
       guard case .assistantDownloadPiperVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
     }()
     case .assistantDownloadVoskModelAction?: try {
       guard case .assistantDownloadVoskModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
     }()
     case .assistantRemoveGenericLlmProviderAction?: try {
       guard case .assistantRemoveGenericLlmProviderAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
     }()
     case .assistantRemoveMoonshineDownloadedModelAction?: try {
       guard case .assistantRemoveMoonshineDownloadedModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
     }()
     case .assistantReportAction?: try {
       guard case .assistantReportAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
     }()
     case .assistantRunPipelineAction?: try {
       guard case .assistantRunPipelineAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
     }()
     case .assistantSelectGenericLlmProviderAction?: try {
       guard case .assistantSelectGenericLlmProviderAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
     }()
     case .assistantSetConversationEndPhrasesAction?: try {
       guard case .assistantSetConversationEndPhrasesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
     }()
     case .assistantSetElevenLabsAvailableVoicesAction?: try {
       guard case .assistantSetElevenLabsAvailableVoicesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
     }()
     case .assistantSetIsActiveAction?: try {
       guard case .assistantSetIsActiveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
     }()
     case .assistantSetKokoroDownloadedAction?: try {
       guard case .assistantSetKokoroDownloadedAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
     }()
     case .assistantSetMistralAvailableVoicesAction?: try {
       guard case .assistantSetMistralAvailableVoicesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 27)
     }()
     case .assistantSetMoonshineDownloadingAction?: try {
       guard case .assistantSetMoonshineDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 27)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 28)
     }()
     case .assistantSetOllamaDownloadedModelsAction?: try {
       guard case .assistantSetOllamaDownloadedModelsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 28)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 29)
     }()
     case .assistantSetOllamaModelCapabilitiesAction?: try {
       guard case .assistantSetOllamaModelCapabilitiesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 29)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 30)
     }()
     case .assistantSetOllamaThinkingAction?: try {
       guard case .assistantSetOllamaThinkingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 30)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 31)
     }()
     case .assistantSetPiperDownloadedVoicesAction?: try {
       guard case .assistantSetPiperDownloadedVoicesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 31)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 32)
     }()
     case .assistantSetSelectedImageGeneratorAction?: try {
       guard case .assistantSetSelectedImageGeneratorAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 32)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 33)
     }()
     case .assistantSetSelectedKokoroVoiceAction?: try {
       guard case .assistantSetSelectedKokoroVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 33)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 34)
     }()
     case .assistantSetSelectedLlmAction?: try {
       guard case .assistantSetSelectedLlmAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 34)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 35)
     }()
     case .assistantSetSelectedModelAction?: try {
       guard case .assistantSetSelectedModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 35)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 36)
     }()
     case .assistantSetSelectedMoonshineModelAction?: try {
       guard case .assistantSetSelectedMoonshineModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 36)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 37)
     }()
     case .assistantSetSelectedPiperVoiceAction?: try {
       guard case .assistantSetSelectedPiperVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 37)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 38)
     }()
     case .assistantSetSelectedSttAction?: try {
       guard case .assistantSetSelectedSttAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 38)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 39)
     }()
     case .assistantSetSelectedTtsAction?: try {
       guard case .assistantSetSelectedTtsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 39)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
     }()
     case .assistantSetSelectedVoiceAction?: try {
       guard case .assistantSetSelectedVoiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
     }()
     case .assistantSetSelectedVoskModelAction?: try {
       guard case .assistantSetSelectedVoskModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
     }()
     case .assistantSetVoskDownloadedModelsAction?: try {
       guard case .assistantSetVoskDownloadedModelsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
     }()
     case .assistantStartListeningAction?: try {
       guard case .assistantStartListeningAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
     }()
     case .assistantStopListeningAction?: try {
       guard case .assistantStopListeningAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
     }()
     case .assistantStopTalkingAction?: try {
       guard case .assistantStopTalkingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
     }()
     case .assistantSynthesizeAction?: try {
       guard case .assistantSynthesizeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
     }()
     case .assistantToggleListeningAction?: try {
       guard case .assistantToggleListeningAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
     }()
     case .assistantTranscribeAction?: try {
       guard case .assistantTranscribeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 49)
     }()
     case .assistantUpdateProvidersAction?: try {
       guard case .assistantUpdateProvidersAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 49)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 50)
     }()
     case .audioAction?: try {
       guard case .audioAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 50)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 51)
     }()
     case .audioChangeVolumeAction?: try {
       guard case .audioChangeVolumeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 51)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 52)
     }()
     case .audioInstallDriverAction?: try {
       guard case .audioInstallDriverAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 52)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 53)
     }()
     case .audioPlayAudioSampleAction?: try {
       guard case .audioPlayAudioSampleAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 53)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 54)
     }()
     case .audioPlayAudioSequenceAction?: try {
       guard case .audioPlayAudioSequenceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 54)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 55)
     }()
     case .audioPlayChimeAction?: try {
       guard case .audioPlayChimeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 55)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 56)
     }()
     case .audioPlayRecordingAction?: try {
       guard case .audioPlayRecordingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 56)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 57)
     }()
     case .audioPlaybackDoneAction?: try {
       guard case .audioPlaybackDoneAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 57)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 58)
+    }()
+    case .audioReportRemoteCaptureAction?: try {
+      guard case .audioReportRemoteCaptureAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 59)
     }()
     case .audioReportSampleAction?: try {
       guard case .audioReportSampleAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 58)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 60)
     }()
     case .audioSetMuteStatusAction?: try {
       guard case .audioSetMuteStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 59)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
     }()
     case .audioSetVolumeAction?: try {
       guard case .audioSetVolumeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 60)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
     }()
     case .audioStartRecordingAction?: try {
       guard case .audioStartRecordingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
     }()
     case .audioStopPlaybackAction?: try {
       guard case .audioStopPlaybackAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 64)
     }()
     case .audioStopRecordingAction?: try {
       guard case .audioStopRecordingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 65)
     }()
     case .audioToggleMuteStatusAction?: try {
       guard case .audioToggleMuteStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 64)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 66)
     }()
     case .audioToggleRecordingAction?: try {
       guard case .audioToggleRecordingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 65)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 67)
     }()
     case .cameraAction?: try {
       guard case .cameraAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 66)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
     }()
     case .cameraDetectAction?: try {
       guard case .cameraDetectAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 67)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 69)
     }()
     case .cameraInstallDriverAction?: try {
       guard case .cameraInstallDriverAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 70)
     }()
     case .cameraRegisterRemoteAction?: try {
       guard case .cameraRegisterRemoteAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 69)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
     }()
     case .cameraReportBarcodeAction?: try {
       guard case .cameraReportBarcodeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 70)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
     }()
     case .cameraReportImageAction?: try {
       guard case .cameraReportImageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
     }()
     case .cameraRestoreDefaultAction?: try {
       guard case .cameraRestoreDefaultAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
     }()
     case .cameraSetAvailableCamerasAction?: try {
       guard case .cameraSetAvailableCamerasAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
     }()
     case .cameraSetIndexAction?: try {
       guard case .cameraSetIndexAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 76)
     }()
     case .cameraSetSelectedSourceAction?: try {
       guard case .cameraSetSelectedSourceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 77)
     }()
     case .cameraStartViewfinderAction?: try {
       guard case .cameraStartViewfinderAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 76)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 78)
     }()
     case .chatAction?: try {
       guard case .chatAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 77)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 79)
     }()
     case .chatAddMessageAction?: try {
       guard case .chatAddMessageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 78)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 80)
     }()
     case .chatAppendToMessageAction?: try {
       guard case .chatAppendToMessageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 79)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 81)
     }()
     case .chatClearAction?: try {
       guard case .chatClearAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 80)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 82)
     }()
     case .chatEndSessionAction?: try {
       guard case .chatEndSessionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 81)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 83)
     }()
     case .chatSendUserMessageAction?: try {
       guard case .chatSendUserMessageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 82)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 84)
     }()
     case .chatSetMessageTextAction?: try {
       guard case .chatSetMessageTextAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 83)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 85)
     }()
     case .chatStartSessionAction?: try {
       guard case .chatStartSessionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 84)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 86)
     }()
     case .chatToggleAudioPlaybackAction?: try {
       guard case .chatToggleAudioPlaybackAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 85)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 87)
     }()
     case .clearDynamicMenuAction_p?: try {
       guard case .clearDynamicMenuAction_p(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 86)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 88)
     }()
     case .closeApplicationAction?: try {
       guard case .closeApplicationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 87)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 89)
     }()
     case .closeInstructionAction?: try {
       guard case .closeInstructionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 88)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 90)
     }()
     case .deregisterRegularAppAction?: try {
       guard case .deregisterRegularAppAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 89)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 91)
     }()
     case .displayAction?: try {
       guard case .displayAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 90)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 92)
     }()
     case .displayBlankAction?: try {
       guard case .displayBlankAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 91)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 93)
     }()
     case .displayPauseAction?: try {
       guard case .displayPauseAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 92)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 94)
     }()
     case .displayRedrawAction?: try {
       guard case .displayRedrawAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 93)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 95)
     }()
     case .displayResumeAction?: try {
       guard case .displayResumeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 94)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 96)
     }()
     case .displaySetBlankTimeoutAction?: try {
       guard case .displaySetBlankTimeoutAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 95)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 97)
     }()
     case .displayUnblankAction?: try {
       guard case .displayUnblankAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 96)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 98)
     }()
     case .displayUpdateActivityAction?: try {
       guard case .displayUpdateActivityAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 97)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 99)
     }()
     case .dockerAction?: try {
       guard case .dockerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 98)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 100)
     }()
     case .dockerImageAction?: try {
       guard case .dockerImageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 99)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 101)
     }()
     case .dockerImageFetchAction?: try {
       guard case .dockerImageFetchAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 100)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 102)
     }()
     case .dockerImageReleaseAction?: try {
       guard case .dockerImageReleaseAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 101)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 103)
     }()
     case .dockerImageRemoveAction?: try {
       guard case .dockerImageRemoveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 102)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 104)
     }()
     case .dockerImageRemoveContainerAction?: try {
       guard case .dockerImageRemoveContainerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 103)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 105)
     }()
     case .dockerImageRunAction?: try {
       guard case .dockerImageRunAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 104)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 106)
     }()
     case .dockerImageSetDockerIDAction?: try {
       guard case .dockerImageSetDockerIDAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 105)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 107)
     }()
     case .dockerImageSetExposeToLanAction?: try {
       guard case .dockerImageSetExposeToLanAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 106)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 108)
     }()
     case .dockerImageSetStatusAction?: try {
       guard case .dockerImageSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 107)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 109)
     }()
     case .dockerImageStopAction?: try {
       guard case .dockerImageStopAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 108)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 110)
     }()
     case .dockerImageUpdateMetadataAction?: try {
       guard case .dockerImageUpdateMetadataAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 109)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 111)
     }()
     case .dockerInstallAction?: try {
       guard case .dockerInstallAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 110)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 112)
     }()
     case .dockerRemoveUsernameAction?: try {
       guard case .dockerRemoveUsernameAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 111)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 113)
     }()
-    case .dockerSetMacvlanConfigAction?: try {
-      guard case .dockerSetMacvlanConfigAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 112)
+    case .dockerSetHostNetworkAction?: try {
+      guard case .dockerSetHostNetworkAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 114)
     }()
     case .dockerSetStatusAction?: try {
       guard case .dockerSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 113)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 115)
     }()
     case .dockerSetZigbeeIntentAction?: try {
       guard case .dockerSetZigbeeIntentAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 114)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 116)
     }()
     case .dockerStartAction?: try {
       guard case .dockerStartAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 115)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 117)
     }()
     case .dockerStopAction?: try {
       guard case .dockerStopAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 116)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 118)
     }()
     case .dockerStoreUsernameAction?: try {
       guard case .dockerStoreUsernameAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 117)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 119)
     }()
     case .dynamicMenuAction?: try {
       guard case .dynamicMenuAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 118)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 120)
     }()
     case .executeMenuActionAction?: try {
       guard case .executeMenuActionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 119)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 121)
     }()
     case .fileDownloadAction?: try {
       guard case .fileDownloadAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 120)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 122)
     }()
     case .fileDownloadReadyAction?: try {
       guard case .fileDownloadReadyAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 121)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 123)
     }()
     case .fileDownloadRequestAction?: try {
       guard case .fileDownloadRequestAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 122)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 124)
     }()
     case .fileSystemAction?: try {
       guard case .fileSystemAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 123)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 125)
     }()
     case .fileSystemCopyAction?: try {
       guard case .fileSystemCopyAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 124)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 126)
     }()
     case .fileSystemMoveAction?: try {
       guard case .fileSystemMoveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 125)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 127)
     }()
     case .fileSystemRemoveAction?: try {
       guard case .fileSystemRemoveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 126)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 128)
     }()
     case .fileSystemReportSelectionAction?: try {
       guard case .fileSystemReportSelectionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 127)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 129)
     }()
     case .fileSystemSelectorPushedAction?: try {
       guard case .fileSystemSelectorPushedAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 128)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 130)
     }()
     case .fileUploadAction?: try {
       guard case .fileUploadAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 129)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 131)
     }()
     case .fileUploadChunkAction?: try {
       guard case .fileUploadChunkAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 130)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 132)
     }()
     case .fileUploadCompleteAction?: try {
       guard case .fileUploadCompleteAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 131)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 133)
     }()
     case .fileUploadStartAction?: try {
       guard case .fileUploadStartAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 132)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 134)
     }()
     case .infraredAction?: try {
       guard case .infraredAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 133)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 135)
     }()
     case .infraredAddDeviceAction?: try {
       guard case .infraredAddDeviceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 134)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 136)
     }()
     case .infraredHandleReceivedCodeAction?: try {
       guard case .infraredHandleReceivedCodeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 135)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 137)
     }()
     case .infraredRegisterDeviceAction?: try {
       guard case .infraredRegisterDeviceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 136)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 138)
     }()
     case .infraredRemoveDeviceAction?: try {
       guard case .infraredRemoveDeviceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 137)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 139)
     }()
     case .infraredSendCodeAction?: try {
       guard case .infraredSendCodeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 138)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 140)
     }()
     case .infraredSetIsRegisteringDeviceAction?: try {
       guard case .infraredSetIsRegisteringDeviceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 139)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 141)
     }()
     case .infraredSetShouldPropagateAction?: try {
       guard case .infraredSetShouldPropagateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 140)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 142)
     }()
     case .infraredSetShouldReceiveAction?: try {
       guard case .infraredSetShouldReceiveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 141)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 143)
     }()
     case .inputAction?: try {
       guard case .inputAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 142)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 144)
     }()
     case .inputCancelAction?: try {
       guard case .inputCancelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 143)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 145)
     }()
     case .inputDemandAction?: try {
       guard case .inputDemandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 144)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 146)
     }()
     case .inputProvideAction?: try {
       guard case .inputProvideAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 145)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 147)
     }()
     case .inputResolveAction?: try {
       guard case .inputResolveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 146)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 148)
     }()
     case .ipAction?: try {
       guard case .ipAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 147)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 149)
     }()
     case .ipSetIsConnectedAction?: try {
       guard case .ipSetIsConnectedAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 148)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 150)
     }()
     case .ipUpdateInterfacesAction?: try {
       guard case .ipUpdateInterfacesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 149)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 151)
     }()
     case .keypadAction?: try {
       guard case .keypadAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 150)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 152)
     }()
     case .keypadKeyHoldAction?: try {
       guard case .keypadKeyHoldAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 151)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 153)
     }()
     case .keypadKeyPressAction?: try {
       guard case .keypadKeyPressAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 152)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 154)
     }()
     case .keypadKeyReleaseAction?: try {
       guard case .keypadKeyReleaseAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 153)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 155)
     }()
     case .keypadKeyUnholdAction?: try {
       guard case .keypadKeyUnholdAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 154)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 156)
     }()
     case .keypadReportContextAction?: try {
       guard case .keypadReportContextAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 155)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 157)
+    }()
+    case .kioskAction?: try {
+      guard case .kioskAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 158)
+    }()
+    case .kioskAddDashboardAction?: try {
+      guard case .kioskAddDashboardAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 159)
+    }()
+    case .kioskClearEnabledStateAction?: try {
+      guard case .kioskClearEnabledStateAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 160)
+    }()
+    case .kioskDeleteDashboardAction?: try {
+      guard case .kioskDeleteDashboardAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 161)
+    }()
+    case .kioskRotatePortAction?: try {
+      guard case .kioskRotatePortAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 162)
+    }()
+    case .kioskSetPortSelectionAction?: try {
+      guard case .kioskSetPortSelectionAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 163)
+    }()
+    case .kioskUpdateStateAction?: try {
+      guard case .kioskUpdateStateAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 164)
     }()
     case .lightDmAction?: try {
       guard case .lightDmAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 156)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 165)
     }()
     case .lightDmClearEnabledStateAction?: try {
       guard case .lightDmClearEnabledStateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 157)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 166)
     }()
     case .lightDmUpdateStateAction?: try {
       guard case .lightDmUpdateStateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 158)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 167)
     }()
     case .localizationAction?: try {
       guard case .localizationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 159)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 168)
+    }()
+    case .localizationRefreshWeatherAction?: try {
+      guard case .localizationRefreshWeatherAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 169)
+    }()
+    case .localizationResetLocationAction?: try {
+      guard case .localizationResetLocationAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 170)
     }()
     case .localizationSetLanguageAction?: try {
       guard case .localizationSetLanguageAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 160)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 171)
+    }()
+    case .localizationSetLocationAction?: try {
+      guard case .localizationSetLocationAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 172)
+    }()
+    case .localizationSpeakDateAction?: try {
+      guard case .localizationSpeakDateAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 173)
+    }()
+    case .localizationSpeakTimeAction?: try {
+      guard case .localizationSpeakTimeAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 174)
+    }()
+    case .localizationSpeakWeatherAction?: try {
+      guard case .localizationSpeakWeatherAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 175)
+    }()
+    case .localizationUpdateWeatherAction?: try {
+      guard case .localizationUpdateWeatherAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 176)
     }()
     case .mainAction?: try {
       guard case .mainAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 161)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 177)
     }()
     case .mcpAction?: try {
       guard case .mcpAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 162)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 178)
     }()
     case .mcpAddServerAction?: try {
       guard case .mcpAddServerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 163)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 179)
     }()
     case .mcpDeleteServerAction?: try {
       guard case .mcpDeleteServerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 164)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 180)
     }()
     case .mcpSetServerStatusAction?: try {
       guard case .mcpSetServerStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 165)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 181)
     }()
     case .mcpSetServersAction?: try {
       guard case .mcpSetServersAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 166)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 182)
     }()
     case .mcpSyncServersAction?: try {
       guard case .mcpSyncServersAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 167)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 183)
     }()
     case .mcpToggleServerAction?: try {
       guard case .mcpToggleServerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 168)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 184)
     }()
     case .menuAction?: try {
       guard case .menuAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 169)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 185)
     }()
     case .menuChooseByIconAction?: try {
       guard case .menuChooseByIconAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 170)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 186)
     }()
     case .menuChooseByIndexAction?: try {
       guard case .menuChooseByIndexAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 171)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 187)
     }()
     case .menuChooseByLabelAction?: try {
       guard case .menuChooseByLabelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 172)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 188)
     }()
     case .menuGoBackAction?: try {
       guard case .menuGoBackAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 173)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 189)
     }()
     case .menuGoHomeAction?: try {
       guard case .menuGoHomeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 174)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 190)
     }()
     case .menuScrollAction?: try {
       guard case .menuScrollAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 175)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 191)
+    }()
+    case .mqttAction?: try {
+      guard case .mqttAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 192)
+    }()
+    case .mqttBundledCredentialsChangedAction?: try {
+      guard case .mqttBundledCredentialsChangedAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 193)
+    }()
+    case .mqttPublishAction?: try {
+      guard case .mqttPublishAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 194)
+    }()
+    case .mqttRequestAnnounceAction?: try {
+      guard case .mqttRequestAnnounceAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 195)
+    }()
+    case .mqttSetAllowRemoteControlAction?: try {
+      guard case .mqttSetAllowRemoteControlAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 196)
+    }()
+    case .mqttSetBrokerAction?: try {
+      guard case .mqttSetBrokerAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 197)
+    }()
+    case .mqttSetBundledExposeToLanAction?: try {
+      guard case .mqttSetBundledExposeToLanAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 198)
+    }()
+    case .mqttSetEnabledAction?: try {
+      guard case .mqttSetEnabledAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 199)
+    }()
+    case .mqttSetPublishedComponentsAction?: try {
+      guard case .mqttSetPublishedComponentsAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 200)
+    }()
+    case .mqttSetStatusAction?: try {
+      guard case .mqttSetStatusAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 201)
     }()
     case .notificationsAction?: try {
       guard case .notificationsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 176)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 202)
     }()
     case .notificationsAddAction?: try {
       guard case .notificationsAddAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 177)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 203)
     }()
     case .notificationsClearAction?: try {
       guard case .notificationsClearAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 178)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 204)
     }()
     case .notificationsClearAllAction?: try {
       guard case .notificationsClearAllAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 179)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 205)
     }()
     case .notificationsClearByIDAction?: try {
       guard case .notificationsClearByIDAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 180)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 206)
     }()
     case .notificationsDisplayAction?: try {
       guard case .notificationsDisplayAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 181)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 207)
     }()
     case .openApplicationAction?: try {
       guard case .openApplicationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 182)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 208)
     }()
     case .openRenderAction?: try {
       guard case .openRenderAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 183)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 209)
     }()
     case .powerAction?: try {
       guard case .powerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 184)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 210)
     }()
     case .powerOffAction?: try {
       guard case .powerOffAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 185)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 211)
     }()
     case .rPiConnectAction?: try {
       guard case .rPiConnectAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 186)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 212)
     }()
     case .rPiConnectDoneDownloadingAction?: try {
       guard case .rPiConnectDoneDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 187)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 213)
     }()
     case .rPiConnectSetPendingAction?: try {
       guard case .rPiConnectSetPendingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 188)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 214)
     }()
     case .rPiConnectSetStatusAction?: try {
       guard case .rPiConnectSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 189)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 215)
     }()
     case .rPiConnectStartDownloadingAction?: try {
       guard case .rPiConnectStartDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 190)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 216)
     }()
     case .rPiConnectUpdateServiceStateAction?: try {
       guard case .rPiConnectUpdateServiceStateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 191)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 217)
     }()
     case .rebootAction?: try {
       guard case .rebootAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 192)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 218)
     }()
     case .registerAppAction?: try {
       guard case .registerAppAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 193)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 219)
     }()
     case .registerRegularAppAction?: try {
       guard case .registerRegularAppAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 194)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 220)
     }()
     case .registerSettingAppAction?: try {
       guard case .registerSettingAppAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 195)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 221)
     }()
     case .replayRecordedSequenceAction?: try {
       guard case .replayRecordedSequenceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 196)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 222)
     }()
     case .reportReplayingDoneAction?: try {
       guard case .reportReplayingDoneAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 197)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 223)
     }()
     case .rgbRingAction?: try {
       guard case .rgbRingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 198)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 224)
     }()
     case .rgbRingBlankAction?: try {
       guard case .rgbRingBlankAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 199)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 225)
     }()
     case .rgbRingBlinkAction?: try {
       guard case .rgbRingBlinkAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 200)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 226)
     }()
     case .rgbRingColorfulCommandAction?: try {
       guard case .rgbRingColorfulCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 201)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 227)
     }()
     case .rgbRingCommandAction?: try {
       guard case .rgbRingCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 202)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 228)
     }()
     case .rgbRingFillDownfromAction?: try {
       guard case .rgbRingFillDownfromAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 203)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 229)
     }()
     case .rgbRingFillUptoAction?: try {
       guard case .rgbRingFillUptoAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 204)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 230)
     }()
     case .rgbRingProgressWheelAction?: try {
       guard case .rgbRingProgressWheelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 205)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 231)
     }()
     case .rgbRingProgressWheelStepAction?: try {
       guard case .rgbRingProgressWheelStepAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 206)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 232)
     }()
     case .rgbRingPulseAction?: try {
       guard case .rgbRingPulseAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 207)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 233)
     }()
     case .rgbRingRainbowAction?: try {
       guard case .rgbRingRainbowAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 208)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 234)
     }()
     case .rgbRingSequenceAction?: try {
       guard case .rgbRingSequenceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 209)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 235)
     }()
     case .rgbRingSetAllAction?: try {
       guard case .rgbRingSetAllAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 210)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 236)
     }()
     case .rgbRingSetBrightnessAction?: try {
       guard case .rgbRingSetBrightnessAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 211)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 237)
     }()
     case .rgbRingSetEnabledAction?: try {
       guard case .rgbRingSetEnabledAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 212)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 238)
     }()
     case .rgbRingSetIsBusyAction?: try {
       guard case .rgbRingSetIsBusyAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 213)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 239)
     }()
     case .rgbRingSpinningWheelAction?: try {
       guard case .rgbRingSpinningWheelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 214)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 240)
     }()
     case .rgbRingWaitableCommandAction?: try {
       guard case .rgbRingWaitableCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 215)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 241)
     }()
     case .sshAction?: try {
       guard case .sshAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 216)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 242)
     }()
     case .sshClearEnabledStateAction?: try {
       guard case .sshClearEnabledStateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 217)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 243)
     }()
     case .sshUpdateStateAction?: try {
       guard case .sshUpdateStateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 218)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 244)
     }()
     case .screenshotDataAction?: try {
       guard case .screenshotDataAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 219)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 245)
     }()
     case .sensorsAction?: try {
       guard case .sensorsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 220)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 246)
+    }()
+    case .sensorsReportDeviceReadingsAction?: try {
+      guard case .sensorsReportDeviceReadingsAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 247)
     }()
     case .sensorsReportReadingAction?: try {
       guard case .sensorsReportReadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 221)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 248)
+    }()
+    case .sensorsScanAction?: try {
+      guard case .sensorsScanAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 249)
+    }()
+    case .sensorsScanCompletedAction?: try {
+      guard case .sensorsScanCompletedAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 250)
     }()
     case .setAreEnclosuresVisibleAction?: try {
       guard case .setAreEnclosuresVisibleAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 222)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 251)
     }()
     case .setLocalOverlayOpenAction?: try {
       guard case .setLocalOverlayOpenAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 223)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 252)
     }()
     case .settingsAction?: try {
       guard case .settingsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 224)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 253)
     }()
     case .settingsClearServiceErrorsAction?: try {
       guard case .settingsClearServiceErrorsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 225)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 254)
     }()
     case .settingsReportServiceErrorAction?: try {
       guard case .settingsReportServiceErrorAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 226)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
     }()
     case .settingsServiceAction?: try {
       guard case .settingsServiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 227)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 256)
     }()
     case .settingsServiceSetIsEnabledAction?: try {
       guard case .settingsServiceSetIsEnabledAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 228)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 257)
     }()
     case .settingsServiceSetLogLevelAction?: try {
       guard case .settingsServiceSetLogLevelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 229)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 258)
     }()
     case .settingsServiceSetShouldRestartAction?: try {
       guard case .settingsServiceSetShouldRestartAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 230)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 259)
     }()
     case .settingsServiceSetStatusAction?: try {
       guard case .settingsServiceSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 231)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 260)
     }()
     case .settingsSetServicesAction?: try {
       guard case .settingsSetServicesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 232)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 261)
     }()
     case .settingsStartServiceAction?: try {
       guard case .settingsStartServiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 233)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 262)
     }()
     case .settingsStopServiceAction?: try {
       guard case .settingsStopServiceAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 234)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 263)
+    }()
+    case .settingsToggleAssistantDebugAction?: try {
+      guard case .settingsToggleAssistantDebugAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 264)
     }()
     case .settingsToggleBetaVersionsAction?: try {
       guard case .settingsToggleBetaVersionsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 235)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 265)
+    }()
+    case .settingsToggleGrpcRemoteAccessAction?: try {
+      guard case .settingsToggleGrpcRemoteAccessAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 266)
     }()
     case .settingsTogglePdbSignalAction?: try {
       guard case .settingsTogglePdbSignalAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 236)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 267)
     }()
     case .settingsToggleVisualDebugAction?: try {
       guard case .settingsToggleVisualDebugAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 237)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 268)
     }()
     case .speechRecognitionAction?: try {
       guard case .speechRecognitionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 238)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 269)
     }()
     case .speechRecognitionAddCommandAction?: try {
       guard case .speechRecognitionAddCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 239)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 270)
     }()
     case .speechRecognitionRemoveCommandAction?: try {
       guard case .speechRecognitionRemoveCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 240)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 271)
     }()
     case .speechRecognitionReportIntentDetectionAction?: try {
       guard case .speechRecognitionReportIntentDetectionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 241)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 272)
     }()
     case .speechRecognitionReportIntentTimeoutAction?: try {
       guard case .speechRecognitionReportIntentTimeoutAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 242)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 273)
     }()
     case .speechRecognitionReportSpeechAction?: try {
       guard case .speechRecognitionReportSpeechAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 243)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 274)
     }()
     case .speechRecognitionReportWakeWordDetectionAction?: try {
       guard case .speechRecognitionReportWakeWordDetectionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 244)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 275)
+    }()
+    case .speechRecognitionRunCommandAction?: try {
+      guard case .speechRecognitionRunCommandAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 276)
     }()
     case .speechRecognitionSetAssistantEnabledAction?: try {
       guard case .speechRecognitionSetAssistantEnabledAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 245)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 277)
+    }()
+    case .speechRecognitionSetAssistantListeningAction?: try {
+      guard case .speechRecognitionSetAssistantListeningAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 278)
     }()
     case .speechRecognitionSetConversationEndPhrasesAction?: try {
       guard case .speechRecognitionSetConversationEndPhrasesAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 246)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 279)
+    }()
+    case .speechRecognitionSetWakeModeEnabledAction?: try {
+      guard case .speechRecognitionSetWakeModeEnabledAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 280)
     }()
     case .speechRecognitionTriggerModeAction?: try {
       guard case .speechRecognitionTriggerModeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 247)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 281)
     }()
     case .speechRecognitionUpdateCommandAction?: try {
       guard case .speechRecognitionUpdateCommandAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 248)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 282)
     }()
     case .speechSynthesisAction?: try {
       guard case .speechSynthesisAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 249)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 283)
     }()
     case .speechSynthesisReadTextAction?: try {
       guard case .speechSynthesisReadTextAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 250)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 284)
     }()
     case .speechSynthesisSetIsEnabledAction?: try {
       guard case .speechSynthesisSetIsEnabledAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 251)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 285)
     }()
     case .speechSynthesisSetPreferLocalAction?: try {
       guard case .speechSynthesisSetPreferLocalAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 252)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 286)
     }()
     case .stackAction?: try {
       guard case .stackAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 253)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 287)
     }()
     case .stackPopAction?: try {
       guard case .stackPopAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 254)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 288)
     }()
     case .stackPopChatAction?: try {
       guard case .stackPopChatAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 255)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 289)
     }()
     case .stackPopItemAction?: try {
       guard case .stackPopItemAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 256)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 290)
     }()
     case .stackPopNotificationAction?: try {
       guard case .stackPopNotificationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 257)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 291)
     }()
     case .stackPopToRootAction?: try {
       guard case .stackPopToRootAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 258)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 292)
     }()
     case .stackPushApplicationAction?: try {
       guard case .stackPushApplicationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 259)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 293)
     }()
     case .stackPushChatAction?: try {
       guard case .stackPushChatAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 260)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 294)
     }()
     case .stackPushInstructionAction?: try {
       guard case .stackPushInstructionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 261)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 295)
     }()
     case .stackPushMenuAction?: try {
       guard case .stackPushMenuAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 262)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 296)
     }()
     case .stackPushNotificationAction?: try {
       guard case .stackPushNotificationAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 263)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 297)
     }()
     case .stackPushPromptAction?: try {
       guard case .stackPushPromptAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 264)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 298)
     }()
     case .stackPushRenderAction?: try {
       guard case .stackPushRenderAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 265)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 299)
     }()
     case .stackSetPageIndexAction?: try {
       guard case .stackSetPageIndexAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 266)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 300)
     }()
     case .statusIconsAction?: try {
       guard case .statusIconsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 267)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 301)
     }()
     case .statusIconsRegisterAction?: try {
       guard case .statusIconsRegisterAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 268)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 302)
     }()
     case .systemAction?: try {
       guard case .systemAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 269)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 303)
     }()
     case .systemMetricsUpdateAction?: try {
       guard case .systemMetricsUpdateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 270)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 304)
     }()
     case .tailscaleAction?: try {
       guard case .tailscaleAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 271)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 305)
     }()
     case .tailscaleDoneDownloadingAction?: try {
       guard case .tailscaleDoneDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 272)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 306)
     }()
     case .tailscaleSetPendingAction?: try {
       guard case .tailscaleSetPendingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 273)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 307)
     }()
     case .tailscaleSetStatusAction?: try {
       guard case .tailscaleSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 274)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 308)
     }()
     case .tailscaleStartDownloadingAction?: try {
       guard case .tailscaleStartDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 275)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 309)
     }()
     case .takeScreenshotAction?: try {
       guard case .takeScreenshotAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 276)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 310)
     }()
     case .toggleRecordingAction?: try {
       guard case .toggleRecordingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 277)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 311)
     }()
     case .updateApplicationKwargsAction?: try {
       guard case .updateApplicationKwargsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 278)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 312)
     }()
     case .updateCurrentViewAction?: try {
       guard case .updateCurrentViewAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 279)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 313)
     }()
     case .updateDynamicMenuAction?: try {
       guard case .updateDynamicMenuAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 280)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 314)
     }()
     case .updateInstructionProgressAction?: try {
       guard case .updateInstructionProgressAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 281)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 315)
     }()
     case .updateManagerAction?: try {
       guard case .updateManagerAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 282)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 316)
     }()
     case .updateManagerReportFailedCheckAction?: try {
       guard case .updateManagerReportFailedCheckAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 283)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 317)
     }()
     case .updateManagerRequestCheckAction?: try {
       guard case .updateManagerRequestCheckAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 284)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 318)
     }()
     case .updateManagerRequestUpdateAction?: try {
       guard case .updateManagerRequestUpdateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 285)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 319)
     }()
     case .updateManagerSetVersionsAction?: try {
       guard case .updateManagerSetVersionsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 286)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 320)
     }()
     case .updatePromptAction?: try {
       guard case .updatePromptAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 287)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 321)
     }()
     case .updateRenderPropsAction?: try {
       guard case .updateRenderPropsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 288)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 322)
     }()
     case .usersAction?: try {
       guard case .usersAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 289)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 323)
     }()
     case .usersCreateUserAction?: try {
       guard case .usersCreateUserAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 290)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 324)
     }()
     case .usersDeleteUserAction?: try {
       guard case .usersDeleteUserAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 291)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 325)
     }()
     case .usersResetPasswordAction?: try {
       guard case .usersResetPasswordAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 292)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 326)
     }()
     case .usersSetUsersAction?: try {
       guard case .usersSetUsersAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 293)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 327)
     }()
     case .vsCodeAction?: try {
       guard case .vsCodeAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 294)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 328)
     }()
     case .vsCodeDoneDownloadingAction?: try {
       guard case .vsCodeDoneDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 295)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 329)
     }()
     case .vsCodeSetPendingAction?: try {
       guard case .vsCodeSetPendingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 296)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 330)
     }()
     case .vsCodeSetStatusAction?: try {
       guard case .vsCodeSetStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 297)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 331)
     }()
     case .vsCodeStartDownloadingAction?: try {
       guard case .vsCodeStartDownloadingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 298)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 332)
     }()
     case .wakeEngineSetEnabledAction?: try {
       guard case .wakeEngineSetEnabledAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 299)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 333)
     }()
     case .wakeTriggerAddAction?: try {
       guard case .wakeTriggerAddAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 300)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 334)
     }()
     case .wakeTriggerRemoveAction?: try {
       guard case .wakeTriggerRemoveAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 301)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 335)
     }()
     case .wakeWordDeleteModelAction?: try {
       guard case .wakeWordDeleteModelAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 302)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 336)
     }()
     case .wakeWordDownloadModelsAction?: try {
       guard case .wakeWordDownloadModelsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 303)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 337)
     }()
     case .wakeWordSetAvailableModelsAction?: try {
       guard case .wakeWordSetAvailableModelsAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 304)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 338)
     }()
     case .wakeWordSetModelsStatusAction?: try {
       guard case .wakeWordSetModelsStatusAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 305)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 339)
     }()
     case .webUiAction?: try {
       guard case .webUiAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 306)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 340)
+    }()
+    case .webUiInputAction?: try {
+      guard case .webUiInputAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 341)
     }()
     case .wiFiAction?: try {
       guard case .wiFiAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 307)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 342)
     }()
     case .wiFiInputConnectionAction?: try {
       guard case .wiFiInputConnectionAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 308)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 343)
     }()
     case .wiFiSetHasVisitedOnboardingAction?: try {
       guard case .wiFiSetHasVisitedOnboardingAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 309)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 344)
     }()
     case .wiFiSetHotspotRunningAction?: try {
       guard case .wiFiSetHotspotRunningAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 310)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 345)
     }()
     case .wiFiStartHotspotAction?: try {
       guard case .wiFiStartHotspotAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 311)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 346)
     }()
     case .wiFiStopHotspotAction?: try {
       guard case .wiFiStopHotspotAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 312)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 347)
     }()
     case .wiFiUpdateAction?: try {
       guard case .wiFiUpdateAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 313)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 348)
     }()
     case .wiFiUpdateRequestAction?: try {
       guard case .wiFiUpdateRequestAction(let v)? = self.action else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 314)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 349)
+    }()
+    case .wyomingAction?: try {
+      guard case .wyomingAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 350)
+    }()
+    case .wyomingAddAccessPolicyAction?: try {
+      guard case .wyomingAddAccessPolicyAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 351)
+    }()
+    case .wyomingRemoveAccessPolicyAction?: try {
+      guard case .wyomingRemoveAccessPolicyAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 352)
+    }()
+    case .wyomingReportEnginesStatusAction?: try {
+      guard case .wyomingReportEnginesStatusAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 353)
+    }()
+    case .wyomingReportSatelliteStatusAction?: try {
+      guard case .wyomingReportSatelliteStatusAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 354)
+    }()
+    case .wyomingSatelliteWakeAction?: try {
+      guard case .wyomingSatelliteWakeAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 355)
+    }()
+    case .wyomingSetEnginesEnabledAction?: try {
+      guard case .wyomingSetEnginesEnabledAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 356)
+    }()
+    case .wyomingSetSatelliteEnabledAction?: try {
+      guard case .wyomingSetSatelliteEnabledAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 357)
+    }()
+    case .wyomingSetZeroconfEnabledAction?: try {
+      guard case .wyomingSetZeroconfEnabledAction(let v)? = self.action else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 358)
     }()
     case nil: break
     }
@@ -67081,7 +75702,7 @@ extension Ubo_V1_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
 extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Event"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}application_scroll_event\0\u{3}assistant_delete_kokoro_event\0\u{3}assistant_delete_moonshine_model_event\0\u{3}assistant_delete_ollama_model_event\0\u{3}assistant_delete_piper_voice_event\0\u{3}assistant_delete_vosk_model_event\0\u{3}assistant_download_kokoro_event\0\u{3}assistant_download_moonshine_model_event\0\u{3}assistant_download_ollama_model_event\0\u{3}assistant_download_piper_voice_event\0\u{3}assistant_download_vosk_model_event\0\u{3}assistant_event\0\u{3}assistant_generic_llm_provider_changed_event\0\u{3}assistant_generic_llm_provider_removed_event\0\u{3}assistant_handle_report_event\0\u{3}assistant_model_changed_event\0\u{3}assistant_ollama_thinking_changed_event\0\u{3}assistant_piper_voice_changed_event\0\u{3}assistant_run_pipeline_event\0\u{3}assistant_stop_talking_event\0\u{3}assistant_update_providers_event\0\u{3}assistant_voice_changed_event\0\u{3}audio_event\0\u{3}audio_install_driver_event\0\u{3}audio_play_audio_sample_event\0\u{3}audio_play_audio_sequence_event\0\u{3}audio_play_chime_event\0\u{3}audio_playback_done_event\0\u{3}audio_report_sample_event\0\u{3}audio_stop_playback_event\0\u{3}camera_detect_advertise_event\0\u{3}camera_detect_event\0\u{3}camera_detected_event\0\u{3}camera_event\0\u{3}camera_install_driver_event\0\u{3}camera_reinitialize_event\0\u{3}camera_report_image_event\0\u{3}camera_restore_default_event\0\u{3}camera_start_viewfinder_event\0\u{3}camera_stop_viewfinder_event\0\u{3}chat_audio_playback_toggled_event\0\u{3}chat_event\0\u{3}chat_session_ended_event\0\u{3}chat_session_started_event\0\u{3}chat_user_message_sent_event\0\u{3}display_blank_event\0\u{3}display_compressed_render_event\0\u{3}display_event\0\u{3}display_redraw_event\0\u{3}display_render_event\0\u{3}display_unblank_event\0\u{3}docker_event\0\u{3}docker_image_event\0\u{3}docker_image_fetch_composition_event\0\u{3}docker_image_fetch_event\0\u{3}docker_image_rebind_event\0\u{3}docker_image_register_app_event\0\u{3}docker_image_release_composition_event\0\u{3}docker_image_remove_composition_event\0\u{3}docker_image_remove_container_event\0\u{3}docker_image_remove_event\0\u{3}docker_image_run_composition_event\0\u{3}docker_image_run_container_event\0\u{3}docker_image_stop_composition_event\0\u{3}docker_image_stop_container_event\0\u{3}docker_install_event\0\u{3}docker_start_event\0\u{3}docker_stop_event\0\u{3}dynamic_menu_changed_event\0\u{3}execute_menu_action_event\0\u{3}file_download_event\0\u{3}file_download_ready_event\0\u{3}file_download_request_event\0\u{3}file_system_copy_event\0\u{3}file_system_event\0\u{3}file_system_move_event\0\u{3}file_system_remove_event\0\u{3}file_system_select_event\0\u{3}file_system_selector_cleanup_event\0\u{3}file_system_video_frame_event\0\u{3}file_upload_chunk_event\0\u{3}file_upload_complete_event\0\u{3}file_upload_error_event\0\u{3}file_upload_event\0\u{3}file_upload_start_event\0\u{3}frame_stream_data_event\0\u{3}infrared_bound_action_triggered_event\0\u{3}infrared_device_registration_complete_event\0\u{3}infrared_device_registration_started_event\0\u{3}infrared_event\0\u{3}infrared_send_code_event\0\u{3}init_event\0\u{3}input_cancel_event\0\u{3}input_provide_event\0\u{3}input_resolve_event\0\u{3}ip_event\0\u{3}local_overlay_go_back_event\0\u{3}localization_event\0\u{3}localization_language_changed_event\0\u{3}main_event\0\u{3}mcp_add_server_event\0\u{3}mcp_delete_server_event\0\u{3}mcp_event\0\u{3}mcp_sync_servers_event\0\u{3}mcp_toggle_server_event\0\u{3}menu_choose_by_icon_event\0\u{3}menu_choose_by_index_event\0\u{3}menu_choose_by_label_event\0\u{3}menu_event\0\u{3}notifications_clear_event\0\u{3}notifications_display_event\0\u{3}notifications_event\0\u{3}power_event\0\u{3}power_off_event\0\u{3}r_pi_connect_event\0\u{3}r_pi_connect_login_event\0\u{3}reboot_event\0\u{3}replay_recorded_sequence_event\0\u{3}rgb_ring_command_event\0\u{3}rgb_ring_event\0\u{3}screenshot_data_event\0\u{3}screenshot_event\0\u{3}settings_event\0\u{3}settings_service_event\0\u{3}settings_start_service_event\0\u{3}settings_stop_service_event\0\u{3}snapshot_event\0\u{3}speech_recognition_bound_action_triggered_event\0\u{3}speech_recognition_event\0\u{3}speech_recognition_report_text_event\0\u{3}speech_synthesis_event\0\u{3}speech_synthesis_synthesize_text_event\0\u{3}stack_changed_event\0\u{3}stack_page_index_changed_event\0\u{3}store_recorded_sequence_event\0\u{3}system_event\0\u{3}tailscale_event\0\u{3}update_manager_check_event\0\u{3}update_manager_event\0\u{3}update_manager_update_event\0\u{3}users_create_user_event\0\u{3}users_delete_user_event\0\u{3}users_event\0\u{3}users_reset_password_event\0\u{3}vs_code_event\0\u{3}vs_code_login_event\0\u{3}vs_code_restart_event\0\u{3}view_changed_event\0\u{3}wake_word_delete_model_event\0\u{3}wake_word_download_models_event\0\u{3}web_ui_event\0\u{3}web_ui_initialize_event\0\u{3}wi_fi_event\0\u{3}wi_fi_input_connection_event\0\u{3}wi_fi_start_hotspot_event\0\u{3}wi_fi_stop_hotspot_event\0\u{3}wi_fi_update_request_event\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}application_scroll_event\0\u{3}assistant_cancel_request_event\0\u{3}assistant_delete_kokoro_event\0\u{3}assistant_delete_moonshine_model_event\0\u{3}assistant_delete_ollama_model_event\0\u{3}assistant_delete_piper_voice_event\0\u{3}assistant_delete_vosk_model_event\0\u{3}assistant_download_kokoro_event\0\u{3}assistant_download_moonshine_model_event\0\u{3}assistant_download_ollama_model_event\0\u{3}assistant_download_piper_voice_event\0\u{3}assistant_download_vosk_model_event\0\u{3}assistant_event\0\u{3}assistant_generic_llm_provider_changed_event\0\u{3}assistant_generic_llm_provider_removed_event\0\u{3}assistant_handle_report_event\0\u{3}assistant_model_changed_event\0\u{3}assistant_ollama_thinking_changed_event\0\u{3}assistant_piper_voice_changed_event\0\u{3}assistant_request_mic_stream_event\0\u{3}assistant_run_pipeline_event\0\u{3}assistant_stop_talking_event\0\u{3}assistant_update_providers_event\0\u{3}assistant_voice_changed_event\0\u{3}audio_event\0\u{3}audio_install_driver_event\0\u{3}audio_play_audio_sample_event\0\u{3}audio_play_audio_sequence_event\0\u{3}audio_play_chime_event\0\u{3}audio_playback_done_event\0\u{3}audio_report_sample_event\0\u{3}audio_stop_playback_event\0\u{3}camera_detect_advertise_event\0\u{3}camera_detect_event\0\u{3}camera_detected_event\0\u{3}camera_event\0\u{3}camera_install_driver_event\0\u{3}camera_reinitialize_event\0\u{3}camera_report_image_event\0\u{3}camera_restore_default_event\0\u{3}camera_start_viewfinder_event\0\u{3}camera_stop_viewfinder_event\0\u{3}chat_audio_playback_toggled_event\0\u{3}chat_event\0\u{3}chat_session_ended_event\0\u{3}chat_session_started_event\0\u{3}chat_user_message_sent_event\0\u{3}display_blank_event\0\u{3}display_compressed_render_event\0\u{3}display_event\0\u{3}display_redraw_event\0\u{3}display_render_event\0\u{3}display_unblank_event\0\u{3}docker_event\0\u{3}docker_image_event\0\u{3}docker_image_fetch_composition_event\0\u{3}docker_image_fetch_event\0\u{3}docker_image_rebind_event\0\u{3}docker_image_register_app_event\0\u{3}docker_image_release_composition_event\0\u{3}docker_image_remove_composition_event\0\u{3}docker_image_remove_container_event\0\u{3}docker_image_remove_event\0\u{3}docker_image_run_composition_event\0\u{3}docker_image_run_container_event\0\u{3}docker_image_stop_composition_event\0\u{3}docker_image_stop_container_event\0\u{3}docker_install_event\0\u{3}docker_start_event\0\u{3}docker_stop_event\0\u{3}dynamic_menu_changed_event\0\u{3}execute_menu_action_event\0\u{3}file_download_event\0\u{3}file_download_ready_event\0\u{3}file_download_request_event\0\u{3}file_system_copy_event\0\u{3}file_system_event\0\u{3}file_system_move_event\0\u{3}file_system_remove_event\0\u{3}file_system_select_event\0\u{3}file_system_selector_cleanup_event\0\u{3}file_system_video_frame_event\0\u{3}file_upload_chunk_event\0\u{3}file_upload_complete_event\0\u{3}file_upload_error_event\0\u{3}file_upload_event\0\u{3}file_upload_start_event\0\u{3}frame_stream_chunk_event\0\u{3}frame_stream_data_event\0\u{3}infrared_bound_action_triggered_event\0\u{3}infrared_device_registration_complete_event\0\u{3}infrared_device_registration_started_event\0\u{3}infrared_event\0\u{3}infrared_send_code_event\0\u{3}init_event\0\u{3}input_cancel_event\0\u{3}input_provide_event\0\u{3}input_resolve_event\0\u{3}ip_event\0\u{3}kiosk_apply_config_event\0\u{3}kiosk_event\0\u{3}local_overlay_go_back_event\0\u{3}localization_event\0\u{3}localization_language_changed_event\0\u{3}localization_location_changed_event\0\u{3}localization_location_reset_event\0\u{3}localization_speak_date_event\0\u{3}localization_speak_time_event\0\u{3}localization_speak_weather_event\0\u{3}localization_weather_refresh_requested_event\0\u{3}main_event\0\u{3}mcp_add_server_event\0\u{3}mcp_delete_server_event\0\u{3}mcp_event\0\u{3}mcp_sync_servers_event\0\u{3}mcp_toggle_server_event\0\u{3}menu_choose_by_icon_event\0\u{3}menu_choose_by_index_event\0\u{3}menu_choose_by_label_event\0\u{3}menu_event\0\u{3}mqtt_announce_requested_event\0\u{3}mqtt_event\0\u{3}mqtt_publish_event\0\u{3}notifications_clear_event\0\u{3}notifications_display_event\0\u{3}notifications_event\0\u{3}power_event\0\u{3}power_off_event\0\u{3}r_pi_connect_event\0\u{3}r_pi_connect_login_event\0\u{3}reboot_event\0\u{3}replay_recorded_sequence_event\0\u{3}rgb_ring_command_event\0\u{3}rgb_ring_event\0\u{3}screenshot_data_event\0\u{3}screenshot_event\0\u{3}sensors_event\0\u{3}sensors_scan_event\0\u{3}settings_event\0\u{3}settings_service_event\0\u{3}settings_start_service_event\0\u{3}settings_stop_service_event\0\u{3}snapshot_event\0\u{3}speech_recognition_bound_action_triggered_event\0\u{3}speech_recognition_event\0\u{3}speech_recognition_report_text_event\0\u{3}speech_synthesis_event\0\u{3}speech_synthesis_synthesize_text_event\0\u{3}stack_changed_event\0\u{3}stack_page_index_changed_event\0\u{3}store_recorded_sequence_event\0\u{3}system_event\0\u{3}tailscale_event\0\u{3}update_manager_check_event\0\u{3}update_manager_event\0\u{3}update_manager_update_event\0\u{3}users_create_user_event\0\u{3}users_delete_user_event\0\u{3}users_event\0\u{3}users_reset_password_event\0\u{3}vs_code_event\0\u{3}vs_code_login_event\0\u{3}vs_code_restart_event\0\u{3}view_changed_event\0\u{3}wake_word_delete_model_event\0\u{3}wake_word_download_models_event\0\u{3}web_ui_event\0\u{3}web_ui_initialize_event\0\u{3}web_ui_input_event\0\u{3}wi_fi_event\0\u{3}wi_fi_input_connection_event\0\u{3}wi_fi_start_hotspot_event\0\u{3}wi_fi_stop_hotspot_event\0\u{3}wi_fi_update_request_event\0\u{3}wyoming_event\0\u{3}wyoming_satellite_wake_event\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -67103,6 +75724,19 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         }
       }()
       case 2: try {
+        var v: Ubo_V1_AssistantCancelRequestEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .assistantCancelRequestEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .assistantCancelRequestEvent(v)
+        }
+      }()
+      case 3: try {
         var v: Ubo_V1_AssistantDeleteKokoroEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67115,7 +75749,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDeleteKokoroEvent(v)
         }
       }()
-      case 3: try {
+      case 4: try {
         var v: Ubo_V1_AssistantDeleteMoonshineModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67128,7 +75762,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDeleteMoonshineModelEvent(v)
         }
       }()
-      case 4: try {
+      case 5: try {
         var v: Ubo_V1_AssistantDeleteOllamaModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67141,7 +75775,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDeleteOllamaModelEvent(v)
         }
       }()
-      case 5: try {
+      case 6: try {
         var v: Ubo_V1_AssistantDeletePiperVoiceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67154,7 +75788,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDeletePiperVoiceEvent(v)
         }
       }()
-      case 6: try {
+      case 7: try {
         var v: Ubo_V1_AssistantDeleteVoskModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67167,7 +75801,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDeleteVoskModelEvent(v)
         }
       }()
-      case 7: try {
+      case 8: try {
         var v: Ubo_V1_AssistantDownloadKokoroEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67180,7 +75814,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDownloadKokoroEvent(v)
         }
       }()
-      case 8: try {
+      case 9: try {
         var v: Ubo_V1_AssistantDownloadMoonshineModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67193,7 +75827,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDownloadMoonshineModelEvent(v)
         }
       }()
-      case 9: try {
+      case 10: try {
         var v: Ubo_V1_AssistantDownloadOllamaModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67206,7 +75840,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDownloadOllamaModelEvent(v)
         }
       }()
-      case 10: try {
+      case 11: try {
         var v: Ubo_V1_AssistantDownloadPiperVoiceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67219,7 +75853,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDownloadPiperVoiceEvent(v)
         }
       }()
-      case 11: try {
+      case 12: try {
         var v: Ubo_V1_AssistantDownloadVoskModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67232,7 +75866,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantDownloadVoskModelEvent(v)
         }
       }()
-      case 12: try {
+      case 13: try {
         var v: Ubo_V1_AssistantEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67245,7 +75879,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantEvent(v)
         }
       }()
-      case 13: try {
+      case 14: try {
         var v: Ubo_V1_AssistantGenericLLMProviderChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67258,7 +75892,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantGenericLlmProviderChangedEvent(v)
         }
       }()
-      case 14: try {
+      case 15: try {
         var v: Ubo_V1_AssistantGenericLLMProviderRemovedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67271,7 +75905,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantGenericLlmProviderRemovedEvent(v)
         }
       }()
-      case 15: try {
+      case 16: try {
         var v: Ubo_V1_AssistantHandleReportEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67284,7 +75918,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantHandleReportEvent(v)
         }
       }()
-      case 16: try {
+      case 17: try {
         var v: Ubo_V1_AssistantModelChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67297,7 +75931,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantModelChangedEvent(v)
         }
       }()
-      case 17: try {
+      case 18: try {
         var v: Ubo_V1_AssistantOllamaThinkingChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67310,7 +75944,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantOllamaThinkingChangedEvent(v)
         }
       }()
-      case 18: try {
+      case 19: try {
         var v: Ubo_V1_AssistantPiperVoiceChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67323,7 +75957,20 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantPiperVoiceChangedEvent(v)
         }
       }()
-      case 19: try {
+      case 20: try {
+        var v: Ubo_V1_AssistantRequestMicStreamEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .assistantRequestMicStreamEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .assistantRequestMicStreamEvent(v)
+        }
+      }()
+      case 21: try {
         var v: Ubo_V1_AssistantRunPipelineEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67336,7 +75983,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantRunPipelineEvent(v)
         }
       }()
-      case 20: try {
+      case 22: try {
         var v: Ubo_V1_AssistantStopTalkingEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67349,7 +75996,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantStopTalkingEvent(v)
         }
       }()
-      case 21: try {
+      case 23: try {
         var v: Ubo_V1_AssistantUpdateProvidersEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67362,7 +76009,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantUpdateProvidersEvent(v)
         }
       }()
-      case 22: try {
+      case 24: try {
         var v: Ubo_V1_AssistantVoiceChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67375,7 +76022,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .assistantVoiceChangedEvent(v)
         }
       }()
-      case 23: try {
+      case 25: try {
         var v: Ubo_V1_AudioEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67388,7 +76035,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioEvent(v)
         }
       }()
-      case 24: try {
+      case 26: try {
         var v: Ubo_V1_AudioInstallDriverEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67401,7 +76048,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioInstallDriverEvent(v)
         }
       }()
-      case 25: try {
+      case 27: try {
         var v: Ubo_V1_AudioPlayAudioSampleEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67414,7 +76061,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioPlayAudioSampleEvent(v)
         }
       }()
-      case 26: try {
+      case 28: try {
         var v: Ubo_V1_AudioPlayAudioSequenceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67427,7 +76074,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioPlayAudioSequenceEvent(v)
         }
       }()
-      case 27: try {
+      case 29: try {
         var v: Ubo_V1_AudioPlayChimeEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67440,7 +76087,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioPlayChimeEvent(v)
         }
       }()
-      case 28: try {
+      case 30: try {
         var v: Ubo_V1_AudioPlaybackDoneEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67453,7 +76100,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioPlaybackDoneEvent(v)
         }
       }()
-      case 29: try {
+      case 31: try {
         var v: Ubo_V1_AudioReportSampleEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67466,7 +76113,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioReportSampleEvent(v)
         }
       }()
-      case 30: try {
+      case 32: try {
         var v: Ubo_V1_AudioStopPlaybackEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67479,7 +76126,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .audioStopPlaybackEvent(v)
         }
       }()
-      case 31: try {
+      case 33: try {
         var v: Ubo_V1_CameraDetectAdvertiseEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67492,7 +76139,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraDetectAdvertiseEvent(v)
         }
       }()
-      case 32: try {
+      case 34: try {
         var v: Ubo_V1_CameraDetectEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67505,7 +76152,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraDetectEvent(v)
         }
       }()
-      case 33: try {
+      case 35: try {
         var v: Ubo_V1_CameraDetectedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67518,7 +76165,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraDetectedEvent(v)
         }
       }()
-      case 34: try {
+      case 36: try {
         var v: Ubo_V1_CameraEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67531,7 +76178,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraEvent(v)
         }
       }()
-      case 35: try {
+      case 37: try {
         var v: Ubo_V1_CameraInstallDriverEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67544,7 +76191,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraInstallDriverEvent(v)
         }
       }()
-      case 36: try {
+      case 38: try {
         var v: Ubo_V1_CameraReinitializeEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67557,7 +76204,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraReinitializeEvent(v)
         }
       }()
-      case 37: try {
+      case 39: try {
         var v: Ubo_V1_CameraReportImageEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67570,7 +76217,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraReportImageEvent(v)
         }
       }()
-      case 38: try {
+      case 40: try {
         var v: Ubo_V1_CameraRestoreDefaultEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67583,7 +76230,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraRestoreDefaultEvent(v)
         }
       }()
-      case 39: try {
+      case 41: try {
         var v: Ubo_V1_CameraStartViewfinderEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67596,7 +76243,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraStartViewfinderEvent(v)
         }
       }()
-      case 40: try {
+      case 42: try {
         var v: Ubo_V1_CameraStopViewfinderEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67609,7 +76256,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .cameraStopViewfinderEvent(v)
         }
       }()
-      case 41: try {
+      case 43: try {
         var v: Ubo_V1_ChatAudioPlaybackToggledEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67622,7 +76269,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .chatAudioPlaybackToggledEvent(v)
         }
       }()
-      case 42: try {
+      case 44: try {
         var v: Ubo_V1_ChatEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67635,7 +76282,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .chatEvent(v)
         }
       }()
-      case 43: try {
+      case 45: try {
         var v: Ubo_V1_ChatSessionEndedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67648,7 +76295,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .chatSessionEndedEvent(v)
         }
       }()
-      case 44: try {
+      case 46: try {
         var v: Ubo_V1_ChatSessionStartedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67661,7 +76308,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .chatSessionStartedEvent(v)
         }
       }()
-      case 45: try {
+      case 47: try {
         var v: Ubo_V1_ChatUserMessageSentEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67674,7 +76321,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .chatUserMessageSentEvent(v)
         }
       }()
-      case 46: try {
+      case 48: try {
         var v: Ubo_V1_DisplayBlankEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67687,7 +76334,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayBlankEvent(v)
         }
       }()
-      case 47: try {
+      case 49: try {
         var v: Ubo_V1_DisplayCompressedRenderEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67700,7 +76347,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayCompressedRenderEvent(v)
         }
       }()
-      case 48: try {
+      case 50: try {
         var v: Ubo_V1_DisplayEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67713,7 +76360,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayEvent(v)
         }
       }()
-      case 49: try {
+      case 51: try {
         var v: Ubo_V1_DisplayRedrawEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67726,7 +76373,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayRedrawEvent(v)
         }
       }()
-      case 50: try {
+      case 52: try {
         var v: Ubo_V1_DisplayRenderEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67739,7 +76386,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayRenderEvent(v)
         }
       }()
-      case 51: try {
+      case 53: try {
         var v: Ubo_V1_DisplayUnblankEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67752,7 +76399,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .displayUnblankEvent(v)
         }
       }()
-      case 52: try {
+      case 54: try {
         var v: Ubo_V1_DockerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67765,7 +76412,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerEvent(v)
         }
       }()
-      case 53: try {
+      case 55: try {
         var v: Ubo_V1_DockerImageEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67778,7 +76425,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageEvent(v)
         }
       }()
-      case 54: try {
+      case 56: try {
         var v: Ubo_V1_DockerImageFetchCompositionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67791,7 +76438,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageFetchCompositionEvent(v)
         }
       }()
-      case 55: try {
+      case 57: try {
         var v: Ubo_V1_DockerImageFetchEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67804,7 +76451,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageFetchEvent(v)
         }
       }()
-      case 56: try {
+      case 58: try {
         var v: Ubo_V1_DockerImageRebindEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67817,7 +76464,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRebindEvent(v)
         }
       }()
-      case 57: try {
+      case 59: try {
         var v: Ubo_V1_DockerImageRegisterAppEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67830,7 +76477,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRegisterAppEvent(v)
         }
       }()
-      case 58: try {
+      case 60: try {
         var v: Ubo_V1_DockerImageReleaseCompositionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67843,7 +76490,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageReleaseCompositionEvent(v)
         }
       }()
-      case 59: try {
+      case 61: try {
         var v: Ubo_V1_DockerImageRemoveCompositionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67856,7 +76503,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRemoveCompositionEvent(v)
         }
       }()
-      case 60: try {
+      case 62: try {
         var v: Ubo_V1_DockerImageRemoveContainerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67869,7 +76516,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRemoveContainerEvent(v)
         }
       }()
-      case 61: try {
+      case 63: try {
         var v: Ubo_V1_DockerImageRemoveEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67882,7 +76529,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRemoveEvent(v)
         }
       }()
-      case 62: try {
+      case 64: try {
         var v: Ubo_V1_DockerImageRunCompositionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67895,7 +76542,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRunCompositionEvent(v)
         }
       }()
-      case 63: try {
+      case 65: try {
         var v: Ubo_V1_DockerImageRunContainerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67908,7 +76555,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageRunContainerEvent(v)
         }
       }()
-      case 64: try {
+      case 66: try {
         var v: Ubo_V1_DockerImageStopCompositionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67921,7 +76568,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageStopCompositionEvent(v)
         }
       }()
-      case 65: try {
+      case 67: try {
         var v: Ubo_V1_DockerImageStopContainerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67934,7 +76581,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerImageStopContainerEvent(v)
         }
       }()
-      case 66: try {
+      case 68: try {
         var v: Ubo_V1_DockerInstallEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67947,7 +76594,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerInstallEvent(v)
         }
       }()
-      case 67: try {
+      case 69: try {
         var v: Ubo_V1_DockerStartEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67960,7 +76607,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerStartEvent(v)
         }
       }()
-      case 68: try {
+      case 70: try {
         var v: Ubo_V1_DockerStopEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67973,7 +76620,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dockerStopEvent(v)
         }
       }()
-      case 69: try {
+      case 71: try {
         var v: Ubo_V1_DynamicMenuChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67986,7 +76633,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .dynamicMenuChangedEvent(v)
         }
       }()
-      case 70: try {
+      case 72: try {
         var v: Ubo_V1_ExecuteMenuActionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -67999,7 +76646,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .executeMenuActionEvent(v)
         }
       }()
-      case 71: try {
+      case 73: try {
         var v: Ubo_V1_FileDownloadEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68012,7 +76659,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileDownloadEvent(v)
         }
       }()
-      case 72: try {
+      case 74: try {
         var v: Ubo_V1_FileDownloadReadyEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68025,7 +76672,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileDownloadReadyEvent(v)
         }
       }()
-      case 73: try {
+      case 75: try {
         var v: Ubo_V1_FileDownloadRequestEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68038,7 +76685,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileDownloadRequestEvent(v)
         }
       }()
-      case 74: try {
+      case 76: try {
         var v: Ubo_V1_FileSystemCopyEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68051,7 +76698,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemCopyEvent(v)
         }
       }()
-      case 75: try {
+      case 77: try {
         var v: Ubo_V1_FileSystemEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68064,7 +76711,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemEvent(v)
         }
       }()
-      case 76: try {
+      case 78: try {
         var v: Ubo_V1_FileSystemMoveEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68077,7 +76724,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemMoveEvent(v)
         }
       }()
-      case 77: try {
+      case 79: try {
         var v: Ubo_V1_FileSystemRemoveEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68090,7 +76737,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemRemoveEvent(v)
         }
       }()
-      case 78: try {
+      case 80: try {
         var v: Ubo_V1_FileSystemSelectEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68103,7 +76750,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemSelectEvent(v)
         }
       }()
-      case 79: try {
+      case 81: try {
         var v: Ubo_V1_FileSystemSelectorCleanupEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68116,7 +76763,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemSelectorCleanupEvent(v)
         }
       }()
-      case 80: try {
+      case 82: try {
         var v: Ubo_V1_FileSystemVideoFrameEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68129,7 +76776,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileSystemVideoFrameEvent(v)
         }
       }()
-      case 81: try {
+      case 83: try {
         var v: Ubo_V1_FileUploadChunkEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68142,7 +76789,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileUploadChunkEvent(v)
         }
       }()
-      case 82: try {
+      case 84: try {
         var v: Ubo_V1_FileUploadCompleteEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68155,7 +76802,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileUploadCompleteEvent(v)
         }
       }()
-      case 83: try {
+      case 85: try {
         var v: Ubo_V1_FileUploadErrorEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68168,7 +76815,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileUploadErrorEvent(v)
         }
       }()
-      case 84: try {
+      case 86: try {
         var v: Ubo_V1_FileUploadEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68181,7 +76828,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileUploadEvent(v)
         }
       }()
-      case 85: try {
+      case 87: try {
         var v: Ubo_V1_FileUploadStartEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68194,7 +76841,20 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .fileUploadStartEvent(v)
         }
       }()
-      case 86: try {
+      case 88: try {
+        var v: Ubo_V1_FrameStreamChunkEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .frameStreamChunkEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .frameStreamChunkEvent(v)
+        }
+      }()
+      case 89: try {
         var v: Ubo_V1_FrameStreamDataEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68207,7 +76867,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .frameStreamDataEvent(v)
         }
       }()
-      case 87: try {
+      case 90: try {
         var v: Ubo_V1_InfraredBoundActionTriggeredEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68220,7 +76880,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .infraredBoundActionTriggeredEvent(v)
         }
       }()
-      case 88: try {
+      case 91: try {
         var v: Ubo_V1_InfraredDeviceRegistrationCompleteEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68233,7 +76893,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .infraredDeviceRegistrationCompleteEvent(v)
         }
       }()
-      case 89: try {
+      case 92: try {
         var v: Ubo_V1_InfraredDeviceRegistrationStartedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68246,7 +76906,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .infraredDeviceRegistrationStartedEvent(v)
         }
       }()
-      case 90: try {
+      case 93: try {
         var v: Ubo_V1_InfraredEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68259,7 +76919,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .infraredEvent(v)
         }
       }()
-      case 91: try {
+      case 94: try {
         var v: Ubo_V1_InfraredSendCodeEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68272,7 +76932,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .infraredSendCodeEvent(v)
         }
       }()
-      case 92: try {
+      case 95: try {
         var v: Ubo_V1_InitEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68285,7 +76945,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .initEvent(v)
         }
       }()
-      case 93: try {
+      case 96: try {
         var v: Ubo_V1_InputCancelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68298,7 +76958,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .inputCancelEvent(v)
         }
       }()
-      case 94: try {
+      case 97: try {
         var v: Ubo_V1_InputProvideEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68311,7 +76971,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .inputProvideEvent(v)
         }
       }()
-      case 95: try {
+      case 98: try {
         var v: Ubo_V1_InputResolveEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68324,7 +76984,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .inputResolveEvent(v)
         }
       }()
-      case 96: try {
+      case 99: try {
         var v: Ubo_V1_IpEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68337,7 +76997,33 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .ipEvent(v)
         }
       }()
-      case 97: try {
+      case 100: try {
+        var v: Ubo_V1_KioskApplyConfigEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .kioskApplyConfigEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .kioskApplyConfigEvent(v)
+        }
+      }()
+      case 101: try {
+        var v: Ubo_V1_KioskEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .kioskEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .kioskEvent(v)
+        }
+      }()
+      case 102: try {
         var v: Ubo_V1_LocalOverlayGoBackEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68350,7 +77036,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .localOverlayGoBackEvent(v)
         }
       }()
-      case 98: try {
+      case 103: try {
         var v: Ubo_V1_LocalizationEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68363,7 +77049,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .localizationEvent(v)
         }
       }()
-      case 99: try {
+      case 104: try {
         var v: Ubo_V1_LocalizationLanguageChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68376,7 +77062,85 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .localizationLanguageChangedEvent(v)
         }
       }()
-      case 100: try {
+      case 105: try {
+        var v: Ubo_V1_LocalizationLocationChangedEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationLocationChangedEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationLocationChangedEvent(v)
+        }
+      }()
+      case 106: try {
+        var v: Ubo_V1_LocalizationLocationResetEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationLocationResetEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationLocationResetEvent(v)
+        }
+      }()
+      case 107: try {
+        var v: Ubo_V1_LocalizationSpeakDateEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationSpeakDateEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationSpeakDateEvent(v)
+        }
+      }()
+      case 108: try {
+        var v: Ubo_V1_LocalizationSpeakTimeEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationSpeakTimeEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationSpeakTimeEvent(v)
+        }
+      }()
+      case 109: try {
+        var v: Ubo_V1_LocalizationSpeakWeatherEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationSpeakWeatherEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationSpeakWeatherEvent(v)
+        }
+      }()
+      case 110: try {
+        var v: Ubo_V1_LocalizationWeatherRefreshRequestedEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .localizationWeatherRefreshRequestedEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .localizationWeatherRefreshRequestedEvent(v)
+        }
+      }()
+      case 111: try {
         var v: Ubo_V1_MainEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68389,7 +77153,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mainEvent(v)
         }
       }()
-      case 101: try {
+      case 112: try {
         var v: Ubo_V1_McpAddServerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68402,7 +77166,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mcpAddServerEvent(v)
         }
       }()
-      case 102: try {
+      case 113: try {
         var v: Ubo_V1_McpDeleteServerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68415,7 +77179,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mcpDeleteServerEvent(v)
         }
       }()
-      case 103: try {
+      case 114: try {
         var v: Ubo_V1_McpEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68428,7 +77192,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mcpEvent(v)
         }
       }()
-      case 104: try {
+      case 115: try {
         var v: Ubo_V1_McpSyncServersEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68441,7 +77205,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mcpSyncServersEvent(v)
         }
       }()
-      case 105: try {
+      case 116: try {
         var v: Ubo_V1_McpToggleServerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68454,7 +77218,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .mcpToggleServerEvent(v)
         }
       }()
-      case 106: try {
+      case 117: try {
         var v: Ubo_V1_MenuChooseByIconEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68467,7 +77231,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .menuChooseByIconEvent(v)
         }
       }()
-      case 107: try {
+      case 118: try {
         var v: Ubo_V1_MenuChooseByIndexEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68480,7 +77244,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .menuChooseByIndexEvent(v)
         }
       }()
-      case 108: try {
+      case 119: try {
         var v: Ubo_V1_MenuChooseByLabelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68493,7 +77257,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .menuChooseByLabelEvent(v)
         }
       }()
-      case 109: try {
+      case 120: try {
         var v: Ubo_V1_MenuEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68506,7 +77270,46 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .menuEvent(v)
         }
       }()
-      case 110: try {
+      case 121: try {
+        var v: Ubo_V1_MqttAnnounceRequestedEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .mqttAnnounceRequestedEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .mqttAnnounceRequestedEvent(v)
+        }
+      }()
+      case 122: try {
+        var v: Ubo_V1_MqttEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .mqttEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .mqttEvent(v)
+        }
+      }()
+      case 123: try {
+        var v: Ubo_V1_MqttPublishEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .mqttPublishEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .mqttPublishEvent(v)
+        }
+      }()
+      case 124: try {
         var v: Ubo_V1_NotificationsClearEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68519,7 +77322,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .notificationsClearEvent(v)
         }
       }()
-      case 111: try {
+      case 125: try {
         var v: Ubo_V1_NotificationsDisplayEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68532,7 +77335,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .notificationsDisplayEvent(v)
         }
       }()
-      case 112: try {
+      case 126: try {
         var v: Ubo_V1_NotificationsEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68545,7 +77348,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .notificationsEvent(v)
         }
       }()
-      case 113: try {
+      case 127: try {
         var v: Ubo_V1_PowerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68558,7 +77361,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .powerEvent(v)
         }
       }()
-      case 114: try {
+      case 128: try {
         var v: Ubo_V1_PowerOffEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68571,7 +77374,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .powerOffEvent(v)
         }
       }()
-      case 115: try {
+      case 129: try {
         var v: Ubo_V1_RPiConnectEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68584,7 +77387,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .rPiConnectEvent(v)
         }
       }()
-      case 116: try {
+      case 130: try {
         var v: Ubo_V1_RPiConnectLoginEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68597,7 +77400,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .rPiConnectLoginEvent(v)
         }
       }()
-      case 117: try {
+      case 131: try {
         var v: Ubo_V1_RebootEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68610,7 +77413,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .rebootEvent(v)
         }
       }()
-      case 118: try {
+      case 132: try {
         var v: Ubo_V1_ReplayRecordedSequenceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68623,7 +77426,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .replayRecordedSequenceEvent(v)
         }
       }()
-      case 119: try {
+      case 133: try {
         var v: Ubo_V1_RgbRingCommandEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68636,7 +77439,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .rgbRingCommandEvent(v)
         }
       }()
-      case 120: try {
+      case 134: try {
         var v: Ubo_V1_RgbRingEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68649,7 +77452,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .rgbRingEvent(v)
         }
       }()
-      case 121: try {
+      case 135: try {
         var v: Ubo_V1_ScreenshotDataEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68662,7 +77465,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .screenshotDataEvent(v)
         }
       }()
-      case 122: try {
+      case 136: try {
         var v: Ubo_V1_ScreenshotEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68675,7 +77478,33 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .screenshotEvent(v)
         }
       }()
-      case 123: try {
+      case 137: try {
+        var v: Ubo_V1_SensorsEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .sensorsEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .sensorsEvent(v)
+        }
+      }()
+      case 138: try {
+        var v: Ubo_V1_SensorsScanEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .sensorsScanEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .sensorsScanEvent(v)
+        }
+      }()
+      case 139: try {
         var v: Ubo_V1_SettingsEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68688,7 +77517,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .settingsEvent(v)
         }
       }()
-      case 124: try {
+      case 140: try {
         var v: Ubo_V1_SettingsServiceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68701,7 +77530,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .settingsServiceEvent(v)
         }
       }()
-      case 125: try {
+      case 141: try {
         var v: Ubo_V1_SettingsStartServiceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68714,7 +77543,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .settingsStartServiceEvent(v)
         }
       }()
-      case 126: try {
+      case 142: try {
         var v: Ubo_V1_SettingsStopServiceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68727,7 +77556,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .settingsStopServiceEvent(v)
         }
       }()
-      case 127: try {
+      case 143: try {
         var v: Ubo_V1_SnapshotEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68740,7 +77569,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .snapshotEvent(v)
         }
       }()
-      case 128: try {
+      case 144: try {
         var v: Ubo_V1_SpeechRecognitionBoundActionTriggeredEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68753,7 +77582,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .speechRecognitionBoundActionTriggeredEvent(v)
         }
       }()
-      case 129: try {
+      case 145: try {
         var v: Ubo_V1_SpeechRecognitionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68766,7 +77595,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .speechRecognitionEvent(v)
         }
       }()
-      case 130: try {
+      case 146: try {
         var v: Ubo_V1_SpeechRecognitionReportTextEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68779,7 +77608,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .speechRecognitionReportTextEvent(v)
         }
       }()
-      case 131: try {
+      case 147: try {
         var v: Ubo_V1_SpeechSynthesisEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68792,7 +77621,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .speechSynthesisEvent(v)
         }
       }()
-      case 132: try {
+      case 148: try {
         var v: Ubo_V1_SpeechSynthesisSynthesizeTextEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68805,7 +77634,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .speechSynthesisSynthesizeTextEvent(v)
         }
       }()
-      case 133: try {
+      case 149: try {
         var v: Ubo_V1_StackChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68818,7 +77647,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .stackChangedEvent(v)
         }
       }()
-      case 134: try {
+      case 150: try {
         var v: Ubo_V1_StackPageIndexChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68831,7 +77660,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .stackPageIndexChangedEvent(v)
         }
       }()
-      case 135: try {
+      case 151: try {
         var v: Ubo_V1_StoreRecordedSequenceEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68844,7 +77673,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .storeRecordedSequenceEvent(v)
         }
       }()
-      case 136: try {
+      case 152: try {
         var v: Ubo_V1_SystemEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68857,7 +77686,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .systemEvent(v)
         }
       }()
-      case 137: try {
+      case 153: try {
         var v: Ubo_V1_TailscaleEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68870,7 +77699,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .tailscaleEvent(v)
         }
       }()
-      case 138: try {
+      case 154: try {
         var v: Ubo_V1_UpdateManagerCheckEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68883,7 +77712,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .updateManagerCheckEvent(v)
         }
       }()
-      case 139: try {
+      case 155: try {
         var v: Ubo_V1_UpdateManagerEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68896,7 +77725,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .updateManagerEvent(v)
         }
       }()
-      case 140: try {
+      case 156: try {
         var v: Ubo_V1_UpdateManagerUpdateEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68909,7 +77738,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .updateManagerUpdateEvent(v)
         }
       }()
-      case 141: try {
+      case 157: try {
         var v: Ubo_V1_UsersCreateUserEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68922,7 +77751,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .usersCreateUserEvent(v)
         }
       }()
-      case 142: try {
+      case 158: try {
         var v: Ubo_V1_UsersDeleteUserEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68935,7 +77764,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .usersDeleteUserEvent(v)
         }
       }()
-      case 143: try {
+      case 159: try {
         var v: Ubo_V1_UsersEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68948,7 +77777,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .usersEvent(v)
         }
       }()
-      case 144: try {
+      case 160: try {
         var v: Ubo_V1_UsersResetPasswordEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68961,7 +77790,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .usersResetPasswordEvent(v)
         }
       }()
-      case 145: try {
+      case 161: try {
         var v: Ubo_V1_VSCodeEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68974,7 +77803,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .vsCodeEvent(v)
         }
       }()
-      case 146: try {
+      case 162: try {
         var v: Ubo_V1_VSCodeLoginEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -68987,7 +77816,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .vsCodeLoginEvent(v)
         }
       }()
-      case 147: try {
+      case 163: try {
         var v: Ubo_V1_VSCodeRestartEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69000,7 +77829,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .vsCodeRestartEvent(v)
         }
       }()
-      case 148: try {
+      case 164: try {
         var v: Ubo_V1_ViewChangedEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69013,7 +77842,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .viewChangedEvent(v)
         }
       }()
-      case 149: try {
+      case 165: try {
         var v: Ubo_V1_WakeWordDeleteModelEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69026,7 +77855,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wakeWordDeleteModelEvent(v)
         }
       }()
-      case 150: try {
+      case 166: try {
         var v: Ubo_V1_WakeWordDownloadModelsEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69039,7 +77868,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wakeWordDownloadModelsEvent(v)
         }
       }()
-      case 151: try {
+      case 167: try {
         var v: Ubo_V1_WebUIEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69052,7 +77881,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .webUiEvent(v)
         }
       }()
-      case 152: try {
+      case 168: try {
         var v: Ubo_V1_WebUIInitializeEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69065,7 +77894,20 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .webUiInitializeEvent(v)
         }
       }()
-      case 153: try {
+      case 169: try {
+        var v: Ubo_V1_WebUIInputEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .webUiInputEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .webUiInputEvent(v)
+        }
+      }()
+      case 170: try {
         var v: Ubo_V1_WiFiEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69078,7 +77920,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wiFiEvent(v)
         }
       }()
-      case 154: try {
+      case 171: try {
         var v: Ubo_V1_WiFiInputConnectionEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69091,7 +77933,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wiFiInputConnectionEvent(v)
         }
       }()
-      case 155: try {
+      case 172: try {
         var v: Ubo_V1_WiFiStartHotspotEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69104,7 +77946,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wiFiStartHotspotEvent(v)
         }
       }()
-      case 156: try {
+      case 173: try {
         var v: Ubo_V1_WiFiStopHotspotEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69117,7 +77959,7 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
           self.event = .wiFiStopHotspotEvent(v)
         }
       }()
-      case 157: try {
+      case 174: try {
         var v: Ubo_V1_WiFiUpdateRequestEvent?
         var hadOneofValue = false
         if let current = self.event {
@@ -69128,6 +77970,32 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
         if let v = v {
           if hadOneofValue {try decoder.handleConflictingOneOf()}
           self.event = .wiFiUpdateRequestEvent(v)
+        }
+      }()
+      case 175: try {
+        var v: Ubo_V1_WyomingEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .wyomingEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .wyomingEvent(v)
+        }
+      }()
+      case 176: try {
+        var v: Ubo_V1_WyomingSatelliteWakeEvent?
+        var hadOneofValue = false
+        if let current = self.event {
+          hadOneofValue = true
+          if case .wyomingSatelliteWakeEvent(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.event = .wyomingSatelliteWakeEvent(v)
         }
       }()
       default: break
@@ -69145,629 +78013,705 @@ extension Ubo_V1_Event: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
       guard case .applicationScrollEvent(let v)? = self.event else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }()
+    case .assistantCancelRequestEvent?: try {
+      guard case .assistantCancelRequestEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
     case .assistantDeleteKokoroEvent?: try {
       guard case .assistantDeleteKokoroEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case .assistantDeleteMoonshineModelEvent?: try {
       guard case .assistantDeleteMoonshineModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     }()
     case .assistantDeleteOllamaModelEvent?: try {
       guard case .assistantDeleteOllamaModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     }()
     case .assistantDeletePiperVoiceEvent?: try {
       guard case .assistantDeletePiperVoiceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
     }()
     case .assistantDeleteVoskModelEvent?: try {
       guard case .assistantDeleteVoskModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
     }()
     case .assistantDownloadKokoroEvent?: try {
       guard case .assistantDownloadKokoroEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
     }()
     case .assistantDownloadMoonshineModelEvent?: try {
       guard case .assistantDownloadMoonshineModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
     }()
     case .assistantDownloadOllamaModelEvent?: try {
       guard case .assistantDownloadOllamaModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     }()
     case .assistantDownloadPiperVoiceEvent?: try {
       guard case .assistantDownloadPiperVoiceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
     }()
     case .assistantDownloadVoskModelEvent?: try {
       guard case .assistantDownloadVoskModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
     }()
     case .assistantEvent?: try {
       guard case .assistantEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
     }()
     case .assistantGenericLlmProviderChangedEvent?: try {
       guard case .assistantGenericLlmProviderChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
     }()
     case .assistantGenericLlmProviderRemovedEvent?: try {
       guard case .assistantGenericLlmProviderRemovedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
     }()
     case .assistantHandleReportEvent?: try {
       guard case .assistantHandleReportEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
     }()
     case .assistantModelChangedEvent?: try {
       guard case .assistantModelChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
     }()
     case .assistantOllamaThinkingChangedEvent?: try {
       guard case .assistantOllamaThinkingChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
     }()
     case .assistantPiperVoiceChangedEvent?: try {
       guard case .assistantPiperVoiceChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+    }()
+    case .assistantRequestMicStreamEvent?: try {
+      guard case .assistantRequestMicStreamEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
     }()
     case .assistantRunPipelineEvent?: try {
       guard case .assistantRunPipelineEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
     }()
     case .assistantStopTalkingEvent?: try {
       guard case .assistantStopTalkingEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
     }()
     case .assistantUpdateProvidersEvent?: try {
       guard case .assistantUpdateProvidersEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
     }()
     case .assistantVoiceChangedEvent?: try {
       guard case .assistantVoiceChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
     }()
     case .audioEvent?: try {
       guard case .audioEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
     }()
     case .audioInstallDriverEvent?: try {
       guard case .audioInstallDriverEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
     }()
     case .audioPlayAudioSampleEvent?: try {
       guard case .audioPlayAudioSampleEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 27)
     }()
     case .audioPlayAudioSequenceEvent?: try {
       guard case .audioPlayAudioSequenceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 28)
     }()
     case .audioPlayChimeEvent?: try {
       guard case .audioPlayChimeEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 27)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 29)
     }()
     case .audioPlaybackDoneEvent?: try {
       guard case .audioPlaybackDoneEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 28)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 30)
     }()
     case .audioReportSampleEvent?: try {
       guard case .audioReportSampleEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 29)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 31)
     }()
     case .audioStopPlaybackEvent?: try {
       guard case .audioStopPlaybackEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 30)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 32)
     }()
     case .cameraDetectAdvertiseEvent?: try {
       guard case .cameraDetectAdvertiseEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 31)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 33)
     }()
     case .cameraDetectEvent?: try {
       guard case .cameraDetectEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 32)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 34)
     }()
     case .cameraDetectedEvent?: try {
       guard case .cameraDetectedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 33)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 35)
     }()
     case .cameraEvent?: try {
       guard case .cameraEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 34)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 36)
     }()
     case .cameraInstallDriverEvent?: try {
       guard case .cameraInstallDriverEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 35)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 37)
     }()
     case .cameraReinitializeEvent?: try {
       guard case .cameraReinitializeEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 36)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 38)
     }()
     case .cameraReportImageEvent?: try {
       guard case .cameraReportImageEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 37)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 39)
     }()
     case .cameraRestoreDefaultEvent?: try {
       guard case .cameraRestoreDefaultEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 38)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
     }()
     case .cameraStartViewfinderEvent?: try {
       guard case .cameraStartViewfinderEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 39)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
     }()
     case .cameraStopViewfinderEvent?: try {
       guard case .cameraStopViewfinderEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
     }()
     case .chatAudioPlaybackToggledEvent?: try {
       guard case .chatAudioPlaybackToggledEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
     }()
     case .chatEvent?: try {
       guard case .chatEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
     }()
     case .chatSessionEndedEvent?: try {
       guard case .chatSessionEndedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
     }()
     case .chatSessionStartedEvent?: try {
       guard case .chatSessionStartedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
     }()
     case .chatUserMessageSentEvent?: try {
       guard case .chatUserMessageSentEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
     }()
     case .displayBlankEvent?: try {
       guard case .displayBlankEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
     }()
     case .displayCompressedRenderEvent?: try {
       guard case .displayCompressedRenderEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 49)
     }()
     case .displayEvent?: try {
       guard case .displayEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 50)
     }()
     case .displayRedrawEvent?: try {
       guard case .displayRedrawEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 49)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 51)
     }()
     case .displayRenderEvent?: try {
       guard case .displayRenderEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 50)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 52)
     }()
     case .displayUnblankEvent?: try {
       guard case .displayUnblankEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 51)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 53)
     }()
     case .dockerEvent?: try {
       guard case .dockerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 52)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 54)
     }()
     case .dockerImageEvent?: try {
       guard case .dockerImageEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 53)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 55)
     }()
     case .dockerImageFetchCompositionEvent?: try {
       guard case .dockerImageFetchCompositionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 54)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 56)
     }()
     case .dockerImageFetchEvent?: try {
       guard case .dockerImageFetchEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 55)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 57)
     }()
     case .dockerImageRebindEvent?: try {
       guard case .dockerImageRebindEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 56)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 58)
     }()
     case .dockerImageRegisterAppEvent?: try {
       guard case .dockerImageRegisterAppEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 57)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 59)
     }()
     case .dockerImageReleaseCompositionEvent?: try {
       guard case .dockerImageReleaseCompositionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 58)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 60)
     }()
     case .dockerImageRemoveCompositionEvent?: try {
       guard case .dockerImageRemoveCompositionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 59)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
     }()
     case .dockerImageRemoveContainerEvent?: try {
       guard case .dockerImageRemoveContainerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 60)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
     }()
     case .dockerImageRemoveEvent?: try {
       guard case .dockerImageRemoveEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 61)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
     }()
     case .dockerImageRunCompositionEvent?: try {
       guard case .dockerImageRunCompositionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 62)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 64)
     }()
     case .dockerImageRunContainerEvent?: try {
       guard case .dockerImageRunContainerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 63)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 65)
     }()
     case .dockerImageStopCompositionEvent?: try {
       guard case .dockerImageStopCompositionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 64)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 66)
     }()
     case .dockerImageStopContainerEvent?: try {
       guard case .dockerImageStopContainerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 65)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 67)
     }()
     case .dockerInstallEvent?: try {
       guard case .dockerInstallEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 66)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
     }()
     case .dockerStartEvent?: try {
       guard case .dockerStartEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 67)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 69)
     }()
     case .dockerStopEvent?: try {
       guard case .dockerStopEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 68)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 70)
     }()
     case .dynamicMenuChangedEvent?: try {
       guard case .dynamicMenuChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 69)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
     }()
     case .executeMenuActionEvent?: try {
       guard case .executeMenuActionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 70)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
     }()
     case .fileDownloadEvent?: try {
       guard case .fileDownloadEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
     }()
     case .fileDownloadReadyEvent?: try {
       guard case .fileDownloadReadyEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
     }()
     case .fileDownloadRequestEvent?: try {
       guard case .fileDownloadRequestEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
     }()
     case .fileSystemCopyEvent?: try {
       guard case .fileSystemCopyEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 76)
     }()
     case .fileSystemEvent?: try {
       guard case .fileSystemEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 77)
     }()
     case .fileSystemMoveEvent?: try {
       guard case .fileSystemMoveEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 76)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 78)
     }()
     case .fileSystemRemoveEvent?: try {
       guard case .fileSystemRemoveEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 77)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 79)
     }()
     case .fileSystemSelectEvent?: try {
       guard case .fileSystemSelectEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 78)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 80)
     }()
     case .fileSystemSelectorCleanupEvent?: try {
       guard case .fileSystemSelectorCleanupEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 79)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 81)
     }()
     case .fileSystemVideoFrameEvent?: try {
       guard case .fileSystemVideoFrameEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 80)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 82)
     }()
     case .fileUploadChunkEvent?: try {
       guard case .fileUploadChunkEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 81)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 83)
     }()
     case .fileUploadCompleteEvent?: try {
       guard case .fileUploadCompleteEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 82)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 84)
     }()
     case .fileUploadErrorEvent?: try {
       guard case .fileUploadErrorEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 83)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 85)
     }()
     case .fileUploadEvent?: try {
       guard case .fileUploadEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 84)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 86)
     }()
     case .fileUploadStartEvent?: try {
       guard case .fileUploadStartEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 85)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 87)
+    }()
+    case .frameStreamChunkEvent?: try {
+      guard case .frameStreamChunkEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 88)
     }()
     case .frameStreamDataEvent?: try {
       guard case .frameStreamDataEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 86)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 89)
     }()
     case .infraredBoundActionTriggeredEvent?: try {
       guard case .infraredBoundActionTriggeredEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 87)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 90)
     }()
     case .infraredDeviceRegistrationCompleteEvent?: try {
       guard case .infraredDeviceRegistrationCompleteEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 88)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 91)
     }()
     case .infraredDeviceRegistrationStartedEvent?: try {
       guard case .infraredDeviceRegistrationStartedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 89)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 92)
     }()
     case .infraredEvent?: try {
       guard case .infraredEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 90)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 93)
     }()
     case .infraredSendCodeEvent?: try {
       guard case .infraredSendCodeEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 91)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 94)
     }()
     case .initEvent?: try {
       guard case .initEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 92)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 95)
     }()
     case .inputCancelEvent?: try {
       guard case .inputCancelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 93)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 96)
     }()
     case .inputProvideEvent?: try {
       guard case .inputProvideEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 94)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 97)
     }()
     case .inputResolveEvent?: try {
       guard case .inputResolveEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 95)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 98)
     }()
     case .ipEvent?: try {
       guard case .ipEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 96)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 99)
+    }()
+    case .kioskApplyConfigEvent?: try {
+      guard case .kioskApplyConfigEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 100)
+    }()
+    case .kioskEvent?: try {
+      guard case .kioskEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 101)
     }()
     case .localOverlayGoBackEvent?: try {
       guard case .localOverlayGoBackEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 97)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 102)
     }()
     case .localizationEvent?: try {
       guard case .localizationEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 98)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 103)
     }()
     case .localizationLanguageChangedEvent?: try {
       guard case .localizationLanguageChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 99)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 104)
+    }()
+    case .localizationLocationChangedEvent?: try {
+      guard case .localizationLocationChangedEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 105)
+    }()
+    case .localizationLocationResetEvent?: try {
+      guard case .localizationLocationResetEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 106)
+    }()
+    case .localizationSpeakDateEvent?: try {
+      guard case .localizationSpeakDateEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 107)
+    }()
+    case .localizationSpeakTimeEvent?: try {
+      guard case .localizationSpeakTimeEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 108)
+    }()
+    case .localizationSpeakWeatherEvent?: try {
+      guard case .localizationSpeakWeatherEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 109)
+    }()
+    case .localizationWeatherRefreshRequestedEvent?: try {
+      guard case .localizationWeatherRefreshRequestedEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 110)
     }()
     case .mainEvent?: try {
       guard case .mainEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 100)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 111)
     }()
     case .mcpAddServerEvent?: try {
       guard case .mcpAddServerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 101)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 112)
     }()
     case .mcpDeleteServerEvent?: try {
       guard case .mcpDeleteServerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 102)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 113)
     }()
     case .mcpEvent?: try {
       guard case .mcpEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 103)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 114)
     }()
     case .mcpSyncServersEvent?: try {
       guard case .mcpSyncServersEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 104)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 115)
     }()
     case .mcpToggleServerEvent?: try {
       guard case .mcpToggleServerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 105)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 116)
     }()
     case .menuChooseByIconEvent?: try {
       guard case .menuChooseByIconEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 106)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 117)
     }()
     case .menuChooseByIndexEvent?: try {
       guard case .menuChooseByIndexEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 107)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 118)
     }()
     case .menuChooseByLabelEvent?: try {
       guard case .menuChooseByLabelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 108)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 119)
     }()
     case .menuEvent?: try {
       guard case .menuEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 109)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 120)
+    }()
+    case .mqttAnnounceRequestedEvent?: try {
+      guard case .mqttAnnounceRequestedEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 121)
+    }()
+    case .mqttEvent?: try {
+      guard case .mqttEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 122)
+    }()
+    case .mqttPublishEvent?: try {
+      guard case .mqttPublishEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 123)
     }()
     case .notificationsClearEvent?: try {
       guard case .notificationsClearEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 110)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 124)
     }()
     case .notificationsDisplayEvent?: try {
       guard case .notificationsDisplayEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 111)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 125)
     }()
     case .notificationsEvent?: try {
       guard case .notificationsEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 112)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 126)
     }()
     case .powerEvent?: try {
       guard case .powerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 113)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 127)
     }()
     case .powerOffEvent?: try {
       guard case .powerOffEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 114)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 128)
     }()
     case .rPiConnectEvent?: try {
       guard case .rPiConnectEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 115)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 129)
     }()
     case .rPiConnectLoginEvent?: try {
       guard case .rPiConnectLoginEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 116)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 130)
     }()
     case .rebootEvent?: try {
       guard case .rebootEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 117)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 131)
     }()
     case .replayRecordedSequenceEvent?: try {
       guard case .replayRecordedSequenceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 118)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 132)
     }()
     case .rgbRingCommandEvent?: try {
       guard case .rgbRingCommandEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 119)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 133)
     }()
     case .rgbRingEvent?: try {
       guard case .rgbRingEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 120)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 134)
     }()
     case .screenshotDataEvent?: try {
       guard case .screenshotDataEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 121)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 135)
     }()
     case .screenshotEvent?: try {
       guard case .screenshotEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 122)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 136)
+    }()
+    case .sensorsEvent?: try {
+      guard case .sensorsEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 137)
+    }()
+    case .sensorsScanEvent?: try {
+      guard case .sensorsScanEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 138)
     }()
     case .settingsEvent?: try {
       guard case .settingsEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 123)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 139)
     }()
     case .settingsServiceEvent?: try {
       guard case .settingsServiceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 124)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 140)
     }()
     case .settingsStartServiceEvent?: try {
       guard case .settingsStartServiceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 125)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 141)
     }()
     case .settingsStopServiceEvent?: try {
       guard case .settingsStopServiceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 126)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 142)
     }()
     case .snapshotEvent?: try {
       guard case .snapshotEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 127)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 143)
     }()
     case .speechRecognitionBoundActionTriggeredEvent?: try {
       guard case .speechRecognitionBoundActionTriggeredEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 128)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 144)
     }()
     case .speechRecognitionEvent?: try {
       guard case .speechRecognitionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 129)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 145)
     }()
     case .speechRecognitionReportTextEvent?: try {
       guard case .speechRecognitionReportTextEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 130)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 146)
     }()
     case .speechSynthesisEvent?: try {
       guard case .speechSynthesisEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 131)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 147)
     }()
     case .speechSynthesisSynthesizeTextEvent?: try {
       guard case .speechSynthesisSynthesizeTextEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 132)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 148)
     }()
     case .stackChangedEvent?: try {
       guard case .stackChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 133)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 149)
     }()
     case .stackPageIndexChangedEvent?: try {
       guard case .stackPageIndexChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 134)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 150)
     }()
     case .storeRecordedSequenceEvent?: try {
       guard case .storeRecordedSequenceEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 135)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 151)
     }()
     case .systemEvent?: try {
       guard case .systemEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 136)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 152)
     }()
     case .tailscaleEvent?: try {
       guard case .tailscaleEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 137)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 153)
     }()
     case .updateManagerCheckEvent?: try {
       guard case .updateManagerCheckEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 138)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 154)
     }()
     case .updateManagerEvent?: try {
       guard case .updateManagerEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 139)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 155)
     }()
     case .updateManagerUpdateEvent?: try {
       guard case .updateManagerUpdateEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 140)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 156)
     }()
     case .usersCreateUserEvent?: try {
       guard case .usersCreateUserEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 141)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 157)
     }()
     case .usersDeleteUserEvent?: try {
       guard case .usersDeleteUserEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 142)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 158)
     }()
     case .usersEvent?: try {
       guard case .usersEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 143)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 159)
     }()
     case .usersResetPasswordEvent?: try {
       guard case .usersResetPasswordEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 144)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 160)
     }()
     case .vsCodeEvent?: try {
       guard case .vsCodeEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 145)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 161)
     }()
     case .vsCodeLoginEvent?: try {
       guard case .vsCodeLoginEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 146)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 162)
     }()
     case .vsCodeRestartEvent?: try {
       guard case .vsCodeRestartEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 147)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 163)
     }()
     case .viewChangedEvent?: try {
       guard case .viewChangedEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 148)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 164)
     }()
     case .wakeWordDeleteModelEvent?: try {
       guard case .wakeWordDeleteModelEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 149)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 165)
     }()
     case .wakeWordDownloadModelsEvent?: try {
       guard case .wakeWordDownloadModelsEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 150)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 166)
     }()
     case .webUiEvent?: try {
       guard case .webUiEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 151)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 167)
     }()
     case .webUiInitializeEvent?: try {
       guard case .webUiInitializeEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 152)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 168)
+    }()
+    case .webUiInputEvent?: try {
+      guard case .webUiInputEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 169)
     }()
     case .wiFiEvent?: try {
       guard case .wiFiEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 153)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 170)
     }()
     case .wiFiInputConnectionEvent?: try {
       guard case .wiFiInputConnectionEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 154)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 171)
     }()
     case .wiFiStartHotspotEvent?: try {
       guard case .wiFiStartHotspotEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 155)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 172)
     }()
     case .wiFiStopHotspotEvent?: try {
       guard case .wiFiStopHotspotEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 156)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 173)
     }()
     case .wiFiUpdateRequestEvent?: try {
       guard case .wiFiUpdateRequestEvent(let v)? = self.event else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 157)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 174)
+    }()
+    case .wyomingEvent?: try {
+      guard case .wyomingEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 175)
+    }()
+    case .wyomingSatelliteWakeEvent?: try {
+      guard case .wyomingSatelliteWakeEvent(let v)? = self.event else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 176)
     }()
     case nil: break
     }
