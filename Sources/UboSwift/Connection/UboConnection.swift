@@ -1321,14 +1321,9 @@ public actor UboConnection {
             throw UboError.notConnected
         }
 
-        UboLog.camera.notice("[camera-sub-debug] streamCameraEvents() entered")
-        defer { UboLog.camera.notice("[camera-sub-debug] streamCameraEvents() returning/throwing") }
-
         try await withThrowingTaskGroup(of: Void.self) { group in
             // CameraStartViewfinderEvent
             group.addTask {
-                UboLog.camera.notice("[camera-sub-debug] start-sub: subscribing")
-                defer { UboLog.camera.notice("[camera-sub-debug] start-sub: task ending") }
                 var requestBuilder = Store_V1_SubscribeEventRequest()
                 var eventBuilder = Ubo_V1_Event()
                 eventBuilder.cameraStartViewfinderEvent = Ubo_V1_CameraStartViewfinderEvent()
@@ -1338,21 +1333,16 @@ public actor UboConnection {
                 try await client.subscribeEvent(request) { response in
                     switch response.accepted {
                     case .success(let contents):
-                        UboLog.camera.notice("[camera-sub-debug] start-sub: accepted, awaiting bodyParts")
                         for try await message in contents.bodyParts {
-                            UboLog.camera.notice("[camera-sub-debug] start-sub: bodyPart received")
                             if case .message(let subscribeResponse) = message {
                                 await self.markConnected()
                                 if case .cameraStartViewfinderEvent(let startEvent) = subscribeResponse.event.event {
                                     let pattern: String? = startEvent.hasPattern ? startEvent.pattern : nil
-                                    UboLog.camera.notice("[camera-sub-debug] start-sub: yielding startViewfinder")
                                     continuation.yield(.startViewfinder(pattern: pattern, sourceId: startEvent.sourceID))
                                 }
                             }
                         }
-                        UboLog.camera.notice("[camera-sub-debug] start-sub: bodyParts loop ended")
                     case .failure(let error):
-                        UboLog.camera.notice("[camera-sub-debug] start-sub: rejected: \(error)")
                         throw error
                     }
                 }
@@ -1360,8 +1350,6 @@ public actor UboConnection {
 
             // CameraStopViewfinderEvent
             group.addTask {
-                UboLog.camera.notice("[camera-sub-debug] stop-sub: subscribing")
-                defer { UboLog.camera.notice("[camera-sub-debug] stop-sub: task ending") }
                 var requestBuilder = Store_V1_SubscribeEventRequest()
                 var eventBuilder = Ubo_V1_Event()
                 eventBuilder.cameraStopViewfinderEvent = Ubo_V1_CameraStopViewfinderEvent()
@@ -1371,20 +1359,15 @@ public actor UboConnection {
                 try await client.subscribeEvent(request) { response in
                     switch response.accepted {
                     case .success(let contents):
-                        UboLog.camera.notice("[camera-sub-debug] stop-sub: accepted, awaiting bodyParts")
                         for try await message in contents.bodyParts {
-                            UboLog.camera.notice("[camera-sub-debug] stop-sub: bodyPart received")
                             if case .message(let subscribeResponse) = message {
                                 await self.markConnected()
                                 if case .cameraStopViewfinderEvent(_) = subscribeResponse.event.event {
-                                    UboLog.camera.notice("[camera-sub-debug] stop-sub: yielding stopViewfinder")
                                     continuation.yield(.stopViewfinder)
                                 }
                             }
                         }
-                        UboLog.camera.notice("[camera-sub-debug] stop-sub: bodyParts loop ended")
                     case .failure(let error):
-                        UboLog.camera.notice("[camera-sub-debug] stop-sub: rejected: \(error)")
                         throw error
                     }
                 }
@@ -1393,8 +1376,6 @@ public actor UboConnection {
             // CameraDetectAdvertiseEvent — Pi tapped "Detect Cameras";
             // each yield prompts subscribers to (re-)register themselves.
             group.addTask {
-                UboLog.camera.notice("[camera-sub-debug] detect-sub: subscribing")
-                defer { UboLog.camera.notice("[camera-sub-debug] detect-sub: task ending") }
                 var requestBuilder = Store_V1_SubscribeEventRequest()
                 var eventBuilder = Ubo_V1_Event()
                 eventBuilder.cameraDetectAdvertiseEvent = Ubo_V1_CameraDetectAdvertiseEvent()
@@ -1404,20 +1385,15 @@ public actor UboConnection {
                 try await client.subscribeEvent(request) { response in
                     switch response.accepted {
                     case .success(let contents):
-                        UboLog.camera.notice("[camera-sub-debug] detect-sub: accepted, awaiting bodyParts")
                         for try await message in contents.bodyParts {
-                            UboLog.camera.notice("[camera-sub-debug] detect-sub: bodyPart received")
                             if case .message(let subscribeResponse) = message {
                                 await self.markConnected()
                                 if case .cameraDetectAdvertiseEvent(_) = subscribeResponse.event.event {
-                                    UboLog.camera.notice("[camera-sub-debug] detect-sub: yielding detectAdvertise")
                                     continuation.yield(.detectAdvertise)
                                 }
                             }
                         }
-                        UboLog.camera.notice("[camera-sub-debug] detect-sub: bodyParts loop ended")
                     case .failure(let error):
-                        UboLog.camera.notice("[camera-sub-debug] detect-sub: rejected: \(error)")
                         throw error
                     }
                 }
