@@ -520,23 +520,13 @@ public actor UboConnection {
         // open a third long-lived stream just for two scalars.
         request.selectors = ["state.system", "state.sensors", "state.audio"]
 
-        // TEMP DEBUG (remove once the CPU/RAM/temperature-always-zero bug is
-        // found): trace whether this subscription opens at all, whether it
-        // ever receives a message, and what's actually inside each one.
-        UboLog.subscription.notice("[stats-debug] opening subscribeStore for \(request.selectors)")
-
         try await client.subscribeStore(request) { response in
             switch response.accepted {
             case .success(let contents):
-                UboLog.subscription.notice("[stats-debug] subscribeStore accepted, awaiting bodyParts")
                 for try await message in contents.bodyParts {
-                    UboLog.subscription.notice("[stats-debug] bodyPart received: \(String(describing: message))")
                     if case .message(let subscribeResponse) = message {
                         await self.markConnected()
                         let results = subscribeResponse.results
-                        UboLog.subscription.notice(
-                            "[stats-debug] results.count=\(results.count) typeURLs=\(results.map(\.typeURL))"
-                        )
 
                         var cpuPercent: Float?
                         var ramPercent: Float?
@@ -551,19 +541,14 @@ public actor UboConnection {
                                 cpuPercent = stats.cpuPercent
                                 ramPercent = stats.ramPercent
                                 clock = stats.clock
-                                UboLog.subscription.notice(
-                                    "[stats-debug] unpacked SystemState: cpu=\(stats.cpuPercent) ram=\(stats.ramPercent) clock=\(stats.clock)"
-                                )
                             }
                             if let temp = self.unpackTemperature(from: result) {
                                 temperature = temp
-                                UboLog.subscription.notice("[stats-debug] unpacked temperature: \(temp)")
                             }
                             if let audio = self.unpackAudioState(from: result) {
                                 playbackVolume = audio.volume
                                 isPlaybackMute = audio.isMute
                                 isCaptureMute = audio.isCaptureMute
-                                UboLog.subscription.notice("[stats-debug] unpacked AudioState: \(audio)")
                             }
                         }
 
@@ -576,15 +561,10 @@ public actor UboConnection {
                             isPlaybackMute: isPlaybackMute,
                             isCaptureMute: isCaptureMute
                         )
-                        UboLog.subscription.notice(
-                            "[stats-debug] yielding merged stats: cpu=\(mergedStats.cpuPercent) ram=\(mergedStats.ramPercent) temp=\(String(describing: mergedStats.temperature))"
-                        )
                         continuation.yield(mergedStats)
                     }
                 }
-                UboLog.subscription.notice("[stats-debug] bodyParts loop ended (stream closed by server)")
             case .failure(let error):
-                UboLog.subscription.notice("[stats-debug] subscribeStore rejected: \(error)")
                 throw error
             }
         }
