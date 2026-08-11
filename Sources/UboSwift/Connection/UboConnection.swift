@@ -521,11 +521,9 @@ public actor UboConnection {
         // lives on `state.localization`, not `state.system`.
         request.selectors = ["state.system", "state.sensors", "state.audio", "state.localization"]
 
-        UboLog.subscription.debug("subscribeToSystemStats: subscribing to \(request.selectors)")
         try await client.subscribeStore(request) { response in
             switch response.accepted {
             case .success(let contents):
-                UboLog.subscription.debug("subscribeToSystemStats: subscribeStore accepted")
                 for try await message in contents.bodyParts {
                     if case .message(let subscribeResponse) = message {
                         await self.markConnected()
@@ -557,17 +555,6 @@ public actor UboConnection {
                             }
                         }
 
-                        if UboLog.level <= .debug {
-                            let typeURLs: [String] = results.map(\.typeURL)
-                            let cpuDesc: String = cpuPercent.map { "\($0)" } ?? "nil"
-                            let ramDesc: String = ramPercent.map { "\($0)" } ?? "nil"
-                            let tempDesc: String = temperature.map { "\($0)" } ?? "nil"
-                            let clockDesc: String = clock ?? "nil"
-                            let summary = "frame typeURLs=\(typeURLs) -> cpu=\(cpuDesc) ram=\(ramDesc) "
-                                + "temp=\(tempDesc) clock=\(clockDesc)"
-                            UboLog.subscription.debug("subscribeToSystemStats: \(summary)")
-                        }
-
                         let mergedStats = await statsHolder.update(
                             cpuPercent: cpuPercent,
                             ramPercent: ramPercent,
@@ -577,13 +564,10 @@ public actor UboConnection {
                             isPlaybackMute: isPlaybackMute,
                             isCaptureMute: isCaptureMute
                         )
-                        UboLog.subscription.debug("subscribeToSystemStats: merged=\(mergedStats)")
                         continuation.yield(mergedStats)
                     }
                 }
-                UboLog.subscription.debug("subscribeToSystemStats: stream ended")
             case .failure(let error):
-                UboLog.subscription.error("subscribeToSystemStats: subscribeStore failed: \(String(describing: error))")
                 throw error
             }
         }
