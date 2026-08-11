@@ -517,8 +517,9 @@ public actor UboConnection {
         // `state.audio` brings the device's playback volume + mute state in
         // sync with the app, matching what the Web UI subscribes to in
         // `state-manager.ts`. Bundled into the same subscription so we don't
-        // open a third long-lived stream just for two scalars.
-        request.selectors = ["state.system", "state.sensors", "state.audio"]
+        // open a third long-lived stream just for two scalars. `clock` now
+        // lives on `state.localization`, not `state.system`.
+        request.selectors = ["state.system", "state.sensors", "state.audio", "state.localization"]
 
         try await client.subscribeStore(request) { response in
             switch response.accepted {
@@ -540,7 +541,6 @@ public actor UboConnection {
                             if let stats = self.unpackSystemStats(from: result) {
                                 cpuPercent = stats.cpuPercent
                                 ramPercent = stats.ramPercent
-                                clock = stats.clock
                             }
                             if let temp = self.unpackTemperature(from: result) {
                                 temperature = temp
@@ -549,6 +549,9 @@ public actor UboConnection {
                                 playbackVolume = audio.volume
                                 isPlaybackMute = audio.isMute
                                 isCaptureMute = audio.isCaptureMute
+                            }
+                            if let clk = self.unpackClock(from: result) {
+                                clock = clk
                             }
                         }
 
@@ -636,12 +639,22 @@ public actor UboConnection {
                 return SystemStats(
                     cpuPercent: proto.hasCpuPercent ? proto.cpuPercent : 0,
                     ramPercent: proto.hasRamPercent ? proto.ramPercent : 0,
-                    clock: proto.hasClock ? proto.clock : ""
+                    clock: ""
                 )
             }
         }
 
         return nil
+    }
+
+    /// Unpack the device's local clock string from LocalizationState
+    private nonisolated func unpackClock(from any: SwiftProtobuf.Google_Protobuf_Any) -> String? {
+        guard any.typeURL.hasSuffix("LocalizationState"),
+              let proto = try? Ubo_V1_LocalizationState(serializedBytes: any.value),
+              proto.hasClock else {
+            return nil
+        }
+        return proto.clock
     }
 
     /// Unpack temperature from SensorsState
