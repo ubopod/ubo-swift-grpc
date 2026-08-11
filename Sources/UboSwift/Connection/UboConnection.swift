@@ -6,25 +6,61 @@ import SwiftProtobuf
 
 /// Actor to safely hold and merge system stats across async updates
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+/// One frame's worth of updates to `SystemStats`. Every field is optional so
+/// a merge only overwrites what this particular `SubscribeStoreResponse`
+/// frame actually carried, never clobbering an already-known value with a
+/// default zero.
+struct SystemStatsPatch {
+    var cpuPercent: Float?
+    var ramPercent: Float?
+    var temperature: Float?
+    var loadAverage1: Float?
+    var loadAverage5: Float?
+    var loadAverage15: Float?
+    var bootTime: Float?
+    var diskTotalBytes: Int64?
+    var diskUsedBytes: Int64?
+    var diskPercent: Float?
+    var networkUploadBps: Float?
+    var networkDownloadBps: Float?
+    var clock: String?
+    var date: String?
+    var weather: WeatherCondition?
+    var locationCity: String?
+    var locationCountry: String?
+    var dockerApps: [DockerAppStatus]?
+    var sensorDevices: [SensorDeviceState]?
+    var playbackVolume: Float?
+    var isPlaybackMute: Bool?
+    var isCaptureMute: Bool?
+}
+
 private actor StatsHolder {
     private var stats = SystemStats()
 
-    func update(
-        cpuPercent: Float?,
-        ramPercent: Float?,
-        clock: String?,
-        temperature: Float?,
-        playbackVolume: Float?,
-        isPlaybackMute: Bool?,
-        isCaptureMute: Bool?
-    ) -> SystemStats {
-        if let cpu = cpuPercent { stats.cpuPercent = cpu }
-        if let ram = ramPercent { stats.ramPercent = ram }
-        if let clk = clock { stats.clock = clk }
-        if let temp = temperature { stats.temperature = temp }
-        if let vol = playbackVolume { stats.playbackVolume = vol }
-        if let mute = isPlaybackMute { stats.isPlaybackMute = mute }
-        if let micMute = isCaptureMute { stats.isCaptureMute = micMute }
+    func update(_ patch: SystemStatsPatch) -> SystemStats {
+        if let v = patch.cpuPercent { stats.cpuPercent = v }
+        if let v = patch.ramPercent { stats.ramPercent = v }
+        if let v = patch.temperature { stats.temperature = v }
+        if let v = patch.loadAverage1 { stats.loadAverage1 = v }
+        if let v = patch.loadAverage5 { stats.loadAverage5 = v }
+        if let v = patch.loadAverage15 { stats.loadAverage15 = v }
+        if let v = patch.bootTime { stats.bootTime = v }
+        if let v = patch.diskTotalBytes { stats.diskTotalBytes = v }
+        if let v = patch.diskUsedBytes { stats.diskUsedBytes = v }
+        if let v = patch.diskPercent { stats.diskPercent = v }
+        if let v = patch.networkUploadBps { stats.networkUploadBps = v }
+        if let v = patch.networkDownloadBps { stats.networkDownloadBps = v }
+        if let v = patch.clock { stats.clock = v }
+        if let v = patch.date { stats.date = v }
+        if let v = patch.weather { stats.weather = v }
+        if let v = patch.locationCity { stats.locationCity = v }
+        if let v = patch.locationCountry { stats.locationCountry = v }
+        if let v = patch.dockerApps { stats.dockerApps = v }
+        if let v = patch.sensorDevices { stats.sensorDevices = v }
+        if let v = patch.playbackVolume { stats.playbackVolume = v }
+        if let v = patch.isPlaybackMute { stats.isPlaybackMute = v }
+        if let v = patch.isCaptureMute { stats.isCaptureMute = v }
         return stats
     }
 }
@@ -516,10 +552,12 @@ public actor UboConnection {
         var request = Store_V1_SubscribeStoreRequest()
         // `state.audio` brings the device's playback volume + mute state in
         // sync with the app, matching what the Web UI subscribes to in
-        // `state-manager.ts`. Bundled into the same subscription so we don't
-        // open a third long-lived stream just for two scalars. `clock` now
-        // lives on `state.localization`, not `state.system`.
-        request.selectors = ["state.system", "state.sensors", "state.audio", "state.localization"]
+        // `state-manager.ts`. `state.docker.service` (not the parent
+        // `state.docker`) matches the same selector the Web UI uses, to
+        // avoid an Any-packing issue on the parent DockerState.
+        request.selectors = [
+            "state.system", "state.sensors", "state.audio", "state.localization", "state.docker.service",
+        ]
 
         try await client.subscribeStore(request) { response in
             switch response.accepted {
@@ -527,43 +565,13 @@ public actor UboConnection {
                 for try await message in contents.bodyParts {
                     if case .message(let subscribeResponse) = message {
                         await self.markConnected()
-                        let results = subscribeResponse.results
 
-                        var cpuPercent: Float?
-                        var ramPercent: Float?
-                        var clock: String?
-                        var temperature: Float?
-                        var playbackVolume: Float?
-                        var isPlaybackMute: Bool?
-                        var isCaptureMute: Bool?
-
-                        for result in results {
-                            if let stats = self.unpackSystemStats(from: result) {
-                                cpuPercent = stats.cpuPercent
-                                ramPercent = stats.ramPercent
-                            }
-                            if let temp = self.unpackTemperature(from: result) {
-                                temperature = temp
-                            }
-                            if let audio = self.unpackAudioState(from: result) {
-                                playbackVolume = audio.volume
-                                isPlaybackMute = audio.isMute
-                                isCaptureMute = audio.isCaptureMute
-                            }
-                            if let clk = self.unpackClock(from: result) {
-                                clock = clk
-                            }
+                        var patch = SystemStatsPatch()
+                        for result in subscribeResponse.results {
+                            self.applySystemStatsResult(result, to: &patch)
                         }
 
-                        let mergedStats = await statsHolder.update(
-                            cpuPercent: cpuPercent,
-                            ramPercent: ramPercent,
-                            clock: clock,
-                            temperature: temperature,
-                            playbackVolume: playbackVolume,
-                            isPlaybackMute: isPlaybackMute,
-                            isCaptureMute: isCaptureMute
-                        )
+                        let mergedStats = await statsHolder.update(patch)
                         continuation.yield(mergedStats)
                     }
                 }
@@ -630,62 +638,119 @@ public actor UboConnection {
         return nil
     }
 
-    /// Unpack a google.protobuf.Any message to SystemStats
-    private nonisolated func unpackSystemStats(from any: SwiftProtobuf.Google_Protobuf_Any) -> SystemStats? {
+    /// Dispatch one `SubscribeStoreResponse` result into the in-progress
+    /// `SystemStatsPatch` by its type URL. Each result carries at most one
+    /// state slice (`SystemState`, `LocalizationState`, `DockerServiceState`,
+    /// `SensorsState`, or `AudioState`); unrecognized/unset fields are left
+    /// untouched so a frame with a subset of selectors never clobbers
+    /// already-known values with defaults.
+    private nonisolated func applySystemStatsResult(
+        _ any: SwiftProtobuf.Google_Protobuf_Any,
+        to patch: inout SystemStatsPatch
+    ) {
         let typeURL = any.typeURL
 
-        if typeURL.hasSuffix("SystemState") {
-            if let proto = try? Ubo_V1_SystemState(serializedBytes: any.value) {
-                return SystemStats(
-                    cpuPercent: proto.hasCpuPercent ? proto.cpuPercent : 0,
-                    ramPercent: proto.hasRamPercent ? proto.ramPercent : 0,
-                    clock: ""
+        if typeURL.hasSuffix("SystemState"), let proto = try? Ubo_V1_SystemState(serializedBytes: any.value) {
+            if proto.hasCpuPercent { patch.cpuPercent = proto.cpuPercent }
+            if proto.hasRamPercent { patch.ramPercent = proto.ramPercent }
+            if proto.hasCpuTemperatureCelsius { patch.temperature = proto.cpuTemperatureCelsius }
+            if proto.hasLoadAverage1 { patch.loadAverage1 = proto.loadAverage1 }
+            if proto.hasLoadAverage5 { patch.loadAverage5 = proto.loadAverage5 }
+            if proto.hasLoadAverage15 { patch.loadAverage15 = proto.loadAverage15 }
+            if proto.hasBootTime { patch.bootTime = proto.bootTime }
+            if proto.hasDiskTotalBytes { patch.diskTotalBytes = proto.diskTotalBytes }
+            if proto.hasDiskUsedBytes { patch.diskUsedBytes = proto.diskUsedBytes }
+            if proto.hasDiskPercent { patch.diskPercent = proto.diskPercent }
+            if proto.hasNetworkUploadBps { patch.networkUploadBps = proto.networkUploadBps }
+            if proto.hasNetworkDownloadBps { patch.networkDownloadBps = proto.networkDownloadBps }
+        } else if typeURL.hasSuffix("LocalizationState"),
+                  let proto = try? Ubo_V1_LocalizationState(serializedBytes: any.value) {
+            if proto.hasClock { patch.clock = proto.clock }
+            if proto.hasDate { patch.date = proto.date }
+            if proto.hasLocation {
+                if proto.location.hasCity { patch.locationCity = proto.location.city }
+                if proto.location.hasCountry { patch.locationCountry = proto.location.country }
+            }
+            if proto.hasWeather {
+                patch.weather = WeatherCondition(
+                    symbolCode: proto.weather.symbolCode,
+                    temperatureCelsius: proto.weather.temperatureCelsius,
+                    windSpeedMps: proto.weather.hasWindSpeedMps ? proto.weather.windSpeedMps : nil
                 )
             }
+        } else if typeURL.hasSuffix("DockerServiceState"),
+                  let proto = try? Ubo_V1_DockerServiceState(serializedBytes: any.value) {
+            patch.dockerApps = proto.apps.items.values.map(convertDockerAppStatus)
+        } else if typeURL.hasSuffix("SensorsState"),
+                  let proto = try? Ubo_V1_SensorsState(serializedBytes: any.value) {
+            patch.sensorDevices = proto.devices.items.values.map(convertSensorDeviceState)
+        } else if typeURL.hasSuffix("AudioState"), let proto = try? Ubo_V1_AudioState(serializedBytes: any.value) {
+            if proto.hasPlaybackVolume { patch.playbackVolume = proto.playbackVolume }
+            if proto.hasIsPlaybackMute { patch.isPlaybackMute = proto.isPlaybackMute }
+            if proto.hasIsCaptureMute { patch.isCaptureMute = proto.isCaptureMute }
         }
-
-        return nil
     }
 
-    /// Unpack the device's local clock string from LocalizationState
-    private nonisolated func unpackClock(from any: SwiftProtobuf.Google_Protobuf_Any) -> String? {
-        guard any.typeURL.hasSuffix("LocalizationState"),
-              let proto = try? Ubo_V1_LocalizationState(serializedBytes: any.value),
-              proto.hasClock else {
-            return nil
-        }
-        return proto.clock
+    private nonisolated func convertDockerAppStatus(_ proto: Ubo_V1_DockerAppStatus) -> DockerAppStatus {
+        DockerAppStatus(
+            id: proto.id,
+            label: proto.label,
+            icon: proto.icon,
+            status: convertDockerItemStatus(proto.status),
+            health: convertDockerItemHealth(proto.health)
+        )
     }
 
-    /// Unpack temperature from SensorsState
-    private nonisolated func unpackTemperature(from any: SwiftProtobuf.Google_Protobuf_Any) -> Float? {
-        let typeURL = any.typeURL
-
-        if typeURL.hasSuffix("SensorsState") {
-            if let proto = try? Ubo_V1_SensorsState(serializedBytes: any.value) {
-                if proto.hasTemperature && proto.temperature.hasValue {
-                    return proto.temperature.value
-                }
-            }
+    private nonisolated func convertDockerItemStatus(_ proto: Ubo_V1_DockerItemStatus) -> DockerItemStatus {
+        switch proto {
+        case .notAvailable: .notAvailable
+        case .fetching: .fetching
+        case .available: .available
+        case .created: .created
+        case .starting: .starting
+        case .running: .running
+        case .error: .error
+        case .processing: .processing
+        case .uboAppDotStoreDotServicesDotDockerUnspecified, .UNRECOGNIZED: .unspecified
         }
-
-        return nil
     }
 
-    /// Unpack playback + capture mute state from AudioState. Returns `nil` for
-    /// any field the device hasn't set explicitly so the holder doesn't
-    /// clobber a real value with a default zero.
-    private nonisolated func unpackAudioState(
-        from any: SwiftProtobuf.Google_Protobuf_Any
-    ) -> (volume: Float?, isMute: Bool?, isCaptureMute: Bool?)? {
-        guard any.typeURL.hasSuffix("AudioState"),
-              let proto = try? Ubo_V1_AudioState(serializedBytes: any.value) else {
-            return nil
+    private nonisolated func convertDockerItemHealth(_ proto: Ubo_V1_DockerItemHealth) -> DockerItemHealth {
+        switch proto {
+        case .ok: .ok
+        case .recovered: .recovered
+        case .crashLooping: .crashLooping
+        case .uboAppDotStoreDotServicesDotDockerUnspecified, .UNRECOGNIZED: .unspecified
         }
-        return (
-            volume: proto.hasPlaybackVolume ? proto.playbackVolume : nil,
-            isMute: proto.hasIsPlaybackMute ? proto.isPlaybackMute : nil,
-            isCaptureMute: proto.hasIsCaptureMute ? proto.isCaptureMute : nil
+    }
+
+    private nonisolated func convertSensorDeviceState(_ proto: Ubo_V1_SensorDeviceState) -> SensorDeviceState {
+        SensorDeviceState(
+            id: proto.id,
+            label: proto.label,
+            status: convertSensorDeviceStatus(proto.status),
+            entities: proto.entities.items.map(convertSensorEntityReading)
+        )
+    }
+
+    private nonisolated func convertSensorDeviceStatus(_ proto: Ubo_V1_SensorStatus) -> SensorDeviceStatus {
+        switch proto {
+        case .active: .active
+        case .error: .error
+        case .unsupported: .unsupported
+        case .ambiguous: .ambiguous
+        case .uboAppDotStoreDotServicesDotSensorsUnspecified, .UNRECOGNIZED: .unspecified
+        }
+    }
+
+    private nonisolated func convertSensorEntityReading(_ proto: Ubo_V1_SensorEntityReading) -> SensorEntityReading {
+        SensorEntityReading(
+            key: proto.key,
+            value: proto.hasValue ? proto.value : nil,
+            name: proto.hasName ? proto.name : nil,
+            unit: proto.hasUnit ? proto.unit : nil,
+            deviceClass: proto.hasDeviceClass ? proto.deviceClass : nil,
+            precision: proto.hasPrecision ? proto.precision : nil
         )
     }
 
