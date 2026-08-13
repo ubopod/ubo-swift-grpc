@@ -154,6 +154,7 @@ public enum RenderKind: Sendable, Equatable {
     case imageViewer
     case frameStream
     case status
+    case readings
     case unknown(String)
 
     public init(rawValue: String) {
@@ -164,6 +165,7 @@ public enum RenderKind: Sendable, Equatable {
         case "image_viewer": self = .imageViewer
         case "frame_stream": self = .frameStream
         case "status": self = .status
+        case "readings": self = .readings
         default: self = .unknown(rawValue)
         }
     }
@@ -176,6 +178,7 @@ public enum RenderKind: Sendable, Equatable {
         case .imageViewer: return "image_viewer"
         case .frameStream: return "frame_stream"
         case .status: return "status"
+        case .readings: return "readings"
         case .unknown(let value): return value
         }
     }
