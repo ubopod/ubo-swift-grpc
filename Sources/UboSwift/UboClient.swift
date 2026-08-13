@@ -690,8 +690,8 @@ public final class UboClient: ObservableObject {
     private static let uploadMaxRetries = 3
     private static let uploadRetryDelayMs: UInt64 = 1_000
 
-    /// Upload `data` as `filename`, chunked to match the server's
-    /// `FileUploadStartAction`/`FileUploadChunkAction`/
+    /// Upload a file whose bytes are supplied by `readChunk`, chunked to
+    /// match the server's `FileUploadStartAction`/`FileUploadChunkAction`/
     /// `FileUploadCompleteAction` session protocol (see
     /// `ubo_app/services/090-file-system/upload_handler.py`). `id` is the
     /// caller-generated upload id — pass the same value as the
@@ -699,26 +699,38 @@ public final class UboClient: ObservableObject {
     /// so the server-side form handler's `await_completed_upload(id)` finds
     /// this upload once it finishes.
     ///
+    /// `readChunk(maxLength)` is called once per chunk (up to `totalChunks`
+    /// times, off the main actor) and is expected to behave like a
+    /// sequential file read: exactly `maxLength` bytes except for the final
+    /// chunk, which may be shorter. Never buffers more than one chunk in
+    /// memory, so a multi-hundred-MB picked video doesn't OOM the way
+    /// loading it into a single `Data` up front would.
+    ///
     /// Chunks are sent sequentially (the Web UI sends them concurrently;
     /// this trades some speed for a much simpler retry story and less load
     /// on the device's gRPC server). Each chunk gets its own retry budget,
     /// matching the Web UI's per-chunk retry.
-    public func uploadFile(id: String, filename: String, data: Data) async throws {
+    public func uploadFile(
+        id: String,
+        filename: String,
+        totalSize: Int,
+        readChunk: @escaping @Sendable (Int) throws -> Data,
+    ) async throws {
         let chunkSize = Self.uploadChunkSize
-        let totalChunks = data.isEmpty ? 0 : (data.count + chunkSize - 1) / chunkSize
+        let totalChunks = totalSize <= 0 ? 0 : (totalSize + chunkSize - 1) / chunkSize
         try await dispatch(
             .fileUploadStart(
                 uploadId: id,
                 filename: filename,
-                totalSize: data.count,
+                totalSize: totalSize,
                 totalChunks: totalChunks,
                 chunkSize: chunkSize,
             ),
         )
         for index in 0..<totalChunks {
-            let start = index * chunkSize
-            let end = min(start + chunkSize, data.count)
-            let chunk = data.subdata(in: start..<end)
+            let chunk = try await Task.detached(priority: .userInitiated) {
+                try readChunk(chunkSize)
+            }.value
             try await sendChunkWithRetry(uploadId: id, chunkIndex: index, chunk: chunk)
         }
         try await dispatch(.fileUploadComplete(uploadId: id))
