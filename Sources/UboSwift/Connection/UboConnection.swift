@@ -1581,10 +1581,17 @@ public actor UboConnection {
         case .audioPlayRecording:
             protoAction.audioPlayRecordingAction = Ubo_V1_AudioPlayRecordingAction()
 
-        case .inputProvide(let id, let value):
+        case .inputProvide(let id, let value, let data):
             var provide = Ubo_V1_InputProvideAction()
             provide.id = id
             provide.value = value
+            // Always attach a result, even for single-field forms: server
+            // handlers for multi-field WebUIInputDescription forms read
+            // result.data, not value (mirrors the Web UI's inputs.tsx).
+            var result = Ubo_V1_InputResult()
+            result.data = data
+            result.method = .webDashboard
+            provide.result = result
             protoAction.inputProvideAction = provide
 
         case .inputCancel(let id):

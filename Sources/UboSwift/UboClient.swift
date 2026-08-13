@@ -668,8 +668,12 @@ public final class UboClient: ObservableObject {
     /// Provide the user's response to an active `InputDescription` request.
     /// This is what a connected client (iPhone/Watch/Mac) dispatches after a
     /// native input form is filled in, instead of redirecting to the Web UI.
-    public func provideInput(id: String, value: String) async throws {
-        try await dispatch(.inputProvide(id: id, value: value))
+    /// `value` is the scalar shown to single-field callers; `data` should
+    /// carry every field's name → value for multi-field forms — server
+    /// handlers read `result.data`, not `value`, so a form with more than
+    /// one field silently no-ops without it.
+    public func provideInput(id: String, value: String, data: [String: String] = [:]) async throws {
+        try await dispatch(.inputProvide(id: id, value: value, data: data))
     }
 
     /// Cancel an active `InputDescription` request.

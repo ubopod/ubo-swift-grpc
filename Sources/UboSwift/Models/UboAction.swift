@@ -174,12 +174,12 @@ public enum UboAction: Sendable {
     // MARK: - Input Actions
 
     /// Provide the user's response to an active `InputDescription` request.
-    /// `value` is the primary scalar response (e.g. text typed into the
-    /// field). For multi-field forms the richer `InputResult` payload should
-    /// be supplied by `audioReportSampleWithResult`/dedicated helpers when
-    /// they're added; the common case (single-field text/password) is
-    /// handled here.
-    case inputProvide(id: String, value: String)
+    /// `value` is the primary scalar response (e.g. text typed into a
+    /// single-field form). `data` carries every field's name → value, the
+    /// same map the Web UI sends (`inputs.tsx`) — server-side handlers for
+    /// multi-field forms read `result.data`, not `value`, so omitting this
+    /// silently no-ops any form with more than a lone scalar field.
+    case inputProvide(id: String, value: String, data: [String: String] = [:])
 
     /// Cancel an active `InputDescription` request without providing a value.
     case inputCancel(id: String)
@@ -269,7 +269,7 @@ extension UboAction: CustomStringConvertible {
         case .stackPushMenu(let key): return "StackPushMenu(\(key))"
         case .stackPop(let count): return "StackPop(\(count))"
         case .stackPopToRoot: return "StackPopToRoot"
-        case .inputProvide(let id, _): return "InputProvide(\(id))"
+        case .inputProvide(let id, _, _): return "InputProvide(\(id))"
         case .inputCancel(let id): return "InputCancel(\(id))"
         case .assistantStartListening(let src): return "AssistantStartListening(\(src))"
         case .assistantStopListening: return "AssistantStopListening"
