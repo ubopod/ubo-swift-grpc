@@ -1670,6 +1670,14 @@ public actor UboConnection {
             chooseByIcon.icon = icon
             protoAction.menuChooseByIconAction = chooseByIcon
 
+        case .executeMenuAction(let actionId, let menuKey):
+            var executeAction = Ubo_V1_ExecuteMenuActionAction()
+            executeAction.actionID = actionId
+            if let menuKey {
+                executeAction.menuKey = menuKey
+            }
+            protoAction.executeMenuActionAction = executeAction
+
         case .menuScrollUp:
             var scroll = Ubo_V1_MenuScrollAction()
             scroll.direction = .up

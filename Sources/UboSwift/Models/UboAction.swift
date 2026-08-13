@@ -152,6 +152,16 @@ public enum UboAction: Sendable {
     /// Choose menu item by icon
     case menuChooseByIcon(String)
 
+    /// Execute a menu item's registered action handler directly by its
+    /// `action_id` (every `MenuItemData` carries one over the wire). This is
+    /// the primary selection mechanism — mirrors the Web UI's
+    /// `dispatchMenuAction`, and unlike `menuChooseByLabel`/`menuChooseByIcon`
+    /// doesn't depend on the server's legacy label-lookup tracking staying in
+    /// sync with what's actually on screen (which it isn't for prompts —
+    /// see `PromptDeviceView`). `menuKey` lets the reducer push the result
+    /// onto the stack when the handler returns a submenu.
+    case executeMenuAction(actionId: String, menuKey: String? = nil)
+
     /// Push a registered menu onto the navigation stack by its menu key.
     case stackPushMenu(menuKey: String)
 
@@ -255,6 +265,7 @@ extension UboAction: CustomStringConvertible {
         case .menuChooseByIndex(let i): return "MenuChooseByIndex(\(i))"
         case .menuChooseByLabel(let l): return "MenuChooseByLabel(\(l))"
         case .menuChooseByIcon(let i): return "MenuChooseByIcon(\(i))"
+        case .executeMenuAction(let actionId, let menuKey): return "ExecuteMenuAction(\(actionId), menuKey=\(menuKey ?? "nil"))"
         case .stackPushMenu(let key): return "StackPushMenu(\(key))"
         case .stackPop(let count): return "StackPop(\(count))"
         case .stackPopToRoot: return "StackPopToRoot"

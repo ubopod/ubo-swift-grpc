@@ -786,6 +786,15 @@ extension UboClient {
         try await dispatch(.menuChooseByIcon(icon))
     }
 
+    /// Execute a menu item's action directly by its `action_id`. Prefer this
+    /// over `selectMenuItem(label:)`/`selectMenuItem(icon:)` — those depend on
+    /// the server's legacy label/icon lookup staying in sync with whatever the
+    /// client is showing, which it isn't for every screen (prompts, notably).
+    /// Every `MenuItemData` the server streams already carries its `actionId`.
+    public func executeMenuAction(actionId: String, menuKey: String? = nil) async throws {
+        try await dispatch(.executeMenuAction(actionId: actionId, menuKey: menuKey))
+    }
+
     /// Scroll the menu up
     public func scrollMenuUp() async throws {
         try await dispatch(.menuScrollUp)
