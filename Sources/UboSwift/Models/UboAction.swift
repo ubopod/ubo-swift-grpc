@@ -184,6 +184,21 @@ public enum UboAction: Sendable {
     /// Cancel an active `InputDescription` request without providing a value.
     case inputCancel(id: String)
 
+    // MARK: - File Upload Actions
+
+    /// Begin a chunked upload session. Prefer the high-level
+    /// `UboClient.uploadFile(id:filename:data:)`, which drives this plus the
+    /// chunk/complete steps with retry — these three cases exist so
+    /// `buildProtoAction` has something to match on.
+    case fileUploadStart(uploadId: String, filename: String, totalSize: Int, totalChunks: Int, chunkSize: Int)
+
+    /// Send one chunk of an in-progress upload. `chunkIndex` is 0-based;
+    /// `data` must be exactly `chunkSize` bytes except for the final chunk.
+    case fileUploadChunk(uploadId: String, chunkIndex: Int, data: Data)
+
+    /// Signal that every chunk has been sent.
+    case fileUploadComplete(uploadId: String)
+
     // MARK: - Assistant Actions
 
     /// Start assistant listening. `audioSource` selects which mic the session
@@ -271,6 +286,9 @@ extension UboAction: CustomStringConvertible {
         case .stackPopToRoot: return "StackPopToRoot"
         case .inputProvide(let id, _, _): return "InputProvide(\(id))"
         case .inputCancel(let id): return "InputCancel(\(id))"
+        case .fileUploadStart(let id, let filename, let size, _, _): return "FileUploadStart(\(id), \(filename), \(size)B)"
+        case .fileUploadChunk(let id, let index, let data): return "FileUploadChunk(\(id), #\(index), \(data.count)B)"
+        case .fileUploadComplete(let id): return "FileUploadComplete(\(id))"
         case .assistantStartListening(let src): return "AssistantStartListening(\(src))"
         case .assistantStopListening: return "AssistantStopListening"
         case .assistantToggleListening(let src): return "AssistantToggleListening(\(src))"

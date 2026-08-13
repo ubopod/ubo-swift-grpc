@@ -681,6 +681,66 @@ public final class UboClient: ObservableObject {
         try await dispatch(.inputCancel(id: id))
     }
 
+    // MARK: - File Upload
+
+    /// Chunk size, retry count, and inter-retry backoff mirror the Web UI's
+    /// `inputs.tsx` (`CHUNK_SIZE` / `MAX_RETRIES` / `RETRY_DELAY_MS`) so
+    /// behavior is consistent across clients.
+    private static let uploadChunkSize = 512 * 1_024
+    private static let uploadMaxRetries = 3
+    private static let uploadRetryDelayMs: UInt64 = 1_000
+
+    /// Upload `data` as `filename`, chunked to match the server's
+    /// `FileUploadStartAction`/`FileUploadChunkAction`/
+    /// `FileUploadCompleteAction` session protocol (see
+    /// `ubo_app/services/090-file-system/upload_handler.py`). `id` is the
+    /// caller-generated upload id — pass the same value as the
+    /// `{field}_upload_id` entry in the `data` map given to `provideInput`
+    /// so the server-side form handler's `await_completed_upload(id)` finds
+    /// this upload once it finishes.
+    ///
+    /// Chunks are sent sequentially (the Web UI sends them concurrently;
+    /// this trades some speed for a much simpler retry story and less load
+    /// on the device's gRPC server). Each chunk gets its own retry budget,
+    /// matching the Web UI's per-chunk retry.
+    public func uploadFile(id: String, filename: String, data: Data) async throws {
+        let chunkSize = Self.uploadChunkSize
+        let totalChunks = data.isEmpty ? 0 : (data.count + chunkSize - 1) / chunkSize
+        try await dispatch(
+            .fileUploadStart(
+                uploadId: id,
+                filename: filename,
+                totalSize: data.count,
+                totalChunks: totalChunks,
+                chunkSize: chunkSize,
+            ),
+        )
+        for index in 0..<totalChunks {
+            let start = index * chunkSize
+            let end = min(start + chunkSize, data.count)
+            let chunk = data.subdata(in: start..<end)
+            try await sendChunkWithRetry(uploadId: id, chunkIndex: index, chunk: chunk)
+        }
+        try await dispatch(.fileUploadComplete(uploadId: id))
+    }
+
+    private func sendChunkWithRetry(uploadId: String, chunkIndex: Int, chunk: Data) async throws {
+        var lastError: Error?
+        for attempt in 0...Self.uploadMaxRetries {
+            do {
+                try await dispatch(.fileUploadChunk(uploadId: uploadId, chunkIndex: chunkIndex, data: chunk))
+                return
+            } catch {
+                lastError = error
+                if attempt < Self.uploadMaxRetries {
+                    let delay = Self.uploadRetryDelayMs * UInt64(attempt + 1)
+                    try? await Task.sleep(nanoseconds: delay * 1_000_000)
+                }
+            }
+        }
+        throw lastError ?? UboError.dispatchFailed(CancellationError())
+    }
+
     // MARK: - Audio Capture (mic → device)
 
     /// Report a captured microphone sample to the device. Mirrors the Web

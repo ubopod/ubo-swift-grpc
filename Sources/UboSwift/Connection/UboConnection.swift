@@ -1599,6 +1599,27 @@ public actor UboConnection {
             cancel.id = id
             protoAction.inputCancelAction = cancel
 
+        case .fileUploadStart(let uploadId, let filename, let totalSize, let totalChunks, let chunkSize):
+            var start = Ubo_V1_FileUploadStartAction()
+            start.uploadID = uploadId
+            start.filename = filename
+            start.totalSize = Int64(totalSize)
+            start.totalChunks = Int64(totalChunks)
+            start.chunkSize = Int64(chunkSize)
+            protoAction.fileUploadStartAction = start
+
+        case .fileUploadChunk(let uploadId, let chunkIndex, let data):
+            var chunk = Ubo_V1_FileUploadChunkAction()
+            chunk.uploadID = uploadId
+            chunk.chunkIndex = Int64(chunkIndex)
+            chunk.data = data
+            protoAction.fileUploadChunkAction = chunk
+
+        case .fileUploadComplete(let uploadId):
+            var complete = Ubo_V1_FileUploadCompleteAction()
+            complete.uploadID = uploadId
+            protoAction.fileUploadCompleteAction = complete
+
         case .stackPushMenu(let menuKey):
             var pushMenu = Ubo_V1_StackPushMenuAction()
             pushMenu.menuKey = menuKey
