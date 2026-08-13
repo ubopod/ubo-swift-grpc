@@ -21,6 +21,11 @@ public struct SystemStats: Sendable, Equatable {
     /// match what the Web UI's Processor card shows).
     public var temperature: Float?
 
+    /// Already converted to the device's effective UnitSystem — see
+    /// `ubo_app/utils/units.py`. Clients display these, not `temperature`.
+    public var temperatureDisplayValue: Float?
+    public var temperatureDisplayUnit: String?
+
     /// 1/5/15-minute load averages from `SystemState`.
     public var loadAverage1: Float?
     public var loadAverage5: Float?
@@ -72,6 +77,8 @@ public struct SystemStats: Sendable, Equatable {
         cpuPercent: Float = 0,
         ramPercent: Float = 0,
         temperature: Float? = nil,
+        temperatureDisplayValue: Float? = nil,
+        temperatureDisplayUnit: String? = nil,
         loadAverage1: Float? = nil,
         loadAverage5: Float? = nil,
         loadAverage15: Float? = nil,
@@ -95,6 +102,8 @@ public struct SystemStats: Sendable, Equatable {
         self.cpuPercent = cpuPercent
         self.ramPercent = ramPercent
         self.temperature = temperature
+        self.temperatureDisplayValue = temperatureDisplayValue
+        self.temperatureDisplayUnit = temperatureDisplayUnit
         self.loadAverage1 = loadAverage1
         self.loadAverage5 = loadAverage5
         self.loadAverage15 = loadAverage15

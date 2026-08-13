@@ -14,6 +14,8 @@ struct SystemStatsPatch {
     var cpuPercent: Float?
     var ramPercent: Float?
     var temperature: Float?
+    var temperatureDisplayValue: Float?
+    var temperatureDisplayUnit: String?
     var loadAverage1: Float?
     var loadAverage5: Float?
     var loadAverage15: Float?
@@ -42,6 +44,8 @@ private actor StatsHolder {
         if let v = patch.cpuPercent { stats.cpuPercent = v }
         if let v = patch.ramPercent { stats.ramPercent = v }
         if let v = patch.temperature { stats.temperature = v }
+        if let v = patch.temperatureDisplayValue { stats.temperatureDisplayValue = v }
+        if let v = patch.temperatureDisplayUnit { stats.temperatureDisplayUnit = v }
         if let v = patch.loadAverage1 { stats.loadAverage1 = v }
         if let v = patch.loadAverage5 { stats.loadAverage5 = v }
         if let v = patch.loadAverage15 { stats.loadAverage15 = v }
@@ -654,6 +658,12 @@ public actor UboConnection {
             if proto.hasCpuPercent { patch.cpuPercent = proto.cpuPercent }
             if proto.hasRamPercent { patch.ramPercent = proto.ramPercent }
             if proto.hasCpuTemperatureCelsius { patch.temperature = proto.cpuTemperatureCelsius }
+            if proto.hasCpuTemperatureDisplayValue {
+                patch.temperatureDisplayValue = proto.cpuTemperatureDisplayValue
+            }
+            if proto.hasCpuTemperatureDisplayUnit {
+                patch.temperatureDisplayUnit = proto.cpuTemperatureDisplayUnit
+            }
             if proto.hasLoadAverage1 { patch.loadAverage1 = proto.loadAverage1 }
             if proto.hasLoadAverage5 { patch.loadAverage5 = proto.loadAverage5 }
             if proto.hasLoadAverage15 { patch.loadAverage15 = proto.loadAverage15 }
@@ -675,7 +685,13 @@ public actor UboConnection {
                 patch.weather = WeatherCondition(
                     symbolCode: proto.weather.symbolCode,
                     temperatureCelsius: proto.weather.temperatureCelsius,
-                    windSpeedMps: proto.weather.hasWindSpeedMps ? proto.weather.windSpeedMps : nil
+                    windSpeedMps: proto.weather.hasWindSpeedMps ? proto.weather.windSpeedMps : nil,
+                    temperatureDisplayValue: proto.weather.temperatureDisplayValue,
+                    temperatureDisplayUnit: proto.weather.temperatureDisplayUnit,
+                    windSpeedDisplayValue: proto.weather.hasWindSpeedDisplayValue
+                        ? proto.weather.windSpeedDisplayValue : nil,
+                    windSpeedDisplayUnit: proto.weather.hasWindSpeedDisplayUnit
+                        ? proto.weather.windSpeedDisplayUnit : nil
                 )
             }
         } else if typeURL.hasSuffix("DockerServiceState"),
