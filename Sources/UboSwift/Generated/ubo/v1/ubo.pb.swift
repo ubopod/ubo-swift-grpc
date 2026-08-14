@@ -25333,6 +25333,24 @@ public struct Ubo_V1_SensorEntityReading: Sendable {
   /// Clears the value of `precision`. Subsequent reads from it will return its default value.
   public mutating func clearPrecision() {self._precision = nil}
 
+  public var displayValue: Float {
+    get {_displayValue ?? 0}
+    set {_displayValue = newValue}
+  }
+  /// Returns true if `displayValue` has been explicitly set.
+  public var hasDisplayValue: Bool {self._displayValue != nil}
+  /// Clears the value of `displayValue`. Subsequent reads from it will return its default value.
+  public mutating func clearDisplayValue() {self._displayValue = nil}
+
+  public var displayUnit: String {
+    get {_displayUnit ?? String()}
+    set {_displayUnit = newValue}
+  }
+  /// Returns true if `displayUnit` has been explicitly set.
+  public var hasDisplayUnit: Bool {self._displayUnit != nil}
+  /// Clears the value of `displayUnit`. Subsequent reads from it will return its default value.
+  public mutating func clearDisplayUnit() {self._displayUnit = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -25343,6 +25361,8 @@ public struct Ubo_V1_SensorEntityReading: Sendable {
   fileprivate var _unit: String? = nil
   fileprivate var _deviceClass: String? = nil
   fileprivate var _precision: Int64? = nil
+  fileprivate var _displayValue: Float? = nil
+  fileprivate var _displayUnit: String? = nil
 }
 
 public struct Ubo_V1_SensorDeviceState: Sendable {
@@ -66651,7 +66671,7 @@ extension Ubo_V1_SensorsReportReadingAction: SwiftProtobuf.Message, SwiftProtobu
 
 extension Ubo_V1_SensorEntityReading: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SensorEntityReading"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}key\0\u{1}value\0\u{1}name\0\u{1}unit\0\u{3}device_class\0\u{1}precision\0\u{4}a\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\u{2}key\0\u{1}value\0\u{1}name\0\u{1}unit\0\u{3}device_class\0\u{1}precision\0\u{3}display_value\0\u{3}display_unit\0\u{4}_\u{f}meta_field_package_name_ubo_app_dot_store_dot_services_dot_sensors\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -66665,6 +66685,8 @@ extension Ubo_V1_SensorEntityReading: SwiftProtobuf.Message, SwiftProtobuf._Mess
       case 5: try { try decoder.decodeSingularStringField(value: &self._unit) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self._deviceClass) }()
       case 7: try { try decoder.decodeSingularInt64Field(value: &self._precision) }()
+      case 8: try { try decoder.decodeSingularFloatField(value: &self._displayValue) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self._displayUnit) }()
       case 1000: try { try decoder.decodeSingularStringField(value: &self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors) }()
       default: break
       }
@@ -66694,6 +66716,12 @@ extension Ubo_V1_SensorEntityReading: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try { if let v = self._precision {
       try visitor.visitSingularInt64Field(value: v, fieldNumber: 7)
     } }()
+    try { if let v = self._displayValue {
+      try visitor.visitSingularFloatField(value: v, fieldNumber: 8)
+    } }()
+    try { if let v = self._displayUnit {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+    } }()
     try { if let v = self._metaFieldPackageNameUboAppDotStoreDotServicesDotSensors {
       try visitor.visitSingularStringField(value: v, fieldNumber: 1000)
     } }()
@@ -66708,6 +66736,8 @@ extension Ubo_V1_SensorEntityReading: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if lhs._unit != rhs._unit {return false}
     if lhs._deviceClass != rhs._deviceClass {return false}
     if lhs._precision != rhs._precision {return false}
+    if lhs._displayValue != rhs._displayValue {return false}
+    if lhs._displayUnit != rhs._displayUnit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

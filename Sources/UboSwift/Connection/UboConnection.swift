@@ -766,7 +766,9 @@ public actor UboConnection {
             name: proto.hasName ? proto.name : nil,
             unit: proto.hasUnit ? proto.unit : nil,
             deviceClass: proto.hasDeviceClass ? proto.deviceClass : nil,
-            precision: proto.hasPrecision ? proto.precision : nil
+            precision: proto.hasPrecision ? proto.precision : nil,
+            displayValue: proto.hasDisplayValue ? proto.displayValue : nil,
+            displayUnit: proto.hasDisplayUnit ? proto.displayUnit : nil
         )
     }
 
