@@ -140,8 +140,12 @@ public final class UboDiscovery: Sendable {
     private static func hostString(from host: NWEndpoint.Host) -> String {
         switch host {
         case .name(let name, _): return name
-        case .ipv4(let addr): return addr.debugDescription
-        case .ipv6(let addr): return addr.debugDescription
+        // IPAddress.debugDescription appends a "%interface" zone-id suffix
+        // for scoped addresses (e.g. "192.168.0.133%en0") — strip it, since
+        // this string is used as the literal host to connect to, not just
+        // for display, and callers don't expect/parse a zone id.
+        case .ipv4(let addr): return addr.debugDescription.split(separator: "%", maxSplits: 1)[0].description
+        case .ipv6(let addr): return addr.debugDescription.split(separator: "%", maxSplits: 1)[0].description
         @unknown default: return "\(host)"
         }
     }
