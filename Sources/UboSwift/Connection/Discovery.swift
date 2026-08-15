@@ -35,56 +35,26 @@ public final class UboDiscovery: Sendable {
     ///
     /// Each yielded element is the current set of devices: appearances and
     /// disappearances both produce a new snapshot, so consumers can render
-    /// the latest list directly.
+    /// the latest list directly. The underlying `NWBrowser` session
+    /// restarts itself (with capped exponential backoff) if it enters
+    /// `.failed` — without this, a single transient network hiccup
+    /// silently ends discovery for the rest of the view's lifetime, with
+    /// no way to recover short of leaving and re-entering the screen.
     public static func browse(
         serviceType: String = defaultServiceType,
         domain: String = "local."
     ) -> AsyncStream<Set<DiscoveredDevice>> {
         AsyncStream { continuation in
-            let descriptor = NWBrowser.Descriptor.bonjour(type: serviceType, domain: domain)
-            let parameters = NWParameters.tcp
-            parameters.includePeerToPeer = false
-            let browser = NWBrowser(for: descriptor, using: parameters)
-
-            let state = BrowserState()
-
-            browser.browseResultsChangedHandler = { results, _ in
-                Task {
-                    let token = await state.nextUpdateToken()
-                    var snapshot: Set<DiscoveredDevice> = []
-                    await withTaskGroup(of: DiscoveredDevice?.self) { group in
-                        for result in results {
-                            group.addTask {
-                                await Self.resolveWithTimeout(result: result, timeoutNanoseconds: 5_000_000_000)
-                            }
-                        }
-                        for await device in group {
-                            if let device { snapshot.insert(device) }
-                        }
-                    }
-                    await state.setSnapshot(snapshot)
-                    if await state.isCurrentToken(token) {
-                        continuation.yield(snapshot)
-                    }
-                }
-            }
-
-            browser.stateUpdateHandler = { newState in
-                if case .failed = newState {
-                    continuation.finish()
-                }
-            }
-
+            let session = BrowserSession(serviceType: serviceType, domain: domain, continuation: continuation)
+            Task { await session.start() }
             continuation.onTermination = { _ in
-                browser.cancel()
+                Task { await session.stop() }
             }
-
-            browser.start(queue: .global(qos: .utility))
         }
     }
 
     /// Resolve a single Bonjour result to a `DiscoveredDevice` with a timeout.
-    private static func resolveWithTimeout(result: NWBrowser.Result, timeoutNanoseconds: UInt64) async -> DiscoveredDevice? {
+    fileprivate static func resolveWithTimeout(result: NWBrowser.Result, timeoutNanoseconds: UInt64) async -> DiscoveredDevice? {
         await withTaskGroup(of: DiscoveredDevice?.self) { group in
             group.addTask {
                 await Self.resolve(result: result)
@@ -151,11 +121,96 @@ public final class UboDiscovery: Sendable {
     }
 }
 
-private actor BrowserState {
-    private var snapshot: Set<DiscoveredDevice> = []
-    private var browseUpdateToken: Int = 0
+/// Owns one `NWBrowser`'s lifecycle: starts it, reconciles result changes
+/// through `BrowserState`, and restarts (with capped exponential backoff)
+/// if the session enters `.failed`, so a transient network hiccup doesn't
+/// silently end discovery for good.
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, visionOS 1.0, *)
+private actor BrowserSession {
+    private let serviceType: String
+    private let domain: String
+    private let continuation: AsyncStream<Set<DiscoveredDevice>>.Continuation
+    private let state = BrowserState()
 
-    func setSnapshot(_ s: Set<DiscoveredDevice>) { snapshot = s }
+    private var browser: NWBrowser?
+    private var stopped = false
+    private var restartAttempt = 0
+
+    init(serviceType: String, domain: String, continuation: AsyncStream<Set<DiscoveredDevice>>.Continuation) {
+        self.serviceType = serviceType
+        self.domain = domain
+        self.continuation = continuation
+    }
+
+    func start() {
+        guard !stopped else { return }
+
+        let descriptor = NWBrowser.Descriptor.bonjour(type: serviceType, domain: domain)
+        let parameters = NWParameters.tcp
+        parameters.includePeerToPeer = false
+        let newBrowser = NWBrowser(for: descriptor, using: parameters)
+
+        newBrowser.browseResultsChangedHandler = { [weak self] results, _ in
+            guard let self else { return }
+            Task { await self.handleResultsChanged(results) }
+        }
+
+        newBrowser.stateUpdateHandler = { [weak self] newState in
+            guard let self else { return }
+            switch newState {
+            case .ready:
+                Task { await self.markReady() }
+            case .failed:
+                Task { await self.handleFailure() }
+            default:
+                break
+            }
+        }
+
+        browser = newBrowser
+        newBrowser.start(queue: .global(qos: .utility))
+    }
+
+    func stop() {
+        stopped = true
+        browser?.cancel()
+        browser = nil
+    }
+
+    private func markReady() {
+        restartAttempt = 0
+    }
+
+    private func handleResultsChanged(_ results: Set<NWBrowser.Result>) async {
+        let token = await state.nextUpdateToken()
+        let snapshot = await state.reconcile(results: results)
+        if await state.isCurrentToken(token) {
+            continuation.yield(snapshot)
+        }
+    }
+
+    private func handleFailure() async {
+        guard !stopped else { return }
+        browser?.cancel()
+        browser = nil
+
+        let delaySeconds = min(pow(2.0, Double(restartAttempt)), 30)
+        restartAttempt += 1
+        try? await Task.sleep(nanoseconds: UInt64(delaySeconds * 1_000_000_000))
+
+        guard !stopped else { return }
+        start()
+    }
+}
+
+/// Tracks resolved devices by service name across browse deltas so an
+/// already-known device isn't re-resolved (opening a fresh `NWConnection`)
+/// on every mDNS refresh — mirrors the caching fix in the Android
+/// `NsdManager`-based `UboDiscovery`.
+@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, visionOS 1.0, *)
+private actor BrowserState {
+    private var resolvedByName: [String: DiscoveredDevice] = [:]
+    private var browseUpdateToken = 0
 
     func nextUpdateToken() -> Int {
         browseUpdateToken += 1
@@ -163,7 +218,32 @@ private actor BrowserState {
     }
 
     func isCurrentToken(_ token: Int) -> Bool {
-        return token == browseUpdateToken
+        token == browseUpdateToken
+    }
+
+    func reconcile(results: Set<NWBrowser.Result>) async -> Set<DiscoveredDevice> {
+        var currentNames: Set<String> = []
+        for result in results {
+            if case .service(let name, _, _, _) = result.endpoint {
+                currentNames.insert(name)
+            }
+        }
+        resolvedByName = resolvedByName.filter { currentNames.contains($0.key) }
+
+        await withTaskGroup(of: (String, DiscoveredDevice?).self) { group in
+            for result in results {
+                guard case .service(let name, _, _, _) = result.endpoint, resolvedByName[name] == nil else { continue }
+                group.addTask {
+                    let device = await UboDiscovery.resolveWithTimeout(result: result, timeoutNanoseconds: 5_000_000_000)
+                    return (name, device)
+                }
+            }
+            for await (name, device) in group {
+                if let device { resolvedByName[name] = device }
+            }
+        }
+
+        return Set(resolvedByName.values)
     }
 }
 
