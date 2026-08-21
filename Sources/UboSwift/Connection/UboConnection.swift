@@ -699,7 +699,19 @@ public actor UboConnection {
             patch.dockerApps = proto.apps.items.values.map(convertDockerAppStatus)
         } else if typeURL.hasSuffix("SensorsState"),
                   let proto = try? Ubo_V1_SensorsState(serializedBytes: any.value) {
-            patch.sensorDevices = proto.devices.items.values.map(convertSensorDeviceState)
+            // `devices.items` is a protobuf map, decoded as a Swift
+            // Dictionary — `.values` iteration order isn't tied to
+            // insertion order and can differ between two decodes of the
+            // same key set. Every sensor reading update re-decodes this
+            // whole map, so an unsorted array here reshuffles page order
+            // on the watch's per-device TabView on essentially every
+            // tick, which SwiftUI sees as pages moving out from under the
+            // current selection — the dots and current page desync and
+            // swiping skips/jumps. Sorting by a stable key makes the
+            // order deterministic across decodes.
+            patch.sensorDevices = proto.devices.items.values
+                .map(convertSensorDeviceState)
+                .sorted { ($0.label.isEmpty ? $0.id : $0.label) < ($1.label.isEmpty ? $1.id : $1.label) }
         } else if typeURL.hasSuffix("AudioState"), let proto = try? Ubo_V1_AudioState(serializedBytes: any.value) {
             if proto.hasPlaybackVolume { patch.playbackVolume = proto.playbackVolume }
             if proto.hasIsPlaybackMute { patch.isPlaybackMute = proto.isPlaybackMute }
