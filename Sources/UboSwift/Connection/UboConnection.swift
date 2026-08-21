@@ -1760,9 +1760,12 @@ public actor UboConnection {
             setTimeout.timeout = Ubo_V1_DisplayBlankTimeout(rawValue: Int(timeout.protoValue)) ?? .uboAppDotStoreDotServicesDotDisplayUnspecified
             protoAction.displaySetBlankTimeoutAction = setTimeout
 
-        case .assistantStartListening(let audioSource):
+        case .assistantStartListening(let audioSource, let triggerSource):
             var startListening = Ubo_V1_AssistantStartListeningAction()
             startListening.audioSource = audioSource
+            if let triggerSource {
+                startListening.source = buildProtoTriggerSource(triggerSource)
+            }
             protoAction.assistantStartListeningAction = startListening
 
         case .assistantStopListening:
@@ -1841,6 +1844,34 @@ public actor UboConnection {
 
     private func protoKey(_ key: Key) -> Ubo_V1_Key {
         Ubo_V1_Key(rawValue: Int(key.protoValue)) ?? .uboAppDotStoreDotServicesDotKeypadUnspecified
+    }
+
+    private func buildProtoTriggerSource(
+        _ source: AssistantTriggerSource
+    ) -> Ubo_V1_AssistantTriggerSourceUnion {
+        var union = Ubo_V1_AssistantTriggerSourceUnion()
+        switch source {
+        case .grpc:
+            union.grpcTriggerSource = Ubo_V1_GrpcTriggerSource()
+
+        case .wakePhrase(let phrase, let detector, let mode):
+            var wakePhrase = Ubo_V1_WakePhraseTriggerSource()
+            wakePhrase.phrase = phrase
+            wakePhrase.detector = detector
+            wakePhrase.mode = buildProtoWakeMode(mode)
+            union.wakePhraseTriggerSource = wakePhrase
+        }
+        return union
+    }
+
+    private func buildProtoWakeMode(_ mode: WakeMode) -> Ubo_V1_WakeMode {
+        switch mode {
+        case .intents: return .intents
+        case .quickChat: return .quickChat
+        case .conversation: return .conversation
+        case .stopTalking: return .stopTalking
+        case .homeAssistant: return .homeAssistant
+        }
     }
 
     private func buildProtoColor(_ color: UboColor) -> Ubo_V1_RgbColor {

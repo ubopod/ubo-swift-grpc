@@ -642,8 +642,14 @@ public final class UboClient: ObservableObject {
     /// (see `reportAudioSample`): the core binds the session to that id and
     /// ignores the device's built-in mic. Leave it empty to use the on-device
     /// system mic. The same id must be set on every `reportAudioSample`.
-    public func startAssistantListening(audioSource: String = "") async throws {
-        try await dispatch(.assistantStartListening(audioSource: audioSource))
+    /// Pass `source` to tell the core *how* the session was triggered; it
+    /// selects the turn-completion policy (silence window vs push-to-talk).
+    /// Omitting it means no policy applies and the device logs a warning.
+    public func startAssistantListening(
+        audioSource: String = "",
+        source: AssistantTriggerSource? = nil
+    ) async throws {
+        try await dispatch(.assistantStartListening(audioSource: audioSource, source: source))
     }
 
     /// Stop assistant listening

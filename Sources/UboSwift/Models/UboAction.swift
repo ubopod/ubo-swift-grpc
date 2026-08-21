@@ -205,7 +205,11 @@ public enum UboAction: Sendable {
     /// consumes (empty = on-device system mic; a remote client sets a unique
     /// id so the core listens only to that client's streamed samples and
     /// ignores the device's built-in mic).
-    case assistantStartListening(audioSource: String)
+    ///
+    /// `source` is a separate axis: it says *how* the session was triggered so
+    /// the core can pick a turn-completion policy. Leaving it `nil` means no
+    /// policy applies and the device logs a warning.
+    case assistantStartListening(audioSource: String, source: AssistantTriggerSource? = nil)
 
     /// Stop assistant listening
     case assistantStopListening
@@ -289,7 +293,7 @@ extension UboAction: CustomStringConvertible {
         case .fileUploadStart(let id, let filename, let size, _, _): return "FileUploadStart(\(id), \(filename), \(size)B)"
         case .fileUploadChunk(let id, let index, let data): return "FileUploadChunk(\(id), #\(index), \(data.count)B)"
         case .fileUploadComplete(let id): return "FileUploadComplete(\(id))"
-        case .assistantStartListening(let src): return "AssistantStartListening(\(src))"
+        case .assistantStartListening(let src, let trigger): return "AssistantStartListening(\(src), \(trigger.map(String.init(describing:)) ?? "no-source"))"
         case .assistantStopListening: return "AssistantStopListening"
         case .assistantToggleListening(let src): return "AssistantToggleListening(\(src))"
         case .cameraRegisterRemote(let id, let label): return "CameraRegisterRemote(\(id), \(label))"
