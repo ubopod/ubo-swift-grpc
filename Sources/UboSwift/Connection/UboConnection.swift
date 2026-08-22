@@ -176,13 +176,15 @@ public actor UboConnection {
     /// Connect to an Ubo device
     /// - Parameters:
     ///   - host: Device hostname or IP address
-    ///   - port: gRPC port (default: 50051)
+    ///   - port: gRPC port. Defaults to 50053, Envoy's raw-TCP proxy that
+    ///     exposes the core to the LAN — the core itself listens on
+    ///     127.0.0.1:50051 and is unreachable from another device.
     ///   - security: Transport security to use. Defaults to `.plaintext` to
     ///     match the Pi-side default; pass `.tls` (or `.tls(...)`) once the
     ///     device-side server advertises a TLS endpoint.
     public func connect(
         host: String,
-        port: Int = 50051,
+        port: Int = 50053,
         security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext
     ) async throws {
         // Tear down any previous transport first (connect-after-connect

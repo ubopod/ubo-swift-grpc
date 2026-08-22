@@ -85,12 +85,14 @@ public final class UboClient: ObservableObject {
     /// Connect to an Ubo device
     /// - Parameters:
     ///   - host: Device hostname or IP address
-    ///   - port: gRPC port (default: 50051)
+    ///   - port: gRPC port. Defaults to 50053, Envoy's raw-TCP proxy that
+    ///     exposes the core to the LAN — the core itself listens on
+    ///     127.0.0.1:50051 and is unreachable from another device.
     ///   - security: Transport security to use (default: `.plaintext`).
     ///   - subscribeToDisplay: Whether to automatically subscribe to display events
     public func connect(
         host: String,
-        port: Int = 50051,
+        port: Int = 50053,
         security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext,
         subscribeToDisplay: Bool = true
     ) async throws {

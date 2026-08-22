@@ -5,7 +5,7 @@
 //
 // Examples:
 //   swift run ubo-test 192.168.1.100
-//   swift run ubo-test localhost 50051
+//   swift run ubo-test localhost 50053
 
 import Foundation
 import UboSwift
@@ -26,22 +26,22 @@ func runTest() async {
         print("")
         print("Examples:")
         print("  swift run ubo-test 192.168.1.100")
-        print("  swift run ubo-test localhost 50051")
+        print("  swift run ubo-test localhost 50053")
         print("  swift run ubo-test ubo.local")
         print("")
         print("Environment variables:")
         print("  GRPC_HOST - Default host (default: localhost)")
-        print("  GRPC_PORT - Default port (default: 50051)")
+        print("  GRPC_PORT - Default port (default: 50053)")
         print("")
 
         // Use environment variables as fallback
         host = ProcessInfo.processInfo.environment["GRPC_HOST"] ?? "localhost"
-        port = Int(ProcessInfo.processInfo.environment["GRPC_PORT"] ?? "50051") ?? 50051
+        port = Int(ProcessInfo.processInfo.environment["GRPC_PORT"] ?? "50053") ?? 50053
         print("Using defaults: \(host):\(port)")
         print("")
     } else {
         host = args[1]
-        port = args.count > 2 ? Int(args[2]) ?? 50051 : 50051
+        port = args.count > 2 ? Int(args[2]) ?? 50053 : 50053
     }
 
     print("Connecting to \(host):\(port)...")
