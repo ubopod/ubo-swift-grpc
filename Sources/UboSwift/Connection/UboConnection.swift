@@ -4,6 +4,19 @@ import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 import SwiftProtobuf
 
+// watchOS's sandboxed networking stack (Local Network privacy, background
+// path attribution) is only correctly handled by grpc-swift-nio-transport's
+// Network.framework-backed transport — the raw-BSD-socket `.Posix` transport
+// is grpc-swift's own recommendation for Linux, not Darwin, and connections
+// through it hang/time out on a physical Watch despite working fine in the
+// simulator (which has no such sandboxing). Other Apple targets keep
+// `.Posix` unchanged.
+#if os(watchOS)
+public typealias UboClientTransport = HTTP2ClientTransport.TransportServices
+#else
+public typealias UboClientTransport = HTTP2ClientTransport.Posix
+#endif
+
 /// Actor to safely hold and merge system stats across async updates
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 /// One frame's worth of updates to `SystemStats`. Every field is optional so
@@ -73,10 +86,10 @@ private actor StatsHolder {
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public actor UboConnection {
     /// The gRPC client
-    private var grpcClient: GRPCClient<HTTP2ClientTransport.Posix>?
+    private var grpcClient: GRPCClient<UboClientTransport>?
 
     /// The store service client
-    private var storeClient: Store_V1_StoreService.Client<HTTP2ClientTransport.Posix>?
+    private var storeClient: Store_V1_StoreService.Client<UboClientTransport>?
 
     /// Current connection state
     public private(set) var state: ConnectionState = .disconnected
@@ -185,7 +198,7 @@ public actor UboConnection {
     public func connect(
         host: String,
         port: Int = 50053,
-        security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext
+        security: UboClientTransport.TransportSecurity = .plaintext
     ) async throws {
         // Tear down any previous transport first (connect-after-connect
         // without an explicit disconnect) so the old `runConnections()`
@@ -198,7 +211,7 @@ public actor UboConnection {
         do {
             // Create the transport
             // Use DNS resolution which handles both IPv4 and IPv6 (important for .local mDNS names)
-            let transport = try HTTP2ClientTransport.Posix(
+            let transport = try UboClientTransport(
                 target: .dns(host: host, port: port),
                 transportSecurity: security
             )

@@ -93,7 +93,7 @@ public final class UboClient: ObservableObject {
     public func connect(
         host: String,
         port: Int = 50053,
-        security: HTTP2ClientTransport.Posix.TransportSecurity = .plaintext,
+        security: UboClientTransport.TransportSecurity = .plaintext,
         subscribeToDisplay: Bool = true
     ) async throws {
         connectionState = .connecting
