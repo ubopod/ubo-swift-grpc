@@ -4,17 +4,22 @@ import GRPCNIOTransportHTTP2
 import GRPCProtobuf
 import SwiftProtobuf
 
-// watchOS's sandboxed networking stack (Local Network privacy, background
-// path attribution) is only correctly handled by grpc-swift-nio-transport's
-// Network.framework-backed transport — the raw-BSD-socket `.Posix` transport
-// is grpc-swift's own recommendation for Linux, not Darwin, and connections
-// through it hang/time out on a physical Watch despite working fine in the
-// simulator (which has no such sandboxing). Other Apple targets keep
-// `.Posix` unchanged.
+// A physical Apple Watch blocks low-level networking outright (raw
+// sockets, HTTP/2, any Network.framework connection) outside three narrow
+// app categories — Apple's TN3135 technote. Neither `.Posix` nor
+// `.TransportServices` can ever work there regardless of configuration, so
+// watchOS uses `GRPCWebClientTransport`: a `ClientTransport` conformance
+// that speaks grpc-web over `URLSession`, which TN3135 exempts as
+// high-level HTTP(S). Other Apple targets are unaffected and keep the
+// native HTTP/2 socket transport.
 #if os(watchOS)
-public typealias UboClientTransport = HTTP2ClientTransport.TransportServices
+public typealias UboClientTransport = GRPCWebClientTransport
+// The grpc-web bridge (Envoy), not the native raw-TCP proxy watchOS can't
+// reach — see the `UboClientTransport` note above.
+public let uboDefaultPort = 50052
 #else
 public typealias UboClientTransport = HTTP2ClientTransport.Posix
+public let uboDefaultPort = 50053
 #endif
 
 /// Actor to safely hold and merge system stats across async updates
@@ -191,13 +196,16 @@ public actor UboConnection {
     ///   - host: Device hostname or IP address
     ///   - port: gRPC port. Defaults to 50053, Envoy's raw-TCP proxy that
     ///     exposes the core to the LAN — the core itself listens on
-    ///     127.0.0.1:50051 and is unreachable from another device.
+    ///     127.0.0.1:50051 and is unreachable from another device. On
+    ///     watchOS this defaults to 50052, Envoy's grpc-web bridge, since
+    ///     the raw-TCP proxy is unreachable from a physical Watch (TN3135).
     ///   - security: Transport security to use. Defaults to `.plaintext` to
     ///     match the Pi-side default; pass `.tls` (or `.tls(...)`) once the
-    ///     device-side server advertises a TLS endpoint.
+    ///     device-side server advertises a TLS endpoint. Ignored on watchOS,
+    ///     where the grpc-web bridge is plaintext-only.
     public func connect(
         host: String,
-        port: Int = 50053,
+        port: Int = uboDefaultPort,
         security: UboClientTransport.TransportSecurity = .plaintext
     ) async throws {
         // Tear down any previous transport first (connect-after-connect
@@ -210,11 +218,15 @@ public actor UboConnection {
 
         do {
             // Create the transport
+            #if os(watchOS)
+            let transport = try UboClientTransport(host: host, port: port, transportSecurity: security)
+            #else
             // Use DNS resolution which handles both IPv4 and IPv6 (important for .local mDNS names)
             let transport = try UboClientTransport(
                 target: .dns(host: host, port: port),
                 transportSecurity: security
             )
+            #endif
 
             // Create the gRPC client
             let client = GRPCClient(transport: transport)

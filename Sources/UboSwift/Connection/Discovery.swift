@@ -7,10 +7,20 @@ public struct DiscoveredDevice: Sendable, Hashable {
     public let host: String
     public let port: Int
 
-    public init(name: String, host: String, port: Int) {
+    /// The grpc-web bridge port, read from the `grpcWebPort` TXT record
+    /// when the advertising device publishes one. `nil` on older core
+    /// versions that don't yet advertise it.
+    ///
+    /// Only watchOS should read this instead of `port` — a physical Watch
+    /// can't reach `port` (the native raw-TCP proxy) at all per TN3135.
+    /// Every other platform keeps reading `port` unchanged.
+    public let grpcWebPort: Int?
+
+    public init(name: String, host: String, port: Int, grpcWebPort: Int? = nil) {
         self.name = name
         self.host = host
         self.port = port
+        self.grpcWebPort = grpcWebPort
     }
 }
 
@@ -78,6 +88,7 @@ public final class UboDiscovery: Sendable {
         let endpoint = result.endpoint
         let parameters = NWParameters.tcp
         let connection = NWConnection(to: endpoint, using: parameters)
+        let resolvedGrpcWebPort = grpcWebPort(from: result.metadata)
 
         return await withCheckedContinuation { (continuation: CheckedContinuation<DiscoveredDevice?, Never>) in
             let resolved = ResolveLatch()
@@ -90,7 +101,8 @@ public final class UboDiscovery: Sendable {
                         device = DiscoveredDevice(
                             name: name,
                             host: hostString(from: host),
-                            port: Int(port.rawValue)
+                            port: Int(port.rawValue),
+                            grpcWebPort: resolvedGrpcWebPort
                         )
                     } else {
                         device = nil
@@ -119,6 +131,18 @@ public final class UboDiscovery: Sendable {
         @unknown default: return "\(host)"
         }
     }
+
+    /// Reads the `grpcWebPort` TXT entry a browse result's Bonjour metadata
+    /// may carry (see `ubo_app/services/080-docker/setup.py::_advertise_uborpc`).
+    /// `nil` for non-Bonjour results or an older core that doesn't advertise it.
+    private static func grpcWebPort(from metadata: NWBrowser.Result.Metadata) -> Int? {
+        guard case .bonjour(let txtRecord) = metadata,
+              case .string(let value)? = txtRecord.getEntry(for: "grpcWebPort")
+        else {
+            return nil
+        }
+        return Int(value)
+    }
 }
 
 /// Owns one `NWBrowser`'s lifecycle: starts it, reconciles result changes
@@ -145,7 +169,12 @@ private actor BrowserSession {
     func start() {
         guard !stopped else { return }
 
-        let descriptor = NWBrowser.Descriptor.bonjour(type: serviceType, domain: domain)
+        // `.bonjour(type:domain:)` never populates `result.metadata` — TXT
+        // records are opt-in via this separate descriptor case. Without it
+        // `grpcWebPort(from:)` below always sees `.none` and every
+        // `DiscoveredDevice.grpcWebPort` is silently nil, falling back to
+        // the native proxy port a physical Watch can't reach.
+        let descriptor = NWBrowser.Descriptor.bonjourWithTXTRecord(type: serviceType, domain: domain)
         let parameters = NWParameters.tcp
         parameters.includePeerToPeer = false
         let newBrowser = NWBrowser(for: descriptor, using: parameters)
