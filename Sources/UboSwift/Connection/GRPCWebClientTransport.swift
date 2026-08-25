@@ -108,7 +108,28 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
         }
 
         let requestWriter = CollectingRequestWriter<Bytes>()
-        let (inboundStream, inboundContinuation) = AsyncThrowingStream<RPCResponsePart<Bytes>, any Error>.makeStream()
+        // `.bufferingNewest`, not the default `.unbounded`: grpc-swift's
+        // deserializer (`RawBodyPartToMessageSequence`) pulls from this
+        // stream lazily, one message at a time, only as fast as the
+        // consumer (e.g. `UboConnection.streamFrameStream`'s loop, and
+        // beyond it the watch view's RGB decode + SwiftUI render) asks for
+        // the next one. Unbounded buffering let raw, still-undeserialized
+        // response bytes — up to ~170KB apiece for a camera viewfinder
+        // frame — pile up without limit whenever the consumer fell behind
+        // production rate, and since nothing ever got dropped, the backlog
+        // only grew: the consumer kept paying full deserialize+render cost
+        // working through increasingly stale frames, never catching up.
+        // Bounding this drops stale, not-yet-deserialized frames instead —
+        // sparing that cost entirely — the same "newest wins" intent
+        // `subscribeToFrameStream`'s own `.bufferingNewest(8)` already
+        // documents, just applied where the actual backlog was forming.
+        // `.status`/`.metadata` are unaffected: `.metadata` is always the
+        // first part consumed (before any messages can even queue), and
+        // `.status` is always the last part yielded, so it's the *newest*
+        // by construction — a bounded "keep newest" policy never evicts it.
+        let (inboundStream, inboundContinuation) = AsyncThrowingStream<RPCResponsePart<Bytes>, any Error>.makeStream(
+            bufferingPolicy: .bufferingNewest(8)
+        )
 
         let stream = RPCStream(
             descriptor: descriptor,
