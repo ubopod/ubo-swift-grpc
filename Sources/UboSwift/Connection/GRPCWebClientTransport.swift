@@ -63,6 +63,25 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
         // lifecycle is governed by gRPC-level cancellation/deadlines
         // instead, not this transport-level timeout.
         configuration.timeoutIntervalForRequest = 86400
+        // `URLSession`'s per-host connection pool defaults to a handful of
+        // slots (HTTP/1.1-oriented — the grpc-web bridge is plaintext HTTP,
+        // so no h2 multiplexing kicks in). `UboClient` alone opens four
+        // concurrent long-lived streams (view, stats, inputs, stack) before
+        // a camera viewfinder subscription adds a fifth; with the default
+        // pool size, once every slot is pinned by a stream that never
+        // closes, any further request — e.g. the unary `dispatchAction` a
+        // "back" press sends — queues forever waiting for a slot that never
+        // frees, and looks like a dead UI. The Web UI sidesteps this by
+        // consolidating subscriptions into far fewer concurrent connections
+        // (`state-manager.ts`'s `subscribeEvent`/`subscribeStore` bundle
+        // several features into one call each); the ESP32 firmware
+        // sidesteps it by not pooling connections at all (`http_transport_esp.c`
+        // opens a fresh socket per call, unbounded). Matching either exactly
+        // would mean reshaping the shared cross-platform subscription API —
+        // simplest correct fix here is just sizing the pool for how many
+        // concurrent streams this client can plausibly hold open at once,
+        // with headroom.
+        configuration.httpMaximumConnectionsPerHost = 16
         self.session = URLSession(configuration: configuration)
     }
 
