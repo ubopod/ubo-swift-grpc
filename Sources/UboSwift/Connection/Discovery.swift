@@ -170,11 +170,20 @@ private actor BrowserSession {
         guard !stopped else { return }
 
         // `.bonjour(type:domain:)` never populates `result.metadata` — TXT
-        // records are opt-in via this separate descriptor case. Without it
-        // `grpcWebPort(from:)` below always sees `.none` and every
-        // `DiscoveredDevice.grpcWebPort` is silently nil, falling back to
-        // the native proxy port a physical Watch can't reach.
+        // records are opt-in via `.bonjourWithTXTRecord`, needed so
+        // `grpcWebPort(from:)` below can read the `grpcWebPort` TXT entry
+        // instead of every `DiscoveredDevice.grpcWebPort` staying silently
+        // nil. But requesting TXT records is a real behavioral change to
+        // how the browse resolves (an extra mDNS query type, observed to
+        // break discovery entirely on a real iPhone on some networks) —
+        // this file is shared by every platform, and only watchOS actually
+        // needs the TXT field (it's the only platform that can't fall back
+        // to `port`), so only watchOS pays for it.
+        #if os(watchOS)
         let descriptor = NWBrowser.Descriptor.bonjourWithTXTRecord(type: serviceType, domain: domain)
+        #else
+        let descriptor = NWBrowser.Descriptor.bonjour(type: serviceType, domain: domain)
+        #endif
         let parameters = NWParameters.tcp
         parameters.includePeerToPeer = false
         let newBrowser = NWBrowser(for: descriptor, using: parameters)
