@@ -157,64 +157,79 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                 request.timeoutInterval = TimeInterval(components.seconds) + TimeInterval(components.attoseconds) / 1e18
             }
 
-            let (byteStream, response) = try await session.bytes(for: request, delegate: NoRedirectsDelegate())
-            guard let httpResponse = response as? HTTPURLResponse else {
-                throw RPCError(code: .unavailable, message: "grpc-web response was not an HTTP response.")
-            }
-            guard (200..<300).contains(httpResponse.statusCode) else {
-                throw RPCError(
-                    code: .unavailable,
-                    message: "grpc-web request failed with HTTP \(httpResponse.statusCode)."
-                )
-            }
+            let (chunkStream, chunkContinuation) = AsyncThrowingStream<Data, any Error>.makeStream()
+            let responseBox = SingleContinuation<HTTPURLResponse>()
+            let dataTask = session.dataTask(with: request)
+            dataTask.delegate = ChunkedResponseDelegate(chunks: chunkContinuation, response: responseBox)
 
-            // Trailers-only response: the server rejected the call before
-            // any message, so the status rides on the HTTP headers instead
-            // of a trailer frame in the body — the exact shape
-            // `ClientStreamExecutor` expects as a first-and-only `.status`
-            // part (see `fetch-stream.ts`'s identical header check).
-            if let headerStatus = httpResponse.value(forHTTPHeaderField: "grpc-status") {
-                let code = Int(headerStatus).flatMap(Status.Code.init(rawValue:)) ?? .unknown
-                let message = httpResponse.value(forHTTPHeaderField: "grpc-message") ?? ""
-                continuation.yield(.status(Status(code: code, message: message), Metadata()))
-                continuation.finish()
-                return
-            }
+            try await withTaskCancellationHandler {
+                dataTask.resume()
 
-            continuation.yield(.metadata(Metadata()))
+                let httpResponse = try await responseBox.wait()
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    throw RPCError(
+                        code: .unavailable,
+                        message: "grpc-web request failed with HTTP \(httpResponse.statusCode)."
+                    )
+                }
 
-            var decoder = GRPCWebFrameDecoder()
-            var sawTrailer = false
+                // Trailers-only response: the server rejected the call
+                // before any message, so the status rides on the HTTP
+                // headers instead of a trailer frame in the body — the
+                // exact shape `ClientStreamExecutor` expects as a
+                // first-and-only `.status` part (see `fetch-stream.ts`'s
+                // identical header check).
+                if let headerStatus = httpResponse.value(forHTTPHeaderField: "grpc-status") {
+                    let code = Int(headerStatus).flatMap(Status.Code.init(rawValue:)) ?? .unknown
+                    let message = httpResponse.value(forHTTPHeaderField: "grpc-message") ?? ""
+                    continuation.yield(.status(Status(code: code, message: message), Metadata()))
+                    continuation.finish()
+                    return
+                }
 
-            // Decode as bytes arrive rather than batching to a fixed size —
-            // `subscribeStore`/`subscribeEvent` are long-lived and often
-            // idle between updates, so batching would sit on a completed
-            // message until enough *further* traffic arrived to cross the
-            // threshold, making the watch look frozen. `GRPCWebFrameDecoder`
-            // already buffers only the in-progress frame internally, so
-            // feeding it one byte at a time costs nothing but a few extra
-            // calls — it still emits a frame the instant it completes.
-            for try await byte in byteStream {
-                if sawTrailer { break }
-                for frame in try decoder.decode(Data([byte])) {
-                    switch frame {
-                    case .message(let payload):
-                        continuation.yield(.message(Bytes(payload)))
-                    case .trailer(let trailers):
-                        let code = trailers.status.flatMap(Status.Code.init(rawValue:)) ?? .unknown
-                        continuation.yield(.status(Status(code: code, message: trailers.message ?? ""), Metadata()))
-                        sawTrailer = true
+                continuation.yield(.metadata(Metadata()))
+
+                var decoder = GRPCWebFrameDecoder()
+                var sawTrailer = false
+
+                // Decode each chunk as `URLSession` delivers it — its
+                // natural network-sized chunks (typically several KB),
+                // not one byte at a time. `session.bytes(for:)`'s public
+                // API only exposes a byte-by-byte `AsyncSequence`, and
+                // looping + decoding one byte at a time multiplied the
+                // number of `await` suspensions by the frame size, which
+                // is what made a multi-KB camera viewfinder frame
+                // (`FrameStreamDataEvent`) visibly laggy — this per-task
+                // `URLSessionDataDelegate` matches the Web UI's
+                // `response.body.getReader()` chunk-at-a-time pattern
+                // instead (`fetch-stream.ts`).
+                for try await chunk in chunkStream {
+                    if sawTrailer { break }
+                    for frame in try decoder.decode(chunk) {
+                        switch frame {
+                        case .message(let payload):
+                            continuation.yield(.message(Bytes(payload)))
+                        case .trailer(let trailers):
+                            let code = trailers.status.flatMap(Status.Code.init(rawValue:)) ?? .unknown
+                            continuation.yield(.status(Status(code: code, message: trailers.message ?? ""), Metadata()))
+                            sawTrailer = true
+                        }
                     }
                 }
-            }
 
-            if sawTrailer {
-                continuation.finish()
-            } else {
-                throw RPCError(
-                    code: .internalError,
-                    message: "grpc-web response ended without a trailer frame."
-                )
+                if sawTrailer {
+                    continuation.finish()
+                } else {
+                    throw RPCError(
+                        code: .internalError,
+                        message: "grpc-web response ended without a trailer frame."
+                    )
+                }
+            } onCancel: {
+                // Unlike `session.bytes(for:)`, a delegate-based
+                // `URLSessionDataTask` doesn't cancel itself when the
+                // awaiting `Task` is cancelled — has to be done explicitly.
+                dataTask.cancel()
             }
         } catch {
             continuation.finish(throwing: error)
@@ -222,14 +237,55 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
     }
 }
 
-/// Refuses HTTP redirects. `URLSession` follows 307/308 redirects — which
-/// preserve method and body — by default; without this, a rogue LAN device
-/// answering on the grpc-web port could redirect a call (including its
-/// framed protobuf body) to an arbitrary off-LAN host. The native HTTP/2
-/// transport has no redirect concept at all, so this keeps the grpc-web
-/// path from being strictly weaker.
+/// Bridges one `URLSessionDataTask`'s delegate callbacks — which arrive on
+/// an arbitrary queue, not the calling `Task`'s isolation — into the
+/// `async`/`await` values `performCall` needs: the `HTTPURLResponse` once
+/// (via `SingleContinuation`) and the body as an `AsyncThrowingStream` of
+/// `Data` chunks in their natural, network-delivered sizes.
+///
+/// Also refuses HTTP redirects. `URLSession` follows 307/308 redirects —
+/// which preserve method and body — by default; without this, a rogue LAN
+/// device answering on the grpc-web port could redirect a call (including
+/// its framed protobuf body) to an arbitrary off-LAN host. The native
+/// HTTP/2 transport has no redirect concept at all, so this keeps the
+/// grpc-web path from being strictly weaker.
 @available(watchOS 11.0, *)
-private final class NoRedirectsDelegate: NSObject, URLSessionTaskDelegate, Sendable {
+private final class ChunkedResponseDelegate: NSObject, URLSessionDataDelegate, @unchecked Sendable {
+    private let chunks: AsyncThrowingStream<Data, any Error>.Continuation
+    private let response: SingleContinuation<HTTPURLResponse>
+
+    init(chunks: AsyncThrowingStream<Data, any Error>.Continuation, response: SingleContinuation<HTTPURLResponse>) {
+        self.chunks = chunks
+        self.response = response
+    }
+
+    func urlSession(
+        _: URLSession,
+        dataTask: URLSessionDataTask,
+        didReceive response: URLResponse
+    ) async -> URLSession.ResponseDisposition {
+        if let httpResponse = response as? HTTPURLResponse {
+            self.response.resume(returning: httpResponse)
+        } else {
+            self.response.resume(throwing: RPCError(code: .unavailable, message: "grpc-web response was not an HTTP response."))
+        }
+        return .allow
+    }
+
+    func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        chunks.yield(data)
+    }
+
+    func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        if let error {
+            // A no-op if `didReceive response:` already resumed it.
+            response.resume(throwing: error)
+            chunks.finish(throwing: error)
+        } else {
+            chunks.finish()
+        }
+    }
+
     func urlSession(
         _: URLSession,
         task: URLSessionTask,
@@ -237,6 +293,66 @@ private final class NoRedirectsDelegate: NSObject, URLSessionTaskDelegate, Senda
         newRequest: URLRequest
     ) async -> URLRequest? {
         nil
+    }
+}
+
+/// Resumes a continuation exactly once from callback contexts that may
+/// race each other (`URLSessionDataDelegate` methods can arrive on any
+/// queue, not necessarily in the order you'd expect) — a plain
+/// `CheckedContinuation` traps if resumed twice, which `didReceive
+/// response:` racing `didCompleteWithError:` could otherwise trigger.
+@available(watchOS 11.0, *)
+private final class SingleContinuation<T: Sendable>: @unchecked Sendable {
+    private let lock = NSLock()
+    private var result: Result<T, any Error>?
+    private var continuation: CheckedContinuation<T, any Error>?
+
+    func wait() async throws -> T {
+        // `NSLock.lock()`/`.unlock()` are unavailable from `async`
+        // functions (holding a lock across a suspension is unsafe) —
+        // `withLock`'s closure is synchronous, so every critical section
+        // here is a plain, non-suspending block; the continuation itself
+        // is only ever resumed *outside* the lock.
+        if let immediate = lock.withLock({ result }) {
+            return try immediate.get()
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let alreadyResolved: Result<T, any Error>? = lock.withLock {
+                if let result {
+                    return result
+                }
+                self.continuation = continuation
+                return nil
+            }
+            switch alreadyResolved {
+            case .success(let value): continuation.resume(returning: value)
+            case .failure(let error): continuation.resume(throwing: error)
+            case nil: break
+            }
+        }
+    }
+
+    func resume(returning value: T) {
+        complete(with: .success(value))
+    }
+
+    func resume(throwing error: any Error) {
+        complete(with: .failure(error))
+    }
+
+    private func complete(with newResult: Result<T, any Error>) {
+        let toResume: CheckedContinuation<T, any Error>? = lock.withLock {
+            guard result == nil else { return nil }
+            result = newResult
+            let continuation = self.continuation
+            self.continuation = nil
+            return continuation
+        }
+        switch newResult {
+        case .success(let value): toResume?.resume(returning: value)
+        case .failure(let error): toResume?.resume(throwing: error)
+        }
     }
 }
 

@@ -54,6 +54,30 @@ final class GRPCWebFramingTests: XCTestCase {
         XCTAssertEqual(data, payload)
     }
 
+    func testDecoderReassemblesFrameAcrossManySmallChunks() throws {
+        // Exercises the multi-chunk `ChunkQueue.take` path (spanning more
+        // than two pushed chunks, some smaller than a single byte's worth
+        // of header) — mirrors how a real camera-viewfinder frame arrives:
+        // many small `URLSessionDataDelegate` `didReceive data:` calls.
+        var decoder = GRPCWebFrameDecoder()
+        let payload = Data((0..<50).map { UInt8($0) })
+        let frame = grpcWebFrameRequest(Array(payload))
+
+        var decoded: [GRPCWebDecodedFrame] = []
+        var index = frame.startIndex
+        while index < frame.endIndex {
+            let end = frame.index(index, offsetBy: 3, limitedBy: frame.endIndex) ?? frame.endIndex
+            decoded += try decoder.decode(Data(frame[index..<end]))
+            index = end
+        }
+
+        XCTAssertEqual(decoded.count, 1)
+        guard case .message(let data) = decoded[0] else {
+            return XCTFail("expected a message frame")
+        }
+        XCTAssertEqual(data, payload)
+    }
+
     func testDecoderParsesMultipleFramesInOneChunk() throws {
         var decoder = GRPCWebFrameDecoder()
         let first = Data([0x01])

@@ -72,14 +72,66 @@ enum GRPCWebDecodedFrame: Sendable {
     case trailer(GRPCWebTrailers)
 }
 
+/// A byte queue that retains only the frame being assembled — chunks are
+/// dropped as they're fully consumed rather than copied into one growing
+/// `Data` buffer that gets repeatedly sliced from the front. Ports the Web
+/// UI's `ChunkQueue` (`fetch-stream.ts`) verbatim: that class exists there
+/// for exactly this reason, replacing this format's `grpcwebtext`/XHR
+/// mode's single-ever-growing-buffer approach, which caused an OOM in the
+/// Web UI kiosk.
+private struct ChunkQueue {
+    private var chunks: [Data] = []
+    private var offset = 0
+    private var available = 0
+
+    mutating func push(_ chunk: Data) {
+        guard !chunk.isEmpty else { return }
+        chunks.append(chunk)
+        available += chunk.count
+    }
+
+    var count: Int { available }
+
+    /// Remove and return exactly `count` bytes, or `nil` if fewer are
+    /// buffered. `chunks.removeFirst()` is O(chunk count), not O(byte
+    /// count) — the queue holds a handful of network-delivered chunks at
+    /// a time, never one entry per byte, so this stays cheap regardless
+    /// of how large the frame being assembled is.
+    mutating func take(_ count: Int) -> Data? {
+        guard available >= count else { return nil }
+        guard count > 0 else { return Data() }
+
+        var out = Data(capacity: count)
+        var remaining = count
+        while remaining > 0 {
+            let head = chunks[0]
+            let headStart = head.index(head.startIndex, offsetBy: offset)
+            let takeFromHead = min(remaining, head.count - offset)
+            out.append(head.subdata(in: headStart..<head.index(headStart, offsetBy: takeFromHead)))
+            offset += takeFromHead
+            remaining -= takeFromHead
+            if offset == head.count {
+                chunks.removeFirst()
+                offset = 0
+            }
+        }
+        available -= count
+        return out
+    }
+}
+
 /// Incrementally decodes a grpc-web binary frame stream from chunks handed
 /// in as they arrive off the network, without ever buffering more than the
-/// frame currently being assembled — the fix for the unbounded-buffer OOM
-/// this format's `grpcwebtext`/XHR mode causes in the Web UI kiosk (see
-/// `ubo_app/services/090-web-ui/web-app/src/store/fetch-stream.ts`'s
-/// `ChunkQueue`).
+/// frame currently being assembled.
+///
+/// Feed this whole chunks as `URLSession` delivers them (see
+/// `GRPCWebClientTransport`'s per-task `URLSessionDataDelegate`), not one
+/// byte at a time — decoding byte-by-byte multiplies the number of calls
+/// (and, before this transport switched off `URLSession.bytes(for:)`, the
+/// number of `await` suspensions on the read side) by the frame size,
+/// which is what made a multi-KB camera viewfinder frame visibly laggy.
 struct GRPCWebFrameDecoder {
-    private var buffer = Data()
+    private var queue = ChunkQueue()
     private var pendingHeader: (isTrailer: Bool, length: Int)?
 
     /// Feed newly-received bytes and drain every whole frame they complete.
@@ -87,17 +139,17 @@ struct GRPCWebFrameDecoder {
     ///
     /// Throws `GRPCWebFramingError.frameTooLarge` if a header declares a
     /// length past `GRPCWebFrame.maxFrameLength` — without this a hostile
-    /// peer could claim a multi-gigabyte frame and grow `buffer` unbounded
-    /// as bytes trickle in, one small chunk at a time.
+    /// peer could claim a multi-gigabyte frame and grow the queue unbounded
+    /// as bytes trickle in.
     mutating func decode(_ chunk: Data) throws -> [GRPCWebDecodedFrame] {
-        buffer.append(chunk)
+        queue.push(chunk)
         var frames: [GRPCWebDecodedFrame] = []
 
         while true {
             if pendingHeader == nil {
-                guard buffer.count >= GRPCWebFrame.headerSize else { break }
-                let flags = buffer[buffer.startIndex]
-                let lengthBytes = buffer.subdata(in: buffer.index(buffer.startIndex, offsetBy: 1)..<buffer.index(buffer.startIndex, offsetBy: GRPCWebFrame.headerSize))
+                guard let header = queue.take(GRPCWebFrame.headerSize) else { break }
+                let flags = header[header.startIndex]
+                let lengthBytes = header.subdata(in: header.index(header.startIndex, offsetBy: 1)..<header.index(header.startIndex, offsetBy: GRPCWebFrame.headerSize))
                 // `loadUnaligned`, not `load`: `lengthBytes` is a `Data`
                 // subrange with no alignment guarantee, and `load(as:)`
                 // requires 4-byte alignment for `UInt32` — undefined
@@ -108,14 +160,10 @@ struct GRPCWebFrameDecoder {
                     throw GRPCWebFramingError.frameTooLarge(declaredLength: Int(length))
                 }
                 pendingHeader = (isTrailer: (flags & GRPCWebFrame.trailerFlag) != 0, length: Int(length))
-                buffer.removeSubrange(buffer.startIndex..<buffer.index(buffer.startIndex, offsetBy: GRPCWebFrame.headerSize))
             }
 
             guard let header = pendingHeader else { break }
-            guard buffer.count >= header.length else { break }
-
-            let payload = buffer.subdata(in: buffer.startIndex..<buffer.index(buffer.startIndex, offsetBy: header.length))
-            buffer.removeSubrange(buffer.startIndex..<buffer.index(buffer.startIndex, offsetBy: header.length))
+            guard let payload = queue.take(header.length) else { break }
             pendingHeader = nil
 
             if header.isTrailer {
