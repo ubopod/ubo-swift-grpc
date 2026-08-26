@@ -64,6 +64,11 @@ public final class UboClient: ObservableObject {
     /// Current navigation stack (root → current), for breadcrumb display.
     @Published public private(set) var stack: [UboStackItem] = []
 
+    /// Server-authoritative assistant listening state (`state.assistant.is_listening`
+    /// / `active_audio_source`), from `startAssistantStateSubscription()`. `nil`
+    /// until the first update arrives.
+    @Published public private(set) var assistantServerListening: (isListening: Bool, activeAudioSource: String)?
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
@@ -73,6 +78,7 @@ public final class UboClient: ObservableObject {
     private var cameraSubscriptionTask: Task<Void, Never>?
     private var inputsSubscriptionTask: Task<Void, Never>?
     private var stackSubscriptionTask: Task<Void, Never>?
+    private var assistantStateSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -130,6 +136,8 @@ public final class UboClient: ObservableObject {
         inputsSubscriptionTask = nil
         stackSubscriptionTask?.cancel()
         stackSubscriptionTask = nil
+        assistantStateSubscriptionTask?.cancel()
+        assistantStateSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
@@ -140,6 +148,7 @@ public final class UboClient: ObservableObject {
         cameraPattern = nil
         activeInputs = []
         stack = []
+        assistantServerListening = nil
     }
 
     /// Whether currently connected to a device
@@ -301,6 +310,39 @@ public final class UboClient: ObservableObject {
     public func stopStackSubscription() {
         stackSubscriptionTask?.cancel()
         stackSubscriptionTask = nil
+    }
+
+    // MARK: - Assistant Listening State Subscription
+
+    /// Start subscribing to `state.assistant.is_listening` /
+    /// `active_audio_source`. Updates `assistantServerListening` so a host
+    /// app can reconcile its own local mic-toggle flag against what the
+    /// core actually thinks is happening, instead of only trusting local
+    /// button-press state (which the core can invalidate unilaterally via
+    /// silence timeout, mute, or a stop-talking phrase).
+    public func startAssistantStateSubscription() {
+        assistantStateSubscriptionTask?.cancel()
+        assistantStateSubscriptionTask = Task {
+            do {
+                for try await state in await connection.subscribeToAssistantListeningState() {
+                    await MainActor.run {
+                        self.assistantServerListening = state
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to assistant listening state.
+    public func stopAssistantStateSubscription() {
+        assistantStateSubscriptionTask?.cancel()
+        assistantStateSubscriptionTask = nil
     }
 
     // MARK: - Camera Subscription

@@ -612,6 +612,59 @@ public actor UboConnection {
         }
     }
 
+    /// Subscribe to `state.assistant.is_listening` / `active_audio_source`.
+    /// Lets a client detect when the core starts or ends an assistant
+    /// session it didn't itself initiate (silence timeout, mute, a
+    /// stop-talking phrase, or another client's session) instead of only
+    /// trusting its own local button-press state.
+    /// - Returns: An async stream of (isListening, activeAudioSource) tuples
+    public func subscribeToAssistantListeningState() -> AsyncThrowingStream<(isListening: Bool, activeAudioSource: String), Error> {
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(4)) { continuation in
+            let task = Task {
+                await self.runWithRetry {
+                    try await self.streamAssistantListeningState(continuation: continuation)
+                } onFinalError: { error in
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                } onCancelled: {
+                    continuation.finish()
+                }
+            }
+            continuation.onTermination = { _ in task.cancel() }
+        }
+    }
+
+    private func streamAssistantListeningState(
+        continuation: AsyncThrowingStream<(isListening: Bool, activeAudioSource: String), Error>.Continuation
+    ) async throws {
+        guard let client = self.storeClient else {
+            throw UboError.notConnected
+        }
+
+        var request = Store_V1_SubscribeStoreRequest()
+        request.selectors = ["state.assistant.is_listening", "state.assistant.active_audio_source"]
+
+        try await client.subscribeStore(request) { response in
+            switch response.accepted {
+            case .success(let contents):
+                for try await message in contents.bodyParts {
+                    if case .message(let subscribeResponse) = message {
+                        await self.markConnected()
+
+                        let results = subscribeResponse.results
+                        guard results.count > 1,
+                              let isListening = self.unpackBoolValue(from: results[0]) else {
+                            continue
+                        }
+                        let activeAudioSource = self.unpackStringValue(from: results[1]) ?? ""
+                        continuation.yield((isListening, activeAudioSource))
+                    }
+                }
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+
     // MARK: - Proto Unpacking
 
     /// Unpack a google.protobuf.Any message to ViewData
@@ -667,6 +720,27 @@ public actor UboConnection {
         }
 
         return nil
+    }
+
+    /// Unpack a google.protobuf.Any wrapping a google.protobuf.BoolValue —
+    /// what a bare `bool`-leaf selector (e.g. `state.assistant.is_listening`)
+    /// packs to server-side (`_pack_to_any` in `store_service.py`).
+    private nonisolated func unpackBoolValue(from any: SwiftProtobuf.Google_Protobuf_Any) -> Bool? {
+        guard any.typeURL.hasSuffix("BoolValue"),
+              let proto = try? SwiftProtobuf.Google_Protobuf_BoolValue(serializedBytes: any.value) else {
+            return nil
+        }
+        return proto.value
+    }
+
+    /// Unpack a google.protobuf.Any wrapping a google.protobuf.StringValue —
+    /// what a bare `str`-leaf selector packs to server-side.
+    private nonisolated func unpackStringValue(from any: SwiftProtobuf.Google_Protobuf_Any) -> String? {
+        guard any.typeURL.hasSuffix("StringValue"),
+              let proto = try? SwiftProtobuf.Google_Protobuf_StringValue(serializedBytes: any.value) else {
+            return nil
+        }
+        return proto.value
     }
 
     /// Dispatch one `SubscribeStoreResponse` result into the in-progress
