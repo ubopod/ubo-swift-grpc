@@ -248,7 +248,17 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                     for frame in try decoder.decode(chunk) {
                         switch frame {
                         case .message(let payload):
-                            continuation.yield(.message(Bytes(payload)))
+                            // Validation instrumentation (temporary): confirms whether
+                            // `bufferingNewest(8)` above actually evicts messages in
+                            // practice — the leading theory for watchOS's chopped TTS
+                            // playback, not yet confirmed on real hardware. Remove once
+                            // that's settled one way or the other.
+                            let yieldResult = continuation.yield(.message(Bytes(payload)))
+                            if case .dropped = yieldResult {
+                                UboLog.connection.error(
+                                    "GRPCWebClientTransport: bufferingNewest(8) evicted a message for \(descriptor.fullyQualifiedMethod)"
+                                )
+                            }
                         case .trailer(let trailers):
                             let code = trailers.status.flatMap(Status.Code.init(rawValue:)) ?? .unknown
                             continuation.yield(.status(Status(code: code, message: trailers.message ?? ""), Metadata()))
