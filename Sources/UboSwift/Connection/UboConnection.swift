@@ -382,7 +382,7 @@ public actor UboConnection {
     // MARK: - Action Dispatch
 
     /// Dispatch an action to the device
-    public func dispatchAction(_ action: UboAction) async throws {
+    public func dispatchAction(_ action: UboAction, timeout: Duration? = nil) async throws {
         guard let client = storeClient else {
             throw UboError.notConnected
         }
@@ -395,8 +395,10 @@ public actor UboConnection {
         requestBuilder.action = protoAction
         let request = requestBuilder
 
+        var options = CallOptions.defaults
+        options.timeout = timeout
         do {
-            _ = try await client.dispatchAction(request)
+            _ = try await client.dispatchAction(request, options: options)
         } catch {
             throw UboError.dispatchFailed(error)
         }
@@ -659,6 +661,31 @@ public actor UboConnection {
                         continuation.yield((isListening, activeAudioSource))
                     }
                 }
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+
+    /// A fresh snapshot after a start/stop RPC, including unchanged/refused
+    /// starts. The first subscription response avoids trusting cached state.
+    public func assistantListeningState() async throws -> (isListening: Bool, activeAudioSource: String) {
+        guard let client = storeClient else { throw UboError.notConnected }
+        var request = Store_V1_SubscribeStoreRequest()
+        request.selectors = ["state.assistant.is_listening", "state.assistant.active_audio_source"]
+        var options = CallOptions.defaults
+        options.timeout = .seconds(3)
+        return try await client.subscribeStore(request, options: options) { response in
+            switch response.accepted {
+            case .success(let contents):
+                for try await part in contents.bodyParts {
+                    if case .message(let message) = part,
+                       message.results.count > 1,
+                       let listening = self.unpackBoolValue(from: message.results[0]) {
+                        return (listening, self.unpackStringValue(from: message.results[1]) ?? "")
+                    }
+                }
+                throw UboError.timeout
             case .failure(let error):
                 throw error
             }
@@ -1226,24 +1253,22 @@ public actor UboConnection {
     /// the connected client can route audio to its own speaker. Mirrors the
     /// three events the Web UI handles in `audio.ts`.
     public func subscribeToPlaybackEvents() -> AsyncThrowingStream<PlaybackEvent, Error> {
-        // Audio chunks: large enough to absorb bursts without dropping
-        // audible samples, bounded so a stalled consumer can't grow memory.
-        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(256)) { continuation in
-            let task = Task {
-                await self.runWithRetry {
-                    try await self.streamPlaybackEvents(continuation: continuation)
-                } onFinalError: { error in
-                    continuation.finish(throwing: UboError.subscriptionFailed(error))
-                } onCancelled: {
-                    continuation.finish()
-                }
+        let buffer = OrderedEventStream<PlaybackEvent>(capacity: 256)
+        let task = Task {
+            await self.runWithRetry {
+                try await self.streamPlaybackEvents(buffer: buffer)
+            } onFinalError: { error in
+                buffer.continuation.finish(throwing: UboError.subscriptionFailed(error))
+            } onCancelled: {
+                buffer.continuation.finish()
             }
-            continuation.onTermination = { _ in task.cancel() }
         }
+        buffer.continuation.onTermination = { _ in task.cancel() }
+        return buffer.stream
     }
 
     private func streamPlaybackEvents(
-        continuation: AsyncThrowingStream<PlaybackEvent, Error>.Continuation
+        buffer: OrderedEventStream<PlaybackEvent>
     ) async throws {
         guard let client = self.storeClient else {
             throw UboError.notConnected
@@ -1272,7 +1297,7 @@ public actor UboConnection {
                         switch subscribeResponse.event.event {
                         case .audioPlayAudioSampleEvent(let event):
                             let sample = event.sample
-                            continuation.yield(.sample(
+                            try buffer.yield(.sample(
                                 sample: AudioSampleData(
                                     data: sample.data,
                                     channels: Int(sample.channels),
@@ -1290,14 +1315,14 @@ public actor UboConnection {
                                     width: Int(event.sample.width)
                                 )
                                 : nil
-                            continuation.yield(.sequence(
+                            try buffer.yield(.sequence(
                                 id: event.id,
                                 index: Int(event.index),
                                 sample: payload,
                                 volume: event.volume
                             ))
                         case .audioStopPlaybackEvent:
-                            continuation.yield(.stop)
+                            try buffer.yield(.stop)
                         default:
                             break
                         }

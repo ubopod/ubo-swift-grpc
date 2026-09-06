@@ -695,12 +695,17 @@ public final class UboClient: ObservableObject {
         audioSource: String = "",
         source: AssistantTriggerSource? = nil
     ) async throws {
-        try await dispatch(.assistantStartListening(audioSource: audioSource, source: source))
+        try await dispatch(.assistantStartListening(audioSource: audioSource, source: source), timeout: .seconds(3))
+    }
+
+    public func assistantListeningState() async throws -> (isListening: Bool, activeAudioSource: String) {
+        guard isConnected else { throw UboError.notConnected }
+        return try await connection.assistantListeningState()
     }
 
     /// Stop assistant listening
     public func stopAssistantListening() async throws {
-        try await dispatch(.assistantStopListening)
+        try await dispatch(.assistantStopListening, timeout: .seconds(3))
     }
 
     /// Toggle assistant listening. See `startAssistantListening` for `audioSource`.
@@ -821,7 +826,7 @@ public final class UboClient: ObservableObject {
         audioSource: String = ""
     ) async throws {
         let sample = AudioSampleData(data: data, channels: channels, rate: rate, width: width)
-        try await dispatch(.audioReportSample(timestamp: timestamp, sample: sample, audioSource: audioSource))
+        try await dispatch(.audioReportSample(timestamp: timestamp, sample: sample, audioSource: audioSource), timeout: .seconds(2))
     }
 
     // MARK: - Stack Navigation
@@ -863,13 +868,13 @@ public final class UboClient: ObservableObject {
 
     /// Dispatch a raw action (for advanced use)
     /// - Parameter action: The action to dispatch
-    public func dispatch(_ action: UboAction) async throws {
+    public func dispatch(_ action: UboAction, timeout: Duration? = nil) async throws {
         guard isConnected else {
             throw UboError.notConnected
         }
 
         do {
-            try await connection.dispatchAction(action)
+            try await connection.dispatchAction(action, timeout: timeout)
         } catch let error as UboError {
             lastError = error
             throw error

@@ -108,32 +108,11 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
         }
 
         let requestWriter = CollectingRequestWriter<Bytes>()
-        // `.bufferingNewest`, not the default `.unbounded`: grpc-swift's
-        // deserializer (`RawBodyPartToMessageSequence`) pulls from this
-        // stream lazily, one message at a time, only as fast as the
-        // consumer (e.g. `UboConnection.streamFrameStream`'s loop, and
-        // beyond it the watch view's RGB decode + SwiftUI render) asks for
-        // the next one. Unbounded buffering let raw, still-undeserialized
-        // response bytes — up to ~170KB apiece for a camera viewfinder
-        // frame — pile up without limit whenever the consumer fell behind
-        // production rate, and since nothing ever got dropped, the backlog
-        // only grew: the consumer kept paying full deserialize+render cost
-        // working through increasingly stale frames, never catching up.
-        // Bounding this drops stale, not-yet-deserialized frames instead —
-        // sparing that cost entirely — the same "newest wins" intent
-        // `subscribeToFrameStream`'s own `.bufferingNewest(8)` already
-        // documents, just applied where the actual backlog was forming.
-        // `.status`/`.metadata` are unaffected: `.metadata` is always the
-        // first part consumed (before any messages can even queue), and
-        // `.status` is always the last part yielded, so it's the *newest*
-        // by construction — a bounded "keep newest" policy never evicts it.
-        let (inboundStream, inboundContinuation) = AsyncThrowingStream<RPCResponsePart<Bytes>, any Error>.makeStream(
-            bufferingPolicy: .bufferingNewest(8)
-        )
+        let inbound = OrderedEventStream<RPCResponsePart<Bytes>>(capacity: 256)
 
         let stream = RPCStream(
             descriptor: descriptor,
-            inbound: RPCAsyncSequence(wrapping: inboundStream),
+            inbound: RPCAsyncSequence(wrapping: inbound.stream),
             outbound: RPCWriter.Closable(wrapping: requestWriter)
         )
 
@@ -149,7 +128,7 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
             await Self.performCall(
                 descriptor: descriptor,
                 requestWriter: requestWriter,
-                continuation: inboundContinuation,
+                inbound: inbound,
                 baseURL: baseURL,
                 session: session,
                 timeout: options.timeout
@@ -174,7 +153,7 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
     private static func performCall(
         descriptor: MethodDescriptor,
         requestWriter: CollectingRequestWriter<Bytes>,
-        continuation: AsyncThrowingStream<RPCResponsePart<Bytes>, any Error>.Continuation,
+        inbound: OrderedEventStream<RPCResponsePart<Bytes>>,
         baseURL: URL,
         session: URLSession,
         timeout: Duration?
@@ -197,10 +176,11 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                 request.timeoutInterval = TimeInterval(components.seconds) + TimeInterval(components.attoseconds) / 1e18
             }
 
-            let (chunkStream, chunkContinuation) = AsyncThrowingStream<Data, any Error>.makeStream()
+            let chunks = OrderedEventStream<Data>(capacity: 64)
             let responseBox = SingleContinuation<HTTPURLResponse>()
             let dataTask = session.dataTask(with: request)
-            dataTask.delegate = ChunkedResponseDelegate(chunks: chunkContinuation, response: responseBox)
+            defer { dataTask.cancel() }
+            dataTask.delegate = ChunkedResponseDelegate(chunks: chunks, response: responseBox)
 
             try await withTaskCancellationHandler {
                 dataTask.resume()
@@ -222,12 +202,12 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                 if let headerStatus = httpResponse.value(forHTTPHeaderField: "grpc-status") {
                     let code = Int(headerStatus).flatMap(Status.Code.init(rawValue:)) ?? .unknown
                     let message = httpResponse.value(forHTTPHeaderField: "grpc-message") ?? ""
-                    continuation.yield(.status(Status(code: code, message: message), Metadata()))
-                    continuation.finish()
+                    try inbound.yield(.status(Status(code: code, message: message), Metadata()))
+                    inbound.continuation.finish()
                     return
                 }
 
-                continuation.yield(.metadata(Metadata()))
+                try inbound.yield(.metadata(Metadata()))
 
                 var decoder = GRPCWebFrameDecoder()
                 var sawTrailer = false
@@ -243,32 +223,22 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                 // `URLSessionDataDelegate` matches the Web UI's
                 // `response.body.getReader()` chunk-at-a-time pattern
                 // instead (`fetch-stream.ts`).
-                for try await chunk in chunkStream {
+                for try await chunk in chunks.stream {
                     if sawTrailer { break }
                     for frame in try decoder.decode(chunk) {
                         switch frame {
                         case .message(let payload):
-                            // Validation instrumentation (temporary): confirms whether
-                            // `bufferingNewest(8)` above actually evicts messages in
-                            // practice — the leading theory for watchOS's chopped TTS
-                            // playback, not yet confirmed on real hardware. Remove once
-                            // that's settled one way or the other.
-                            let yieldResult = continuation.yield(.message(Bytes(payload)))
-                            if case .dropped = yieldResult {
-                                UboLog.connection.error(
-                                    "GRPCWebClientTransport: bufferingNewest(8) evicted a message for \(descriptor.fullyQualifiedMethod)"
-                                )
-                            }
+                            try inbound.yield(.message(Bytes(payload)))
                         case .trailer(let trailers):
                             let code = trailers.status.flatMap(Status.Code.init(rawValue:)) ?? .unknown
-                            continuation.yield(.status(Status(code: code, message: trailers.message ?? ""), Metadata()))
+                            try inbound.yield(.status(Status(code: code, message: trailers.message ?? ""), Metadata()))
                             sawTrailer = true
                         }
                     }
                 }
 
                 if sawTrailer {
-                    continuation.finish()
+                    inbound.continuation.finish()
                 } else {
                     throw RPCError(
                         code: .internalError,
@@ -282,7 +252,7 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
                 dataTask.cancel()
             }
         } catch {
-            continuation.finish(throwing: error)
+            inbound.continuation.finish(throwing: error)
         }
     }
 }
@@ -301,10 +271,10 @@ public final class GRPCWebClientTransport: ClientTransport, Sendable {
 /// grpc-web path from being strictly weaker.
 @available(watchOS 11.0, *)
 private final class ChunkedResponseDelegate: NSObject, URLSessionDataDelegate, @unchecked Sendable {
-    private let chunks: AsyncThrowingStream<Data, any Error>.Continuation
+    private let chunks: OrderedEventStream<Data>
     private let response: SingleContinuation<HTTPURLResponse>
 
-    init(chunks: AsyncThrowingStream<Data, any Error>.Continuation, response: SingleContinuation<HTTPURLResponse>) {
+    init(chunks: OrderedEventStream<Data>, response: SingleContinuation<HTTPURLResponse>) {
         self.chunks = chunks
         self.response = response
     }
@@ -323,16 +293,17 @@ private final class ChunkedResponseDelegate: NSObject, URLSessionDataDelegate, @
     }
 
     func urlSession(_: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        chunks.yield(data)
+        do { try chunks.yield(data) }
+        catch { dataTask.cancel() }
     }
 
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
         if let error {
             // A no-op if `didReceive response:` already resumed it.
             response.resume(throwing: error)
-            chunks.finish(throwing: error)
+            chunks.continuation.finish(throwing: error)
         } else {
-            chunks.finish()
+            chunks.continuation.finish()
         }
     }
 
