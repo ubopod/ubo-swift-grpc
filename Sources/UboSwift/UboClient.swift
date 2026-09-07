@@ -69,6 +69,13 @@ public final class UboClient: ObservableObject {
     /// until the first update arrives.
     @Published public private(set) var assistantServerListening: (isListening: Bool, activeAudioSource: String)?
 
+    /// Fires when the core asks a specific client to start/stop streaming its
+    /// microphone (`AssistantRequestMicStreamEvent`) — a session opened by
+    /// anything other than the device itself (a test harness, the Web UI, a
+    /// wake word heard on the pod). Subscribers should filter `audioSource`
+    /// against their own id before acting; see `UboConnection.subscribeToMicStreamRequests()`.
+    public let micStreamRequestSubject = PassthroughSubject<(audioSource: String, isActive: Bool), Never>()
+
     // MARK: - Private Properties
 
     private let connection: UboConnection
@@ -79,6 +86,7 @@ public final class UboClient: ObservableObject {
     private var inputsSubscriptionTask: Task<Void, Never>?
     private var stackSubscriptionTask: Task<Void, Never>?
     private var assistantStateSubscriptionTask: Task<Void, Never>?
+    private var micStreamRequestSubscriptionTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -138,6 +146,8 @@ public final class UboClient: ObservableObject {
         stackSubscriptionTask = nil
         assistantStateSubscriptionTask?.cancel()
         assistantStateSubscriptionTask = nil
+        micStreamRequestSubscriptionTask?.cancel()
+        micStreamRequestSubscriptionTask = nil
         await connection.disconnect()
         connectionState = .disconnected
         currentDisplay = nil
@@ -343,6 +353,36 @@ public final class UboClient: ObservableObject {
     public func stopAssistantStateSubscription() {
         assistantStateSubscriptionTask?.cancel()
         assistantStateSubscriptionTask = nil
+    }
+
+    // MARK: - Mic Stream Request Subscription
+
+    /// Start subscribing to `AssistantRequestMicStreamEvent`. Forwards each
+    /// (audioSource, isActive) pair through `micStreamRequestSubject` — a
+    /// signal, not state, since the same request may legitimately repeat.
+    public func startMicStreamRequestSubscription() {
+        micStreamRequestSubscriptionTask?.cancel()
+        micStreamRequestSubscriptionTask = Task {
+            do {
+                for try await request in await connection.subscribeToMicStreamRequests() {
+                    await MainActor.run {
+                        self.micStreamRequestSubject.send(request)
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    if self.connectionState == .connected {
+                        self.lastError = .subscriptionFailed(error)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Stop subscribing to mic stream requests.
+    public func stopMicStreamRequestSubscription() {
+        micStreamRequestSubscriptionTask?.cancel()
+        micStreamRequestSubscriptionTask = nil
     }
 
     // MARK: - Camera Subscription

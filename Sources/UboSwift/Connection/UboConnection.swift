@@ -692,6 +692,61 @@ public actor UboConnection {
         }
     }
 
+    /// Subscribe to `AssistantRequestMicStreamEvent` — the core asking a
+    /// specific remote client to start or stop streaming its microphone.
+    /// Fired for a session opened by anything other than the device itself
+    /// (a test harness, the Web UI, a wake word heard on the pod): those
+    /// callers can flip server-side listening state, but only this event
+    /// tells the actual client to open its mic. See
+    /// `AssistantRequestMicStreamEvent`'s docstring in
+    /// `ubo_app/store/services/assistant.py` for the full rationale.
+    /// - Returns: An async stream of (audioSource, isActive) tuples. Callers
+    ///   should filter `audioSource` against their own id before acting.
+    public func subscribeToMicStreamRequests() -> AsyncThrowingStream<(audioSource: String, isActive: Bool), Error> {
+        AsyncThrowingStream(bufferingPolicy: .bufferingNewest(4)) { continuation in
+            let task = Task {
+                await self.runWithRetry {
+                    try await self.streamMicStreamRequests(continuation: continuation)
+                } onFinalError: { error in
+                    continuation.finish(throwing: UboError.subscriptionFailed(error))
+                } onCancelled: {
+                    continuation.finish()
+                }
+            }
+            continuation.onTermination = { _ in task.cancel() }
+        }
+    }
+
+    private func streamMicStreamRequests(
+        continuation: AsyncThrowingStream<(audioSource: String, isActive: Bool), Error>.Continuation
+    ) async throws {
+        guard let client = self.storeClient else {
+            throw UboError.notConnected
+        }
+
+        var requestBuilder = Store_V1_SubscribeEventRequest()
+        var eventBuilder = Ubo_V1_Event()
+        eventBuilder.assistantRequestMicStreamEvent = Ubo_V1_AssistantRequestMicStreamEvent()
+        requestBuilder.events = [eventBuilder]
+        let request = requestBuilder
+
+        try await client.subscribeEvent(request) { response in
+            switch response.accepted {
+            case .success(let contents):
+                for try await message in contents.bodyParts {
+                    if case .message(let subscribeResponse) = message {
+                        await self.markConnected()
+                        if case .assistantRequestMicStreamEvent(let micEvent) = subscribeResponse.event.event {
+                            continuation.yield((audioSource: micEvent.audioSource, isActive: micEvent.isActive))
+                        }
+                    }
+                }
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+
     // MARK: - Proto Unpacking
 
     /// Unpack a google.protobuf.Any message to ViewData
